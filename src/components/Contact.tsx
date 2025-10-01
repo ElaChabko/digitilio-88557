@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
+import { CircleDecoration } from "@/components/CircleDecoration";
 
 export const Contact = () => {
   const { toast } = useToast();
@@ -49,8 +50,10 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 bg-background relative overflow-hidden">
+      <CircleDecoration className="top-1/3 -left-10" size="lg" opacity={0.06} />
+      <CircleDecoration className="bottom-10 right-20" size="md" opacity={0.08} />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">

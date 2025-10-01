@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { ArrowRight, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { CircleDecoration } from "@/components/CircleDecoration";
 
 export const Hero = () => {
   const scrollToContact = () => {
@@ -13,13 +13,28 @@ export const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(27, 165, 165, 0.95), rgba(27, 165, 165, 0.90)), url(${heroBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-accent/30"
     >
+      {/* Dekoracyjne fioletowe koła */}
+      <CircleDecoration className="top-10 -left-20" size="xl" opacity={0.15} />
+      <CircleDecoration className="top-1/3 right-10" size="lg" opacity={0.1} />
+      <CircleDecoration className="bottom-20 left-1/4" size="md" opacity={0.12} />
+      <CircleDecoration className="-bottom-10 -right-10" size="xl" opacity={0.08} />
+      
+      {/* Floating social media icons */}
+      <div className="absolute top-1/4 left-10 animate-bounce" style={{ animationDuration: '3s' }}>
+        <Instagram className="w-8 h-8 text-white/20" />
+      </div>
+      <div className="absolute top-1/3 right-20 animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.5s' }}>
+        <Facebook className="w-8 h-8 text-white/20" />
+      </div>
+      <div className="absolute bottom-1/3 left-1/4 animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1s' }}>
+        <Linkedin className="w-8 h-8 text-white/20" />
+      </div>
+      <div className="absolute bottom-1/4 right-1/3 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1.5s' }}>
+        <Youtube className="w-8 h-8 text-white/20" />
+      </div>
+
       <div className="container mx-auto px-4 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
@@ -29,7 +44,7 @@ export const Hero = () => {
             <br />
             Komunikacja z charakterem.
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
             Pomagam firmom budować silną obecność w social mediach i wykorzystywać potencjał AI w
             komunikacji z klientami.
           </p>

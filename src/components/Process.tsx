@@ -1,4 +1,5 @@
 import { Target, FileText, LineChart } from "lucide-react";
+import { CircleDecoration } from "@/components/CircleDecoration";
 
 const steps = [
   {
@@ -23,8 +24,9 @@ const steps = [
 
 export const Process = () => {
   return (
-    <section id="process" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="process" className="py-20 bg-background relative overflow-hidden">
+      <CircleDecoration className="-top-10 left-1/3" size="xl" opacity={0.05} />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Jak pracuję?</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
+import { CircleDecoration } from "@/components/CircleDecoration";
 
 const benefits = [
   {
@@ -26,8 +27,10 @@ const benefits = [
 
 export const Benefits = () => {
   return (
-    <section id="benefits" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section id="benefits" className="py-20 bg-secondary/30 relative overflow-hidden">
+      <CircleDecoration className="-top-5 right-1/4" size="xl" opacity={0.06} />
+      <CircleDecoration className="bottom-10 -left-16" size="lg" opacity={0.07} />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
             Co zyskujesz?

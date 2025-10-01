@@ -1,9 +1,12 @@
 import aboutPhoto from "@/assets/about-photo.jpg";
+import { CircleDecoration } from "@/components/CircleDecoration";
 
 export const About = () => {
   return (
-    <section id="about" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-20 bg-secondary/30 relative overflow-hidden">
+      <CircleDecoration className="top-1/2 -right-16" size="lg" opacity={0.07} />
+      <CircleDecoration className="bottom-20 left-10" size="md" opacity={0.06} />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div className="animate-fade-in">
             <img
