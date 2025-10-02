@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import logo from "@/assets/logo.png";
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,9 +41,9 @@ export const Navigation = () => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <button
           onClick={() => scrollToSection("hero")}
-          className="text-2xl font-bold text-primary hover:opacity-80 transition-opacity"
+          className="hover:opacity-80 transition-opacity"
         >
-          Digitilio
+          <img src={logo} alt="Digitilio" className="h-10 w-auto" />
         </button>
 
         {/* Desktop Menu */}
