@@ -2,51 +2,77 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
 import { CircleDecoration } from "@/components/CircleDecoration";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { supabase } from "@/integrations/supabase/client";
+
+const formSchema = z.object({
+  name: z.string().min(2, "Imię i nazwisko musi mieć minimum 2 znaki").max(100),
+  email: z.string().email("Nieprawidłowy adres email").max(255),
+  message: z.string().min(10, "Wiadomość musi mieć minimum 10 znaków").max(1000),
+  privacyConsent: z.boolean().refine((val) => val === true, {
+    message: "Wymagana jest zgoda na przetwarzanie danych osobowych",
+  }),
+  marketingConsent: z.boolean().optional(),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export const Contact = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+  
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+      privacyConsent: false,
+      marketingConsent: false,
+    },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simple validation
-    if (!formData.name || !formData.email || !formData.message) {
+  const onSubmit = async (data: FormValues) => {
+    try {
+      const { error } = await supabase.functions.invoke("submit-contact-form", {
+        body: {
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          marketingConsent: data.marketingConsent,
+          timestamp: new Date().toISOString(),
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Wiadomość wysłana!",
+        description: "Dziękuję za kontakt. Odpiszę najszybciej jak to możliwe.",
+      });
+
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
       toast({
         title: "Błąd",
-        description: "Proszę wypełnić wszystkie pola formularza.",
+        description: "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
         variant: "destructive",
       });
-      return;
     }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      toast({
-        title: "Błąd",
-        description: "Proszę podać prawidłowy adres email.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Success message
-    toast({
-      title: "Wiadomość wysłana!",
-      description: "Dziękuję za kontakt. Odpiszę najszybciej jak to możliwe.",
-    });
-
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
@@ -66,49 +92,120 @@ export const Contact = () => {
           </div>
           <Card className="animate-slide-up shadow-xl">
             <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
-                    Imię i nazwisko
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Jan Kowalski"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Imię i nazwisko</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Jan Kowalski" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="jan@przykład.pl" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Wiadomość</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Opowiedz mi o swoim projekcie..."
+                            className="min-h-[150px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="space-y-4 pt-4 border-t">
+                    <FormField
+                      control={form.control}
+                      name="privacyConsent"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel className="text-sm font-normal">
+                              Wyrażam zgodę na przetwarzanie moich danych osobowych w celu
+                              udzielenia odpowiedzi na przesłane zapytanie zgodnie z{" "}
+                              <a href="#" className="text-primary underline">
+                                Polityką Prywatności
+                              </a>
+                              . *
+                            </FormLabel>
+                            <FormMessage />
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="marketingConsent"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel className="text-sm font-normal">
+                              Wyrażam zgodę na otrzymywanie informacji handlowych drogą
+                              elektroniczną zgodnie z ustawą o świadczeniu usług drogą
+                              elektroniczną.
+                            </FormLabel>
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
+                    <p className="text-xs text-muted-foreground">
+                      * Pola oznaczone gwiazdką są wymagane
+                    </p>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    size="lg"
                     className="w-full"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="jan@przykład.pl"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
-                    Wiadomość
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Opowiedz mi o swoim projekcie..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full min-h-[150px]"
-                  />
-                </div>
-                <Button type="submit" variant="hero" size="lg" className="w-full">
-                  Wyślij wiadomość <Send className="ml-2" />
-                </Button>
-              </form>
+                    disabled={form.formState.isSubmitting}
+                  >
+                    {form.formState.isSubmitting ? "Wysyłanie..." : "Wyślij wiadomość"}
+                    <Send className="ml-2" />
+                  </Button>
+                </form>
+              </Form>
             </CardContent>
           </Card>
         </div>
