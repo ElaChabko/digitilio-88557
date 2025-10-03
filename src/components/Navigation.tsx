@@ -7,6 +7,8 @@ export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const GOOGLE_FORM_URL = "https://forms.gle/bPNf6bg2DYdy7qDb8";
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -22,6 +24,11 @@ export const Navigation = () => {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const openContactForm = () => {
+    window.open(GOOGLE_FORM_URL, "_blank");
+    setIsMobileMenuOpen(false);
   };
 
   const navItems = [
@@ -57,7 +64,7 @@ export const Navigation = () => {
               {item.label}
             </button>
           ))}
-          <Button variant="hero" onClick={() => scrollToSection("contact")}>
+          <Button variant="hero" onClick={openContactForm}>
             Skontaktuj się
           </Button>
         </div>
@@ -84,7 +91,7 @@ export const Navigation = () => {
                 {item.label}
               </button>
             ))}
-            <Button variant="hero" onClick={() => scrollToSection("contact")} className="w-full">
+            <Button variant="hero" onClick={openContactForm} className="w-full">
               Skontaktuj się
             </Button>
           </div>
