@@ -51,7 +51,7 @@ export const Hero = () => {
               onClick={openContactForm}
               className="text-lg px-8 py-6 h-auto"
             >
-              Skontaktuj się <ArrowRight className="ml-2" />
+              Porozmawiajmy o Twojej marce <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
