@@ -6,19 +6,19 @@ const steps = [
     icon: Target,
     title: "Strategia",
     description:
-      "Analizuję Twoją markę, grupę docelową i cele. Tworzę spójną strategię komunikacji.",
+      "Audyt marki, analiza konkurencji i dopasowanie kanałów.",
   },
   {
     icon: FileText,
-    title: "Treści",
+    title: "Kreacja",
     description:
-      "Projektuję i publikuję angażujące treści, które budują Twoją markę i przyciągają klientów.",
+      "Projektuję treści, które angażują, uczą lub inspirują.",
   },
   {
     icon: LineChart,
-    title: "Analiza",
+    title: "Optymalizacja",
     description:
-      "Monitoruję wyniki, optymalizuję działania i dostarczam regularne raporty z efektów.",
+      "Badam wyniki, reaguję szybko, stale udoskonalam.",
   },
 ];
 
@@ -30,8 +30,8 @@ export const Process = () => {
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Jak pracuję?</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Mój proces to połączenie strategicznego myślenia, kreatywności i analityki. Wszystko
-            po to, by Twoja marka błyszczała w social mediach.
+            Moje procesy łączą dane, kreatywność i sztuczną inteligencję.<br />
+            Dzięki narzędziom analitycznym i automatyzacjom skracam czas produkcji treści nawet o 40%.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">

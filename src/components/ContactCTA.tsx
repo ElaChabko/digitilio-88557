@@ -18,11 +18,10 @@ export const ContactCTA = () => {
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-3xl mx-auto animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Gotowy do transformacji cyfrowej?
+            Gotowy na markę, o której się mówi?
           </h2>
           <p className="text-lg md:text-xl text-white/90 mb-8">
-            Skontaktuj się ze mną i omówmy, jak mogę pomóc Twojej firmie
-            osiągnąć sukces w mediach społecznościowych.
+            Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
           </p>
           <Button
             onClick={openContactForm}
@@ -31,7 +30,7 @@ export const ContactCTA = () => {
             className="text-lg px-8 py-6 h-auto"
           >
             <Mail className="mr-2" />
-            Skontaktuj się ze mną
+            Zacznijmy współpracę
           </Button>
         </div>
       </div>

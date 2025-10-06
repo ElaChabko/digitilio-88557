@@ -4,24 +4,24 @@ import { CircleDecoration } from "@/components/CircleDecoration";
 
 const benefits = [
   {
+    title: "Widoczność, która się opłaca",
+    description:
+      "Treści zaprojektowane tak, by przyciągały i konwertowały.",
+  },
+  {
     title: "Oszczędność czasu",
     description:
-      "Nie musisz już martwić się o social media – wszystkim zajmę się za Ciebie.",
+      "Automatyzacje i planowanie, które działają za Ciebie.",
   },
   {
-    title: "Profesjonalna obsługa",
+    title: "Większe zasięgi, lepsze wyniki",
     description:
-      "Doświadczenie i wiedza, która przekłada się na wysoką jakość treści i strategii.",
+      "Realne dane, nie obietnice.",
   },
   {
-    title: "Wzrost zasięgów",
+    title: "Partner, nie wykonawca",
     description:
-      "Skuteczne działania, które zwiększają rozpoznawalność marki i przyciągają klientów.",
-  },
-  {
-    title: "Lepsze wyniki",
-    description:
-      "Analiza danych i optymalizacja działań prowadzą do wymiernych efektów biznesowych.",
+      "Transparentna współpraca i stały kontakt.",
   },
 ];
 

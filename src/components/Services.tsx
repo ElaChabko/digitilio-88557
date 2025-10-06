@@ -4,27 +4,15 @@ import { CircleDecoration } from "@/components/CircleDecoration";
 const services = [{
   icon: Share2,
   title: "Zarządzanie Social Media",
-  description: "Kompleksowa obsługa Twoich profili – od strategii po codzienne publikacje."
+  description: "Od strategii po publikacje. Tworzę spójną komunikację, która zwiększa widoczność, buduje zaufanie i generuje realne zapytania."
 }, {
-  icon: FileEdit,
-  title: "Tworzenie treści",
-  description: "Angażujące posty, grafiki i kopie, które przyciągają uwagę i budują zasięgi."
+  icon: Brain,
+  title: "AI / Automatyzacja",
+  description: "Nie tylko treści – także inteligentne procesy. Automatyzuję komunikację i wdrażam rozwiązania, które oszczędzają Twój czas."
 }, {
   icon: TrendingUp,
   title: "Strategia komunikacji",
-  description: "Przemyślany plan działania dopasowany do Twoich celów biznesowych."
-}, {
-  icon: Brain,
-  title: "Implementacja AI",
-  description: "Automatyzacja procesów i chatboty, które oszczędzają czas i zwiększają konwersję."
-}, {
-  icon: BarChart3,
-  title: "Analiza i raportowanie",
-  description: "Regularne raporty z działań, które pokazują realne efekty i ROI."
-}, {
-  icon: MessageSquare,
-  title: "Community management",
-  description: "Budowanie relacji z odbiorcami i szybka, profesjonalna komunikacja."
+  description: "Każdy post ma sens, bo wynika z planu. Opracowuję strategie, które wspierają Twój cel biznesowy – od employer brandingu po sprzedaż."
 }];
 export const Services = () => {
   return <section id="services" className="py-20 bg-secondary/30 relative overflow-hidden">
@@ -37,7 +25,7 @@ export const Services = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Oferuję kompleksowe usługi z zakresu social media i AI, które pomogą Ci osiągnąć cele biznesowe.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {services.map((service, index) => <Card key={index} className="hover:shadow-lg transition-all duration-300 animate-slide-up border-border/50" style={{
           animationDelay: `${index * 100}ms`
         }}>

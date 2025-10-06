@@ -13,17 +13,18 @@ export const About = () => {
             <h2 className="text-3xl md:text-5xl font-bold text-foreground">Cześć, jestem Ela z Digitilio</h2>
             <div className="space-y-4 text-muted-foreground">
               <p className="text-lg">
-                Od lat pomagam firmom budować silną obecność w social mediach. Łączę pasję do
-                marketingu z fascynacją nowymi technologiami – szczególnie sztuczną inteligencją.
+                Od 2018 roku wspieram firmy i marki w budowaniu skutecznej obecności online. 
+                Pracowałam m.in. z branżą przemysłową, IT i retail.
               </p>
               <p className="text-lg">
-                Wierzę, że skuteczna komunikacja w social media to nie tylko regularne publikacje,
-                ale przede wszystkim dobrze przemyślana strategia i autentyczne relacje z odbiorcami.
+                Łączę strategiczne podejście z umiejętnością wykorzystywania AI – dzięki temu moi 
+                klienci zyskują przewagę na rynku.
               </p>
-              <p className="text-lg">Moim celem jest nie tylko zwiększenie zasięgów, ale realne wsparcie Twojego biznesu – więcej klientów, większa rozpoznawalność i lepsze wyniki sprzedażowe.
-
-
-Ela Chabko</p>
+              <p className="text-lg">
+                Wierzę, że komunikacja to nie tylko algorytmy i zasięgi, ale emocje, które sprawiają, 
+                że marka zostaje w pamięci.
+              </p>
+              <p className="text-lg font-medium">Ela Chabko</p>
             </div>
             <div className="flex flex-wrap gap-3 pt-4">
               <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
