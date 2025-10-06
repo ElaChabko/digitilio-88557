@@ -39,7 +39,13 @@ export const Hero = () => {
       <div className="container mx-auto px-4 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            Strategia. AI. Emocje. Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
+            <span className="text-accent">Strategia.</span> <span className="text-accent">AI.</span> <span className="text-accent">Emocje.</span>
+            <br />
+            <br />
+            Tworzę komunikację, która <span className="text-accent">przyciąga uwagę</span> i <span className="text-accent">działa</span>.
+            <br />
+            <br />
+            Łączę analityczne podejście z kreatywnością, by Twoja marka była <span className="text-accent">widoczna</span>, <span className="text-accent">zapamiętana</span> i <span className="text-accent">skuteczna</span>.
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
             Pomagam firmom budować silną obecność w social mediach i wykorzystywać potencjał AI w
