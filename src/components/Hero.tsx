@@ -39,11 +39,7 @@ export const Hero = () => {
       <div className="container mx-auto px-4 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            Social media z planem.
-            <br />
-            Treści z celem.
-            <br />
-            Komunikacja z charakterem.
+            Strategia. AI. Emocje. Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
             Pomagam firmom budować silną obecność w social mediach i wykorzystywać potencjał AI w
