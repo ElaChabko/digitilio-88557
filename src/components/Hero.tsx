@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { CircleDecoration } from "@/components/CircleDecoration";
+import { ContactFormDialog } from "@/components/ContactFormDialog";
+import { useState } from "react";
 
 export const Hero = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById("contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+
+  const openContactForm = () => {
+    setIsContactFormOpen(true);
   };
 
   return (
@@ -52,7 +53,7 @@ export const Hero = () => {
             <Button
               variant="hero"
               size="lg"
-              onClick={scrollToContact}
+              onClick={openContactForm}
               className="text-lg px-8 py-6 h-auto"
             >
               Skontaktuj się <ArrowRight className="ml-2" />
@@ -60,6 +61,11 @@ export const Hero = () => {
           </div>
         </div>
       </div>
+
+      <ContactFormDialog 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
     </section>
   );
 };
