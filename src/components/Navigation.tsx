@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
+import { ContactFormDialog } from "@/components/ContactFormDialog";
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const GOOGLE_FORM_URL = "https://forms.gle/bPNf6bg2DYdy7qDb8";
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +27,7 @@ export const Navigation = () => {
   };
 
   const openContactForm = () => {
-    window.open(GOOGLE_FORM_URL, "_blank");
+    setIsContactFormOpen(true);
     setIsMobileMenuOpen(false);
   };
 
@@ -97,6 +97,11 @@ export const Navigation = () => {
           </div>
         </div>
       )}
+
+      <ContactFormDialog 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
     </nav>
   );
 };

@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import { CircleDecoration } from "@/components/CircleDecoration";
+import { ContactFormDialog } from "@/components/ContactFormDialog";
+import { useState } from "react";
 
 export const ContactCTA = () => {
-  const GOOGLE_FORM_URL = "https://forms.gle/bPNf6bg2DYdy7qDb8";
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const openContactForm = () => {
-    window.open(GOOGLE_FORM_URL, "_blank");
+    setIsContactFormOpen(true);
   };
 
   return (
@@ -33,6 +35,11 @@ export const ContactCTA = () => {
           </Button>
         </div>
       </div>
+
+      <ContactFormDialog 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
     </section>
   );
 };
