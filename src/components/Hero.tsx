@@ -44,7 +44,7 @@ export const Hero = () => {
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
             Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+          <div className="flex flex-col gap-3 justify-center items-center mt-8">
             <Button
               variant="hero"
               size="lg"
