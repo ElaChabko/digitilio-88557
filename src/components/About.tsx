@@ -7,8 +7,8 @@ export const About = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div className="animate-fade-in relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/30 to-transparent rounded-2xl blur-2xl -z-10 transform translate-x-4 translate-y-4"></div>
-            <img src={aboutPhoto} alt="Specjalista Digitilio" className="rounded-2xl shadow-2xl w-full h-auto hover:scale-[1.02] transition-transform duration-500" />
+            <div className="absolute -inset-8 bg-gradient-to-br from-primary/30 via-accent/40 to-transparent rounded-3xl blur-3xl -z-10 opacity-60"></div>
+            <img src={aboutPhoto} alt="Specjalista Digitilio" className="rounded-2xl w-full h-auto hover:scale-[1.02] transition-transform duration-700" style={{ boxShadow: 'var(--shadow-strong)' }} />
           </div>
           <div className="animate-slide-up space-y-6">
             <h2 className="text-3xl md:text-5xl font-bold text-foreground">Cześć, jestem Ela z Digitilio</h2>

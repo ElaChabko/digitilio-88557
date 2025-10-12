@@ -14,7 +14,8 @@ export const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-accent/30"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: 'var(--gradient-hero)' }}
     >
       {/* Dekoracyjne fioletowe koła */}
       <CircleDecoration className="top-10 -left-20" size="xl" opacity={0.15} />
@@ -38,9 +39,12 @@ export const Hero = () => {
 
       <div className="container mx-auto px-4 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            <span className="text-accent">Strategia.</span> <span className="text-accent">AI.</span> <span className="text-accent">Emocje.</span>
-          </h1>
+          <div className="relative inline-block">
+            <div className="absolute inset-0 blur-3xl opacity-40" style={{ background: 'var(--gradient-glow)' }}></div>
+            <h1 className="relative text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight text-glow">
+              <span className="text-accent">Strategia.</span> <span className="text-accent">AI.</span> <span className="text-accent">Emocje.</span>
+            </h1>
+          </div>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
             Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
           </p>

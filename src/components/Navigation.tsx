@@ -59,9 +59,10 @@ export const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
             >
               {item.label}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
             </button>
           ))}
           <Button variant="hero" onClick={openContactForm}>

@@ -27,8 +27,8 @@ export const ContactCTA = () => {
             <Button
               onClick={openContactForm}
               size="lg"
-              variant="secondary"
-              className="text-lg px-8 py-6 h-auto shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+              className="text-lg px-8 py-6 h-auto bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300"
+              style={{ boxShadow: 'var(--shadow-glow-strong)' }}
             >
               <Mail className="mr-2" />
               Zacznijmy współpracę

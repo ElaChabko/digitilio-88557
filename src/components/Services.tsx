@@ -26,11 +26,12 @@ export const Services = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Oferuję kompleksowe usługi z zakresu social media i AI, które pomogą Ci osiągnąć cele biznesowe.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {services.map((service, index) => <Card key={index} className="hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-slide-up border-border/50 bg-gradient-to-br from-card to-secondary/30 group" style={{
+          {services.map((service, index) => <Card key={index} className="hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 animate-slide-up border-border/50 bg-gradient-to-br from-card to-secondary/30 group overflow-hidden relative" style={{
           animationDelay: `${index * 100}ms`
         }}>
-              <CardContent className="p-6">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-4 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <CardContent className="p-6 relative z-10">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center mb-4 shadow-md group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-500">
                   <service.icon className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-foreground">{service.title}</h3>
