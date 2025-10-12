@@ -18,7 +18,7 @@ export const Footer = () => {
               Polityka prywatności
             </a>
             <a 
-              href="https://linkedin.com/in/elachabko" 
+              href="https://www.linkedin.com/in/ela-chabko/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-accent transition-colors"
