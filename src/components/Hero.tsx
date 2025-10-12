@@ -49,10 +49,11 @@ export const Hero = () => {
               variant="hero"
               size="lg"
               onClick={openContactForm}
-              className="text-lg px-8 py-6 h-auto"
+              className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl hover:scale-105 transition-all"
             >
               Porozmawiajmy o Twojej marce <ArrowRight className="ml-2" />
             </Button>
+            <p className="text-white/70 text-sm">Bez zobowiązań • 15 min rozmowy</p>
           </div>
         </div>
       </div>

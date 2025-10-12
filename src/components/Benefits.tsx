@@ -44,12 +44,14 @@ export const Benefits = () => {
           {benefits.map((benefit, index) => (
             <Card
               key={index}
-              className="hover:shadow-lg transition-all duration-300 animate-slide-up border-border/50"
+              className="hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-slide-up border-border/50 bg-gradient-to-br from-card to-secondary/20 group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <CardContent className="p-6 flex gap-4">
-                <div className="flex-shrink-0">
-                  <CheckCircle2 className="w-6 h-6 text-primary" />
+                <div className="flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-5 h-5 text-primary" />
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2 text-foreground">{benefit.title}</h3>

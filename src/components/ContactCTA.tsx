@@ -23,15 +23,18 @@ export const ContactCTA = () => {
           <p className="text-lg md:text-xl text-white/90 mb-8">
             Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
           </p>
-          <Button
-            onClick={openContactForm}
-            size="lg"
-            variant="secondary"
-            className="text-lg px-8 py-6 h-auto"
-          >
-            <Mail className="mr-2" />
-            Zacznijmy współpracę
-          </Button>
+          <div className="space-y-4">
+            <Button
+              onClick={openContactForm}
+              size="lg"
+              variant="secondary"
+              className="text-lg px-8 py-6 h-auto shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+            >
+              <Mail className="mr-2" />
+              Zacznijmy współpracę
+            </Button>
+            <p className="text-white/70 text-sm">Bez zobowiązań • Pierwsza konsultacja</p>
+          </div>
         </div>
       </div>
 
