@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Target } from "lucide-react";
 import { CircleDecoration } from "@/components/CircleDecoration";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
@@ -18,8 +18,25 @@ export const Hero = () => {
       style={{ background: 'var(--gradient-hero)' }}
     >
       {/* Dekoracyjne fioletowe koła */}
-      <CircleDecoration className="top-10 -left-20" size="xl" opacity={0.08} />
-      <CircleDecoration className="bottom-20 right-10" size="lg" opacity={0.06} />
+      <CircleDecoration className="top-10 -left-20" size="xl" opacity={0.1} />
+      <CircleDecoration className="top-1/4 right-10" size="lg" opacity={0.08} />
+      <CircleDecoration className="bottom-20 left-1/4" size="md" opacity={0.09} />
+      <CircleDecoration className="bottom-10 -right-10" size="xl" opacity={0.07} />
+      
+      {/* Floating animated icons */}
+      <div className="absolute top-1/4 left-20 animate-bounce opacity-20" style={{ animationDuration: '3s' }}>
+        <Sparkles className="w-8 h-8 text-white" />
+      </div>
+      <div className="absolute top-1/3 right-24 animate-bounce opacity-15" style={{ animationDuration: '4s', animationDelay: '0.5s' }}>
+        <Zap className="w-10 h-10 text-accent" />
+      </div>
+      <div className="absolute bottom-1/3 left-1/3 animate-bounce opacity-20" style={{ animationDuration: '3.5s', animationDelay: '1s' }}>
+        <Target className="w-7 h-7 text-white" />
+      </div>
+      
+      {/* Gradient overlay orbs */}
+      <div className="absolute top-20 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-primary/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
 
       <div className="container mx-auto px-4 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-8">

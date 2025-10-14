@@ -27,7 +27,7 @@ const benefits = [
 
 export const Benefits = () => {
   return (
-    <section id="benefits" className="py-20 bg-secondary/30 relative overflow-hidden">
+    <section id="benefits" className="py-20 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
       <CircleDecoration className="-top-5 right-1/4" size="xl" opacity={0.06} />
       <CircleDecoration className="bottom-10 -left-16" size="lg" opacity={0.07} />
       <div className="container mx-auto px-4 relative z-10">

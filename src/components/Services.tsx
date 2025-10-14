@@ -15,7 +15,7 @@ const services = [{
   description: "Każdy post ma sens, bo wynika z planu. Opracowuję strategie, które wspierają Twój cel biznesowy – od employer brandingu po sprzedaż."
 }];
 export const Services = () => {
-  return <section id="services" className="py-20 bg-secondary/30 relative overflow-hidden">
+  return <section id="services" className="py-20 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
       <CircleDecoration className="top-20 -right-20" size="lg" opacity={0.06} />
       <CircleDecoration className="bottom-10 -left-10" size="md" opacity={0.08} />
       <div className="container mx-auto px-4 relative z-10">
