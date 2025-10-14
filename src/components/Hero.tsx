@@ -18,44 +18,28 @@ export const Hero = () => {
       style={{ background: 'var(--gradient-hero)' }}
     >
       {/* Dekoracyjne fioletowe koła */}
-      <CircleDecoration className="top-10 -left-20" size="xl" opacity={0.15} />
-      <CircleDecoration className="top-1/3 right-10" size="lg" opacity={0.1} />
-      <CircleDecoration className="bottom-20 left-1/4" size="md" opacity={0.12} />
-      <CircleDecoration className="-bottom-10 -right-10" size="xl" opacity={0.08} />
-      
-      {/* Floating social media icons */}
-      <div className="absolute top-1/4 left-10 animate-bounce" style={{ animationDuration: '3s' }}>
-        <Instagram className="w-8 h-8 text-white/20" />
-      </div>
-      <div className="absolute top-1/3 right-20 animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.5s' }}>
-        <Facebook className="w-8 h-8 text-white/20" />
-      </div>
-      <div className="absolute bottom-1/3 left-1/4 animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1s' }}>
-        <Linkedin className="w-8 h-8 text-white/20" />
-      </div>
-      <div className="absolute bottom-1/4 right-1/3 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1.5s' }}>
-        <Youtube className="w-8 h-8 text-white/20" />
-      </div>
+      <CircleDecoration className="top-10 -left-20" size="xl" opacity={0.08} />
+      <CircleDecoration className="bottom-20 right-10" size="lg" opacity={0.06} />
 
       <div className="container mx-auto px-4 py-20 text-center relative z-10">
-        <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-          <div className="relative inline-block">
-            <div className="absolute inset-0 blur-3xl opacity-40" style={{ background: 'var(--gradient-glow)' }}></div>
-            <h1 className="relative text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight text-glow">
-              <span className="text-accent">Strategia.</span> <span className="text-accent">AI.</span> <span className="text-accent">Emocje.</span>
-            </h1>
-          </div>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight animate-fade-in">
+            <span className="inline-block hover:scale-105 transition-transform duration-300">Strategia.</span>{" "}
+            <span className="inline-block hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.1s' }}>AI.</span>{" "}
+            <span className="inline-block hover:scale-105 transition-transform duration-300" style={{ animationDelay: '0.2s' }}>Emocje.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light animate-fade-in" style={{ animationDelay: '0.3s' }}>
             Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
           </p>
-          <div className="flex flex-col gap-3 justify-center items-center mt-8">
+          <div className="flex flex-col gap-3 justify-center items-center mt-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
             <Button
               variant="hero"
               size="lg"
               onClick={openContactForm}
-              className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              className="group text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
-              Porozmawiajmy o Twojej marce <ArrowRight className="ml-2" />
+              Porozmawiajmy o Twojej marce 
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
             <p className="text-white/70 text-sm">Bez zobowiązań • 15 min rozmowy</p>
           </div>

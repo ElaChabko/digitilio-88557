@@ -59,20 +59,28 @@ export const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
+              className={`relative text-sm font-medium transition-colors group ${
+                isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'
+              }`}
             >
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
             </button>
           ))}
-          <Button variant="hero" onClick={openContactForm}>
+          <Button 
+            variant="hero" 
+            onClick={openContactForm}
+            className={isScrolled ? '' : 'bg-white/10 text-white border-white/20 hover:bg-white/20'}
+          >
             Skontaktuj się
           </Button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-foreground"
+          className={`md:hidden transition-colors ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
