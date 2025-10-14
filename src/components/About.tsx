@@ -1,48 +1,89 @@
 import aboutPhoto from "@/assets/about-photo.jpg";
 import { CircleDecoration } from "@/components/CircleDecoration";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
 export const About = () => {
-  return <section id="about" className="py-20 bg-secondary/30 relative overflow-hidden">
-      <CircleDecoration className="top-1/2 -right-16" size="lg" opacity={0.07} />
-      <CircleDecoration className="bottom-20 left-10" size="md" opacity={0.06} />
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <div className="animate-fade-in relative">
-            <div className="absolute -inset-8 bg-gradient-to-br from-primary/30 via-accent/40 to-transparent rounded-3xl blur-3xl -z-10 opacity-60"></div>
-            <img src={aboutPhoto} alt="Specjalista Digitilio" className="rounded-2xl w-full h-auto hover:scale-[1.02] transition-transform duration-700" style={{ boxShadow: 'var(--shadow-strong)' }} />
-          </div>
-          <div className="animate-slide-up space-y-6">
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground">Cześć, jestem Ela z Digitilio</h2>
-            <div className="space-y-4 text-muted-foreground">
-              <p className="text-lg">
-                Od 2018 roku wspieram firmy i marki w budowaniu skutecznej obecności online. 
-                Pracowałam m.in. z branżą przemysłową, IT i retail.
-              </p>
-              <p className="text-lg">
-                Łączę strategiczne podejście z umiejętnością wykorzystywania AI – dzięki temu moi 
-                klienci zyskują przewagę na rynku.
-              </p>
-              <p className="text-lg">
-                Wierzę, że komunikacja to nie tylko algorytmy i zasięgi, ale emocje, które sprawiają, 
-                że marka zostaje w pamięci.
-              </p>
-              <p className="text-lg font-medium">Ela Chabko</p>
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section id="about" className="py-20 bg-background relative overflow-hidden">
+      <CircleDecoration className="top-1/4 -right-10" size="lg" opacity={0.06} />
+      <CircleDecoration className="bottom-20 left-10" size="md" opacity={0.07} />
+      
+      <div className="container mx-auto px-4 relative z-10" ref={ref}>
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">O mnie</h2>
+        </motion.div>
+        
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/30 via-accent/40 to-transparent rounded-3xl blur-2xl"></div>
+              <motion.img
+                src={aboutPhoto}
+                alt="Ela Chabko - Digitilio"
+                className="relative rounded-2xl w-full object-cover"
+                style={{ boxShadow: 'var(--shadow-strong)' }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              />
             </div>
-            <div className="flex flex-wrap gap-3 pt-4">
-              <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                Social Media
-              </span>
-              <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                AI & Automatyzacja
-              </span>
-              <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                Content Marketing
-              </span>
-              <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                Strategia
-              </span>
-            </div>
-          </div>
+          </motion.div>
+          
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.p 
+              className="text-lg text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              Nazywam się <strong className="text-foreground">Ela Chabko</strong> i jestem specjalistką od strategii komunikacji w social mediach.
+            </motion.p>
+            <motion.p 
+              className="text-lg text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              Tworzę treści, które sprzedają, budują pozycję eksperta i przyciągają uwagę. Nie wierzę w posty „dla postów" – każdy ma cel i działa. Połączenie strategii, kreatywności i AI to moja siła.
+            </motion.p>
+            <motion.p 
+              className="text-lg text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              Pracowałam z markami różnej wielkości – od lokalnych firm po rozpoznawalne brandy. Wiem, jak ważna jest elastyczność i realizm. Trzymam się liczb, badam wyniki, nie boję się zmian.
+            </motion.p>
+            <motion.p 
+              className="text-lg text-foreground font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              Chcesz, by Twoja marka była widoczna i przynosiła wyniki? Zacznijmy działać.
+            </motion.p>
+          </motion.div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
