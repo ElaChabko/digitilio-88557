@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
-import { CircleDecoration } from "@/components/CircleDecoration";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export const ContactCTA = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -12,34 +12,43 @@ export const ContactCTA = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: 'var(--gradient-hero)' }}>
-      <CircleDecoration className="top-10 -left-20" size="lg" opacity={0.12} />
-      <CircleDecoration className="bottom-10 right-10" size="md" opacity={0.15} />
-      
-      {/* Gradient overlay orbs like in Hero */}
-      <div className="absolute top-10 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-10 right-1/3 w-80 h-80 bg-primary/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
-      
-      <div className="container mx-auto px-4 text-center relative z-10">
-        <div className="max-w-3xl mx-auto animate-fade-in">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Gotowy na markę, o której się mówi?
-          </h2>
-          <p className="text-lg md:text-xl text-white/90 mb-8">
+    <section className="py-32 relative overflow-hidden bg-card">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-6xl">
+          <motion.h2 
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-12 leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Gotowy na markę,<br />o której się mówi?
+          </motion.h2>
+          <motion.p 
+            className="text-2xl md:text-3xl text-muted-foreground mb-16 font-light leading-relaxed max-w-4xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
-          </p>
-          <div className="space-y-4">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <Button
               onClick={openContactForm}
               size="lg"
-              className="group text-lg px-8 py-6 h-auto bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300"
-              style={{ boxShadow: 'var(--shadow-glow-strong)' }}
+              className="text-xl px-10 py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group"
             >
-              <Mail className="mr-2 group-hover:rotate-12 transition-transform duration-300" />
+              <Mail className="mr-3 w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
               Zacznijmy współpracę
             </Button>
-            <p className="text-white/70 text-sm">Bez zobowiązań • Pierwsza konsultacja</p>
-          </div>
+            <p className="text-muted-foreground text-base mt-6">Bez zobowiązań • Pierwsza konsultacja</p>
+          </motion.div>
         </div>
       </div>
 

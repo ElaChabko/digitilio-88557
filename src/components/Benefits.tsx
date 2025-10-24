@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
-import { CircleDecoration } from "@/components/CircleDecoration";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -29,55 +28,45 @@ export const Benefits = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="benefits" className="py-20 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
-      <CircleDecoration className="-top-5 right-1/4" size="xl" opacity={0.06} />
-      <CircleDecoration className="bottom-10 -left-16" size="lg" opacity={0.07} />
-      
+    <section id="benefits" className="py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className="mb-24 max-w-5xl"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Co zyskujesz?
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8 leading-tight">
+            Co<br />zyskujesz?
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-2xl md:text-3xl text-muted-foreground font-light leading-relaxed">
             Współpraca ze mną to nie tylko profesjonalna obsługa social mediów, ale przede
             wszystkim realne korzyści dla Twojego biznesu.
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              className="space-y-4"
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ 
                 duration: 0.6,
-                delay: index * 0.1,
-                ease: "easeOut"
+                delay: index * 0.15
               }}
+              whileHover={{ y: -8 }}
             >
-              <Card className="h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-border/50 bg-gradient-to-br from-card to-secondary/20 group">
-                <CardContent className="p-6 flex gap-4">
-                  <motion.div 
-                    className="flex-shrink-0"
-                    whileHover={{ scale: 1.2, rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
-                    </div>
-                  </motion.div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2 text-foreground">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div 
+                className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"
+                whileHover={{ scale: 1.1, backgroundColor: "hsl(var(--primary) / 0.15)" }}
+                transition={{ duration: 0.3 }}
+              >
+                <CheckCircle2 className="w-6 h-6 text-primary" />
+              </motion.div>
+              <h3 className="text-3xl font-bold text-foreground">{benefit.title}</h3>
+              <p className="text-xl text-muted-foreground leading-relaxed">{benefit.description}</p>
             </motion.div>
           ))}
         </div>
