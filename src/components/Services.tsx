@@ -43,15 +43,29 @@ export const Services = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-32 bg-background relative overflow-hidden">
+    <section id="services" className="py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
+      {/* Floating light orbs */}
+      <motion.div 
+        className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl"
+        animate={{ 
+          y: [0, -30, 0],
+          opacity: [0.1, 0.2, 0.1]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div 
-          className="mb-24"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          className="mb-24 max-w-4xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8 leading-tight">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8 leading-tight tracking-tight">
             Czym się<br />zajmuję?
           </h2>
         </motion.div>
@@ -66,19 +80,22 @@ export const Services = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="space-y-6"
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
+              className="group space-y-6 p-8 rounded-3xl transition-all duration-500 hover:bg-secondary/30 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
+              whileHover={{ y: -12, transition: { duration: 0.4, ease: "easeOut" } }}
             >
               <motion.div 
-                className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center"
-                whileHover={{ scale: 1.1, backgroundColor: "hsl(var(--primary) / 0.15)" }}
+                className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
+                whileHover={{ rotate: 5, scale: 1.1 }}
                 transition={{ duration: 0.3 }}
               >
-                <service.icon className="w-8 h-8 text-primary" />
+                <service.icon className="w-8 h-8 text-primary transition-colors duration-500 group-hover:text-primary-foreground" />
               </motion.div>
-              <h3 className="text-3xl font-bold text-foreground leading-tight">{service.title}</h3>
-              <p className="text-xl text-muted-foreground leading-relaxed">{service.description}</p>
+              <h3 className="text-3xl font-bold text-foreground leading-tight tracking-tight transition-colors duration-300 group-hover:text-primary">
+                {service.title}
+              </h3>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                {service.description}
+              </p>
             </motion.div>
           ))}
         </motion.div>

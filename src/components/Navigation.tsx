@@ -41,36 +41,42 @@ export const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? "bg-background/95 backdrop-blur-xl shadow-lg border-b border-border/50" 
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-5 flex items-center justify-between">
         <button
           onClick={() => scrollToSection("hero")}
-          className="hover:opacity-80 transition-opacity"
+          className="hover:opacity-80 transition-all duration-300 hover:scale-105"
         >
           <img src={logo} alt="Digitilio" className="h-10 w-auto" />
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative text-sm font-medium transition-colors group ${
+              className={`relative text-sm font-medium transition-all duration-300 group tracking-wide ${
                 isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'
               }`}
             >
               {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary transition-all duration-500 group-hover:w-full"></span>
             </button>
           ))}
           <Button 
             variant="hero" 
             onClick={openContactForm}
-            className={isScrolled ? '' : 'bg-white/10 text-white border-white/20 hover:bg-white/20'}
+            className={`transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+              isScrolled 
+                ? 'bg-primary hover:bg-primary/90' 
+                : 'bg-white/10 text-white border-white/20 hover:bg-white/20 backdrop-blur-sm'
+            }`}
           >
             Skontaktuj się
           </Button>

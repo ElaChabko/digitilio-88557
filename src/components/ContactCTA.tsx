@@ -12,42 +12,82 @@ export const ContactCTA = () => {
   };
 
   return (
-    <section className="py-32 relative overflow-hidden bg-card">
+    <section className="py-32 relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent/10 to-background">
+      {/* Animated gradient orbs */}
+      <motion.div 
+        className="absolute top-20 left-20 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.3, 0.2]
+        }}
+        transition={{ 
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-accent/25 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.25, 1],
+          opacity: [0.2, 0.35, 0.2]
+        }}
+        transition={{ 
+          duration: 11,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
+      
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl">
           <motion.h2 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-12 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-12 leading-tight tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
           >
             Gotowy na markę,<br />o której się mówi?
           </motion.h2>
           <motion.p 
             className="text-2xl md:text-3xl text-muted-foreground mb-16 font-light leading-relaxed max-w-4xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.15 }}
           >
             Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Button
-              onClick={openContactForm}
-              size="lg"
-              className="text-xl px-10 py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group"
+            <motion.div
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Mail className="mr-3 w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-              Zacznijmy współpracę
-            </Button>
-            <p className="text-muted-foreground text-base mt-6">Bez zobowiązań • Pierwsza konsultacja</p>
+              <Button
+                onClick={openContactForm}
+                size="lg"
+                className="text-xl px-10 py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+              >
+                <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+                Zacznijmy współpracę
+              </Button>
+            </motion.div>
+            <motion.p 
+              className="text-muted-foreground text-base mt-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              Bez zobowiązań • Pierwsza konsultacja
+            </motion.p>
           </motion.div>
         </div>
       </div>
