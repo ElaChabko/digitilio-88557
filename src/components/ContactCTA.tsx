@@ -3,6 +3,7 @@ import { Mail } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import contactBottomImage from "@/assets/contact-bottom-image.png";
 
 export const ContactCTA = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -91,6 +92,21 @@ export const ContactCTA = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Image at the bottom */}
+      <motion.div 
+        className="container mx-auto px-4 relative z-10 mt-16"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <img 
+          src={contactBottomImage} 
+          alt="Contact visual" 
+          className="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl"
+        />
+      </motion.div>
 
       <ContactFormDialog 
         isOpen={isContactFormOpen} 
