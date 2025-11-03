@@ -44,7 +44,7 @@ export const Navigation = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
           ? "bg-background/95 backdrop-blur-xl shadow-lg border-b border-border/50" 
-          : "bg-transparent"
+          : "bg-background/80 backdrop-blur-md shadow-md"
       }`}
     >
       <div className="container mx-auto px-4 py-5 flex items-center justify-between">
@@ -61,9 +61,7 @@ export const Navigation = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative text-sm font-medium transition-all duration-300 group tracking-wide ${
-                isScrolled ? 'text-foreground hover:text-primary' : 'text-white/90 hover:text-white'
-              }`}
+              className="relative text-sm font-medium transition-all duration-300 group tracking-wide text-foreground hover:text-primary"
             >
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary transition-all duration-500 group-hover:w-full"></span>
@@ -72,11 +70,7 @@ export const Navigation = () => {
           <Button 
             variant="hero" 
             onClick={openContactForm}
-            className={`transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-              isScrolled 
-                ? 'bg-primary hover:bg-primary/90' 
-                : 'bg-white/10 text-white border-white/20 hover:bg-white/20 backdrop-blur-sm'
-            }`}
+            className="transition-all duration-300 hover:scale-105 hover:shadow-lg bg-primary hover:bg-primary/90"
           >
             Skontaktuj się
           </Button>
@@ -84,9 +78,7 @@ export const Navigation = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden transition-colors ${
-            isScrolled ? 'text-foreground' : 'text-white'
-          }`}
+          className="md:hidden transition-colors text-foreground"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

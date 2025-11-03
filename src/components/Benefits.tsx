@@ -1,23 +1,28 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Lightbulb, Rocket, Target, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import benefitsBg from "@/assets/benefits-bg.jpg";
 
 const benefits = [
   {
+    icon: Target,
     title: "Widoczność, która się opłaca",
     description: "Treści zaprojektowane tak, by przyciągały i konwertowały.",
   },
   {
+    icon: Rocket,
     title: "Oszczędność czasu",
     description: "Automatyzacje i planowanie, które działają za Ciebie.",
   },
   {
+    icon: TrendingUp,
     title: "Większe zasięgi, lepsze wyniki",
     description: "Realne dane, nie obietnice.",
   },
   {
+    icon: Lightbulb,
     title: "Partner, nie wykonawca",
     description: "Transparentna współpraca i stały kontakt.",
   },
@@ -28,10 +33,25 @@ export const Benefits = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="benefits" className="py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
+    <section id="benefits" className="py-32 relative overflow-hidden">
+      {/* Background image */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.25 }}
+        transition={{ duration: 1.2 }}
+      >
+        <img 
+          src={benefitsBg} 
+          alt="" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/85" />
+      </motion.div>
+      
       {/* Decorative light */}
       <motion.div 
-        className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl"
+        className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl z-[1]"
         animate={{ 
           scale: [1, 1.25, 1],
           opacity: [0.12, 0.2, 0.12]
@@ -82,11 +102,11 @@ export const Benefits = () => {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500 -z-10" />
               
               <motion.div 
-                className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
+                className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
                 whileHover={{ scale: 1.15, rotate: 360 }}
                 transition={{ duration: 0.6 }}
               >
-                <CheckCircle2 className="w-6 h-6 text-primary transition-colors duration-500 group-hover:text-white" />
+                <benefit.icon className="w-8 h-8 text-primary transition-colors duration-500 group-hover:text-white" />
               </motion.div>
               <h3 className="text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {benefit.title}

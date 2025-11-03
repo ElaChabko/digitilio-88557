@@ -3,19 +3,25 @@ import { Share2, TrendingUp, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import serviceSocial from "@/assets/service-social.jpg";
+import serviceAI from "@/assets/service-ai.jpg";
+import serviceStrategy from "@/assets/service-strategy.jpg";
 
 const services = [{
   icon: Share2,
   title: "Zarządzanie Social Media",
-  description: "Od strategii po publikacje. Tworzę spójną komunikację, która zwiększa widoczność, buduje zaufanie i generuje realne zapytania."
+  description: "Od strategii po publikacje. Tworzę spójną komunikację, która zwiększa widoczność, buduje zaufanie i generuje realne zapytania.",
+  image: serviceSocial
 }, {
   icon: Brain,
   title: "AI / Automatyzacja",
-  description: "Nie tylko treści – także inteligentne procesy. Automatyzuję komunikację i wdrażam rozwiązania, które oszczędzają Twój czas."
+  description: "Nie tylko treści – także inteligentne procesy. Automatyzuję komunikację i wdrażam rozwiązania, które oszczędzają Twój czas.",
+  image: serviceAI
 }, {
   icon: TrendingUp,
   title: "Strategia komunikacji",
-  description: "Każdy post ma sens, bo wynika z planu. Opracowuję strategie, które wspierają Twój cel biznesowy – od employer brandingu po sprzedaż."
+  description: "Każdy post ma sens, bo wynika z planu. Opracowuję strategie, które wspierają Twój cel biznesowy – od employer brandingu po sprzedaż.",
+  image: serviceStrategy
 }];
 
 const containerVariants = {
@@ -80,22 +86,38 @@ export const Services = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="group space-y-6 p-8 rounded-3xl transition-all duration-500 hover:bg-secondary/30 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
+              className="group space-y-6 p-8 rounded-3xl transition-all duration-500 hover:bg-secondary/30 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)] relative overflow-hidden"
               whileHover={{ y: -12, transition: { duration: 0.4, ease: "easeOut" } }}
             >
+              {/* Background image overlay */}
               <motion.div 
-                className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
-                whileHover={{ rotate: 5, scale: 1.1 }}
-                transition={{ duration: 0.3 }}
+                className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"
+                initial={{ scale: 1.2 }}
+                whileHover={{ scale: 1 }}
+                transition={{ duration: 0.7 }}
               >
-                <service.icon className="w-8 h-8 text-primary transition-colors duration-500 group-hover:text-primary-foreground" />
+                <img 
+                  src={service.image} 
+                  alt="" 
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
-              <h3 className="text-3xl font-bold text-foreground leading-tight tracking-tight transition-colors duration-300 group-hover:text-primary">
-                {service.title}
-              </h3>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                {service.description}
-              </p>
+              
+              <div className="relative z-10">
+                <motion.div 
+                  className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
+                  whileHover={{ rotate: 5, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <service.icon className="w-8 h-8 text-primary transition-colors duration-500 group-hover:text-primary-foreground" />
+                </motion.div>
+                <h3 className="text-3xl font-bold text-foreground leading-tight tracking-tight transition-colors duration-300 group-hover:text-primary mt-6">
+                  {service.title}
+                </h3>
+                <p className="text-xl text-muted-foreground leading-relaxed mt-4">
+                  {service.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>

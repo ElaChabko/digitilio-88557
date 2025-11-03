@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import heroVisual from "@/assets/hero-visual.jpg";
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -16,9 +17,24 @@ export const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background"
     >
+      {/* Hero background image */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 0.35, scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <img 
+          src={heroVisual} 
+          alt="" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
+      </motion.div>
+      
       {/* Animated gradient orbs */}
       <motion.div 
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl z-[1]"
         animate={{ 
           scale: [1, 1.3, 1],
           opacity: [0.2, 0.3, 0.2],
@@ -32,7 +48,7 @@ export const Hero = () => {
         }}
       />
       <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full blur-3xl z-[1]"
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.15, 0.25, 0.15],
@@ -48,7 +64,7 @@ export const Hero = () => {
       />
       
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(270_13%_90%/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(270_13%_90%/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(270_13%_90%/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(270_13%_90%/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] z-[1]" />
 
       <div className="container mx-auto px-4 py-32 relative z-10">
         <motion.div 
