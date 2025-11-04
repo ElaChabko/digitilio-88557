@@ -42,58 +42,60 @@ export const ContactCTA = () => {
       />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl">
-          <motion.h2 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-12 leading-tight tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-          >
-            Gotowy na markę,<br />o której się mówi?
-          </motion.h2>
-          <motion.p 
-            className="text-2xl md:text-3xl text-muted-foreground mb-16 font-light leading-relaxed max-w-4xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.98 }}
+        <div className="max-w-7xl flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16">
+          <div className="flex-1">
+            <motion.h2 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-12 leading-tight tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
             >
-              <Button
-                onClick={openContactForm}
-                size="lg"
-                className="text-xl px-10 py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
-              >
-                <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-                Zacznijmy współpracę
-              </Button>
-            </motion.div>
+              Gotowy na markę,<br />o której się mówi?
+            </motion.h2>
             <motion.p 
-              className="text-muted-foreground text-base mt-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              className="text-2xl md:text-3xl text-muted-foreground mb-16 font-light leading-relaxed max-w-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.15 }}
             >
-              Bez zobowiązań • Pierwsza konsultacja
+              Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
             </motion.p>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button
+                  onClick={openContactForm}
+                  size="lg"
+                  className="text-xl px-10 py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+                >
+                  <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+                  Zacznijmy współpracę
+                </Button>
+              </motion.div>
+              <motion.p 
+                className="text-muted-foreground text-base mt-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                Bez zobowiązań • Pierwsza konsultacja
+              </motion.p>
+            </motion.div>
+          </div>
 
           {/* Image */}
           <motion.div 
-            className="mt-16"
+            className="flex-shrink-0"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
