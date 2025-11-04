@@ -32,39 +32,113 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
       </motion.div>
       
-      {/* Animated gradient orbs */}
+      {/* Dynamic animated gradient orbs - Multiple layers */}
       <motion.div 
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl z-[1]"
+        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/25 rounded-full blur-3xl z-[1]"
         animate={{ 
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.3, 0.2],
-          x: [0, 50, 0],
-          y: [0, 30, 0]
+          scale: [1, 1.4, 1.1, 1],
+          opacity: [0.25, 0.4, 0.3, 0.25],
+          x: [0, 60, -30, 0],
+          y: [0, 40, -20, 0],
+          rotate: [0, 180, 360]
         }}
         transition={{ 
-          duration: 15,
+          duration: 20,
           repeat: Infinity,
           ease: "easeInOut"
         }}
       />
       <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full blur-3xl z-[1]"
+        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/25 rounded-full blur-3xl z-[1]"
         animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.15, 0.25, 0.15],
-          x: [0, -40, 0],
-          y: [0, -20, 0]
+          scale: [1, 1.3, 0.9, 1],
+          opacity: [0.2, 0.35, 0.25, 0.2],
+          x: [0, -50, 40, 0],
+          y: [0, -30, 20, 0],
+          rotate: [0, -180, -360]
         }}
         transition={{ 
-          duration: 12,
+          duration: 18,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 1
         }}
       />
+      <motion.div 
+        className="absolute top-1/2 right-1/3 w-[400px] h-[400px] bg-secondary/20 rounded-full blur-3xl z-[1]"
+        animate={{ 
+          scale: [1, 1.5, 1],
+          opacity: [0.15, 0.3, 0.15],
+          x: [0, 70, 0],
+          y: [0, -50, 0]
+        }}
+        transition={{ 
+          duration: 16,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-primary/15 rounded-full blur-3xl z-[1]"
+        animate={{ 
+          scale: [1, 1.2, 1.4, 1],
+          opacity: [0.1, 0.25, 0.15, 0.1],
+          x: [0, -60, 30, 0],
+          y: [0, 40, -30, 0]
+        }}
+        transition={{ 
+          duration: 22,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.5
+        }}
+      />
+      <motion.div 
+        className="absolute top-1/3 left-1/2 w-[350px] h-[350px] bg-accent/15 rounded-full blur-3xl z-[1]"
+        animate={{ 
+          scale: [1, 1.6, 1],
+          opacity: [0.1, 0.3, 0.1],
+          x: [0, 40, 0],
+          y: [0, 60, 0],
+          rotate: [0, 90, 0]
+        }}
+        transition={{ 
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.5
+        }}
+      />
       
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(270_13%_90%/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(270_13%_90%/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] z-[1]" />
+      {/* Animated gradient overlay */}
+      <motion.div 
+        className="absolute inset-0 z-[2]"
+        style={{
+          background: "radial-gradient(circle at 50% 50%, transparent 0%, hsl(var(--background)/0.3) 100%)"
+        }}
+        animate={{
+          opacity: [0.5, 0.8, 0.5]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      {/* Subtle animated grid pattern */}
+      <motion.div 
+        className="absolute inset-0 bg-[linear-gradient(to_right,hsl(270_13%_90%/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(270_13%_90%/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] z-[3]"
+        animate={{
+          opacity: [0.3, 0.6, 0.3]
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
 
       <div className="container mx-auto px-4 py-32 relative z-10">
         <motion.div 
