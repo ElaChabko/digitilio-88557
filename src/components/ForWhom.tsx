@@ -40,20 +40,10 @@ export const ForWhom = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.15
-        }}>Jeśli wiesz, że Twoja marka może robić więcej w social mediach – ale brakuje Ci czasu, pomysłu lub strategii – zajmę się tym kompleksowo. Od pierwszego audytu po raport z wynikami – wszystko po to, byś mógł skupić się na prowadzeniu firmy.
+        }}>Jeśli wiesz, że Twoja marka może robić więcej w social mediach, ale brakuje Ci czasu, pomysłu lub strategii to zajmę się tym kompleksowo. Od pierwszego audytu po raport z wynikami – wszystko po to, byś mógł skupić się na prowadzeniu firmy.
 
-
-
-Pracuję z firmami z różnych branż:
-produkcja i przemysł – pokazuję, że nawet techniczne tematy mogą przyciągać uwagę,
-IT i nowe technologie – łączę merytorykę z kreatywną formą,
-handel detaliczny i e-commerce – pomagam budować markę i wspierać sprzedaż,
-logistyka i transport – tworzę komunikację, która pokazuje skalę i zaufanie,
-BHP i odzież ochronna – wspieram marki w edukacji i employer brandingu,
-projekty międzynarodowe – prowadzę komunikację po polsku i po angielsku, zachowując spójność wizerunku.
-
-Niezależnie od wielkości firmy — pracuję strategicznie, elastycznie i z pełnym zaangażowaniem.
-Najważniejsze są dla mnie efekty, nie obietnice.</motion.p>
+Pracuję z firmami z różnych branż: 
+produkcja i przemysł – pokazuję, że nawet techniczne tematy mogą przyciągać uwagę, IT i nowe technologie – łączę merytorykę z kreatywną formą, handel detaliczny i e-commerce – pomagam budować markę i wspierać sprzedaż, logistyka i transport – tworzę komunikację, która pokazuje skalę i zaufanie, BHP i odzież ochronna – wspieram marki w edukacji i employer brandingu, projekty międzynarodowe – prowadzę komunikację po polsku i po angielsku, zachowując spójność wizerunku. Niezależnie od wielkości firmy — pracuję strategicznie, elastycznie i z pełnym zaangażowaniem. Najważniejsze są dla mnie efekty, nie obietnice.</motion.p>
         </div>
       </div>
     </section>;
