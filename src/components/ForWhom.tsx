@@ -18,11 +18,6 @@ const industries = [
     description: "Pomagam budować markę i wspierać sprzedaż"
   },
   {
-    icon: Truck,
-    title: "Logistyka i transport",
-    description: "Tworzę komunikację, która pokazuje skalę i zaufanie"
-  },
-  {
     icon: ShieldCheck,
     title: "BHP i odzież ochronna",
     description: "Wspieram marki w edukacji i employer brandingu"
