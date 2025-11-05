@@ -32,93 +32,115 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
       </motion.div>
       
-      {/* Dynamic animated gradient orbs - Multiple layers */}
+      {/* Modern animated mesh gradient background */}
       <motion.div 
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/25 rounded-full blur-3xl z-[1]"
-        animate={{ 
-          scale: [1, 1.4, 1.1, 1],
-          opacity: [0.25, 0.4, 0.3, 0.25],
-          x: [0, 60, -30, 0],
-          y: [0, 40, -20, 0],
-          rotate: [0, 180, 360]
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: "radial-gradient(at 40% 20%, hsl(var(--primary) / 0.3) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(var(--accent) / 0.25) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(var(--secondary) / 0.2) 0px, transparent 50%), radial-gradient(at 80% 50%, hsl(var(--primary) / 0.2) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(var(--accent) / 0.25) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(var(--primary) / 0.3) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(var(--accent) / 0.2) 0px, transparent 50%)"
         }}
-        transition={{ 
-          duration: 20,
+        animate={{
+          opacity: [0.5, 0.8, 0.6, 0.5]
+        }}
+        transition={{
+          duration: 12,
           repeat: Infinity,
           ease: "easeInOut"
         }}
       />
+
+      {/* Floating animated particles */}
+      {[...Array(30)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-primary/40 rounded-full z-[2]"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [0, 0.8, 0],
+            scale: [0, 1.5, 0]
+          }}
+          transition={{
+            duration: 3 + Math.random() * 4,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+            ease: "easeInOut"
+          }}
+        />
+      ))}
+
+      {/* Dynamic gradient orbs with glow effect */}
       <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/25 rounded-full blur-3xl z-[1]"
+        className="absolute top-1/4 left-1/4 w-[700px] h-[700px] rounded-full z-[1]"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, hsl(var(--primary) / 0.2) 40%, transparent 70%)",
+          filter: "blur(60px)"
+        }}
         animate={{ 
-          scale: [1, 1.3, 0.9, 1],
-          opacity: [0.2, 0.35, 0.25, 0.2],
-          x: [0, -50, 40, 0],
-          y: [0, -30, 20, 0],
-          rotate: [0, -180, -360]
+          scale: [1, 1.3, 1.1, 1],
+          opacity: [0.3, 0.5, 0.4, 0.3],
+          x: [0, 80, -40, 0],
+          y: [0, 50, -30, 0],
         }}
         transition={{ 
-          duration: 18,
+          duration: 25,
           repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
+          ease: "easeInOut"
         }}
       />
+      
       <motion.div 
-        className="absolute top-1/2 right-1/3 w-[400px] h-[400px] bg-secondary/20 rounded-full blur-3xl z-[1]"
-        animate={{ 
-          scale: [1, 1.5, 1],
-          opacity: [0.15, 0.3, 0.15],
-          x: [0, 70, 0],
-          y: [0, -50, 0]
+        className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full z-[1]"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, hsl(var(--accent) / 0.2) 40%, transparent 70%)",
+          filter: "blur(60px)"
         }}
-        transition={{ 
-          duration: 16,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-primary/15 rounded-full blur-3xl z-[1]"
         animate={{ 
-          scale: [1, 1.2, 1.4, 1],
-          opacity: [0.1, 0.25, 0.15, 0.1],
-          x: [0, -60, 30, 0],
-          y: [0, 40, -30, 0]
+          scale: [1, 1.4, 0.9, 1],
+          opacity: [0.25, 0.45, 0.3, 0.25],
+          x: [0, -60, 50, 0],
+          y: [0, -40, 30, 0],
         }}
         transition={{ 
           duration: 22,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 0.5
+          delay: 1
         }}
       />
+
       <motion.div 
-        className="absolute top-1/3 left-1/2 w-[350px] h-[350px] bg-accent/15 rounded-full blur-3xl z-[1]"
+        className="absolute top-1/2 right-1/3 w-[500px] h-[500px] rounded-full z-[1]"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--secondary) / 0.3) 0%, hsl(var(--secondary) / 0.15) 40%, transparent 70%)",
+          filter: "blur(50px)"
+        }}
         animate={{ 
-          scale: [1, 1.6, 1],
-          opacity: [0.1, 0.3, 0.1],
-          x: [0, 40, 0],
-          y: [0, 60, 0],
-          rotate: [0, 90, 0]
+          scale: [1, 1.5, 1.2, 1],
+          opacity: [0.2, 0.4, 0.25, 0.2],
+          x: [0, 90, -20, 0],
+          y: [0, -60, 30, 0]
         }}
         transition={{ 
-          duration: 14,
+          duration: 20,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 1.5
+          delay: 2
         }}
       />
-      
-      {/* Animated gradient overlay */}
+
+      {/* Animated gradient waves */}
       <motion.div 
         className="absolute inset-0 z-[2]"
         style={{
-          background: "radial-gradient(circle at 50% 50%, transparent 0%, hsl(var(--background)/0.3) 100%)"
+          background: "linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.05) 50%, transparent 100%)"
         }}
         animate={{
-          opacity: [0.5, 0.8, 0.5]
+          opacity: [0.3, 0.6, 0.3],
+          y: [0, -20, 0]
         }}
         transition={{
           duration: 8,
@@ -126,17 +148,42 @@ export const Hero = () => {
           ease: "easeInOut"
         }}
       />
-      
-      {/* Subtle animated grid pattern */}
+
+      {/* Modern grid with glow */}
       <motion.div 
-        className="absolute inset-0 bg-[linear-gradient(to_right,hsl(270_13%_90%/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(270_13%_90%/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] z-[3]"
+        className="absolute inset-0 z-[3]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, hsl(var(--primary) / 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, hsl(var(--primary) / 0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px',
+          maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 75%)'
+        }}
         animate={{
-          opacity: [0.3, 0.6, 0.3]
+          opacity: [0.4, 0.7, 0.4]
         }}
         transition={{
-          duration: 10,
+          duration: 6,
           repeat: Infinity,
           ease: "easeInOut"
+        }}
+      />
+
+      {/* Scan line effect */}
+      <motion.div
+        className="absolute inset-0 z-[3]"
+        style={{
+          background: "linear-gradient(0deg, transparent 0%, hsl(var(--accent) / 0.1) 50%, transparent 100%)",
+          height: "200px"
+        }}
+        animate={{
+          y: ["-200px", "100vh"]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear"
         }}
       />
 
