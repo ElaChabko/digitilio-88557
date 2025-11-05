@@ -1,12 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -15,13 +18,22 @@ export const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth"
-      });
-      setIsMobileMenuOpen(false);
+    // If not on home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    setIsMobileMenuOpen(false);
   };
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -42,6 +54,10 @@ export const Navigation = () => {
   }, {
     label: "Korzyści",
     id: "benefits"
+  }, {
+    label: "Blog",
+    id: "blog",
+    isRoute: true
   }];
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "bg-background/95 backdrop-blur-xl shadow-lg border-b border-border/50" : "bg-background/80 backdrop-blur-md shadow-md"}`}>
       <div className="container mx-auto px-4 py-5 flex items-center justify-between">
@@ -51,7 +67,7 @@ export const Navigation = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
-          {navItems.map(item => <button key={item.id} onClick={() => scrollToSection(item.id)} className="relative text-sm font-medium transition-all duration-300 group tracking-wide text-foreground hover:text-primary">
+          {navItems.map(item => <button key={item.id} onClick={() => item.isRoute ? navigate(`/${item.id}`) : scrollToSection(item.id)} className="relative text-sm font-medium transition-all duration-300 group tracking-wide text-foreground hover:text-primary">
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary transition-all duration-500 group-hover:w-full"></span>
             </button>)}
@@ -69,7 +85,7 @@ export const Navigation = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && <div className="md:hidden bg-background border-t border-border">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-            {navItems.map(item => <button key={item.id} onClick={() => scrollToSection(item.id)} className="text-left text-sm font-medium text-foreground hover:text-primary transition-colors">
+            {navItems.map(item => <button key={item.id} onClick={() => item.isRoute ? navigate(`/${item.id}`) : scrollToSection(item.id)} className="text-left text-sm font-medium text-foreground hover:text-primary transition-colors">
                 {item.label}
               </button>)}
             <Button variant="hero" onClick={openContactForm} className="w-full">
