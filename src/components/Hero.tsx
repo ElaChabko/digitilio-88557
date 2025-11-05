@@ -2,11 +2,26 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useMousePosition } from "@/hooks/use-mouse-position";
 import heroVisual from "@/assets/hero-visual.jpg";
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const mousePosition = useMousePosition();
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 150 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left - rect.width / 2);
+    mouseY.set(e.clientY - rect.top - rect.height / 2);
+  };
 
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -16,6 +31,7 @@ export const Hero = () => {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background"
+      onMouseMove={handleMouseMove}
     >
       {/* Hero background image */}
       <motion.div 
@@ -32,14 +48,25 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
       </motion.div>
       
+      {/* Interactive cursor-following gradient */}
+      <motion.div
+        className="absolute w-[800px] h-[800px] rounded-full z-[1] pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, hsl(var(--accent) / 0.3) 30%, transparent 70%)",
+          filter: "blur(80px)",
+          left: mousePosition.x - 400,
+          top: mousePosition.y - 400,
+        }}
+      />
+
       {/* Modern animated mesh gradient background */}
       <motion.div 
         className="absolute inset-0 z-[1]"
         style={{
-          background: "radial-gradient(at 40% 20%, hsl(var(--primary) / 0.3) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(var(--accent) / 0.25) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(var(--secondary) / 0.2) 0px, transparent 50%), radial-gradient(at 80% 50%, hsl(var(--primary) / 0.2) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(var(--accent) / 0.25) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(var(--primary) / 0.3) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(var(--accent) / 0.2) 0px, transparent 50%)"
+          background: "radial-gradient(at 40% 20%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(var(--secondary) / 0.4) 0px, transparent 50%), radial-gradient(at 80% 50%, hsl(var(--primary) / 0.4) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(var(--accent) / 0.4) 0px, transparent 50%)"
         }}
         animate={{
-          opacity: [0.5, 0.8, 0.6, 0.5]
+          opacity: [0.7, 0.9, 0.8, 0.7]
         }}
         transition={{
           duration: 12,
@@ -48,20 +75,20 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating animated particles */}
-      {[...Array(30)].map((_, i) => (
+      {/* Floating animated particles with mouse interaction */}
+      {[...Array(40)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-primary/40 rounded-full z-[2]"
+          className="absolute w-1.5 h-1.5 bg-primary/60 rounded-full z-[2]"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [0, -30, 0],
-            x: [0, Math.random() * 20 - 10, 0],
-            opacity: [0, 0.8, 0],
-            scale: [0, 1.5, 0]
+            y: [0, -40, 0],
+            x: [0, (mousePosition.x / 100) * (Math.random() * 2 - 1), 0],
+            opacity: [0.3, 1, 0.3],
+            scale: [0, 2, 0]
           }}
           transition={{
             duration: 3 + Math.random() * 4,
@@ -72,16 +99,18 @@ export const Hero = () => {
         />
       ))}
 
-      {/* Dynamic gradient orbs with glow effect */}
+      {/* Dynamic gradient orbs with glow effect and mouse interaction */}
       <motion.div 
         className="absolute top-1/4 left-1/4 w-[700px] h-[700px] rounded-full z-[1]"
         style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, hsl(var(--primary) / 0.2) 40%, transparent 70%)",
-          filter: "blur(60px)"
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, hsl(var(--primary) / 0.4) 40%, transparent 70%)",
+          filter: "blur(60px)",
+          x: x,
+          y: y,
         }}
         animate={{ 
           scale: [1, 1.3, 1.1, 1],
-          opacity: [0.3, 0.5, 0.4, 0.3],
+          opacity: [0.5, 0.7, 0.6, 0.5],
           x: [0, 80, -40, 0],
           y: [0, 50, -30, 0],
         }}
@@ -95,12 +124,14 @@ export const Hero = () => {
       <motion.div 
         className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full z-[1]"
         style={{
-          background: "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, hsl(var(--accent) / 0.2) 40%, transparent 70%)",
-          filter: "blur(60px)"
+          background: "radial-gradient(circle, hsl(var(--accent) / 0.6) 0%, hsl(var(--accent) / 0.4) 40%, transparent 70%)",
+          filter: "blur(60px)",
+          x: x.get() * -0.5,
+          y: y.get() * -0.5,
         }}
         animate={{ 
           scale: [1, 1.4, 0.9, 1],
-          opacity: [0.25, 0.45, 0.3, 0.25],
+          opacity: [0.45, 0.65, 0.5, 0.45],
           x: [0, -60, 50, 0],
           y: [0, -40, 30, 0],
         }}
@@ -115,12 +146,14 @@ export const Hero = () => {
       <motion.div 
         className="absolute top-1/2 right-1/3 w-[500px] h-[500px] rounded-full z-[1]"
         style={{
-          background: "radial-gradient(circle, hsl(var(--secondary) / 0.3) 0%, hsl(var(--secondary) / 0.15) 40%, transparent 70%)",
-          filter: "blur(50px)"
+          background: "radial-gradient(circle, hsl(var(--secondary) / 0.5) 0%, hsl(var(--secondary) / 0.3) 40%, transparent 70%)",
+          filter: "blur(50px)",
+          x: x.get() * 0.3,
+          y: y.get() * 0.3,
         }}
         animate={{ 
           scale: [1, 1.5, 1.2, 1],
-          opacity: [0.2, 0.4, 0.25, 0.2],
+          opacity: [0.4, 0.6, 0.45, 0.4],
           x: [0, 90, -20, 0],
           y: [0, -60, 30, 0]
         }}
@@ -136,10 +169,10 @@ export const Hero = () => {
       <motion.div 
         className="absolute inset-0 z-[2]"
         style={{
-          background: "linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.05) 50%, transparent 100%)"
+          background: "linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.1) 50%, transparent 100%)"
         }}
         animate={{
-          opacity: [0.3, 0.6, 0.3],
+          opacity: [0.5, 0.8, 0.5],
           y: [0, -20, 0]
         }}
         transition={{
@@ -154,14 +187,14 @@ export const Hero = () => {
         className="absolute inset-0 z-[3]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, hsl(var(--primary) / 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--primary) / 0.08) 1px, transparent 1px)
+            linear-gradient(to right, hsl(var(--primary) / 0.15) 1px, transparent 1px),
+            linear-gradient(to bottom, hsl(var(--primary) / 0.15) 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
           maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 75%)'
         }}
         animate={{
-          opacity: [0.4, 0.7, 0.4]
+          opacity: [0.6, 0.9, 0.6]
         }}
         transition={{
           duration: 6,
@@ -170,11 +203,11 @@ export const Hero = () => {
         }}
       />
 
-      {/* Scan line effect */}
+      {/* Scan line effect - more visible */}
       <motion.div
         className="absolute inset-0 z-[3]"
         style={{
-          background: "linear-gradient(0deg, transparent 0%, hsl(var(--accent) / 0.1) 50%, transparent 100%)",
+          background: "linear-gradient(0deg, transparent 0%, hsl(var(--accent) / 0.2) 50%, transparent 100%)",
           height: "200px"
         }}
         animate={{
