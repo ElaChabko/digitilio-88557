@@ -2,26 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useMousePosition } from "@/hooks/use-mouse-position";
+import { motion } from "framer-motion";
 import heroVisual from "@/assets/hero-visual.jpg";
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const mousePosition = useMousePosition();
-  
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springConfig = { damping: 40, stiffness: 80 };
-  const x = useSpring(mouseX, springConfig);
-  const y = useSpring(mouseY, springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - rect.width / 2);
-    mouseY.set(e.clientY - rect.top - rect.height / 2);
-  };
 
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -31,7 +16,6 @@ export const Hero = () => {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background"
-      onMouseMove={handleMouseMove}
     >
       {/* Hero background image */}
       <motion.div 
@@ -48,17 +32,6 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
       </motion.div>
       
-      {/* Interactive cursor-following gradient */}
-      <motion.div
-        className="absolute w-[800px] h-[800px] rounded-full z-[1] pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, hsl(var(--accent) / 0.12) 30%, transparent 70%)",
-          filter: "blur(100px)",
-          left: mousePosition.x - 400,
-          top: mousePosition.y - 400,
-        }}
-      />
-
       {/* Modern animated mesh gradient background */}
       <motion.div 
         className="absolute inset-0 z-[1]"
@@ -75,7 +48,7 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating animated particles with mouse interaction */}
+      {/* Floating animated particles */}
       {[...Array(40)].map((_, i) => (
         <motion.div
           key={i}
@@ -98,14 +71,12 @@ export const Hero = () => {
         />
       ))}
 
-      {/* Dynamic gradient orbs with glow effect and mouse interaction */}
+      {/* Dynamic gradient orbs with glow effect */}
       <motion.div 
         className="absolute top-1/4 left-1/4 w-[700px] h-[700px] rounded-full z-[1]"
         style={{
           background: "radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, hsl(var(--primary) / 0.4) 40%, transparent 70%)",
           filter: "blur(60px)",
-          x: useSpring(mouseX.get() * 0.008, springConfig),
-          y: useSpring(mouseY.get() * 0.008, springConfig),
         }}
         animate={{ 
           scale: [1, 1.3, 1.1, 1],
@@ -125,8 +96,6 @@ export const Hero = () => {
         style={{
           background: "radial-gradient(circle, hsl(var(--accent) / 0.6) 0%, hsl(var(--accent) / 0.4) 40%, transparent 70%)",
           filter: "blur(60px)",
-          x: useSpring(mouseX.get() * -0.005, springConfig),
-          y: useSpring(mouseY.get() * -0.005, springConfig),
         }}
         animate={{ 
           scale: [1, 1.4, 0.9, 1],
@@ -147,8 +116,6 @@ export const Hero = () => {
         style={{
           background: "radial-gradient(circle, hsl(var(--secondary) / 0.5) 0%, hsl(var(--secondary) / 0.3) 40%, transparent 70%)",
           filter: "blur(50px)",
-          x: useSpring(mouseX.get() * 0.004, springConfig),
-          y: useSpring(mouseY.get() * 0.004, springConfig),
         }}
         animate={{ 
           scale: [1, 1.5, 1.2, 1],
