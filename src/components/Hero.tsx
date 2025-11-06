@@ -86,7 +86,6 @@ export const Hero = () => {
           }}
           animate={{
             y: [0, -40, 0],
-            x: [0, 10 * (Math.random() * 2 - 1), 0],
             opacity: [0.3, 0.7, 0.3],
             scale: [0, 1.5, 0]
           }}
@@ -105,8 +104,8 @@ export const Hero = () => {
         style={{
           background: "radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, hsl(var(--primary) / 0.4) 40%, transparent 70%)",
           filter: "blur(60px)",
-          x: useSpring(mouseX.get() * 0.03, springConfig),
-          y: useSpring(mouseY.get() * 0.03, springConfig),
+          x: useSpring(mouseX.get() * 0.008, springConfig),
+          y: useSpring(mouseY.get() * 0.008, springConfig),
         }}
         animate={{ 
           scale: [1, 1.3, 1.1, 1],
@@ -126,8 +125,8 @@ export const Hero = () => {
         style={{
           background: "radial-gradient(circle, hsl(var(--accent) / 0.6) 0%, hsl(var(--accent) / 0.4) 40%, transparent 70%)",
           filter: "blur(60px)",
-          x: useSpring(mouseX.get() * -0.02, springConfig),
-          y: useSpring(mouseY.get() * -0.02, springConfig),
+          x: useSpring(mouseX.get() * -0.005, springConfig),
+          y: useSpring(mouseY.get() * -0.005, springConfig),
         }}
         animate={{ 
           scale: [1, 1.4, 0.9, 1],
@@ -148,8 +147,8 @@ export const Hero = () => {
         style={{
           background: "radial-gradient(circle, hsl(var(--secondary) / 0.5) 0%, hsl(var(--secondary) / 0.3) 40%, transparent 70%)",
           filter: "blur(50px)",
-          x: useSpring(mouseX.get() * 0.015, springConfig),
-          y: useSpring(mouseY.get() * 0.015, springConfig),
+          x: useSpring(mouseX.get() * 0.004, springConfig),
+          y: useSpring(mouseY.get() * 0.004, springConfig),
         }}
         animate={{ 
           scale: [1, 1.5, 1.2, 1],
