@@ -86,7 +86,7 @@ export const Hero = () => {
           }}
           animate={{
             y: [0, -40, 0],
-            x: [0, 20 * (Math.random() * 2 - 1), 0],
+            x: [0, 10 * (Math.random() * 2 - 1), 0],
             opacity: [0.3, 0.7, 0.3],
             scale: [0, 1.5, 0]
           }}
