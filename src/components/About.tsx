@@ -1,4 +1,4 @@
-import aboutPhoto from "@/assets/about-photo.jpg";
+import aboutPhoto from "@/assets/about-photo-new.jpg";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
