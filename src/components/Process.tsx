@@ -26,7 +26,7 @@ export const Process = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="process" className="py-32 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden">
+    <section id="process" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden">
       {/* Decorative light */}
       <motion.div 
         className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl"
@@ -43,16 +43,16 @@ export const Process = () => {
       
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div 
-          className="mb-24 max-w-5xl"
+          className="mb-12 md:mb-16 lg:mb-24 max-w-5xl"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8 leading-tight tracking-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
             Jak<br />pracuję?
           </h2>
           <motion.p 
-            className="text-2xl md:text-3xl text-muted-foreground max-w-3xl font-light leading-relaxed"
+            className="text-lg md:text-xl lg:text-3xl text-muted-foreground max-w-3xl font-light leading-relaxed"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -62,11 +62,11 @@ export const Process = () => {
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-20 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 lg:gap-20 max-w-6xl">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-6"
+              className="group relative space-y-4 md:space-y-6"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ 
@@ -91,10 +91,10 @@ export const Process = () => {
               >
                 <step.icon className="w-10 h-10 text-primary transition-colors duration-500 group-hover:text-primary-foreground" />
               </motion.div>
-              <h3 className="text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {step.title}
               </h3>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

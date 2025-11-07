@@ -30,7 +30,7 @@ const industries = [
 ];
 
 export const ForWhom = () => {
-  return <section id="for-whom" className="py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
+  return <section id="for-whom" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
       {/* Floating gradient orb */}
       <motion.div className="absolute top-1/2 right-10 w-[500px] h-[500px] bg-accent/15 rounded-full blur-3xl" animate={{
       y: [0, 40, 0],
@@ -44,7 +44,7 @@ export const ForWhom = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <motion.h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8 leading-tight tracking-tight" initial={{
+          <motion.h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight" initial={{
           opacity: 0,
           y: 30
         }} whileInView={{
@@ -59,7 +59,7 @@ export const ForWhom = () => {
             Dla kogo?
           </motion.h2>
 
-          <motion.p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light mb-16 max-w-4xl" initial={{
+          <motion.p className="text-base md:text-lg lg:text-2xl text-muted-foreground leading-relaxed font-light mb-8 md:mb-12 lg:mb-16 max-w-4xl" initial={{
           opacity: 0,
           y: 20
         }} whileInView={{
@@ -75,7 +75,7 @@ export const ForWhom = () => {
             Jeśli wiesz, że Twoja marka może robić więcej w social mediach, ale brakuje Ci czasu, pomysłu lub strategii to zajmę się tym kompleksowo. Od pierwszego audytu po raport z wynikami – wszystko po to, byś mógł skupić się na prowadzeniu firmy.
           </motion.p>
 
-          <motion.h3 className="text-3xl md:text-4xl font-semibold text-foreground mb-12" initial={{
+          <motion.h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-8 md:mb-10 lg:mb-12" initial={{
           opacity: 0,
           y: 20
         }} whileInView={{
@@ -91,7 +91,7 @@ export const ForWhom = () => {
             Pracuję z firmami z różnych branż:
           </motion.h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 lg:mb-16">
             {industries.map((industry, index) => (
               <motion.div key={industry.title} className="group p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10" initial={{
               opacity: 0,
@@ -123,7 +123,7 @@ export const ForWhom = () => {
             ))}
           </div>
 
-          <motion.p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light max-w-4xl" initial={{
+          <motion.p className="text-base md:text-lg lg:text-2xl text-muted-foreground leading-relaxed font-light max-w-4xl" initial={{
           opacity: 0,
           y: 20
         }} whileInView={{

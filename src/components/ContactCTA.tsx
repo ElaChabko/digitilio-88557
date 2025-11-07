@@ -13,7 +13,7 @@ export const ContactCTA = () => {
   };
 
   return (
-    <section className="py-32 relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent/10 to-background">
+    <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent/10 to-background">
       {/* Animated gradient orbs */}
       <motion.div 
         className="absolute top-20 left-20 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"
@@ -42,10 +42,10 @@ export const ContactCTA = () => {
       />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-7xl flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16">
+        <div className="max-w-7xl flex flex-col lg:flex-row items-start lg:items-center gap-8 md:gap-10 lg:gap-16">
           <div className="flex-1">
             <motion.h2 
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-12 leading-tight tracking-tight"
+              className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-8 md:mb-10 lg:mb-12 leading-tight tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -54,7 +54,7 @@ export const ContactCTA = () => {
               Gotowy na markę,<br />o której się mówi?
             </motion.h2>
             <motion.p 
-              className="text-2xl md:text-3xl text-muted-foreground mb-16 font-light leading-relaxed max-w-4xl"
+              className="text-lg md:text-xl lg:text-3xl text-muted-foreground mb-8 md:mb-12 lg:mb-16 font-light leading-relaxed max-w-4xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -75,7 +75,7 @@ export const ContactCTA = () => {
                 <Button
                   onClick={openContactForm}
                   size="lg"
-                  className="text-xl px-10 py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+                  className="text-base md:text-lg lg:text-xl px-6 py-6 md:px-8 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
                 >
                   <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
                   Zacznijmy współpracę

@@ -33,7 +33,7 @@ export const Benefits = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="benefits" className="py-32 relative overflow-hidden">
+    <section id="benefits" className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
       {/* Background image */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -65,16 +65,16 @@ export const Benefits = () => {
       
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div 
-          className="mb-24 max-w-5xl"
+          className="mb-12 md:mb-16 lg:mb-24 max-w-5xl"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8 leading-tight tracking-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
             Co<br />zyskujesz?
           </h2>
           <motion.p 
-            className="text-2xl md:text-3xl text-muted-foreground font-light leading-relaxed"
+            className="text-lg md:text-xl lg:text-3xl text-muted-foreground font-light leading-relaxed"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -84,11 +84,11 @@ export const Benefits = () => {
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 max-w-6xl">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-4 p-8 rounded-3xl transition-all duration-500 hover:bg-gradient-to-br hover:from-secondary/30 hover:to-accent/10 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
+              className="group relative space-y-3 md:space-y-4 p-6 md:p-8 rounded-3xl transition-all duration-500 hover:bg-gradient-to-br hover:from-secondary/30 hover:to-accent/10 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ 
@@ -108,10 +108,10 @@ export const Benefits = () => {
               >
                 <benefit.icon className="w-8 h-8 text-primary transition-colors duration-500 group-hover:text-white" />
               </motion.div>
-              <h3 className="text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {benefit.title}
               </h3>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>

@@ -8,7 +8,7 @@ export const About = () => {
     once: true,
     margin: "-100px"
   });
-  return <section id="about" className="py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
+  return <section id="about" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
       {/* Decorative elements */}
       <motion.div className="absolute bottom-20 right-20 w-[350px] h-[350px] bg-accent/10 rounded-full blur-3xl" animate={{
       scale: [1, 1.15, 1],
@@ -20,7 +20,7 @@ export const About = () => {
     }} />
       
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
-        <motion.div className="mb-24" initial={{
+        <motion.div className="mb-12 md:mb-16 lg:mb-24" initial={{
         opacity: 0,
         y: 30
       }} animate={isInView ? {
@@ -32,10 +32,10 @@ export const About = () => {
       }} transition={{
         duration: 0.6
       }}>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground leading-tight tracking-tight">O mnie</h2>
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground leading-tight tracking-tight">O mnie</h2>
         </motion.div>
         
-        <div className="max-w-6xl mx-auto grid md:grid-cols-5 gap-16 items-start">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-5 gap-8 md:gap-12 lg:gap-16 items-start">
           <motion.div className="md:col-span-2 group" initial={{
           opacity: 0,
           x: -40
@@ -60,7 +60,7 @@ export const About = () => {
             </motion.div>
           </motion.div>
           
-          <motion.div className="md:col-span-3 space-y-8" initial={{
+          <motion.div className="md:col-span-3 space-y-4 md:space-y-6 lg:space-y-8" initial={{
           opacity: 0,
           x: 40
         }} animate={isInView ? {
@@ -86,7 +86,7 @@ export const About = () => {
           }} transition={{
             duration: 0.5,
             delay: 0.3
-          }} className="text-2xl text-muted-foreground leading-relaxed font-light md:text-2xl">
+          }} className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-light">
               Nazywam się <strong className="text-foreground font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Ela Chabko</strong> i jestem specjalistką od strategii komunikacji w social mediach.
             </motion.p>
             <motion.p initial={{
@@ -101,7 +101,7 @@ export const About = () => {
           }} transition={{
             duration: 0.5,
             delay: 0.4
-          }} className="text-2xl text-muted-foreground leading-relaxed font-light md:text-xl">
+          }} className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed font-light">
               Tworzę treści, które sprzedają, budują pozycję eksperta i przyciągają uwagę. Nie wierzę w posty „dla postów" – każdy ma cel i działa. Połączenie strategii, kreatywności i AI to moja siła.
             </motion.p>
             <motion.p initial={{
@@ -116,7 +116,7 @@ export const About = () => {
           }} transition={{
             duration: 0.5,
             delay: 0.5
-          }} className="text-2xl text-muted-foreground leading-relaxed font-light md:text-xl">
+          }} className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed font-light">
               Pracowałam z markami różnej wielkości – od lokalnych firm po rozpoznawalne brandy. Wiem, jak ważna jest elastyczność i realizm. Trzymam się liczb, badam wyniki, nie boję się zmian.
             </motion.p>
             <motion.p initial={{
@@ -131,7 +131,7 @@ export const About = () => {
           }} transition={{
             duration: 0.5,
             delay: 0.6
-          }} className="text-2xl text-foreground font-normal leading-relaxed md:text-2xl">
+          }} className="text-lg md:text-xl lg:text-2xl text-foreground font-normal leading-relaxed">
               Chcesz, by Twoja marka była widoczna i przynosiła wyniki? Zacznijmy działać.
             </motion.p>
           </motion.div>
