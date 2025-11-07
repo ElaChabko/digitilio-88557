@@ -186,15 +186,15 @@ export const Hero = () => {
         }}
       />
 
-      <div className="container mx-auto px-4 py-16 md:py-24 lg:py-32 relative z-10">
+      <div className="container mx-auto px-6 py-20 md:py-28 lg:py-32 relative z-10">
         <motion.div 
-          className="max-w-7xl mx-auto space-y-8 md:space-y-12 lg:space-y-16"
+          className="max-w-7xl mx-auto space-y-10 md:space-y-14 lg:space-y-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-9xl font-bold text-foreground leading-[0.95] tracking-tight"
+            className="text-[3.5rem] leading-[0.9] md:text-7xl lg:text-9xl font-bold text-foreground md:leading-[0.95] tracking-tight"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -229,7 +229,7 @@ export const Hero = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-lg md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light leading-relaxed"
+            className="text-[1.125rem] leading-[1.6] md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light md:leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
@@ -250,7 +250,7 @@ export const Hero = () => {
               <Button
                 size="lg"
                 onClick={openContactForm}
-                className="text-base md:text-lg lg:text-xl px-6 py-6 md:px-8 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+                className="text-[1rem] md:text-lg lg:text-xl px-8 py-6 md:px-9 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
               >
                 Porozmawiajmy o Twojej marce
                 <motion.div
@@ -258,7 +258,7 @@ export const Hero = () => {
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <ArrowRight className="w-6 h-6" />
+                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                 </motion.div>
               </Button>
             </motion.div>

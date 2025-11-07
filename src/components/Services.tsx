@@ -48,7 +48,7 @@ export const Services = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
+    <section id="services" className="py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
       {/* Floating light orbs */}
       <motion.div 
         className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl"
@@ -63,20 +63,20 @@ export const Services = () => {
         }}
       />
       
-      <div className="container mx-auto px-4 relative z-10" ref={ref}>
+      <div className="container mx-auto px-6 relative z-10" ref={ref}>
         <motion.div 
-          className="mb-12 md:mb-16 lg:mb-24 max-w-4xl"
+          className="mb-14 md:mb-18 lg:mb-24 max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
+          <h2 className="text-[2.75rem] leading-[1.1] md:text-6xl lg:text-8xl font-bold text-foreground mb-0 md:leading-tight tracking-tight">
             Czym się<br />zajmuję?
           </h2>
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 max-w-6xl"
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-16 max-w-6xl"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -85,7 +85,7 @@ export const Services = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="group space-y-4 md:space-y-6 p-6 md:p-8 rounded-3xl transition-all duration-700 relative overflow-hidden border border-primary/10"
+              className="group space-y-5 md:space-y-6 p-7 md:p-8 rounded-3xl transition-all duration-700 relative overflow-hidden border border-primary/10"
               whileHover={{ y: -16, transition: { duration: 0.5, ease: "easeOut" } }}
               style={{
                 background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 100%)`,
@@ -149,13 +149,13 @@ export const Services = () => {
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-2xl md:text-3xl font-bold text-foreground leading-tight tracking-tight transition-all duration-300 group-hover:text-primary mt-4 md:mt-6 group-hover:tracking-wide"
+                  className="text-[1.5rem] leading-[1.3] md:text-3xl font-bold text-foreground md:leading-tight tracking-tight transition-all duration-300 group-hover:text-primary group-hover:tracking-wide"
                   whileHover={{ x: 5 }}
                 >
                   {service.title}
                 </motion.h3>
                 
-                <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed mt-3 md:mt-4 group-hover:text-foreground/90 transition-colors duration-300">
+                <p className="text-[1rem] leading-[1.6] md:text-lg lg:text-xl text-muted-foreground md:leading-relaxed group-hover:text-foreground/90 transition-colors duration-300">
                   {service.description}
                 </p>
 
