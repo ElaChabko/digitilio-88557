@@ -187,17 +187,17 @@ export const Hero = () => {
         }}
       />
 
-      <div className="container mx-auto px-6 py-20 md:py-28 lg:py-32 relative z-10">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="container mx-auto px-6 py-20 md:py-24 lg:py-32 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-center">
           {/* Text Content */}
           <motion.div 
-            className="space-y-10 md:space-y-14 lg:space-y-16"
+            className="space-y-8 md:space-y-10 lg:space-y-16"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
             <motion.h1 
-              className="text-[3.5rem] leading-[0.9] md:text-7xl lg:text-8xl xl:text-9xl font-bold text-foreground md:leading-[0.95] tracking-tight"
+              className="text-[3.5rem] leading-[0.9] md:text-6xl lg:text-7xl xl:text-9xl font-bold text-foreground md:leading-[0.95] tracking-tight"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -232,7 +232,7 @@ export const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-[1.125rem] leading-[1.6] md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light md:leading-relaxed"
+              className="text-[1.125rem] leading-[1.6] md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl font-light md:leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}
@@ -278,21 +278,21 @@ export const Hero = () => {
 
           {/* Portrait Image */}
           <motion.div 
-            className="relative group order-first lg:order-last"
+            className="relative group mt-8 md:mt-10 lg:mt-0"
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
           >
             <motion.div 
-              className="relative rounded-3xl overflow-hidden"
+              className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4 }}
             >
               {/* Glowing border effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 via-accent/30 to-secondary/40 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/40 via-accent/30 to-secondary/40 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               
               {/* Image container */}
-              <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_hsl(263_33%_35%/0.25)] group-hover:shadow-[0_30px_80px_hsl(263_33%_35%/0.4)] transition-all duration-500">
+              <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_hsl(263_33%_35%/0.25)] group-hover:shadow-[0_30px_80px_hsl(263_33%_35%/0.4)] transition-all duration-500">
                 <img 
                   src={heroPortrait} 
                   alt="Ela Chabko - Digitilio" 
