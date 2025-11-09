@@ -48,7 +48,7 @@ export const Services = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
+    <section id="services" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
       {/* Floating light orbs */}
       <motion.div 
         className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl"
@@ -63,20 +63,20 @@ export const Services = () => {
         }}
       />
       
-      <div className="container mx-auto px-6 relative z-10" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <motion.div 
-          className="mb-14 md:mb-18 lg:mb-24 max-w-4xl"
+          className="mb-10 sm:mb-12 md:mb-16 lg:mb-24 max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-[2.75rem] leading-[1.1] md:text-6xl lg:text-8xl font-bold text-foreground mb-0 md:leading-tight tracking-tight">
+          <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground mb-0 tracking-tight">
             Czym się<br />zajmuję?
           </h2>
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-16 max-w-6xl"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-16 max-w-6xl"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -85,7 +85,7 @@ export const Services = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="group space-y-5 md:space-y-6 p-7 md:p-8 rounded-3xl transition-all duration-700 relative overflow-hidden border border-primary/10"
+              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-700 relative overflow-hidden border border-primary/10"
               whileHover={{ y: -16, transition: { duration: 0.5, ease: "easeOut" } }}
               style={{
                 background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 100%)`,
@@ -138,24 +138,24 @@ export const Services = () => {
               
               <div className="relative z-10">
                 <motion.div 
-                  className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center transition-all duration-500 group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_40px_hsl(263_33%_35%/0.5)] border border-primary/20 group-hover:border-primary/40"
+                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center transition-all duration-500 group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_40px_hsl(263_33%_35%/0.5)] border border-primary/20 group-hover:border-primary/40"
                   whileHover={{ 
                     rotate: [0, -10, 10, -10, 0],
                     scale: 1.15 
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  <service.icon className="w-10 h-10 text-primary transition-colors duration-500 group-hover:text-white" />
+                  <service.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary transition-colors duration-500 group-hover:text-white" />
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-[1.5rem] leading-[1.3] md:text-3xl font-bold text-foreground md:leading-tight tracking-tight transition-all duration-300 group-hover:text-primary group-hover:tracking-wide"
+                  className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-all duration-300 group-hover:text-primary group-hover:tracking-wide"
                   whileHover={{ x: 5 }}
                 >
                   {service.title}
                 </motion.h3>
                 
-                <p className="text-[1rem] leading-[1.6] md:text-lg lg:text-xl text-muted-foreground md:leading-relaxed group-hover:text-foreground/90 transition-colors duration-300">
+                <p className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground group-hover:text-foreground/90 transition-colors duration-300">
                   {service.description}
                 </p>
 

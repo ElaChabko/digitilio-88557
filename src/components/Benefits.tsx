@@ -33,7 +33,7 @@ export const Benefits = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="benefits" className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
+    <section id="benefits" className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">
       {/* Background image */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -63,18 +63,18 @@ export const Benefits = () => {
         }}
       />
       
-      <div className="container mx-auto px-4 relative z-10" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <motion.div 
-          className="mb-12 md:mb-16 lg:mb-24 max-w-5xl"
+          className="mb-10 sm:mb-12 md:mb-16 lg:mb-24 max-w-5xl"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
+          <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground mb-5 sm:mb-6 md:mb-8 tracking-tight">
             Co<br />zyskujesz?
           </h2>
           <motion.p 
-            className="text-lg md:text-xl lg:text-3xl text-muted-foreground font-light leading-relaxed"
+            className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-light"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -84,11 +84,11 @@ export const Benefits = () => {
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-16 max-w-6xl">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-3 md:space-y-4 p-6 md:p-8 rounded-3xl transition-all duration-500 hover:bg-gradient-to-br hover:from-secondary/30 hover:to-accent/10 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
+              className="group relative space-y-3 sm:space-y-4 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:bg-gradient-to-br hover:from-secondary/30 hover:to-accent/10 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ 
@@ -102,16 +102,16 @@ export const Benefits = () => {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500 -z-10" />
               
               <motion.div 
-                className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
                 whileHover={{ scale: 1.15, rotate: 360 }}
                 transition={{ duration: 0.6 }}
               >
-                <benefit.icon className="w-8 h-8 text-primary transition-colors duration-500 group-hover:text-white" />
+                <benefit.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary transition-colors duration-500 group-hover:text-white" />
               </motion.div>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
+              <h3 className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {benefit.title}
               </h3>
-              <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground">
                 {benefit.description}
               </p>
             </motion.div>
