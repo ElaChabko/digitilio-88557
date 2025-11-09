@@ -187,17 +187,17 @@ export const Hero = () => {
         }}
       />
 
-      <div className="container mx-auto px-6 py-20 md:py-24 lg:py-32 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-center">
+      <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 lg:py-32 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-14 lg:gap-16 items-center">
           {/* Text Content */}
           <motion.div 
-            className="space-y-8 md:space-y-10 lg:space-y-16"
+            className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
             <motion.h1 
-              className="text-[3.5rem] leading-[0.9] md:text-6xl lg:text-7xl xl:text-9xl font-bold text-foreground md:leading-[0.95] tracking-tight"
+              className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -232,7 +232,7 @@ export const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-[1.125rem] leading-[1.6] md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-4xl font-light md:leading-relaxed"
+              className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl font-light"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1 }}
@@ -253,20 +253,20 @@ export const Hero = () => {
                 <Button
                   size="lg"
                   onClick={openContactForm}
-                  className="text-[1rem] md:text-lg lg:text-xl px-8 py-6 md:px-9 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+                  className="text-sm sm:text-base md:text-lg px-6 py-5 sm:px-7 sm:py-6 md:px-9 md:py-7 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
                 >
                   Porozmawiajmy o Twojej marce
                   <motion.div
-                    className="inline-block ml-3"
+                    className="inline-block ml-2"
                     animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                   </motion.div>
                 </Button>
               </motion.div>
               <motion.p 
-                className="text-muted-foreground text-base"
+                className="text-muted-foreground text-sm sm:text-base"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.4 }}
@@ -278,7 +278,7 @@ export const Hero = () => {
 
           {/* Portrait Image */}
           <motion.div 
-            className="relative group mt-8 md:mt-10 lg:mt-0"
+            className="relative group mt-10 sm:mt-12 lg:mt-0"
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
