@@ -4,6 +4,7 @@ import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import heroVisual from "@/assets/hero-visual.jpg";
+import heroPortrait from "@/assets/hero-portrait.png";
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -187,91 +188,150 @@ export const Hero = () => {
       />
 
       <div className="container mx-auto px-6 py-20 md:py-28 lg:py-32 relative z-10">
-        <motion.div 
-          className="max-w-7xl mx-auto space-y-10 md:space-y-14 lg:space-y-16"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <motion.h1 
-            className="text-[3.5rem] leading-[0.9] md:text-7xl lg:text-9xl font-bold text-foreground md:leading-[0.95] tracking-tight"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <motion.span 
-              className="block"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ x: 10, transition: { duration: 0.3 } }}
-            >
-              Strategia.
-            </motion.span>
-            <motion.span 
-              className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              whileHover={{ x: 10, transition: { duration: 0.3 } }}
-            >
-              AI.
-            </motion.span>
-            <motion.span 
-              className="block"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ x: 10, transition: { duration: 0.3 } }}
-            >
-              Emocje.
-            </motion.span>
-          </motion.h1>
-          
-          <motion.p 
-            className="text-[1.125rem] leading-[1.6] md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light md:leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
-          </motion.p>
-          
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Text Content */}
           <motion.div 
-            className="flex flex-col gap-4 items-start"
+            className="space-y-10 md:space-y-14 lg:space-y-16"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{ duration: 1 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+            <motion.h1 
+              className="text-[3.5rem] leading-[0.9] md:text-7xl lg:text-8xl xl:text-9xl font-bold text-foreground md:leading-[0.95] tracking-tight"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <Button
-                size="lg"
-                onClick={openContactForm}
-                className="text-[1rem] md:text-lg lg:text-xl px-8 py-6 md:px-9 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+              <motion.span 
+                className="block"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
               >
-                Porozmawiajmy o Twojej marce
-                <motion.div
-                  className="inline-block ml-3"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                </motion.div>
-              </Button>
-            </motion.div>
+                Strategia.
+              </motion.span>
+              <motion.span 
+                className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              >
+                AI.
+              </motion.span>
+              <motion.span 
+                className="block"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              >
+                Emocje.
+              </motion.span>
+            </motion.h1>
+            
             <motion.p 
-              className="text-muted-foreground text-base"
+              className="text-[1.125rem] leading-[1.6] md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light md:leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.4 }}
+              transition={{ duration: 0.8, delay: 1 }}
             >
-              Bez zobowiązań • 15 min rozmowy
+              Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
             </motion.p>
+            
+            <motion.div 
+              className="flex flex-col gap-4 items-start"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button
+                  size="lg"
+                  onClick={openContactForm}
+                  className="text-[1rem] md:text-lg lg:text-xl px-8 py-6 md:px-9 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
+                >
+                  Porozmawiajmy o Twojej marce
+                  <motion.div
+                    className="inline-block ml-3"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+                  </motion.div>
+                </Button>
+              </motion.div>
+              <motion.p 
+                className="text-muted-foreground text-base"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.4 }}
+              >
+                Bez zobowiązań • 15 min rozmowy
+              </motion.p>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          {/* Portrait Image */}
+          <motion.div 
+            className="relative group order-first lg:order-last"
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            <motion.div 
+              className="relative rounded-3xl overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4 }}
+            >
+              {/* Glowing border effect */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 via-accent/30 to-secondary/40 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Image container */}
+              <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_hsl(263_33%_35%/0.25)] group-hover:shadow-[0_30px_80px_hsl(263_33%_35%/0.4)] transition-all duration-500">
+                <img 
+                  src={heroPortrait} 
+                  alt="Ela Chabko - Digitilio" 
+                  className="w-full h-auto object-cover"
+                />
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Animated glow on hover */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-primary/0 via-accent/0 to-primary/0 group-hover:from-primary/10 group-hover:via-accent/10 group-hover:to-secondary/10 transition-all duration-700"
+                  animate={{
+                    opacity: [0.5, 0.8, 0.5]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </div>
+            </motion.div>
+            
+            {/* Decorative floating element */}
+            <motion.div 
+              className="absolute -bottom-8 -right-8 w-48 h-48 bg-accent/20 rounded-full blur-3xl -z-10"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+        </div>
       </div>
 
       <ContactFormDialog 
