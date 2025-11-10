@@ -38,7 +38,7 @@ const Blog = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-background pt-20">
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-background pt-24 sm:pt-28 md:pt-32">
         {/* Animated background orbs */}
         <motion.div 
           className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/20 rounded-full blur-3xl z-[1]"
