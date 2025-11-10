@@ -45,14 +45,14 @@ export const Hero = () => {
       {[...Array(isMobile ? 12 : 40)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-primary/40 rounded-full z-[2]"
+          className="absolute w-2 h-2 bg-primary/60 rounded-full z-[5]"
           initial={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
             y: [0, -30, 0],
-            opacity: [0.2, 0.6, 0.2],
+            opacity: [0.4, 0.8, 0.4],
           }}
           transition={{
             duration: 3 + Math.random() * 2,
