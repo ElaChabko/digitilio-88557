@@ -49,18 +49,9 @@ export const Services = () => {
 
   return (
     <section id="services" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
-      {/* Floating light orbs */}
-      <motion.div 
-        className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl"
-        animate={{ 
-          y: [0, -30, 0],
-          opacity: [0.1, 0.2, 0.1]
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+      {/* Floating light orbs - static on mobile */}
+      <div 
+        className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl opacity-15 hidden md:block"
       />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
@@ -85,86 +76,45 @@ export const Services = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-700 relative overflow-hidden border border-primary/10"
-              whileHover={{ y: -16, transition: { duration: 0.5, ease: "easeOut" } }}
+              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 relative overflow-hidden border border-primary/10 md:hover:-translate-y-2"
               style={{
                 background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 100%)`,
               }}
             >
-              {/* Animated gradient background */}
-              <motion.div 
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl`}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 5, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+              {/* Simplified gradient background */}
+              <div 
+                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 md:group-hover:opacity-70 transition-opacity duration-500`}
               />
               
-              {/* Glowing border effect */}
-              <motion.div 
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              {/* Glowing border effect - simplified */}
+              <div 
+                className="absolute inset-0 rounded-3xl opacity-0 md:group-hover:opacity-50 transition-opacity duration-300"
                 style={{
                   background: `linear-gradient(135deg, ${service.glowColor}, transparent)`,
-                  filter: 'blur(20px)',
-                }}
-                animate={{
-                  opacity: [0, 0.5, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-
-              {/* Spotlight effect */}
-              <motion.div 
-                className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                animate={{
-                  x: [0, 20, 0],
-                  y: [0, 20, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
+                  filter: 'blur(15px)',
                 }}
               />
               
               <div className="relative z-10">
-                <motion.div 
-                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center transition-all duration-500 group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_40px_hsl(263_33%_35%/0.5)] border border-primary/20 group-hover:border-primary/40"
-                  whileHover={{ 
-                    rotate: [0, -10, 10, -10, 0],
-                    scale: 1.15 
-                  }}
-                  transition={{ duration: 0.5 }}
+                <div 
+                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center transition-all duration-300 md:group-hover:from-primary md:group-hover:to-accent md:group-hover:shadow-lg border border-primary/20 md:group-hover:border-primary/40"
                 >
-                  <service.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary transition-colors duration-500 group-hover:text-white" />
-                </motion.div>
+                  <service.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary transition-colors duration-300 md:group-hover:text-white" />
+                </div>
                 
-                <motion.h3 
-                  className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-all duration-300 group-hover:text-primary group-hover:tracking-wide"
-                  whileHover={{ x: 5 }}
+                <h3 
+                  className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 md:group-hover:text-primary"
                 >
                   {service.title}
-                </motion.h3>
+                </h3>
                 
-                <p className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground group-hover:text-foreground/90 transition-colors duration-300">
+                <p className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground md:group-hover:text-foreground/90 transition-colors duration-300">
                   {service.description}
                 </p>
 
                 {/* Bottom accent line */}
-                <motion.div 
-                  className="mt-6 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full"
-                  initial={{ width: 0, opacity: 0 }}
-                  whileHover={{ width: "100%", opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+                <div 
+                  className="mt-6 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full w-0 md:group-hover:w-full transition-all duration-500"
                 />
               </div>
             </motion.div>

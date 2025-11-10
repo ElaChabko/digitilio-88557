@@ -35,32 +35,19 @@ export const Benefits = () => {
   return (
     <section id="benefits" className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">
       {/* Background image */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.25 }}
-        transition={{ duration: 1.2 }}
-      >
+      <div className="absolute inset-0 z-0" style={{ opacity: 0.25 }}>
         <img 
           src={benefitsBg} 
           alt="" 
           className="w-full h-full object-cover"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/85" />
-      </motion.div>
+      </div>
       
-      {/* Decorative light */}
-      <motion.div 
-        className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl z-[1]"
-        animate={{ 
-          scale: [1, 1.25, 1],
-          opacity: [0.12, 0.2, 0.12]
-        }}
-        transition={{ 
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+      {/* Decorative light - static */}
+      <div 
+        className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl z-[1] opacity-15 hidden md:block"
       />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
@@ -88,7 +75,7 @@ export const Benefits = () => {
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-3 sm:space-y-4 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:bg-gradient-to-br hover:from-secondary/30 hover:to-accent/10 hover:shadow-[0_20px_60px_hsl(263_33%_35%/0.15)]"
+              className="group relative space-y-3 sm:space-y-4 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 md:hover:bg-gradient-to-br md:hover:from-secondary/30 md:hover:to-accent/10 md:hover:shadow-lg md:hover:-translate-y-2"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ 
@@ -96,18 +83,15 @@ export const Benefits = () => {
                 delay: index * 0.12,
                 ease: "easeOut"
               }}
-              whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.4 } }}
             >
-              {/* Gradient border effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500 -z-10" />
+              {/* Gradient border effect - simplified */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 md:group-hover:opacity-70 blur transition-opacity duration-300 -z-10" />
               
-              <motion.div 
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-accent group-hover:shadow-[0_0_30px_hsl(263_33%_35%/0.4)]"
-                whileHover={{ scale: 1.15, rotate: 360 }}
-                transition={{ duration: 0.6 }}
+              <div 
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-300 md:group-hover:bg-gradient-to-br md:group-hover:from-primary md:group-hover:to-accent md:group-hover:shadow-lg"
               >
-                <benefit.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary transition-colors duration-500 group-hover:text-white" />
-              </motion.div>
+                <benefit.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary transition-colors duration-300 md:group-hover:text-white" />
+              </div>
               <h3 className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {benefit.title}
               </h3>

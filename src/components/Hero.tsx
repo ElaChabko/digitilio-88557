@@ -1,13 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import heroVisual from "@/assets/hero-visual.jpg";
 import heroPortrait from "@/assets/hero-portrait.png";
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  return isMobile;
+};
+
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -19,318 +33,133 @@ export const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background"
     >
       {/* Hero background image */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 0.35, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-      >
+      <div className="absolute inset-0 z-0">
         <img 
           src={heroVisual} 
           alt="" 
           className="w-full h-full object-cover"
+          loading="lazy"
+          style={{ opacity: 0.35 }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
-      </motion.div>
+      </div>
       
-      {/* Modern animated mesh gradient background */}
-      <motion.div 
+      {/* Modern mesh gradient background - static on mobile */}
+      <div 
         className="absolute inset-0 z-[1]"
         style={{
-          background: "radial-gradient(at 40% 20%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(var(--secondary) / 0.4) 0px, transparent 50%), radial-gradient(at 80% 50%, hsl(var(--primary) / 0.4) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(var(--accent) / 0.4) 0px, transparent 50%)"
-        }}
-        animate={{
-          opacity: [0.7, 0.9, 0.8, 0.7]
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut"
+          background: "radial-gradient(at 40% 20%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(var(--secondary) / 0.4) 0px, transparent 50%), radial-gradient(at 80% 50%, hsl(var(--primary) / 0.4) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(var(--accent) / 0.4) 0px, transparent 50%)",
+          opacity: 0.8
         }}
       />
 
-      {/* Floating animated particles */}
-      {[...Array(40)].map((_, i) => (
-        <motion.div
+      {/* Floating particles - only 8 on mobile */}
+      {!isMobile && [...Array(8)].map((_, i) => (
+        <div
           key={i}
-          className="absolute w-1.5 h-1.5 bg-primary/60 rounded-full z-[2]"
+          className="absolute w-1 h-1 bg-primary/40 rounded-full z-[2]"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
-          animate={{
-            y: [0, -40, 0],
-            opacity: [0.3, 0.7, 0.3],
-            scale: [0, 1.5, 0]
-          }}
-          transition={{
-            duration: 3 + Math.random() * 4,
-            repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: "easeInOut"
-          }}
         />
       ))}
 
-      {/* Dynamic gradient orbs with glow effect */}
-      <motion.div 
-        className="absolute top-1/4 left-1/4 w-[700px] h-[700px] rounded-full z-[1]"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, hsl(var(--primary) / 0.4) 40%, transparent 70%)",
-          filter: "blur(60px)",
-        }}
-        animate={{ 
-          scale: [1, 1.3, 1.1, 1],
-          opacity: [0.5, 0.7, 0.6, 0.5],
-          x: [0, 80, -40, 0],
-          y: [0, 50, -30, 0],
-        }}
-        transition={{ 
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
-      <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full z-[1]"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--accent) / 0.6) 0%, hsl(var(--accent) / 0.4) 40%, transparent 70%)",
-          filter: "blur(60px)",
-        }}
-        animate={{ 
-          scale: [1, 1.4, 0.9, 1],
-          opacity: [0.45, 0.65, 0.5, 0.45],
-          x: [0, -60, 50, 0],
-          y: [0, -40, 30, 0],
-        }}
-        transition={{ 
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
+      {/* Simplified gradient orbs - static on mobile */}
+      {!isMobile ? (
+        <>
+          <div 
+            className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full z-[1]"
+            style={{
+              background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
+              filter: "blur(40px)",
+              opacity: 0.5
+            }}
+          />
+          
+          <div 
+            className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full z-[1]"
+            style={{
+              background: "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, transparent 70%)",
+              filter: "blur(40px)",
+              opacity: 0.45
+            }}
+          />
+        </>
+      ) : (
+        <div 
+          className="absolute inset-0 z-[1]"
+          style={{
+            background: "radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.3) 0%, transparent 50%), radial-gradient(circle at 70% 70%, hsl(var(--accent) / 0.3) 0%, transparent 50%)",
+            filter: "blur(30px)",
+            opacity: 0.4
+          }}
+        />
+      )}
 
-      <motion.div 
-        className="absolute top-1/2 right-1/3 w-[500px] h-[500px] rounded-full z-[1]"
-        style={{
-          background: "radial-gradient(circle, hsl(var(--secondary) / 0.5) 0%, hsl(var(--secondary) / 0.3) 40%, transparent 70%)",
-          filter: "blur(50px)",
-        }}
-        animate={{ 
-          scale: [1, 1.5, 1.2, 1],
-          opacity: [0.4, 0.6, 0.45, 0.4],
-          x: [0, 90, -20, 0],
-          y: [0, -60, 30, 0]
-        }}
-        transition={{ 
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
-
-      {/* Animated gradient waves */}
-      <motion.div 
-        className="absolute inset-0 z-[2]"
-        style={{
-          background: "linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.1) 50%, transparent 100%)"
-        }}
-        animate={{
-          opacity: [0.5, 0.8, 0.5],
-          y: [0, -20, 0]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
-      {/* Modern grid with glow */}
-      <motion.div 
-        className="absolute inset-0 z-[3]"
+      {/* Simple grid - no animation on mobile */}
+      <div 
+        className="absolute inset-0 z-[3] hidden md:block"
         style={{
           backgroundImage: `
-            linear-gradient(to right, hsl(var(--primary) / 0.15) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--primary) / 0.15) 1px, transparent 1px)
+            linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 75%)'
-        }}
-        animate={{
-          opacity: [0.6, 0.9, 0.6]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
-      {/* Scan line effect - more visible */}
-      <motion.div
-        className="absolute inset-0 z-[3]"
-        style={{
-          background: "linear-gradient(0deg, transparent 0%, hsl(var(--accent) / 0.2) 50%, transparent 100%)",
-          height: "200px"
-        }}
-        animate={{
-          y: ["-200px", "100vh"]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear"
+          maskImage: 'radial-gradient(ellipse at center, black 0%, transparent 75%)',
+          opacity: 0.7
         }}
       />
 
       <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 lg:py-32 relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-14 lg:gap-16 items-center">
           {/* Text Content */}
-          <motion.div 
-            className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <motion.h1 
-              className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <motion.span 
-                className="block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
-              >
-                Strategia.
-              </motion.span>
-              <motion.span 
-                className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
-              >
-                AI.
-              </motion.span>
-              <motion.span 
-                className="block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
-              >
-                Emocje.
-              </motion.span>
-            </motion.h1>
+          <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
+            <h1 className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight animate-fade-in">
+              <span className="block">Strategia.</span>
+              <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI.</span>
+              <span className="block">Emocje.</span>
+            </h1>
             
-            <motion.p 
-              className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl font-light"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}
-            >
+            <p className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl font-light">
               Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
-            </motion.p>
+            </p>
             
-            <motion.div 
-              className="flex flex-col gap-4 items-start"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+            <div className="flex flex-col gap-4 items-start">
+              <Button
+                size="lg"
+                onClick={openContactForm}
+                className="text-sm sm:text-base md:text-lg px-6 py-5 sm:px-7 sm:py-6 md:px-9 md:py-7 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <Button
-                  size="lg"
-                  onClick={openContactForm}
-                  className="text-sm sm:text-base md:text-lg px-6 py-5 sm:px-7 sm:py-6 md:px-9 md:py-7 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
-                >
-                  Porozmawiajmy o Twojej marce
-                  <motion.div
-                    className="inline-block ml-2"
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                  </motion.div>
-                </Button>
-              </motion.div>
-              <motion.p 
-                className="text-muted-foreground text-sm sm:text-base"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.4 }}
-              >
+                Porozmawiajmy o Twojej marce
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <p className="text-muted-foreground text-sm sm:text-base">
                 Bez zobowiązań • 15 min rozmowy
-              </motion.p>
-            </motion.div>
-          </motion.div>
+              </p>
+            </div>
+          </div>
 
           {/* Portrait Image */}
-          <motion.div 
-            className="relative group mt-10 sm:mt-12 lg:mt-0"
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-          >
-            <motion.div 
-              className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* Glowing border effect */}
-              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/40 via-accent/30 to-secondary/40 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative group mt-10 sm:mt-12 lg:mt-0">
+            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0 hover-scale">
+              {/* Glowing border effect - static on mobile */}
+              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30 blur-xl opacity-50 md:group-hover:opacity-80 transition-opacity duration-500" />
               
               {/* Image container */}
-              <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_hsl(263_33%_35%/0.25)] group-hover:shadow-[0_30px_80px_hsl(263_33%_35%/0.4)] transition-all duration-500">
+              <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-shadow duration-500">
                 <img 
                   src={heroPortrait} 
                   alt="Ela Chabko - Digitilio" 
                   className="w-full h-auto object-cover"
+                  loading="eager"
                 />
                 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Animated glow on hover */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-br from-primary/0 via-accent/0 to-primary/0 group-hover:from-primary/10 group-hover:via-accent/10 group-hover:to-secondary/10 transition-all duration-700"
-                  animate={{
-                    opacity: [0.5, 0.8, 0.5]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-accent/5 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-            </motion.div>
-            
-            {/* Decorative floating element */}
-            <motion.div 
-              className="absolute -bottom-8 -right-8 w-48 h-48 bg-accent/20 rounded-full blur-3xl -z-10"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
 

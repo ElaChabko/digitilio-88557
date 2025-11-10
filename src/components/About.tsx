@@ -9,15 +9,8 @@ export const About = () => {
     margin: "-100px"
   });
   return <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
-      {/* Decorative elements */}
-      <motion.div className="absolute bottom-20 right-20 w-[350px] h-[350px] bg-accent/10 rounded-full blur-3xl" animate={{
-      scale: [1, 1.15, 1],
-      opacity: [0.1, 0.18, 0.1]
-    }} transition={{
-      duration: 9,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }} />
+      {/* Decorative elements - static */}
+      <div className="absolute bottom-20 right-20 w-[350px] h-[350px] bg-accent/10 rounded-full blur-3xl opacity-12 hidden md:block" />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <motion.div className="mb-10 sm:mb-12 md:mb-16 lg:mb-24" initial={{
@@ -49,15 +42,10 @@ export const About = () => {
           duration: 0.7,
           ease: "easeOut"
         }}>
-            <motion.div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_60px_hsl(263_33%_35%/0.15)] group-hover:shadow-[0_30px_80px_hsl(263_33%_35%/0.25)] transition-shadow duration-500" whileHover={{
-            scale: 1.02,
-            y: -5
-          }} transition={{
-            duration: 0.4
-          }}>
-              <img src={aboutPhoto} alt="Ela Chabko - Digitilio" className="w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </motion.div>
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-shadow duration-300 hover-scale">
+              <img src={aboutPhoto} alt="Ela Chabko - Digitilio" className="w-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
           </motion.div>
           
           <motion.div className="md:col-span-3 space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8" initial={{

@@ -27,18 +27,9 @@ export const Process = () => {
 
   return (
     <section id="process" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden">
-      {/* Decorative light */}
-      <motion.div 
-        className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl"
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.15, 0.1]
-        }}
-        transition={{ 
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+      {/* Decorative light - static */}
+      <div 
+        className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl opacity-12 hidden md:block"
       />
       
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
@@ -66,7 +57,7 @@ export const Process = () => {
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-4 md:space-y-6"
+              className="group relative space-y-4 md:space-y-6 md:hover:-translate-y-2 transition-transform duration-300"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ 
@@ -74,23 +65,19 @@ export const Process = () => {
                 delay: index * 0.15,
                 ease: "easeOut"
               }}
-              whileHover={{ y: -10, transition: { duration: 0.4 } }}
             >
               {/* Step number */}
-              <motion.div 
-                className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+              <div 
+                className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-lg shadow-lg opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
               >
                 {index + 1}
-              </motion.div>
+              </div>
               
-              <motion.div 
-                className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:shadow-[0_0_40px_hsl(263_33%_35%/0.4)]"
-                whileHover={{ rotate: -5, scale: 1.1 }}
-                transition={{ duration: 0.3 }}
+              <div 
+                className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-300 md:group-hover:bg-primary md:group-hover:shadow-lg"
               >
-                <step.icon className="w-10 h-10 text-primary transition-colors duration-500 group-hover:text-primary-foreground" />
-              </motion.div>
+                <step.icon className="w-10 h-10 text-primary transition-colors duration-300 md:group-hover:text-primary-foreground" />
+              </div>
               <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {step.title}
               </h3>
