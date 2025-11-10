@@ -43,15 +43,10 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating particles - reduced on mobile, mouse-reactive on desktop */}
+      {/* Floating particles - reduced on mobile, subtle mouse-reactive on desktop */}
       {[...Array(isMobile ? 12 : 40)].map((_, i) => {
         const initialX = Math.random() * 100;
         const initialY = Math.random() * 100;
-        const distanceFromMouse = isMobile ? 0 : Math.sqrt(
-          Math.pow((initialX - (mousePosition.x / window.innerWidth * 100)), 2) +
-          Math.pow((initialY - (mousePosition.y / window.innerHeight * 100)), 2)
-        );
-        const influence = isMobile ? 0 : Math.max(0, 30 - distanceFromMouse) / 30;
         
         return (
           <motion.div
@@ -62,14 +57,14 @@ export const Hero = () => {
               top: `${initialY}%`,
             }}
             animate={{
-              x: isMobile ? 0 : (mousePosition.x - window.innerWidth / 2) / 80 * influence,
-              y: isMobile ? [0, -30, 0] : [(mousePosition.y - window.innerHeight / 2) / 80 * influence - 15, (mousePosition.y - window.innerHeight / 2) / 80 * influence + 15, (mousePosition.y - window.innerHeight / 2) / 80 * influence - 15],
+              x: isMobile ? 0 : (mousePosition.x - window.innerWidth / 2) / 200,
+              y: isMobile ? [0, -30, 0] : (mousePosition.y - window.innerHeight / 2) / 200 + [-15, 15, -15][Math.floor(Date.now() / 1000) % 3],
               opacity: [0.4, 0.8, 0.4],
             }}
             transition={{
-              x: { type: "spring", stiffness: 50, damping: 20 },
+              x: { type: "spring", stiffness: 30, damping: 30 },
               y: {
-                duration: 3 + Math.random() * 2,
+                duration: 4 + Math.random() * 2,
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: Math.random() * 2,
