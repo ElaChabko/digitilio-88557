@@ -2,6 +2,7 @@ import { Share2, TrendingUp, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const services = [{
   icon: Share2,
@@ -46,12 +47,22 @@ const itemVariants = {
 export const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isMobile = useIsMobile();
 
   return (
     <section id="services" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
-      {/* Floating light orbs - static on mobile */}
-      <div 
-        className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl opacity-15 hidden md:block"
+      {/* Floating light orbs */}
+      <motion.div 
+        className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl opacity-15"
+        animate={isMobile ? {} : {
+          scale: [1, 1.2, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
       />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
@@ -76,45 +87,70 @@ export const Services = () => {
             <motion.div 
               key={index} 
               variants={itemVariants}
-              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 relative overflow-hidden border border-primary/10 md:hover:-translate-y-2"
+              whileHover={isMobile ? {} : { y: -8, scale: 1.02 }}
+              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 relative overflow-hidden border border-primary/10"
               style={{
                 background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 100%)`,
               }}
             >
-              {/* Simplified gradient background */}
-              <div 
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 md:group-hover:opacity-70 transition-opacity duration-500`}
+              {/* Animated gradient background */}
+              <motion.div 
+                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0`}
+                whileHover={isMobile ? {} : { opacity: 0.7 }}
+                transition={{ duration: 0.5 }}
               />
               
-              {/* Glowing border effect - simplified */}
-              <div 
-                className="absolute inset-0 rounded-3xl opacity-0 md:group-hover:opacity-50 transition-opacity duration-300"
+              {/* Glowing border effect */}
+              <motion.div 
+                className="absolute inset-0 rounded-3xl opacity-0"
                 style={{
                   background: `linear-gradient(135deg, ${service.glowColor}, transparent)`,
                   filter: 'blur(15px)',
                 }}
+                whileHover={isMobile ? {} : { opacity: 0.5 }}
+                transition={{ duration: 0.3 }}
               />
               
               <div className="relative z-10">
-                <div 
-                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center transition-all duration-300 md:group-hover:from-primary md:group-hover:to-accent md:group-hover:shadow-lg border border-primary/20 md:group-hover:border-primary/40"
+                <motion.div 
+                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/20"
+                  whileHover={isMobile ? {} : {
+                    background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
+                    borderColor: "hsl(var(--primary) / 0.4)",
+                    boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.3)"
+                  }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <service.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary transition-colors duration-300 md:group-hover:text-white" />
-                </div>
+                  <motion.div
+                    whileHover={isMobile ? {} : { color: "hsl(var(--primary-foreground))" }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <service.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary" />
+                  </motion.div>
+                </motion.div>
                 
-                <h3 
-                  className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 md:group-hover:text-primary"
+                <motion.h3 
+                  className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight"
+                  whileHover={isMobile ? {} : { color: "hsl(var(--primary))" }}
+                  transition={{ duration: 0.3 }}
                 >
                   {service.title}
-                </h3>
+                </motion.h3>
                 
-                <p className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground md:group-hover:text-foreground/90 transition-colors duration-300">
+                <motion.p 
+                  className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground"
+                  whileHover={isMobile ? {} : { color: "hsl(var(--foreground) / 0.9)" }}
+                  transition={{ duration: 0.3 }}
+                >
                   {service.description}
-                </p>
+                </motion.p>
 
                 {/* Bottom accent line */}
-                <div 
-                  className="mt-6 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full w-0 md:group-hover:w-full transition-all duration-500"
+                <motion.div 
+                  className="mt-6 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full"
+                  initial={{ width: 0 }}
+                  whileHover={isMobile ? {} : { width: "100%" }}
+                  transition={{ duration: 0.5 }}
                 />
               </div>
             </motion.div>

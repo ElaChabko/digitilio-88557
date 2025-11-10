@@ -1,23 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import heroVisual from "@/assets/hero-visual.jpg";
 import heroPortrait from "@/assets/hero-portrait.png";
-
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  return isMobile;
-};
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -53,49 +41,65 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating particles - only 8 on mobile */}
-      {!isMobile && [...Array(8)].map((_, i) => (
-        <div
+      {/* Floating particles - reduced on mobile */}
+      {[...Array(isMobile ? 12 : 40)].map((_, i) => (
+        <motion.div
           key={i}
           className="absolute w-1 h-1 bg-primary/40 rounded-full z-[2]"
-          style={{
+          initial={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 2,
           }}
         />
       ))}
 
-      {/* Simplified gradient orbs - static on mobile */}
-      {!isMobile ? (
-        <>
-          <div 
-            className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full z-[1]"
-            style={{
-              background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
-              filter: "blur(40px)",
-              opacity: 0.5
-            }}
-          />
-          
-          <div 
-            className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full z-[1]"
-            style={{
-              background: "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, transparent 70%)",
-              filter: "blur(40px)",
-              opacity: 0.45
-            }}
-          />
-        </>
-      ) : (
-        <div 
-          className="absolute inset-0 z-[1]"
-          style={{
-            background: "radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.3) 0%, transparent 50%), radial-gradient(circle at 70% 70%, hsl(var(--accent) / 0.3) 0%, transparent 50%)",
-            filter: "blur(30px)",
-            opacity: 0.4
-          }}
-        />
-      )}
+      {/* Animated gradient orbs - simpler on mobile */}
+      <motion.div 
+        className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full z-[1]"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
+          filter: isMobile ? "blur(30px)" : "blur(40px)",
+          opacity: 0.5
+        }}
+        animate={isMobile ? {} : {
+          scale: [1, 1.2, 1],
+          opacity: [0.5, 0.7, 0.5],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full z-[1]"
+        style={{
+          background: "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, transparent 70%)",
+          filter: isMobile ? "blur(30px)" : "blur(40px)",
+          opacity: 0.45
+        }}
+        animate={isMobile ? {} : {
+          scale: [1, 1.3, 1],
+          opacity: [0.45, 0.65, 0.45],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
 
       {/* Simple grid - no animation on mobile */}
       <div 
@@ -114,18 +118,54 @@ export const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 lg:py-32 relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-14 lg:gap-16 items-center">
           {/* Text Content */}
-          <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
-            <h1 className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight animate-fade-in">
-              <span className="block">Strategia.</span>
-              <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">AI.</span>
-              <span className="block">Emocje.</span>
+          <motion.div 
+            className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h1 className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight">
+              <motion.span 
+                className="block"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Strategia.
+              </motion.span>
+              <motion.span 
+                className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                AI.
+              </motion.span>
+              <motion.span 
+                className="block"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                Emocje.
+              </motion.span>
             </h1>
             
-            <p className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl font-light">
+            <motion.p 
+              className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl font-light"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
               Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col gap-4 items-start">
+            <motion.div 
+              className="flex flex-col gap-4 items-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+            >
               <Button
                 size="lg"
                 onClick={openContactForm}
@@ -137,17 +177,30 @@ export const Hero = () => {
               <p className="text-muted-foreground text-sm sm:text-base">
                 Bez zobowiązań • 15 min rozmowy
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Portrait Image */}
-          <div className="relative group mt-10 sm:mt-12 lg:mt-0">
-            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0 hover-scale">
-              {/* Glowing border effect - static on mobile */}
-              <div className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30 blur-xl opacity-50 md:group-hover:opacity-80 transition-opacity duration-500" />
+          <motion.div 
+            className="relative group mt-10 sm:mt-12 lg:mt-0"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0">
+              {/* Glowing border effect */}
+              <motion.div 
+                className="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30 blur-xl opacity-50"
+                whileHover={isMobile ? {} : { opacity: 0.8 }}
+                transition={{ duration: 0.5 }}
+              />
               
               {/* Image container */}
-              <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-shadow duration-500">
+              <motion.div 
+                className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl"
+                whileHover={isMobile ? {} : { scale: 1.02 }}
+                transition={{ duration: 0.5 }}
+              >
                 <img 
                   src={heroPortrait} 
                   alt="Ela Chabko - Digitilio" 
@@ -156,10 +209,14 @@ export const Hero = () => {
                 />
                 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-accent/5 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-accent/5 opacity-0"
+                  whileHover={isMobile ? {} : { opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
