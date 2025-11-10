@@ -47,6 +47,11 @@ export const Hero = () => {
       {[...Array(isMobile ? 12 : 40)].map((_, i) => {
         const initialX = Math.random() * 100;
         const initialY = Math.random() * 100;
+        const distanceFromMouse = isMobile ? 0 : Math.sqrt(
+          Math.pow((initialX - (mousePosition.x / window.innerWidth * 100)), 2) +
+          Math.pow((initialY - (mousePosition.y / window.innerHeight * 100)), 2)
+        );
+        const influence = isMobile ? 0 : Math.max(0, 30 - distanceFromMouse) / 30;
         
         return (
           <motion.div
@@ -56,19 +61,25 @@ export const Hero = () => {
               left: `${initialX}%`,
               top: `${initialY}%`,
             }}
-            animate={isMobile ? {
-              y: [0, -30, 0],
-              opacity: [0.4, 0.8, 0.4],
-            } : {
-              x: (mousePosition.x - window.innerWidth / 2) / 50,
-              y: [(mousePosition.y - window.innerHeight / 2) / 50, -30 + (mousePosition.y - window.innerHeight / 2) / 50, (mousePosition.y - window.innerHeight / 2) / 50],
+            animate={{
+              x: isMobile ? 0 : (mousePosition.x - window.innerWidth / 2) / 80 * influence,
+              y: isMobile ? [0, -30, 0] : [(mousePosition.y - window.innerHeight / 2) / 80 * influence - 15, (mousePosition.y - window.innerHeight / 2) / 80 * influence + 15, (mousePosition.y - window.innerHeight / 2) / 80 * influence - 15],
               opacity: [0.4, 0.8, 0.4],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 2,
+              x: { type: "spring", stiffness: 50, damping: 20 },
+              y: {
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2,
+              },
+              opacity: {
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2,
+              }
             }}
           />
         );
