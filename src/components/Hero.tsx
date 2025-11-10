@@ -43,7 +43,7 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating particles - reduced on mobile, subtle mouse-reactive on desktop */}
+      {/* Floating particles - reduced on mobile, mouse-reactive on desktop */}
       {[...Array(isMobile ? 12 : 40)].map((_, i) => {
         const initialX = Math.random() * 100;
         const initialY = Math.random() * 100;
@@ -57,18 +57,13 @@ export const Hero = () => {
               top: `${initialY}%`,
             }}
             animate={{
-              x: isMobile ? 0 : (mousePosition.x - window.innerWidth / 2) / 200,
-              y: isMobile ? [0, -30, 0] : (mousePosition.y - window.innerHeight / 2) / 200 + [-15, 15, -15][Math.floor(Date.now() / 1000) % 3],
+              x: isMobile ? 0 : (mousePosition.x - window.innerWidth / 2) / 50,
+              y: isMobile ? [0, -30, 0] : (mousePosition.y - window.innerHeight / 2) / 50,
               opacity: [0.4, 0.8, 0.4],
             }}
             transition={{
-              x: { type: "spring", stiffness: 30, damping: 30 },
-              y: {
-                duration: 4 + Math.random() * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: Math.random() * 2,
-              },
+              x: { type: "spring", stiffness: 50, damping: 15 },
+              y: { type: "spring", stiffness: 50, damping: 15 },
               opacity: {
                 duration: 3 + Math.random() * 2,
                 repeat: Infinity,
