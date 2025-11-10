@@ -4,12 +4,14 @@ import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useMousePosition } from "@/hooks/use-mouse-position";
 import heroVisual from "@/assets/hero-visual.jpg";
 import heroPortrait from "@/assets/hero-portrait.png";
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const isMobile = useIsMobile();
+  const mousePosition = useMousePosition();
 
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -41,27 +43,36 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating particles - reduced on mobile */}
-      {[...Array(isMobile ? 12 : 40)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-primary/60 rounded-full z-[5]"
-          initial={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.4, 0.8, 0.4],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 2,
-          }}
-        />
-      ))}
+      {/* Floating particles - reduced on mobile, mouse-reactive on desktop */}
+      {[...Array(isMobile ? 12 : 40)].map((_, i) => {
+        const initialX = Math.random() * 100;
+        const initialY = Math.random() * 100;
+        
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/60 rounded-full z-[5]"
+            style={{
+              left: `${initialX}%`,
+              top: `${initialY}%`,
+            }}
+            animate={isMobile ? {
+              y: [0, -30, 0],
+              opacity: [0.4, 0.8, 0.4],
+            } : {
+              x: (mousePosition.x - window.innerWidth / 2) / 50,
+              y: [(mousePosition.y - window.innerHeight / 2) / 50, -30 + (mousePosition.y - window.innerHeight / 2) / 50, (mousePosition.y - window.innerHeight / 2) / 50],
+              opacity: [0.4, 0.8, 0.4],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2,
+            }}
+          />
+        );
+      })}
 
       {/* Animated gradient orbs - simpler on mobile */}
       <motion.div 

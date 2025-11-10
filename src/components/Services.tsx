@@ -113,7 +113,7 @@ export const Services = () => {
               
               <div className="relative z-10">
                 <motion.div 
-                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/20"
+                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/20 mb-6 sm:mb-7 md:mb-8"
                   whileHover={isMobile ? {} : {
                     background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
                     borderColor: "hsl(var(--primary) / 0.4)",
