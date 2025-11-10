@@ -74,7 +74,7 @@ export const Services = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground mb-0 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-0 tracking-tight leading-tight">
             Czym się<br />zajmuję?
           </h2>
         </motion.div>
@@ -135,7 +135,7 @@ export const Services = () => {
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight leading-tight"
                   whileHover={isMobile ? {} : { color: "hsl(var(--primary))" }}
                   transition={{ duration: 0.3 }}
                 >
@@ -143,7 +143,7 @@ export const Services = () => {
                 </motion.h3>
                 
                 <motion.p 
-                  className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground"
+                  className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed"
                   whileHover={isMobile ? {} : { color: "hsl(var(--foreground) / 0.9)" }}
                   transition={{ duration: 0.3 }}
                 >

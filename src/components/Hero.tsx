@@ -130,7 +130,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h1 className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-[1.1]">
               <motion.span 
                 className="block"
                 initial={{ opacity: 0, x: -20 }}
@@ -158,7 +158,7 @@ export const Hero = () => {
             </h1>
             
             <motion.p 
-              className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl font-light"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}

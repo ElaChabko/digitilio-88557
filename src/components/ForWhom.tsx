@@ -44,7 +44,7 @@ export const ForWhom = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <motion.h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight" initial={{
+          <motion.h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight" initial={{
           opacity: 0,
           y: 30
         }} whileInView={{
@@ -59,7 +59,7 @@ export const ForWhom = () => {
             Dla kogo?
           </motion.h2>
 
-          <motion.p className="text-base md:text-lg lg:text-2xl text-muted-foreground leading-relaxed font-light mb-8 md:mb-12 lg:mb-16 max-w-4xl" initial={{
+          <motion.p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed font-light mb-8 md:mb-12 lg:mb-16 max-w-4xl" initial={{
           opacity: 0,
           y: 20
         }} whileInView={{
@@ -75,7 +75,7 @@ export const ForWhom = () => {
             Jeśli wiesz, że Twoja marka może robić więcej w social mediach, ale brakuje Ci czasu, pomysłu lub strategii to zajmę się tym kompleksowo. Od pierwszego audytu po raport z wynikami – wszystko po to, byś mógł skupić się na prowadzeniu firmy.
           </motion.p>
 
-          <motion.h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground mb-8 md:mb-10 lg:mb-12" initial={{
+          <motion.h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-8 md:mb-10 lg:mb-12" initial={{
           opacity: 0,
           y: 20
         }} whileInView={{
@@ -111,10 +111,10 @@ export const ForWhom = () => {
                     <industry.icon className="w-6 h-6 text-accent" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-foreground mb-2 text-lg">
+                    <h4 className="font-semibold text-foreground mb-2 text-base sm:text-lg">
                       {industry.title}
                     </h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                       {industry.description}
                     </p>
                   </div>
@@ -123,7 +123,7 @@ export const ForWhom = () => {
             ))}
           </div>
 
-          <motion.p className="text-base md:text-lg lg:text-2xl text-muted-foreground leading-relaxed font-light max-w-4xl" initial={{
+          <motion.p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed font-light max-w-4xl" initial={{
           opacity: 0,
           y: 20
         }} whileInView={{

@@ -40,11 +40,11 @@ export const Process = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
             Jak<br />pracuję?
           </h2>
           <motion.p 
-            className="text-lg md:text-xl lg:text-3xl text-muted-foreground max-w-3xl font-light leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl font-light leading-relaxed"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -81,10 +81,10 @@ export const Process = () => {
               >
                 <step.icon className="w-10 h-10 text-primary transition-colors duration-300 md:group-hover:text-primary-foreground" />
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                 {step.title}
               </h3>
-              <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

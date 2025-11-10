@@ -58,11 +58,11 @@ export const Benefits = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground mb-5 sm:mb-6 md:mb-8 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-5 sm:mb-6 md:mb-8 tracking-tight leading-tight">
             Co<br />zyskujesz?
           </h2>
           <motion.p 
-            className="text-base leading-relaxed sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-light"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light leading-relaxed"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -95,10 +95,10 @@ export const Benefits = () => {
               >
                 <benefit.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary transition-colors duration-300 md:group-hover:text-white" />
               </div>
-              <h3 className="text-xl leading-tight sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary leading-tight">
                 {benefit.title}
               </h3>
-              <p className="text-sm leading-relaxed sm:text-base md:text-lg lg:text-xl text-muted-foreground">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>

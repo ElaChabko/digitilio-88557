@@ -45,7 +45,7 @@ export const ContactCTA = () => {
         <div className="max-w-7xl flex flex-col lg:flex-row items-start lg:items-center gap-8 md:gap-10 lg:gap-16">
           <div className="flex-1">
             <motion.h2 
-              className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-8 md:mb-10 lg:mb-12 leading-tight tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 md:mb-10 lg:mb-12 leading-tight tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -54,7 +54,7 @@ export const ContactCTA = () => {
               Gotowy na markę,<br />o której się mówi?
             </motion.h2>
             <motion.p 
-              className="text-lg md:text-xl lg:text-3xl text-muted-foreground mb-8 md:mb-12 lg:mb-16 font-light leading-relaxed max-w-4xl"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-8 md:mb-12 lg:mb-16 font-light leading-relaxed max-w-4xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
