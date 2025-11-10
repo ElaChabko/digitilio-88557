@@ -35,9 +35,10 @@ export const Process = () => {
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div 
           className="mb-12 md:mb-16 lg:mb-24 max-w-5xl"
+          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight">
             Jak<br />pracuję?
@@ -57,13 +58,15 @@ export const Process = () => {
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-4 md:space-y-6 md:hover:-translate-y-2 transition-transform duration-300"
+              className="group relative space-y-4 md:space-y-6"
+              style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              whileHover={{ y: -8 }}
               transition={{ 
-                duration: 0.6,
-                delay: index * 0.15,
-                ease: "easeOut"
+                duration: 0.5,
+                delay: index * 0.12,
+                ease: [0.22, 1, 0.36, 1]
               }}
             >
               {/* Step number */}

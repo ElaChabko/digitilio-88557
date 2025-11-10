@@ -41,11 +41,12 @@ export const Hero = () => {
         }}
       />
 
-      {/* Floating particles - reduced on mobile */}
-      {[...Array(isMobile ? 12 : 40)].map((_, i) => (
+      {/* Floating particles - optimized for performance */}
+      {[...Array(isMobile ? 8 : 30)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 bg-primary/60 rounded-full z-[5]"
+          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
           initial={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -57,19 +58,21 @@ export const Hero = () => {
           transition={{
             duration: 3 + Math.random() * 2,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "linear",
             delay: Math.random() * 2,
           }}
         />
       ))}
 
-      {/* Animated gradient orbs - simpler on mobile */}
+      {/* Animated gradient orbs - GPU accelerated */}
       <motion.div 
         className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full z-[1]"
         style={{
           background: "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
           filter: isMobile ? "blur(30px)" : "blur(40px)",
-          opacity: 0.5
+          opacity: 0.5,
+          willChange: "transform, opacity",
+          transform: "translateZ(0)"
         }}
         animate={isMobile ? {} : {
           scale: [1, 1.2, 1],
@@ -78,7 +81,7 @@ export const Hero = () => {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "linear"
         }}
       />
       
@@ -87,7 +90,9 @@ export const Hero = () => {
         style={{
           background: "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, transparent 70%)",
           filter: isMobile ? "blur(30px)" : "blur(40px)",
-          opacity: 0.45
+          opacity: 0.45,
+          willChange: "transform, opacity",
+          transform: "translateZ(0)"
         }}
         animate={isMobile ? {} : {
           scale: [1, 1.3, 1],
@@ -96,7 +101,7 @@ export const Hero = () => {
         transition={{
           duration: 10,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "linear",
           delay: 1
         }}
       />
@@ -120,9 +125,10 @@ export const Hero = () => {
           {/* Text Content */}
           <motion.div 
             className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12"
+            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <h1 className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground tracking-tight">
               <motion.span 
@@ -183,9 +189,10 @@ export const Hero = () => {
           {/* Portrait Image */}
           <motion.div 
             className="relative group mt-10 sm:mt-12 lg:mt-0"
+            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0">
               {/* Glowing border effect */}

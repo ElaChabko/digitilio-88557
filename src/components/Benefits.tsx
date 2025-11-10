@@ -53,9 +53,10 @@ export const Benefits = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <motion.div 
           className="mb-10 sm:mb-12 md:mb-16 lg:mb-24 max-w-5xl"
+          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground mb-5 sm:mb-6 md:mb-8 tracking-tight">
             Co<br />zyskujesz?
@@ -75,13 +76,15 @@ export const Benefits = () => {
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="group relative space-y-3 sm:space-y-4 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 md:hover:bg-gradient-to-br md:hover:from-secondary/30 md:hover:to-accent/10 md:hover:shadow-lg md:hover:-translate-y-2"
+              className="group relative space-y-3 sm:space-y-4 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:hover:bg-gradient-to-br md:hover:from-secondary/30 md:hover:to-accent/10 md:hover:shadow-lg"
+              style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              whileHover={{ y: -8 }}
               transition={{ 
-                duration: 0.6,
-                delay: index * 0.12,
-                ease: "easeOut"
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: [0.22, 1, 0.36, 1]
               }}
             >
               {/* Gradient border effect - simplified */}

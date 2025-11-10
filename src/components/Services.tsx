@@ -54,6 +54,7 @@ export const Services = () => {
       {/* Floating light orbs */}
       <motion.div 
         className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl opacity-15"
+        style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
         animate={isMobile ? {} : {
           scale: [1, 1.2, 1],
           opacity: [0.15, 0.25, 0.15],
@@ -61,16 +62,17 @@ export const Services = () => {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "linear"
         }}
       />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
         <motion.div 
           className="mb-10 sm:mb-12 md:mb-16 lg:mb-24 max-w-4xl"
+          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground mb-0 tracking-tight">
             Czym się<br />zajmuję?
@@ -88,10 +90,13 @@ export const Services = () => {
               key={index} 
               variants={itemVariants}
               whileHover={isMobile ? {} : { y: -8, scale: 1.02 }}
-              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 relative overflow-hidden border border-primary/10"
+              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden border border-primary/10"
               style={{
                 background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 100%)`,
+                willChange: "transform, opacity",
+                transform: "translateZ(0)"
               }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Animated gradient background */}
               <motion.div 

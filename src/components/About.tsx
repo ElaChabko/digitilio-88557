@@ -13,7 +13,10 @@ export const About = () => {
       <div className="absolute bottom-20 right-20 w-[350px] h-[350px] bg-accent/10 rounded-full blur-3xl opacity-12 hidden md:block" />
       
       <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
-        <motion.div className="mb-10 sm:mb-12 md:mb-16 lg:mb-24" initial={{
+        <motion.div className="mb-10 sm:mb-12 md:mb-16 lg:mb-24" style={{
+        willChange: "transform, opacity",
+        transform: "translateZ(0)"
+      }} initial={{
         opacity: 0,
         y: 30
       }} animate={isInView ? {
@@ -23,13 +26,17 @@ export const About = () => {
         opacity: 0,
         y: 30
       }} transition={{
-        duration: 0.6
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1]
       }}>
           <h2 className="text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-8xl font-bold text-foreground tracking-tight">O mnie</h2>
         </motion.div>
         
         <div className="max-w-6xl mx-auto grid md:grid-cols-5 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-start">
-          <motion.div className="md:col-span-2 group" initial={{
+          <motion.div className="md:col-span-2 group" style={{
+          willChange: "transform, opacity",
+          transform: "translateZ(0)"
+        }} initial={{
           opacity: 0,
           x: -40
         }} animate={isInView ? {
@@ -39,8 +46,8 @@ export const About = () => {
           opacity: 0,
           x: -40
         }} transition={{
-          duration: 0.7,
-          ease: "easeOut"
+          duration: 0.6,
+          ease: [0.22, 1, 0.36, 1]
         }}>
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-shadow duration-300 hover-scale">
               <img src={aboutPhoto} alt="Ela Chabko - Digitilio" className="w-full object-cover" loading="lazy" />
@@ -48,7 +55,10 @@ export const About = () => {
             </div>
           </motion.div>
           
-          <motion.div className="md:col-span-3 space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8" initial={{
+          <motion.div className="md:col-span-3 space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8" style={{
+          willChange: "transform, opacity",
+          transform: "translateZ(0)"
+        }} initial={{
           opacity: 0,
           x: 40
         }} animate={isInView ? {
@@ -58,9 +68,9 @@ export const About = () => {
           opacity: 0,
           x: 40
         }} transition={{
-          duration: 0.7,
-          delay: 0.2,
-          ease: "easeOut"
+          duration: 0.6,
+          delay: 0.15,
+          ease: [0.22, 1, 0.36, 1]
         }}>
             <motion.p initial={{
             opacity: 0,
