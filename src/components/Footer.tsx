@@ -17,6 +17,12 @@ export const Footer = () => {
             >
               Polityka prywatności
             </a>
+                <a 
+              href="/polityka-cookies" 
+              className="text-sm hover:text-accent transition-colors"
+            >
+              Polityka plików cookies
+            </a>
             <a 
               href="https://www.linkedin.com/in/ela-chabko/" 
               target="_blank" 
