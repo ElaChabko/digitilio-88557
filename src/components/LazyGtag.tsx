@@ -56,9 +56,13 @@ export const LazyGtag: React.FC = () => {
       document.head.appendChild(s2);
 
       // 3) Zaktualizuj zgodę (analytics_storage = granted)
-      (window as any).gtag("consent", "update", {
-        analytics_storage: "granted"
-      });
+   (window as any).gtag("consent", "update", {
+  ad_user_data: "granted",
+  ad_personalization: "granted",
+  ad_storage: "granted",
+  analytics_storage: "granted"
+});
+
 
       setLoaded(true);
     };
