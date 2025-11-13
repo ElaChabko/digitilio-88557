@@ -2,53 +2,63 @@ import React, { useEffect, useState } from "react";
 
 const STORAGE_KEY = "cookieConsentDigitilio";
 
+const defaultConsent = {
+  analytics: false,
+  ad_storage: false,
+  ad_user_data: false,
+  ad_personalization: false,
+};
+
 export const CookieConsent: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      setVisible(true); // pokaż baner, jeśli brak wyboru
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      setVisible(true);
     }
   }, []);
 
-  const acceptAll = () => {
-    // Zapisz zgodę
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ analytics: true }));
-
-    // Wyślij event dla LazyGtag
+  const handleAcceptAll = () => {
+    const consent = {
+      analytics: true,
+      ad_storage: true,
+      ad_user_data: true,
+      ad_personalization: true,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
     window.dispatchEvent(new Event("cookie-consent-updated"));
-
-    // Ukryj baner
     setVisible(false);
   };
 
-  const declineAll = () => {
-    // Zapisz odmowę (można później użyć, np. do stylu działania strony)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ analytics: false }));
-
-    // Ukryj baner
+  const handleOnlyNecessary = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultConsent));
+    window.dispatchEvent(new Event("cookie-consent-updated"));
     setVisible(false);
   };
 
   if (!visible) return null;
 
   return (
-    <div style={{
-      position: "fixed",
-      bottom: 0,
-      width: "100%",
-      background: "#fff",
-      padding: "1rem",
-      boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
-      zIndex: 9999
-    }}>
+    <div
+      style={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        background: "#fff",
+        padding: "16px",
+        boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
+        zIndex: 1000,
+      }}
+    >
       <p style={{ margin: 0 }}>
-        Używamy plików cookies w celach analitycznych i marketingowych. Czy wyrażasz na to zgodę?
+        Używamy plików cookie do celów analitycznych i marketingowych. Możesz
+        zaakceptować wszystkie lub tylko niezbędne.
       </p>
-      <div style={{ marginTop: "0.5rem" }}>
-        <button onClick={acceptAll} style={{ marginRight: "1rem" }}>Akceptuję</button>
-        <button onClick={declineAll}>Odrzucam</button>
+      <div style={{ marginTop: "8px", display: "flex", gap: "8px" }}>
+        <button onClick={handleAcceptAll}>Akceptuj wszystkie</button>
+        <button onClick={handleOnlyNecessary}>Tylko niezbędne</button>
       </div>
     </div>
   );
