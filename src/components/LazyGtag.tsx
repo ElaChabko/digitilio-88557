@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 
-const GA_ID = "G-CF6N5XG77T"; // ← Twój Measurement ID
-
+const GA_ID = "G-CF6N5XG77T"; // ← Twój Google Analytics 4 Measurement ID
 const STORAGE_KEY = "cookieConsentDigitilio";
 
-function readAnalyticsConsent(): boolean {
+type ConsentPreferences = {
+  analytics: boolean;
+  ad_storage: boolean;
+  ad_user_data: boolean;
+  ad_personalization: boolean;
+};
+
+function readConsent(): ConsentPreferences | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return false;
-    const obj = JSON.parse(raw);
-    return !!obj?.analytics;
+    if (!raw) return null;
+    return JSON.parse(raw);
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -19,62 +24,59 @@ export const LazyGtag: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // 1) Ustaw domyślne odmowy (Consent Mode v2)
-    //    zanim jakiekolwiek tagi zostaną załadowane.
-    (window as any).dataLayer = (window as any).dataLayer || [];
+    // 1) Przygotuj dataLayer i gtag
+    window.dataLayer = window.dataLayer || [];
     function gtag(...args: any[]) {
-      (window as any).dataLayer.push(args);
+      window.dataLayer.push(args);
     }
     (window as any).gtag = gtag;
 
+    // 2) Ustaw domyślnie "denied" (z wait_for_update)
     gtag("consent", "default", {
       ad_user_data: "denied",
       ad_personalization: "denied",
       ad_storage: "denied",
       analytics_storage: "denied",
-      wait_for_update: 500
+      wait_for_update: 500,
     });
 
-    const loadGa = () => {
-      if (loaded) return;
-      if (!GA_ID) return;
-      if (!readAnalyticsConsent()) return; // brak zgody → nie ładujemy
+    const loadGA = (consent: ConsentPreferences) => {
+      if (loaded || !GA_ID) return;
 
-      // 2) Załaduj GA4
       const s1 = document.createElement("script");
       s1.async = true;
       s1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
       document.head.appendChild(s1);
 
       const s2 = document.createElement("script");
-s2.innerHTML = `
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('set', 'ads_data_redaction', true);
-  gtag('set', 'url_passthrough', true);
-  gtag('config', '${GA_ID}');
-`;
-
+      s2.innerHTML = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${GA_ID}');
+      `;
       document.head.appendChild(s2);
 
-      // 3) Zaktualizuj zgodę (analytics_storage = granted)
-   (window as any).gtag("consent", "update", {
-  ad_user_data: "granted",
-  ad_personalization: "granted",
-  ad_storage: "granted",
-  analytics_storage: "granted"
-});
-
+      gtag("consent", "update", {
+        ad_user_data: consent.ad_user_data ? "granted" : "denied",
+        ad_personalization: consent.ad_personalization ? "granted" : "denied",
+        ad_storage: consent.ad_storage ? "granted" : "denied",
+        analytics_storage: consent.analytics ? "granted" : "denied",
+      });
 
       setLoaded(true);
     };
 
-    // spróbuj od razu (jeśli już kiedyś zaakceptowano)
-    loadGa();
+    // 3) Jeśli zgoda już była – załaduj GA
+    const saved = readConsent();
+    if (saved) loadGA(saved);
 
-    // nasłuchuj eventu z banera
-    const handler = () => loadGa();
+    // 4) Nasłuchuj zdarzenia z banera
+    const handler = () => {
+      const newConsent = readConsent();
+      if (newConsent) loadGA(newConsent);
+    };
+
     window.addEventListener("cookie-consent-updated", handler);
     return () => window.removeEventListener("cookie-consent-updated", handler);
   }, [loaded]);
