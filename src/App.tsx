@@ -22,6 +22,10 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      
+      <LazyGtag />
+      <CookieConsent />
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
