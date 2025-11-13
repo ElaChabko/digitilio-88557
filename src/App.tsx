@@ -9,6 +9,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import NotFound from "./pages/NotFound";
 
+import { CookieConsent } from "@/components/CookieConsent";
+import { LazyGtag } from "@/components/LazyGtag";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CookiesPolicy from "./pages/CookiesPolicy";
+
+
 const queryClient = new QueryClient();
 
 const App = () => (
