@@ -47,12 +47,15 @@ export const LazyGtag: React.FC = () => {
       document.head.appendChild(s1);
 
       const s2 = document.createElement("script");
-      s2.innerHTML = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${GA_ID}');
-      `;
+s2.innerHTML = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+  gtag('config', '${GA_ID}');
+`;
+
       document.head.appendChild(s2);
 
       // 3) Zaktualizuj zgodę (analytics_storage = granted)
