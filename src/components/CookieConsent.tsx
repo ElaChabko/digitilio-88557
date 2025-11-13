@@ -1,64 +1,125 @@
 import React, { useEffect, useState } from "react";
 
-const STORAGE_KEY = "cookieConsentDigitilio";
-
-const defaultConsent = {
-  analytics: false,
-  ad_storage: false,
-  ad_user_data: false,
-  ad_personalization: false,
+type Consent = {
+  necessary: true;
+  analytics: boolean;
+  marketing: boolean;
+  ad_storage: boolean;
+  ad_user_data: boolean;
+  ad_personalization: boolean;
+  timestamp: string;
+  version: string;
 };
 
+const STORAGE_KEY = "cookieConsentDigitilio";
+const CONSENT_VERSION = "2025-11-13";
+
+function getStoredConsent(): Consent | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Consent) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveConsent(consent: Omit<Consent, "timestamp">) {
+  const payload: Consent = { ...consent, timestamp: new Date().toISOString() };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  window.dispatchEvent(new Event("cookie-consent-updated"));
+}
+
 export const CookieConsent: React.FC = () => {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
+  const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      setVisible(true);
-    }
+    const stored = getStoredConsent();
+    if (!stored || stored.version !== CONSENT_VERSION) setOpen(true);
   }, []);
 
-  const handleAcceptAll = () => {
-    const consent = {
+  const acceptAll = () => {
+    saveConsent({
+      necessary: true,
       analytics: true,
+      marketing: true,
       ad_storage: true,
       ad_user_data: true,
       ad_personalization: true,
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
-    window.dispatchEvent(new Event("cookie-consent-updated"));
-    setVisible(false);
+      version: CONSENT_VERSION
+    });
+    setOpen(false);
   };
 
-  const handleOnlyNecessary = () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultConsent));
-    window.dispatchEvent(new Event("cookie-consent-updated"));
-    setVisible(false);
+  const saveChoices = () => {
+    saveConsent({
+      necessary: true,
+      analytics,
+      marketing,
+      ad_storage: marketing,
+      ad_user_data: marketing,
+      ad_personalization: marketing,
+      version: CONSENT_VERSION
+    });
+    setOpen(false);
   };
 
-  if (!visible) return null;
+  if (!open) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        background: "#fff",
-        padding: "16px",
-        boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
-        zIndex: 1000,
-      }}
-    >
-      <p style={{ margin: 0 }}>
-        Używamy plików cookie do celów analitycznych i marketingowych. Możesz
-        zaakceptować wszystkie lub tylko niezbędne.
-      </p>
-      <div style={{ marginTop: "8px", display: "flex", gap: "8px" }}>
-        <button onClick={handleAcceptAll}>Akceptuj wszystkie</button>
-        <button onClick={handleOnlyNecessary}>Tylko niezbędne</button>
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+      <div className="w-full max-w-xl rounded-xl bg-white p-6 shadow-2xl">
+        <h2 className="text-lg font-semibold mb-2">Ustawienia plików cookies</h2>
+        <p className="text-sm text-slate-700 mb-4">
+          Używamy niezbędnych cookies do działania strony. Dodatkowe (analityczne i marketingowe)
+          tylko za Twoją zgodą. Szczegóły znajdziesz w&nbsp;
+          <a href="/polityka-cookies" className="underline text-indigo-600">polityce cookies</a> oraz&nbsp;
+          <a href="/polityka-prywatnosci" className="underline text-indigo-600">polityce prywatności</a>.
+        </p>
+
+        <div className="grid gap-3 md:grid-cols-3 mb-4">
+          <label className="flex items-start gap-3 rounded-lg border p-3 text-sm">
+            <input type="checkbox" checked readOnly className="mt-1" />
+            <div>
+              <div className="font-medium">Niezbędne</div>
+              <div className="text-slate-600">Zawsze aktywne – potrzebne do działania strony.</div>
+            </div>
+          </label>
+
+          <label className="flex items-start gap-3 rounded-lg border p-3 text-sm">
+            <input type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} className="mt-1" />
+            <div>
+              <div className="font-medium">Analityczne</div>
+              <div className="text-slate-600">Pomagają nam ulepszać serwis (np. GA).</div>
+            </div>
+          </label>
+
+          <label className="flex items-start gap-3 rounded-lg border p-3 text-sm">
+            <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} className="mt-1" />
+            <div>
+              <div className="font-medium">Marketingowe</div>
+              <div className="text-slate-600">Wspierają personalizację reklam.</div>
+            </div>
+          </label>
+        </div>
+
+        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
+          <button
+            onClick={saveChoices}
+            className="rounded-md border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
+          >
+            Zapisz wybór
+          </button>
+          <button
+            onClick={acceptAll}
+            className="rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-500"
+          >
+            Akceptuj wszystkie
+          </button>
+        </div>
+
+        <p className="mt-3 text-xs text-slate-400 text-right">Wersja zgód: {CONSENT_VERSION}</p>
       </div>
     </div>
   );
