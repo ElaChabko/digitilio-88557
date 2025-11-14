@@ -19,7 +19,7 @@ const industries = [
   },
   {
     icon: ShieldCheck,
-    title: "BHP i odzież ochronna",
+    title: "Specjalistyczne usługi",
     description: "Wspieram marki w edukacji i employer brandingu"
   },
   {
