@@ -52,7 +52,15 @@ export const About = () => {
           ease: [0.22, 1, 0.36, 1]
         }}>
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-shadow duration-300 hover-scale">
-              <img src={aboutPhoto} alt="Ela Chabko - Digitilio" className="w-full object-cover" loading="lazy" />
+              <img
+  src={aboutPhoto}
+  alt="Ela Chabko - Digitilio"
+  width={768}
+  height={768}
+  className="w-full h-auto object-cover"
+  loading="lazy"
+/>
+
               <div className="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           </motion.div>
