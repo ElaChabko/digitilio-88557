@@ -1,4 +1,4 @@
-import aboutPhoto from "@/assets/about-photo-new.jpg";
+import aboutPhoto from "@/assets/about-photo-new.webp";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
