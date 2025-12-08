@@ -208,12 +208,15 @@ export const Hero = () => {
                 whileHover={isMobile ? {} : { scale: 1.02 }}
                 transition={{ duration: 0.5 }}
               >
-                <img 
-                  src={heroPortrait} 
-                  alt="Ela Chabko - Digitilio" 
-                  className="w-full h-auto object-cover"
-                  loading="eager"
-                />
+<img
+  src={heroPortrait}
+  alt="Ela Chabko - Digitilio"
+  width={768}
+  height={960}
+  className="w-full h-auto object-cover"
+  loading="lazy"
+/>
+
                 
                 {/* Gradient overlay */}
                 <motion.div 
