@@ -135,7 +135,7 @@ export const Services = () => {
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight leading-tight"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight leading-tight mb-3"
                   whileHover={isMobile ? {} : { color: "hsl(var(--primary))" }}
                   transition={{ duration: 0.3 }}
                 >
