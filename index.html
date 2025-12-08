@@ -2,33 +2,31 @@
 <html lang="en">
   <head>
    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        
-        // 1. Ustawienie domyślnej zgody (musi być pierwsze)
-        gtag('consent', 'default', {
-            'ad_storage': 'denied',
-            'analytics_storage': 'denied',
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'wait_for_update': 500 // Czas na wczytanie zgody z LocalStorage
-        });
-        
-        // 2. Wysłanie niestandardowego zdarzenia do GTM
-        // Oznajmia, że domyślne stany zostały ustawione
-        window.dataLayer.push({
-            event: 'consent_defaults_set'
-        });
-        
-        // 3. Konfiguracja gtag (konieczna po default, przed GTM)
-        gtag('js', new Date());
-    </script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
 
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5N9FPPB7');</script>
+    // 1. Domyślne zgody (MUSI być przed GTM)
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+
+    // 2. Event pomocniczy (opcjonalny, ale ok)
+    window.dataLayer.push({
+      event: 'consent_defaults_set'
+    });
+  </script>
+
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5N9FPPB7');
+  </script>
 
     <meta charset="UTF-8" />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
@@ -60,6 +58,7 @@
     
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5N9FPPB7"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
