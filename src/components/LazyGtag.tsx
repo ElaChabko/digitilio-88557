@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-const GA_ID = "G-CF6N5XG77T"; // ← Twój GA4 ID
 const STORAGE_KEY = "cookieConsentDigitilio";
+const GTM_ID = "GTM-5N9FPPB7"; // ← Twój GTM ID
 
 type ConsentPreferences = {
   analytics: boolean;
@@ -22,58 +22,58 @@ function readConsent(): ConsentPreferences | null {
 
 export const LazyGtag: React.FC = () => {
   useEffect(() => {
-    // 1) Przygotuj dataLayer i gtag
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
-    }
-    (window as any).gtag = gtag;
+    const loadGTM = () => {
+      if (document.getElementById("gtm-script")) return;
 
-    // 2) Ustaw domyślne zgody (denied) + wait_for_update
-    gtag("consent", "default", {
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-      ad_storage: "denied",
-      analytics_storage: "denied",
-      wait_for_update: 500
-    });
+      const script = document.createElement("script");
+      script.id = "gtm-script";
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+      document.head.appendChild(script);
+    };
 
-    // 3) Zawsze załaduj gtag.js — Consent Mode wymaga jego obecności
-    const s1 = document.createElement("script");
-    s1.async = true;
-    s1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    document.head.appendChild(s1);
-
-    const s2 = document.createElement("script");
-    s2.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${GA_ID}', { anonymize_ip: true });
-    `;
-    document.head.appendChild(s2);
-
-    // 4) Jeśli zgoda już zapisana → zaktualizuj
     const saved = readConsent();
     if (saved) {
+      // 1. Ustawienia domyślne Consent Mode
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]) {
+        window.dataLayer.push(args);
+      }
+      window.gtag = gtag;
+
+      gtag("consent", "default", {
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        wait_for_update: 500
+      });
+
+      // 2. Aktualizacja zgód zgodnie z zapisanymi preferencjami
       gtag("consent", "update", {
         ad_user_data: saved.ad_user_data ? "granted" : "denied",
         ad_personalization: saved.ad_personalization ? "granted" : "denied",
         ad_storage: saved.ad_storage ? "granted" : "denied",
-        analytics_storage: saved.analytics ? "granted" : "denied",
+        analytics_storage: saved.analytics ? "granted" : "denied"
       });
+
+      // 3. Dopiero teraz załaduj GTM
+      loadGTM();
     }
 
-    // 5) Obsłuż zdarzenie z banera (cookie-consent-updated)
+    // 4. Nasłuchuj na aktualizację zgód
     const handler = () => {
-      const newConsent = readConsent();
-      if (newConsent) {
-        gtag("consent", "update", {
-          ad_user_data: newConsent.ad_user_data ? "granted" : "denied",
-          ad_personalization: newConsent.ad_personalization ? "granted" : "denied",
-          ad_storage: newConsent.ad_storage ? "granted" : "denied",
-          analytics_storage: newConsent.analytics ? "granted" : "denied",
+      const updated = readConsent();
+      if (updated) {
+        // jak wyżej
+        window.gtag("consent", "update", {
+          ad_user_data: updated.ad_user_data ? "granted" : "denied",
+          ad_personalization: updated.ad_personalization ? "granted" : "denied",
+          ad_storage: updated.ad_storage ? "granted" : "denied",
+          analytics_storage: updated.analytics ? "granted" : "denied"
         });
+
+        loadGTM();
       }
     };
 
