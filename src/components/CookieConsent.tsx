@@ -40,6 +40,15 @@ export const CookieConsent: React.FC = () => {
   }, []);
 
  const acceptAll = () => {
+  // Aktualizacja Google Consent Mode
+  window.gtag?.('consent', 'update', {
+    ad_storage: 'granted',
+    analytics_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted'
+  });
+
+  // Zapis do localStorage
   saveConsent({
     necessary: true,
     analytics: true,
@@ -50,21 +59,21 @@ export const CookieConsent: React.FC = () => {
     version: CONSENT_VERSION
   });
 
-  // ➕ dodane: zgody dla GTM
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "gtm.consentUpdate",
-    ad_storage: "granted",
-    analytics_storage: "granted",
-    ad_user_data: "granted",
-    ad_personalization: "granted"
-  });
-
   setOpen(false);
 };
 
 
+
 const saveChoices = () => {
+  // Aktualizacja Google Consent Mode wg wyboru użytkownika
+  window.gtag?.('consent', 'update', {
+    ad_storage: marketing ? 'granted' : 'denied',
+    ad_user_data: marketing ? 'granted' : 'denied',
+    ad_personalization: marketing ? 'granted' : 'denied',
+    analytics_storage: analytics ? 'granted' : 'denied'
+  });
+
+  // Zapis do localStorage
   saveConsent({
     necessary: true,
     analytics,
@@ -73,16 +82,6 @@ const saveChoices = () => {
     ad_user_data: marketing,
     ad_personalization: marketing,
     version: CONSENT_VERSION
-  });
-
-  // ➕ dodane: zgody dla GTM
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "gtm.consentUpdate",
-    ad_storage: marketing ? "granted" : "denied",
-    analytics_storage: analytics ? "granted" : "denied",
-    ad_user_data: marketing ? "granted" : "denied",
-    ad_personalization: marketing ? "granted" : "denied"
   });
 
   setOpen(false);
