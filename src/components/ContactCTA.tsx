@@ -101,11 +101,15 @@ export const ContactCTA = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <img 
-              src={contactBottomImage} 
-              alt="Contact visual" 
-              className="w-full max-w-sm aspect-square object-cover rounded-2xl shadow-2xl"
-            />
+           <img 
+  src={contactBottomImage} 
+  alt="Contact visual" 
+  width={768}
+  height={768}
+  className="w-full max-w-sm aspect-square object-cover rounded-2xl shadow-2xl"
+  loading="lazy"
+/>
+
           </motion.div>
         </div>
       </div>
