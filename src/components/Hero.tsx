@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import heroVisual from "@/assets/hero-visual.jpg";
-import heroPortrait from "@/assets/hero-portrait.png";
+import heroPortrait from "@/assets/hero-portrait.webp";
 
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
