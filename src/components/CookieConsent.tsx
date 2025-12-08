@@ -59,22 +59,20 @@ export const CookieConsent: React.FC = () => {
     version: CONSENT_VERSION
   });
 
-  // 3. Event dla GTM / GA4
+  // 3. Event do GTM → odpala tag GA4 Event
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    event: 'cookie_consent_submitted',
-    consent_action: 'accept_all',
-    consent_analytics: 'granted',
-    consent_marketing: 'granted',
-    consent_ad_storage: 'granted',
-    consent_ad_user_data: 'granted',
-    consent_ad_personalization: 'granted'
+    event: "cookie_consent_submitted",
+    consent_action: "accept_all",
+    consent_analytics: "granted",
+    consent_marketing: "granted",
+    consent_ad_storage: "granted",
+    consent_ad_user_data: "granted",
+    consent_ad_personalization: "granted"
   });
 
   setOpen(false);
 };
-
-
 
 const saveChoices = () => {
   const adGranted = marketing;
@@ -87,7 +85,7 @@ const saveChoices = () => {
     analytics_storage: analytics ? 'granted' : 'denied'
   });
 
-  // 2. Zapis do localStorage
+  // 2. Zapis w localStorage
   saveConsent({
     necessary: true,
     analytics,
@@ -98,16 +96,16 @@ const saveChoices = () => {
     version: CONSENT_VERSION
   });
 
-  // 3. Event dla GTM / GA4
+  // 3. Event do GTM
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    event: 'cookie_consent_submitted',
-    consent_action: 'save_choices',
-    consent_analytics: analytics ? 'granted' : 'denied',
-    consent_marketing: marketing ? 'granted' : 'denied',
-    consent_ad_storage: adGranted ? 'granted' : 'denied',
-    consent_ad_user_data: adGranted ? 'granted' : 'denied',
-    consent_ad_personalization: adGranted ? 'granted' : 'denied'
+    event: "cookie_consent_submitted",
+    consent_action: "save_choices",
+    consent_analytics: analytics ? "granted" : "denied",
+    consent_marketing: marketing ? "granted" : "denied",
+    consent_ad_storage: adGranted ? "granted" : "denied",
+    consent_ad_user_data: adGranted ? "granted" : "denied",
+    consent_ad_personalization: adGranted ? "granted" : "denied"
   });
 
   setOpen(false);
