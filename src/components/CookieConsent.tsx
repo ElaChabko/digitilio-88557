@@ -40,7 +40,7 @@ export const CookieConsent: React.FC = () => {
   }, []);
 
  const acceptAll = () => {
-  // Aktualizacja Google Consent Mode
+  // 1. Consent Mode
   window.gtag?.('consent', 'update', {
     ad_storage: 'granted',
     analytics_storage: 'granted',
@@ -48,7 +48,7 @@ export const CookieConsent: React.FC = () => {
     ad_personalization: 'granted'
   });
 
-  // Zapis do localStorage
+  // 2. Zapis w localStorage
   saveConsent({
     necessary: true,
     analytics: true,
@@ -59,33 +59,60 @@ export const CookieConsent: React.FC = () => {
     version: CONSENT_VERSION
   });
 
+  // 3. Event dla GTM / GA4
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'cookie_consent_submitted',
+    consent_action: 'accept_all',
+    consent_analytics: 'granted',
+    consent_marketing: 'granted',
+    consent_ad_storage: 'granted',
+    consent_ad_user_data: 'granted',
+    consent_ad_personalization: 'granted'
+  });
+
   setOpen(false);
 };
 
 
 
 const saveChoices = () => {
-  // Aktualizacja Google Consent Mode wg wyboru użytkownika
+  const adGranted = marketing;
+
+  // 1. Consent Mode
   window.gtag?.('consent', 'update', {
-    ad_storage: marketing ? 'granted' : 'denied',
-    ad_user_data: marketing ? 'granted' : 'denied',
-    ad_personalization: marketing ? 'granted' : 'denied',
+    ad_storage: adGranted ? 'granted' : 'denied',
+    ad_user_data: adGranted ? 'granted' : 'denied',
+    ad_personalization: adGranted ? 'granted' : 'denied',
     analytics_storage: analytics ? 'granted' : 'denied'
   });
 
-  // Zapis do localStorage
+  // 2. Zapis do localStorage
   saveConsent({
     necessary: true,
     analytics,
     marketing,
-    ad_storage: marketing,
-    ad_user_data: marketing,
-    ad_personalization: marketing,
+    ad_storage: adGranted,
+    ad_user_data: adGranted,
+    ad_personalization: adGranted,
     version: CONSENT_VERSION
+  });
+
+  // 3. Event dla GTM / GA4
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'cookie_consent_submitted',
+    consent_action: 'save_choices',
+    consent_analytics: analytics ? 'granted' : 'denied',
+    consent_marketing: marketing ? 'granted' : 'denied',
+    consent_ad_storage: adGranted ? 'granted' : 'denied',
+    consent_ad_user_data: adGranted ? 'granted' : 'denied',
+    consent_ad_personalization: adGranted ? 'granted' : 'denied'
   });
 
   setOpen(false);
 };
+
 
 
   if (!open) return null;
