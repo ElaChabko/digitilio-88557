@@ -7,17 +7,17 @@ const steps = [
   {
     icon: Target,
     title: "Strategia",
-    description: "Audyt marki, analiza konkurencji i dopasowanie kanałów.",
+    description: "Zaczynam od konkretów: badam Twoją markę, konkurencję i rynek, dzięki temu planuję działania, które mają sens.",
   },
   {
     icon: FileText,
     title: "Kreacja",
-    description: "Projektuję treści, które angażują, uczą lub inspirują.",
+    description: "Nie tworzę dla algorytmu, tworzę dla ludzi. Ale wiem, jak sprawić, by polubili to i ci pierwsi, i drudzy.",
   },
   {
     icon: LineChart,
     title: "Optymalizacja",
-    description: "Badam wyniki, reaguję szybko, stale udoskonalam.",
+    description: "Bez analizy nie ma wzrostu. Dlatego testuję, poprawiam i optymalizuję, żeby Twoja marka rosła szybciej.",
   },
 ];
 
