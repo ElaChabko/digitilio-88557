@@ -39,31 +39,55 @@ export const CookieConsent: React.FC = () => {
     if (!stored || stored.version !== CONSENT_VERSION) setOpen(true);
   }, []);
 
-  const acceptAll = () => {
-    saveConsent({
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      ad_storage: true,
-      ad_user_data: true,
-      ad_personalization: true,
-      version: CONSENT_VERSION
-    });
-    setOpen(false);
-  };
+ const acceptAll = () => {
+  saveConsent({
+    necessary: true,
+    analytics: true,
+    marketing: true,
+    ad_storage: true,
+    ad_user_data: true,
+    ad_personalization: true,
+    version: CONSENT_VERSION
+  });
 
-  const saveChoices = () => {
-    saveConsent({
-      necessary: true,
-      analytics,
-      marketing,
-      ad_storage: marketing,
-      ad_user_data: marketing,
-      ad_personalization: marketing,
-      version: CONSENT_VERSION
-    });
-    setOpen(false);
-  };
+  // ➕ dodane: zgody dla GTM
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "gtm.consentUpdate",
+    ad_storage: "granted",
+    analytics_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted"
+  });
+
+  setOpen(false);
+};
+
+
+const saveChoices = () => {
+  saveConsent({
+    necessary: true,
+    analytics,
+    marketing,
+    ad_storage: marketing,
+    ad_user_data: marketing,
+    ad_personalization: marketing,
+    version: CONSENT_VERSION
+  });
+
+  // ➕ dodane: zgody dla GTM
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "gtm.consentUpdate",
+    ad_storage: marketing ? "granted" : "denied",
+    analytics_storage: analytics ? "granted" : "denied",
+    ad_user_data: marketing ? "granted" : "denied",
+    ad_personalization: marketing ? "granted" : "denied"
+  });
+
+  setOpen(false);
+};
+
 
   if (!open) return null;
 
