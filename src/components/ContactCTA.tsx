@@ -3,7 +3,7 @@ import { Mail } from "lucide-react";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import contactBottomImage from "@/assets/contact-bottom-image.png";
+import contactBottomImage from "@/assets/contact-bottom-image.webp";
 
 export const ContactCTA = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
