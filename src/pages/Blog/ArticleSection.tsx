@@ -11,7 +11,7 @@ export const ArticleSection = ({ section }: Props) => {
   }
 
   return (
-    <section className="py-12 sm:py-16 md:py-10">
+    <section className="py-6 sm:py-8 md:py-5">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
