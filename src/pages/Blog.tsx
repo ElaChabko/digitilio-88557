@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 
-import { blogPosts } from "@/content/blogs";
+import { blogPosts } from "@/content/blogs/index";
 
 type BlogListItem = {
   id: number;
