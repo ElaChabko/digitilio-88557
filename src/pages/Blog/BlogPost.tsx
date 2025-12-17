@@ -72,9 +72,7 @@ export default function BlogPost() {
               <ArticleSection key={index} section={section} />
             ))}
           </div>
-
         </div>
-      </article>
 <motion.div
   initial={{ opacity: 0, y: 24 }}
   animate={{ opacity: 1, y: 0 }}
@@ -100,6 +98,7 @@ export default function BlogPost() {
     </a>
   </Button>
 </motion.div>
+      </article>
 
       <Footer />
     </div>
