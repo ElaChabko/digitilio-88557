@@ -5,7 +5,7 @@ import { Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { getPostBySlug } from "@/content/blogs/index";
-import ArticleSection from "./ArticleSection";
+import { ArticleSection } from "./ArticleSection";
 
 type NormalizedSection = {
   heading?: string;
