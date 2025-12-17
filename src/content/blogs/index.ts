@@ -1,6 +1,6 @@
-import { post as post1 } from "./nowe-technologie-2026";
+import { noweTechnologie2026 } from "./posts/nowe-technologie-2026";
 
-// tu dodasz kolejne importy w przyszłości
+export const blogPosts = [noweTechnologie2026];
 
-export const posts = [post1];
-
+export const getPostBySlug = (slug: string) =>
+  blogPosts.find(post => post.slug === slug);
