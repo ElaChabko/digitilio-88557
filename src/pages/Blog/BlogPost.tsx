@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Mail } from "lucide-react";
 
 import { Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
