@@ -72,13 +72,21 @@ export default function Blog() {
                       : "opacity-70"
                   }`}
                 >
-                  <div className="h-48 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20" />
-                  <img
-                        src={post.image}
-                         alt={post.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
+
+  {/* OBRAZEK */}
+  <img
+    src={post.image}
+    alt={post.title}
+    loading="lazy"
+    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+  />
+
+  {/* GRADIENT / CIEŃ – overlay */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
+
+</div>
+
 
                   <div className="p-6">
                     <span className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
