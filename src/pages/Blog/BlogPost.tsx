@@ -1,24 +1,38 @@
-import { useRouter } from "next/router";
-import { posts } from "@/content/blogs";
+import { useParams } from "react-router-dom";
+import { post1 } from "@/content/blogs";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
-export default function BlogPostPage() {
-  const { query } = useRouter();
-  const slug = query.slug as string;
+export default function BlogPost() {
+  const { slug } = useParams<{ slug: string }>();
 
-  const post = posts.find(p => p.slug === slug);
-
-  if (!post) {
-    return <div style={{ padding: 40 }}>Nie znaleziono artykułu</div>;
+  if (slug !== post1.slug) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1>404 – Artykuł nie istnieje</h1>
+      </div>
+    );
   }
 
   return (
-    <main style={{ maxWidth: 900, margin: "0 auto", padding: 40 }}>
-      <h1>{post.title}</h1>
-      <p>{post.date} · {post.readTime}</p>
+    <div className="min-h-screen">
+      <Navigation />
 
-      <pre style={{ whiteSpace: "pre-wrap", marginTop: 24 }}>
-        {post.content}
-      </pre>
-    </main>
+      <main className="max-w-3xl mx-auto px-4 py-20">
+        <h1 className="text-4xl font-bold mb-4">
+          {post1.title}
+        </h1>
+
+        <p className="text-muted-foreground mb-8">
+          {post1.date} · {post1.readTime}
+        </p>
+
+        <p className="text-lg">
+          {post1.excerpt}
+        </p>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
