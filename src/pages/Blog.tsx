@@ -3,6 +3,8 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 import { post1 } from "@/content/blogs";
 
 
@@ -83,27 +85,28 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {placeholderPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              >
-                {/* Placeholder image area */}
-                <div className="h-48 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"
-                    animate={{
-                      opacity: [0.5, 0.8, 0.5]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
+  <motion.article
+    key={post.id}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+    className="group relative"
+  >
+    {post.slug ? (
+      <Link
+        href={`/blog/${post.slug}`}
+        className="block bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+      >
+        {/* CONTENT */}
+      </Link>
+    ) : (
+      <div className="bg-card border border-border rounded-lg overflow-hidden opacity-80 cursor-default">
+        {/* CONTENT */}
+      </div>
+    )}
+  </motion.article>
+))}
+
                 </div>
 
                 <div className="p-6">
