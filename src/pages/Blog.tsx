@@ -3,18 +3,13 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { post1 } from "@/content/blogs";
+
 
 const Blog = () => {
   // Placeholder blog posts - will be replaced with real content later
   const placeholderPosts = [
-    {
-      id: 1,
-      title: "Wkrótce pojawią się tu wartościowe treści",
-      excerpt: "Pracuję nad przygotowaniem artykułów o social media marketingu, AI i strategiach komunikacji.",
-      date: "Coming soon",
-      readTime: "5 min",
-      category: "Social Media"
-    },
+    post1,
     {
       id: 2,
       title: "Trendy w marketingu 2025",
