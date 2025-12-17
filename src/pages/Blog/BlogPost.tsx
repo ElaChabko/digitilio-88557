@@ -5,6 +5,7 @@ import { Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { getPostBySlug } from "@/content/blogs";
+import { ArticleSection } from "./ArticleSection";
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,12 +32,12 @@ export default function BlogPost() {
       <article className="pt-32 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
 
-          {/* META / HEADER */}
+          {/* HEADER */}
           <motion.header
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-12"
+            className="mb-20"
           >
             <span className="inline-block text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
               {post.category}
@@ -64,21 +65,16 @@ export default function BlogPost() {
             </div>
           </motion.header>
 
-          {/* CONTENT */}
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="
-              prose prose-neutral dark:prose-invert max-w-none
-              prose-h2:mt-12 prose-h2:mb-4
-              prose-h3:mt-8 prose-h3:mb-3
-              prose-p:leading-relaxed
-              prose-ul:my-6
-              prose-li:my-2
-            "
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          {/* CONTENT SECTIONS */}
+          <div className="space-y-24">
+            {post.sections.map((section, index) => (
+              <ArticleSection
+                key={index}
+                title={section.title}
+                html={section.html}
+              />
+            ))}
+          </div>
 
         </div>
       </article>
