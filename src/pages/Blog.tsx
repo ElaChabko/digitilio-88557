@@ -84,28 +84,50 @@ const Blog = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {placeholderPosts.map((post, index) => (
+           {placeholderPosts.map((post, index) => (
   <motion.article
     key={post.id}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="group relative"
   >
-    {post.slug ? (
-      <Link
-        href={`/blog/${post.slug}`}
-        className="block bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+    <Link href={post.slug ? `/blog/${post.slug}` : "#"}>
+      <div
+        className={`bg-card border border-border rounded-lg overflow-hidden transition-all duration-300
+          ${post.slug ? "hover:shadow-lg hover:-translate-y-1" : "opacity-80 cursor-default"}`}
+        onClick={e => {
+          if (!post.slug) e.preventDefault();
+        }}
       >
+        {/* IMAGE */}
+        <div className="h-48 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+        </div>
+
         {/* CONTENT */}
-      </Link>
-    ) : (
-      <div className="bg-card border border-border rounded-lg overflow-hidden opacity-80 cursor-default">
-        {/* CONTENT */}
+        <div className="p-6">
+          <span className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
+            {post.category}
+          </span>
+
+          <h3 className="text-xl font-bold mt-3 mb-3">
+            {post.title}
+          </h3>
+
+          <p className="text-muted-foreground mb-4 line-clamp-3">
+            {post.excerpt}
+          </p>
+
+          <div className="flex gap-4 text-sm text-muted-foreground">
+            <span>{post.date}</span>
+            <span>{post.readTime}</span>
+          </div>
+        </div>
       </div>
-    )}
+    </Link>
   </motion.article>
 ))}
+
 
                 </div>
 
