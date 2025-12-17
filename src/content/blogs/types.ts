@@ -1,3 +1,4 @@
+// src/content/blogs/types.ts
 export type BlogPost = {
   id: number;
   slug: string;
