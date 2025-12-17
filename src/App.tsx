@@ -14,6 +14,9 @@ import { LazyGtag } from "@/components/LazyGtag";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 
+import BlogPost from "./pages/Blog/BlogPost";
+
+
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,8 @@ const App = () => (
           <Route path="/polityka-prywatnosci" element={<PrivacyPolicy />} />
           <Route path="/polityka-cookies" element={<CookiesPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/blog/:slug" element={<BlogPost />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
