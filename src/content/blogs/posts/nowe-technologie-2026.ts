@@ -1,4 +1,6 @@
 import { BlogPost } from "../types";
+import coverImage from "@/assets/blog/nowe-technologie-2026.webp";
+
 
 export const noweTechnologie2026: BlogPost = {
   id: 1,
@@ -10,6 +12,7 @@ export const noweTechnologie2026: BlogPost = {
   date: "2025-12-17",
   readTime: "8 min",
   category: "Social Media",
+   image: coverImage, 
 
   content: [
     {
