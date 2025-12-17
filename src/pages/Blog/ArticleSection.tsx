@@ -57,18 +57,5 @@ export const ArticleSection = ({ section }: Props) => {
         </div>
       </motion.div>
     </section>
-    <motion.div
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button
-                  onClick={openContactForm}
-                  size="lg"
-                  className="text-base md:text-lg lg:text-xl px-6 py-6 md:px-8 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
-                >
-                  <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-                  Napisz do mnie
-                </Button>
-              </motion.div>
   );
 };
