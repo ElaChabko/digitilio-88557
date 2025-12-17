@@ -91,7 +91,7 @@ const Blog = () => {
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
   >
-    <Link href={post.slug ? `/blog/${post.slug}` : "#"}>
+    <Link href={post.slug ? `/Blog/${post.slug}` : "#"}>
       <div
         className={`bg-card border border-border rounded-lg overflow-hidden transition-all duration-300
           ${post.slug ? "hover:shadow-lg hover:-translate-y-1" : "opacity-80 cursor-default"}`}
