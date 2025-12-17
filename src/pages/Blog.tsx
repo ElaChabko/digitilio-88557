@@ -73,6 +73,12 @@ export default function Blog() {
                   }`}
                 >
                   <div className="h-48 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20" />
+                  <img
+                        src={post.image}
+                         alt={post.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
 
                   <div className="p-6">
                     <span className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
