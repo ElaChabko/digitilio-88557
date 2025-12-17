@@ -14,8 +14,8 @@ const Blog = () => {
     blogPosts,
     {
       id: 2,
-      title: "Trendy w marketingu 2025",
-      excerpt: "Czego możesz się spodziewać w nadchodzących miesiącach? Blog wkrótce dostępny.",
+      title: "Trendy w marketingu 2026",
+      excerpt: "Blog wkrótce dostępny.",
       date: "Coming soon",
       readTime: "7 min",
       category: "Marketing"
@@ -23,7 +23,7 @@ const Blog = () => {
     {
       id: 3,
       title: "AI w komunikacji marki",
-      excerpt: "Jak wykorzystać sztuczną inteligencję do budowania silnej marki? Dowiesz się wkrótce.",
+      excerpt: "Dowiesz się wkrótce.",
       date: "Coming soon",
       readTime: "6 min",
       category: "AI"
