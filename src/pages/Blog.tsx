@@ -5,13 +5,13 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-import { post1 } from "@/content/blogs";
+import { blogPosts } from "@/content/blogs";
 
 
 const Blog = () => {
   // Placeholder blog posts - will be replaced with real content later
   const placeholderPosts = [
-    post1,
+    blogPosts,
     {
       id: 2,
       title: "Trendy w marketingu 2025",
