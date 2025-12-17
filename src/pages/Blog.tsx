@@ -2,7 +2,6 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 import { blogPosts } from "@/content/blogs";
 
@@ -17,7 +16,7 @@ type BlogListItem = {
 };
 
 export default function Blog() {
-  const placeholderPosts: BlogListItem[] = [
+  const posts: BlogListItem[] = [
     ...blogPosts,
     {
       id: 9991,
@@ -50,33 +49,31 @@ export default function Blog() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Blog
             </h1>
             <p className="text-lg text-muted-foreground">
-              Wiedza o social media, strategiach komunikacji i AI w biznesie.
+              Wiedza o social media, strategiach komunikacji i AI.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* POSTS GRID */}
+      {/* POSTS */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {placeholderPosts.map((post, index) => {
+            {posts.map((post, index) => {
               const Card = (
                 <div
                   className={`bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 ${
                     post.slug
-                      ? "hover:shadow-lg hover:-translate-y-1"
-                      : "opacity-70 cursor-default"
+                      ? "hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+                      : "opacity-70"
                   }`}
                 >
-                  {/* IMAGE */}
                   <div className="h-48 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20" />
 
-                  {/* CONTENT */}
                   <div className="p-6">
                     <span className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
                       {post.category}
@@ -91,13 +88,13 @@ export default function Blog() {
                     </p>
 
                     <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
+                      <div className="flex gap-4">
+                        <span>
+                          <Calendar className="inline w-4 h-4 mr-1" />
                           {post.date}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
+                        <span>
+                          <Clock className="inline w-4 h-4 mr-1" />
                           {post.readTime}
                         </span>
                       </div>
@@ -118,9 +115,7 @@ export default function Blog() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   {post.slug ? (
-                    <Link href={`/Blog/${post.slug}`} className="block">
-                      {Card}
-                    </Link>
+                    <a href={`/blog/${post.slug}`}>{Card}</a>
                   ) : (
                     Card
                   )}
