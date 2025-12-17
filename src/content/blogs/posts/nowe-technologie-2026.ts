@@ -1,28 +1,20 @@
-export const post = {
+import { BlogPost } from "../types";
+
+export const noweTechnologie2026: BlogPost = {
   id: 1,
-  slug: "nowe-technologie-2026", // potrzebne do routingu
-  title: "Nowe technologie społecznościowe 2026–2027: głos, wirtualne doświadczenia i AI",
-  excerpt: "Zobacz, jak voice search, AI i immersyjne doświadczenia zmieniają marketing.",
-  date: "17 grudnia 2025",
-  readTime: "6 min",
+  slug: "nowe-technologie-spolecznosciowe-2026-2027",
+  title: "Nowe technologie społecznościowe 2026–2027",
+  excerpt:
+    "Zobacz, jak głos, AI i immersyjne doświadczenia zmieniają marketing.",
+  date: "2025-12-17",
+  readTime: "8 min",
   category: "Social Media",
 
-  // Treść posta jako React node
   content: `
 ## Wstęp
-
-Marketing społecznościowy przechodzi transformację dzięki trzem filarom: voice search, wirtualnym doświadczeniom i sztucznej inteligencji.
+Marketing społecznościowy przechodzi transformację...
 
 ## 1. Głos jako interfejs
-
-Użytkownicy coraz częściej używają głosu, by wyszukiwać, sterować aplikacjami i kupować produkty...
-
-## 2. AI i personalizacja
-
-Zaawansowane algorytmy przewidują intencje użytkownika...
-
-## 3. Immersyjne doświadczenia
-
-AR i VR budują nowe sposoby interakcji z markami...
-`
+Użytkownicy coraz częściej...
+`,
 };
