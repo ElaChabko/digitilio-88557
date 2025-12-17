@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
 import { ArticleSection as SectionType } from "@/content/blogs/types";
 
-export const ArticleSection = ({ section }: { section: SectionType }) => {
+type Props = {
+  section?: SectionType;
+};
+
+export const ArticleSection = ({ section }: Props) => {
+  if (!section || !section.blocks || section.blocks.length === 0) {
+    return null;
+  }
+
   return (
     <section className="py-12 sm:py-16 md:py-20">
       <motion.div
@@ -10,9 +18,12 @@ export const ArticleSection = ({ section }: { section: SectionType }) => {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="space-y-8"
       >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-          {section.heading}
-        </h2>
+        {/* heading jest OPCJONALNY */}
+        {section.heading && (
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+            {section.heading}
+          </h2>
+        )}
 
         <div className="space-y-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
           {section.blocks.map((block, i) => {
