@@ -30,18 +30,18 @@ export default function BlogPost() {
       <article className="pt-32 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
 
-          {/* ================= META / HEADER ================= */}
+          {/* HEADER */}
           <motion.header
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-20"
+            transition={{ duration: 0.6 }}
+            className="mb-16"
           >
             <span className="inline-block text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
               {post.category}
             </span>
 
-            <h1 className="mt-5 text-4xl md:text-5xl font-bold leading-tight tracking-tight">
+            <h1 className="mt-5 text-4xl md:text-5xl font-bold leading-tight">
               {post.title}
             </h1>
 
@@ -63,18 +63,12 @@ export default function BlogPost() {
             </div>
           </motion.header>
 
-          {/* ================= CONTENT ================= */}
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="space-y-24">
-              {post.sections?.map((section, index) => (
-                <ArticleSection key={index} section={section} />
-              ))}
-            </div>
-          </motion.section>
+          {/* CONTENT */}
+          <div className="space-y-24">
+            {post.content.map((section, index) => (
+              <ArticleSection key={index} section={section} />
+            ))}
+          </div>
 
         </div>
       </article>
