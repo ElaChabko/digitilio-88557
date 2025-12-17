@@ -13,7 +13,7 @@ export const noweTechnologie2026: BlogPost = {
 
   sections: [
     {
-      title: "Jak przygotować marketing na kolejną falę zmian",
+      heading: "Jak przygotować marketing na kolejną falę zmian",
       html: `
         <p>
           Jeszcze kilka lat temu social media oznaczały głównie feed i komentarze pod postami.
@@ -41,7 +41,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      title: "Głos jako nowy interfejs social mediów",
+      heading: "Głos jako nowy interfejs social mediów",
       html: `
         <p>
           Dla części użytkowników wyszukiwanie głosowe jest dziś tak naturalne jak pisanie.
@@ -93,7 +93,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      title: "Metaverse po hype’ie: w stronę użytecznych doświadczeń",
+      heading: "Metaverse po hype’ie: w stronę użytecznych doświadczeń",
       html: `
         <p>
           Metaverse nie zniknął.
@@ -138,7 +138,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      title: "AI jako silnik interakcji",
+      heading: "AI jako silnik interakcji",
       html: `
         <p>
           AI przestaje być narzędziem „do optymalizacji”.
@@ -188,7 +188,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      title: "Jak przygotować się na spójny omnichannel",
+      heading: "Jak przygotować się na spójny omnichannel",
       html: `
         <p>
           Kluczowe pytanie nie brzmi:
@@ -208,7 +208,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      title: "Podsumowanie",
+      heading: "Podsumowanie",
       html: `
         <p>
           Technologia nie zastąpi strategii.
