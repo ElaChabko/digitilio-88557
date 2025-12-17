@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { getPostBySlug } from "@/content/blogs";
+import { getPostBySlug } from "@/content/blogs/index";
 import { ArticleSection } from "./ArticleSection";
 
 export default function BlogPost() {
