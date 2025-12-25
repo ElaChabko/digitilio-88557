@@ -32,6 +32,22 @@ export default function BlogPost() {
 
       <article className="pt-32 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
+          {/* COVER IMAGE */}
+          {post.image && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-16"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full rounded-3xl object-cover"
+                loading="eager"
+              />
+            </motion.div>
+          )}
 
           {/* HEADER */}
           <motion.header
