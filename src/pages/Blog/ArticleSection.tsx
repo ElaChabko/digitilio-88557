@@ -78,7 +78,7 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
                 );
                 case "subheading":
                 return (
-                  <h3 key={i} className="text-xl sm:text-2xl font-semibold text-foreground mt-10">
+                  <h3 key={i} className="text-base sm:text-lg md:text-xl font-medium text-foreground tracking-tight pt-6">
                     {block.text}
                   </h3>
                 );
