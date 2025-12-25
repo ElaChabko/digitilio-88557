@@ -18,19 +18,17 @@ export const noweTechnologie2026: BlogPost = {
 
   content: [
     {
-          type: "paragraph",
-          text:
-            "W tym artykule przyglądam się trzem obszarom, które w następnych latach będą coraz mocniej się przenikać: wyszukiwaniu głosowemu, doświadczeniom wirtualnym i interaktywnym treściom napędzanym przez AI. Na końcu znajdziesz konkretne wskazówki, jak marketerzy mogą przygotować się na omnichannelowe środowisko, w którym social media, świat wirtualny i sztuczna inteligencja działają jak jeden ekosystem.
-",
-        },
-    {
       heading: "Jak przygotować marketing na kolejną falę zmian",
       blocks: [
+    {
+          type: "paragraph",
+          text:
+            "W tym artykule przyglądam się trzem obszarom, które w następnych latach będą coraz mocniej się przenikać: wyszukiwaniu głosowemu, doświadczeniom wirtualnym i interaktywnym treściom napędzanym przez AI. Na końcu znajdziesz konkretne wskazówki, jak marketerzy mogą przygotować się na omnichannelowe środowisko, w którym social media, świat wirtualny i sztuczna inteligencja działają jak jeden ekosystem.",
+        },
         {
           type: "paragraph",
           text:
-            "Jeszcze kilka lat temu social media kojarzyły się głównie z feedem zdjęć i komentarzami pod postami. Dziś coraz częściej mówimy do urządzeń, zanurzamy się w wirtualnych światach i konsumujemy treści generowane przez sztuczną inteligencję. To nie jest już science fiction, ale codzienność, która w 2025 roku zaczęła realnie zmieniać sposób projektowania doświadczeń marketingowych.
-.",
+            "Jeszcze kilka lat temu social media kojarzyły się głównie z feedem zdjęć i komentarzami pod postami. Dziś coraz częściej mówimy do urządzeń, zanurzamy się w wirtualnych światach i konsumujemy treści generowane przez sztuczną inteligencję. To nie jest już science fiction, ale codzienność, która w 2025 roku zaczęła realnie zmieniać sposób projektowania doświadczeń marketingowych.",
         },
         {
           type: "paragraph",
