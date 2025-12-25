@@ -2,7 +2,8 @@ export type ArticleBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
   | { type: "quote"; text: string }
-  | { type: "image"; src: string; alt?: string; caption?: string };
+  | { type: "image"; src: string; alt?: string; caption?: string }
+  | { type: "subheading"; text: string };
 
 export type ArticleSection = {
   heading: string;
