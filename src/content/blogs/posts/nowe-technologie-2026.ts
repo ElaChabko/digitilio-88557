@@ -84,7 +84,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      heading: "Konwersacyjne SEO",
+      subheading: "Konwersacyjne SEO",
       blocks: [
         {
           type: "paragraph",
@@ -95,7 +95,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      heading: "Połączenie głosu z social mediami",
+      subheading: "Połączenie głosu z social mediami",
       blocks: [
         {
           type: "paragraph",
@@ -111,7 +111,7 @@ export const noweTechnologie2026: BlogPost = {
     },
 
     {
-      heading: "Głos jako element doświadczenia klienta",
+      subheading: "Głos jako element doświadczenia klienta",
       blocks: [
         {
           type: "paragraph",
