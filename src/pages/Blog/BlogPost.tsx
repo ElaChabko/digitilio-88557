@@ -67,7 +67,7 @@ export default function BlogPost() {
           </motion.header>
 
           {/* CONTENT */}
-          <div className="space-y-24">
+          <div className="space-y-16">
             {post.content.map((section, index) => (
               <ArticleSection
                 key={index}
