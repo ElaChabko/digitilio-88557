@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Factory, Laptop, ShoppingCart, Truck, ShieldCheck, Globe } from "lucide-react";
+import { Factory, Laptop, ShoppingCart, Truck, ShieldCheck, Globe, Stethoscope  } from "lucide-react";
 
 const industries = [
   {
@@ -26,6 +26,12 @@ const industries = [
     icon: Globe,
     title: "Projekty międzynarodowe",
     description: "Prowadzę komunikację po polsku i po angielsku, zachowując spójność wizerunku"
+  }
+  
+  {
+    icon:  Stethoscope ,
+    title: "Medycyna i HealthCare",
+    description: "Łączę merytorykę z etycznym marketingiem, budując wizerunek eksperta."
   }
 ];
 
