@@ -3,6 +3,7 @@ import { ArticleSection as SectionType } from "@/content/blogs/types";
 
 type Props = {
   section?: SectionType;
+  level?: 2 | 3 | 4;
 };
 
 export const ArticleSection = ({ section }: Props) => {
@@ -19,11 +20,21 @@ export const ArticleSection = ({ section }: Props) => {
         className="space-y-8"
       >
         {/* heading jest OPCJONALNY */}
-        {section.heading && (
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-            {section.heading}
-          </h2>
-        )}
+        {section.heading && (() => {
+          const HeadingTag = (`h${level ?? 2}` as keyof JSX.IntrinsicElements);
+
+         return (
+            <HeadingTag
+            className={
+                        level === 2
+                        ? "text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight"
+                      : "text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight"
+      }
+    >
+      {section.heading}
+    </HeadingTag>
+  );
+})()}
 
         <div className="space-y-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
           {section.blocks.map((block, i) => {
