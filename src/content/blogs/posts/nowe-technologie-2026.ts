@@ -254,7 +254,7 @@ export const noweTechnologie2026: BlogPost = {
         },
         {          
           type: "paragraph",
-          text: "Jeśli publikujesz wideo produktowe, pomyśl od razu:",
+          text: "Jeśli chcesz realnie korzystać z potencjału AI, głosu i wirtualnych doświadczeń, potrzebujesz:",
             },
         {
           type: "list",
@@ -280,27 +280,6 @@ export const noweTechnologie2026: BlogPost = {
         {
           type: "list",
           items: [
-             "spójnego podejścia do danych (co zbierasz, gdzie, na jakiej podstawie prawnej),",
-            "jasnych KPI, które da się porównać pomiędzy kanałami,",
-            "narzędzi, które pozwolą zrozumieć, że użytkownik, który wszedł do twojego wirtualnego świata, wcześniej trafił na ciebie dzięki wyszukiwaniu głosowemu, a potem wrócił przez social media.",
-          ],
-        },
-        {
-          type: "paragraph",
-          text:
-          "Zamiast produkować „kolejny post”, budujesz mały, zamknięty ekosystem doświadczeń wokół jednego komunikatu.",
-            },
-            {
-          type: "subheading",
-          text: "Dane i pomiar pomiędzy światami",
-        },
-        {          
-          type: "paragraph",
-          text: "Jeśli publikujesz wideo produktowe, pomyśl od razu:",
-            },
-        {
-          type: "list",
-          items: [
             "podstawową znajomość zasad projektowania doświadczeń (UX, service design) w zespole marketingowym,",
             "rozumienie, jak działają modele AI, jakie mają ograniczenia i ryzyka,",
             "zasady współpracy z deweloperami, twórcami 3D, dostawcami rozwiązań głosowych i AR.",
@@ -311,27 +290,7 @@ export const noweTechnologie2026: BlogPost = {
           text:
           "W wielu firmach bardziej opłaca się zacząć od małych pilotaży z partnerami zewnętrznymi niż budować wszystkie kompetencje od zera.",
             },
-            {
-          type: "subheading",
-          text: "Dane i pomiar pomiędzy światami",
-        },
-        {          
-          type: "paragraph",
-          text: "Jeśli publikujesz wideo produktowe, pomyśl od razu:",
-            },
-        {
-          type: "list",
-          items: [
-            "podstawową znajomość zasad projektowania doświadczeń (UX, service design) w zespole marketingowym,",
-            "rozumienie, jak działają modele AI, jakie mają ograniczenia i ryzyka,",
-            "zasady współpracy z deweloperami, twórcami 3D, dostawcami rozwiązań głosowych i AR.",
-          ],
-        },
-        {
-          type: "paragraph",
-          text:
-          "W wielu firmach bardziej opłaca się zacząć od małych pilotaży z partnerami zewnętrznymi niż budować wszystkie kompetencje od zera.",
-            },
+
                {
           type: "subheading",
           text: "Ramy odpowiedzialnego korzystania z AI",
