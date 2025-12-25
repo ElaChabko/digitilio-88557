@@ -6,7 +6,7 @@ type Props = {
   level?: 2 | 3 | 4;
 };
 
-export const ArticleSection = ({ section }: Props) => {
+export const ArticleSection = ({ section, level = 2 }: Props) => {
   if (!section || !section.blocks || section.blocks.length === 0) {
     return null;
   }
