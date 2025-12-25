@@ -70,7 +70,7 @@ export const noweTechnologie2026: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Zmienia się nie tylko kanał, ale i forma zapytań. Zamiast krótkich fraz typu „buty robocze męskie” pojawiają się pytania w stylu:",
+            "Zmienia się nie tylko kanał, ale i forma zapytań. Zamiast krótkich fraz typu „buty robocze męskie" pojawiają się pytania w stylu:",
         },
         {
           type: "quote",
@@ -117,7 +117,7 @@ export const noweTechnologie2026: BlogPost = {
          {          
           type: "paragraph",
           text:
-            "W perspektywie 2026–2027 głos stanie się jednym z równouprawnionych interfejsów. Marketerzy, którzy dziś myślą o treściach pod kątem „jak to zabrzmi, gdy przeczyta to asystent głosowy”, zyskują przewagę konkurencyjną.",
+            "W perspektywie 2026–2027 głos stanie się jednym z równouprawnionych interfejsów. Marketerzy, którzy dziś myślą o treściach pod kątem „jak to zabrzmi, gdy przeczyta to asystent głosowy", zyskują przewagę konkurencyjną.",
             },
       ],
     },
@@ -128,7 +128,7 @@ export const noweTechnologie2026: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Słowo „metaverse” przestało być gorącym buzzwordem, ale to nie znaczy, że zniknęło. Raczej przeszło do fazy „co z tego naprawdę działa”. Marki, które zostały w tym obszarze, zaczęły traktować wirtualne światy jak kolejne środowisko doświadczeń, a nie jednorazową ciekawostkę.",
+            "Słowo „metaverse" przestało być gorącym buzzwordem, ale to nie znaczy, że zniknęło. Raczej przeszło do fazy „co z tego naprawdę działa". Marki, które zostały w tym obszarze, zaczęły traktować wirtualne światy jak kolejne środowisko doświadczeń, a nie jednorazową ciekawostkę.",
         },
         {
           type: "paragraph",
@@ -142,7 +142,7 @@ export const noweTechnologie2026: BlogPost = {
         },
         {
           type: "subheading",
-          text: "Od jednorazowych akcji do stałych „światów marki”,
+          text: "Od jednorazowych akcji do stałych „światów marki",
         },
         {          
           type: "paragraph",
@@ -156,7 +156,7 @@ export const noweTechnologie2026: BlogPost = {
         {          
           type: "paragraph",
           text:
-          "Konferencja, premiera produktu czy targi mogą mieć jednocześnie wersję fizyczną, transmisję live i wirtualny „after” w świecie metaverse. Dla części odbiorców to jedyny realny sposób uczestnictwa w wydarzeniu.",
+          "Konferencja, premiera produktu czy targi mogą mieć jednocześnie wersję fizyczną, transmisję live i wirtualny „after" w świecie metaverse. Dla części odbiorców to jedyny realny sposób uczestnictwa w wydarzeniu.",
             },
          {
           type: "subheading",
@@ -198,7 +198,7 @@ export const noweTechnologie2026: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Ta rewolucja ma jednak także ciemną stronę. Coraz głośniej mówi się o „AI slop”, czyli zalewie niskiej jakości, masowo generowanych treści, które zdobywają wyświetlenia dzięki skali, a nie wartości. To ważny sygnał dla marek: samo użycie AI nie jest przewagą. Przewagą jest umiejętność połączenia automatyzacji z jakością, spójnością i odpowiedzialnością.",
+          text: "Ta rewolucja ma jednak także ciemną stronę. Coraz głośniej mówi się o „AI slop", czyli zalewie niskiej jakości, masowo generowanych treści, które zdobywają wyświetlenia dzięki skali, a nie wartości. To ważny sygnał dla marek: samo użycie AI nie jest przewagą. Przewagą jest umiejętność połączenia automatyzacji z jakością, spójnością i odpowiedzialnością.",
         },
       ],
     },
@@ -208,7 +208,7 @@ export const noweTechnologie2026: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Z perspektywy marketera najważniejsze pytanie brzmi nie „które z tych technologii są modne”, ale „jak zbudować z nich spójne doświadczenie klienta”. Poniżej kilka obszarów, od których warto zacząć.",
+            "Z perspektywy marketera najważniejsze pytanie brzmi nie „które z tych technologii są modne", ale „jak zbudować z nich spójne doświadczenie klienta". Poniżej kilka obszarów, od których warto zacząć.",
         },
         {
           type: "subheading",
@@ -217,7 +217,7 @@ export const noweTechnologie2026: BlogPost = {
         {          
           type: "paragraph",
           text:
-          "Zamiast myślenia: „mamy Facebooka, Instagram, TikToka i może kiedyś metaverse”, zacznij od rozrysowania ścieżki klienta i momentów, w których:",
+          "Zamiast myślenia: „mamy Facebooka, Instagram, TikToka i może kiedyś metaverse", zacznij od rozrysowania ścieżki klienta i momentów, w których:",
             },
         {
           type: "list",
