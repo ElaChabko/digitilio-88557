@@ -117,7 +117,7 @@ export const noweTechnologie2026: BlogPost = {
          {          
           type: "paragraph",
           text:
-            "W perspektywie 2026–2027 głos stanie się jednym z równouprawnionych interfejsów. Marketerzy, którzy dziś myślą o treściach pod kątem „jak to zabrzmi, gdy przeczyta to asystent głosowy", zyskują przewagę konkurencyjną.",
+            "W perspektywie 2026–2027 głos stanie się jednym z równouprawnionych interfejsów. Marketerzy, którzy dziś myślą o treściach pod kątem - jak to zabrzmi, gdy przeczyta to asystent głosowy - zyskują przewagę konkurencyjną.",
             },
       ],
     },
