@@ -44,7 +44,11 @@ export default function BlogPost() {
                 src={post.image}
                 alt={post.title}
                 className=" w-full
-    max-h-[420px]
+    w-full
+    max-h-[260px]
+    sm:max-h-[320px]
+    md:max-h-[380px]
+    lg:max-h-[420px]
     object-cover
     object-center
     rounded-3xl"
