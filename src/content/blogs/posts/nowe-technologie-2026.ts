@@ -115,7 +115,7 @@ export const noweTechnologie2026: BlogPost = {
           "Marki testują asystentów głosowych jako przewodników po ofercie, wsparcie w konfiguracji produktu czy towarzysza zakupów w aplikacji. To już nie tylko SEO, ale część obsługi klienta osadzonej w ekosystemie social.",
             },
          {          
-          type: "paragraph",
+          type: "quote",
           text:
             "W perspektywie 2026–2027 głos stanie się jednym z równouprawnionych interfejsów. Marketerzy, którzy dziś myślą o treściach pod kątem - jak to zabrzmi, gdy przeczyta to asystent głosowy - zyskują przewagę konkurencyjną.",
             },
