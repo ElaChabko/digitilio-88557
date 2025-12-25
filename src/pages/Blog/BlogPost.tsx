@@ -69,7 +69,11 @@ export default function BlogPost() {
           {/* CONTENT */}
           <div className="space-y-24">
             {post.content.map((section, index) => (
-              <ArticleSection key={index} section={section} />
+              <ArticleSection
+                key={index}
+                section={section}
+                level={index === 0 ? 2 : 3}
+               />
             ))}
           </div>
         </div>
