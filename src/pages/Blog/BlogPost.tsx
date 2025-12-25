@@ -43,7 +43,11 @@ export default function BlogPost() {
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full rounded-3xl object-cover"
+                className=" w-full
+    max-h-[420px]
+    object-cover
+    object-center
+    rounded-3xl"
                 loading="eager"
               />
             </motion.div>
