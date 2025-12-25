@@ -156,38 +156,48 @@ export const noweTechnologie2026: BlogPost = {
           text:
             "Post staje się zaproszeniem, nie celem.",
         },
-      ],
-    },
-
-    {
-      heading: "Hybrydowe wydarzenia",
-      blocks: [
         {
+          type: "subheading",
+          text: "Od akcji do środowiska",
+        },
+        {          
           type: "paragraph",
           text:
-            "Premiery, konferencje i targi coraz częściej funkcjonują równolegle: fizycznie, online i wirtualnie.",
+          "Zamiast kampanii na chwilę powstają przestrzenie, które można rozwijać, aktualizować i łączyć z komunikacją w social mediach.",
+            },
+         {          
+          type: "paragraph",
+          text:
+            "Post staje się zaproszeniem, nie celem.",
+            },
+         {
+          type: "subheading",
+          text: "Hybrydowe wydarzenia",
         },
-        {
+        {          
+          type: "paragraph",
+          text:
+          "Premiery, konferencje i targi coraz częściej funkcjonują równolegle: fizycznie, online i wirtualnie.",
+            },
+         {          
           type: "paragraph",
           text:
             "Dla wielu odbiorców to jedyna dostępna forma uczestnictwa.",
+            },
+         {
+          type: "subheading",
+          text: "Nowe typy wartości",
         },
-      ],
-    },
-
-    {
-      heading: "Nowe typy wartości",
-      blocks: [
-        {
+        {          
           type: "paragraph",
           text:
-            "Cyfrowe produkty, wirtualne benefity i zamknięte przestrzenie społecznościowe stają się realnym elementem oferty, szczególnie dla młodszych grup.",
-        },
-        {
+          "Cyfrowe produkty, wirtualne benefity i zamknięte przestrzenie społecznościowe stają się realnym elementem oferty, szczególnie dla młodszych grup.",
+            },
+         {          
           type: "paragraph",
           text:
             "Czy każda marka powinna być w metaverse? Nie. Ale każda powinna rozumieć, kiedy i dla kogo takie doświadczenie ma sens.",
-        },
+            },
       ],
     },
 
