@@ -1,7 +1,8 @@
 export type ArticleBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
-  | { type: "quote"; text: string };
+  | { type: "quote"; text: string }
+  | { type: "image"; src: string; alt?: string; caption?: string };
 
 export type ArticleSection = {
   heading: string;
@@ -16,6 +17,6 @@ export type BlogPost = {
   date: string;
   readTime: string;
   category: string;
-    image: string; 
+  image: string; 
   content: ArticleSection[];
 };
