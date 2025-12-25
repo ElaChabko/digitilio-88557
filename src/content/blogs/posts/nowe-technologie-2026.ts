@@ -79,7 +79,7 @@ export const noweTechnologie2026: BlogPost = {
         },
         {
           type: "paragraph",
-          text: "Dla marek oznacza to konieczność innego myślenia o treściach",
+          text: "Dla marek oznacza to konieczność innego myślenia o treściach.",
         },
         
         {
@@ -166,7 +166,7 @@ export const noweTechnologie2026: BlogPost = {
           text:"Wirtualne odpowiedniki produktów, cyfrowe kolekcje, skiny, NFT czy ekskluzywne przestrzenie społecznościowe stają się dodatkiem do oferty. Dla młodszych grup odbiorców posiadanie cyfrowego dobra bywa równie ważne jak fizycznego.",
             },
          {          
-          type: "paragraph",
+          type: "quote",
           text:"Czy oznacza to, że każda marka powinna budować swój świat w metaverse? Nie. Ale firmy, które pracują z młodymi, cyfrowo zaawansowanymi odbiorcami, powinny przynajmniej rozumieć, jak te światy działają i jakie scenariusze mogą mieć sens dla ich grup docelowych.",
             },
       ],
