@@ -146,8 +146,7 @@ export const noweTechnologie2026: BlogPost = {
         },
         {          
           type: "paragraph",
-          text:
-          "Zamiast krótkich kampanii marki inwestują w przestrzenie, które można rozwijać, aktualizować i łączyć z komunikacją w social mediach. Post w social mediach staje się wtedy bramą do doświadczenia, a nie celem samym w sobie.",
+          text: "Zamiast krótkich kampanii marki inwestują w przestrzenie, które można rozwijać, aktualizować i łączyć z komunikacją w social mediach. Post w social mediach staje się wtedy bramą do doświadczenia, a nie celem samym w sobie.",
             },
          {
           type: "subheading",
@@ -164,13 +163,11 @@ export const noweTechnologie2026: BlogPost = {
         },
         {          
           type: "paragraph",
-          text:
-          "Wirtualne odpowiedniki produktów, cyfrowe kolekcje, skiny, NFT czy ekskluzywne przestrzenie społecznościowe stają się dodatkiem do oferty. Dla młodszych grup odbiorców posiadanie cyfrowego dobra bywa równie ważne jak fizycznego.",
+          text:"Wirtualne odpowiedniki produktów, cyfrowe kolekcje, skiny, NFT czy ekskluzywne przestrzenie społecznościowe stają się dodatkiem do oferty. Dla młodszych grup odbiorców posiadanie cyfrowego dobra bywa równie ważne jak fizycznego.",
             },
          {          
           type: "paragraph",
-          text:
-            "Czy oznacza to, że każda marka powinna budować swój świat w metaverse? Nie. Ale firmy, które pracują z młodymi, cyfrowo zaawansowanymi odbiorcami, powinny przynajmniej rozumieć, jak te światy działają i jakie scenariusze mogą mieć sens dla ich grup docelowych.",
+          text:"Czy oznacza to, że każda marka powinna budować swój świat w metaverse? Nie. Ale firmy, które pracują z młodymi, cyfrowo zaawansowanymi odbiorcami, powinny przynajmniej rozumieć, jak te światy działają i jakie scenariusze mogą mieć sens dla ich grup docelowych.",
             },
       ],
     },
@@ -180,13 +177,11 @@ export const noweTechnologie2026: BlogPost = {
       blocks: [
         {
           type: "paragraph",
-          text:
-            "Równolegle z rozwojem głosu i świata wirtualnego rośnie znaczenie interaktywnej treści napędzanej przez AI. Przewidywania na 2026 rok mówią wprost, że interaktywne formaty w social mediach będą coraz bardziej zaawansowane, personalizowane w czasie rzeczywistym i oparte na danych o zachowaniu użytkowników.",
+          text:"Równolegle z rozwojem głosu i świata wirtualnego rośnie znaczenie interaktywnej treści napędzanej przez AI. Przewidywania na 2026 rok mówią wprost, że interaktywne formaty w social mediach będą coraz bardziej zaawansowane, personalizowane w czasie rzeczywistym i oparte na danych o zachowaniu użytkowników.",
         },
         {
           type: "paragraph",
-          text:
-            "To już nie tylko ankiety na Instagramie, ale między innymi:",
+          text:"To już nie tylko ankiety na Instagramie, ale między innymi:",
         },
         {
           type: "list",
@@ -216,8 +211,7 @@ export const noweTechnologie2026: BlogPost = {
         },
         {          
           type: "paragraph",
-          text:
-          "Zamiast myślenia: mamy Facebooka, Instagram, TikToka i może kiedyś metaverse - zacznij od rozrysowania ścieżki klienta i momentów, w których:",
+          text:"Zamiast myślenia: mamy Facebooka, Instagram, TikToka i może kiedyś metaverse - zacznij od rozrysowania ścieżki klienta i momentów, w których:",
             },
         {
           type: "list",
@@ -233,28 +227,155 @@ export const noweTechnologie2026: BlogPost = {
           text:
           "Dopiero potem przypisz do tych punktów konkretne kanały i technologie.",
             },
+         {
+          type: "subheading",
+          text: "Treści projektowane jako doświadczenie, nie jako pojedynczy post",
+        },
+        {          
+          type: "paragraph",
+          text:"Jeśli publikujesz wideo produktowe, pomyśl od razu:",
+            },
+        {
+          type: "list",
+          items: [
+            "jak fragment tego wideo może zostać przerobiony w AI-generowany klip do Reelsów lub Vibes,",
+            "jakie pytania użytkownicy mogą zadać głosowo po obejrzeniu materiału,",
+            "czy istnieje wirtualne doświadczenie, które może być naturalnym kolejnym krokiem, na przykład prosty konfigurator 3D albo wirtualna przestrzeń do przetestowania produktu.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text:
+          "Zamiast produkować „kolejny post”, budujesz mały, zamknięty ekosystem doświadczeń wokół jednego komunikatu.",
+            },
+            {
+          type: "subheading",
+          text: "Dane i pomiar pomiędzy światami",
+        },
+        {          
+          type: "paragraph",
+          text: "Jeśli publikujesz wideo produktowe, pomyśl od razu:",
+            },
+        {
+          type: "list",
+          items: [
+            "spójnego podejścia do danych (co zbierasz, gdzie, na jakiej podstawie prawnej),",
+            "jasnych KPI, które da się porównać pomiędzy kanałami,",
+            "narzędzi, które pozwolą zrozumieć, że użytkownik, który wszedł do twojego wirtualnego świata, wcześniej trafił na ciebie dzięki wyszukiwaniu głosowemu, a potem wrócił przez social media.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text:
+          "Bez tego łatwo wpaść w pułapkę „fajnych, innowacyjnych akcji” bez realnego wpływu na biznes.",
+            },
+        {
+          type: "subheading",
+          text: "Kompetencje i procesy, nie tylko narzędzia",
+        },
+        {          
+          type: "paragraph",
+          text:"Nowe technologie społecznościowe wymagają innych kompetencji niż klasyczne prowadzenie profilu w social mediach. Warto zadbać o:",
+            },
+        {
+          type: "list",
+          items: [
+             "spójnego podejścia do danych (co zbierasz, gdzie, na jakiej podstawie prawnej),",
+            "jasnych KPI, które da się porównać pomiędzy kanałami,",
+            "narzędzi, które pozwolą zrozumieć, że użytkownik, który wszedł do twojego wirtualnego świata, wcześniej trafił na ciebie dzięki wyszukiwaniu głosowemu, a potem wrócił przez social media.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text:
+          "Zamiast produkować „kolejny post”, budujesz mały, zamknięty ekosystem doświadczeń wokół jednego komunikatu.",
+            },
+            {
+          type: "subheading",
+          text: "Dane i pomiar pomiędzy światami",
+        },
+        {          
+          type: "paragraph",
+          text: "Jeśli publikujesz wideo produktowe, pomyśl od razu:",
+            },
+        {
+          type: "list",
+          items: [
+            "podstawową znajomość zasad projektowania doświadczeń (UX, service design) w zespole marketingowym,",
+            "rozumienie, jak działają modele AI, jakie mają ograniczenia i ryzyka,",
+            "zasady współpracy z deweloperami, twórcami 3D, dostawcami rozwiązań głosowych i AR.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text:
+          "W wielu firmach bardziej opłaca się zacząć od małych pilotaży z partnerami zewnętrznymi niż budować wszystkie kompetencje od zera.",
+            },
+            {
+          type: "subheading",
+          text: "Dane i pomiar pomiędzy światami",
+        },
+        {          
+          type: "paragraph",
+          text: "Jeśli publikujesz wideo produktowe, pomyśl od razu:",
+            },
+        {
+          type: "list",
+          items: [
+            "podstawową znajomość zasad projektowania doświadczeń (UX, service design) w zespole marketingowym,",
+            "rozumienie, jak działają modele AI, jakie mają ograniczenia i ryzyka,",
+            "zasady współpracy z deweloperami, twórcami 3D, dostawcami rozwiązań głosowych i AR.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text:
+          "W wielu firmach bardziej opłaca się zacząć od małych pilotaży z partnerami zewnętrznymi niż budować wszystkie kompetencje od zera.",
+            },
+               {
+          type: "subheading",
+          text: "Ramy odpowiedzialnego korzystania z AI",
+        },
+        {          
+          type: "paragraph",
+          text:"Im mocniej opierasz komunikację na AI, tym ważniejsze staje się:",
+            },
+        {
+          type: "list",
+          items: [
+            "jasne oznaczanie treści generowanych lub współtworzonych przez AI,",
+            "unikanie manipulacyjnych form personalizacji, które mogą naruszać autonomię użytkownika,",
+            "dbałość o prywatność i transparentne informowanie, jak wykorzystywane są dane.",
+          ],
+        },
+        {
+          type: "paragraph",
+          text:
+          "To nie tylko kwestia wizerunku, ale też przygotowania na regulacje, które w kolejnych latach będą coraz bardziej szczegółowe.tu.",
+            }
+        
         ],
       },
 
         
 
     {
-      heading: "Podsumowanie",
+      heading: "Podsumowanie: technologia nie zastąpi strategii",
       blocks: [
         {
           type: "paragraph",
           text:
-            "Technologia nie zastąpi strategii. Może ją tylko wzmocnić lub całkowicie rozmyć.",
+            "Wyszukiwanie głosowe, metaverse i interaktywne treści oparte na AI tworzą razem nową warstwę doświadczeń społecznościowych. Dla jednych marek będzie to naturalny kierunek rozwoju, dla innych jedynie inspiracja do przemyślenia własnej obecności w digitalu.",
         },
         {
           type: "paragraph",
           text:
-            "Być o krok przed innymi nie oznacza być wszędzie. Oznacza rozumieć, które zmiany realnie wpływają na doświadczenie klienta i świadomie je projektować.",
+            "Być o krok przed innymi nie oznacza „być wszędzie”. Oznacza rozumieć, które technologie rzeczywiście przesuwają granice doświadczenia twoich klientów, i świadomie włączać je w strategię.",
         },
         {
           type: "paragraph",
           text:
-            "Jeśli dziś myślisz o komunikacji nie tylko przez feed, ale także przez głos, wirtualne środowiska i AI, w 2026 roku nie będziesz reagować na trendy. Będziesz je współtworzyć.",
+            "Jeśli dzisiaj zaczniesz projektować komunikację nie tylko pod feed, ale także pod głos, wirtualne światy i AI, w 2026 roku twoja marka nie będzie „gonić trendów”. Będzie je współtworzyć.",
         },
         {
           type: "paragraph",
