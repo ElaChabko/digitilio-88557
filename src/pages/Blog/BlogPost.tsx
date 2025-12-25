@@ -45,10 +45,9 @@ export default function BlogPost() {
                 alt={post.title}
                 className=" w-full
     w-full
-    max-h-[260px]
-    sm:max-h-[320px]
-    md:max-h-[380px]
-    lg:max-h-[420px]
+    max-h-[220px]
+    sm:max-h-[260px]
+    md:max-h-[300px]
     object-cover
     object-center
     rounded-3xl"
