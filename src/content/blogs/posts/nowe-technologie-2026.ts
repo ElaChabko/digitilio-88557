@@ -1,5 +1,7 @@
 import { BlogPost } from "../types";
 import coverImage from "@/assets/blog/nowe-technologie-2026.webp";
+import diageramImage "@/assets/blog/Digitilio blog grafiki 1.webp;
+
 
 
 export const noweTechnologie2026: BlogPost = {
@@ -39,12 +41,9 @@ export const noweTechnologie2026: BlogPost = {
             "W kolejnych latach trzy obszary będą coraz mocniej się przenikać:",
         },
         {
-          type: "list",
-          items: [
-            "wyszukiwanie głosowe",
-            "doświadczenia wirtualne",
-            "interaktywne treści napędzane przez AI",
-          ],
+          type: "image",
+          src: diagramImage,
+          alt: "Trzy przenikające się obszary zmian: wyszukiwanie głosowe, doświadczenia wirtualne i interaktywne treści AI",
         },
         {
           type: "paragraph",
