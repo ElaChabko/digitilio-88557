@@ -233,6 +233,8 @@ export const noweTechnologie2026: BlogPost = {
           text:
           "Dopiero potem przypisz do tych punktów konkretne kanały i technologie.",
             },
+        ],
+      },
 
         
 
