@@ -90,43 +90,35 @@ export const noweTechnologie2026: BlogPost = {
           text:
           "Treści muszą odpowiadać na realne pytania, formułowane naturalnym językiem. Zyskują sekcje FAQ, nagłówki w formie pytań i dłuższe frazy kontekstowe.",
             },
-
-
-
-
-        
-      ],
-      subheading: "Połączenie głosu z social mediami",
-    },
-
-    {
-      blocks: [
-        {
+         {
+          type: "subheading",
+          text: "Połączenie głosu z social mediami",
+        },
+        {          
           type: "paragraph",
           text:
-            "Social media coraz częściej są pierwszym punktem styku z marką.",
-        },
-        {
+          "Social media coraz częściej są pierwszym punktem styku z marką.",
+            },
+         {          
           type: "paragraph",
           text:
             "Fragmenty postów, live’ów czy podcastów mogą trafiać do wyników wyszukiwania głosowego, o ile są dobrze opisane i logicznie powiązane z profilem marki.",
-        },
-      ],
-    },
-
-    {
-      subheading: "Głos jako element doświadczenia klienta",
-      blocks: [
+            },
         {
+          type: "subheading",
+          text: "Asystenci głosowi przestają być dodatkiem. Stają się częścią obsługi klienta, konfiguratorów produktów i aplikacji zakupowych.",
+        },
+        {          
           type: "paragraph",
           text:
-            "Asystenci głosowi przestają być dodatkiem. Stają się częścią obsługi klienta, konfiguratorów produktów i aplikacji zakupowych.",
-        },
-        {
+          "Social media coraz częściej są pierwszym punktem styku z marką.",
+            },
+         {          
           type: "paragraph",
           text:
             "W latach 2026–2027 głos nie będzie „nowością”. Będzie jednym z podstawowych interfejsów.",
-        },
+            },
+
       ],
     },
 
