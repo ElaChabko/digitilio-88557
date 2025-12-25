@@ -140,22 +140,6 @@ export const noweTechnologie2026: BlogPost = {
           text:
             "Przykłady? Nike z Nikelandem czy Gucci z cyfrowymi kolekcjami i przestrzeniami.",
         },
-      ],
-    },
-
-    {
-      heading: "Od akcji do środowiska",
-      blocks: [
-        {
-          type: "paragraph",
-          text:
-            "Zamiast kampanii na chwilę powstają przestrzenie, które można rozwijać, aktualizować i łączyć z komunikacją w social mediach.",
-        },
-        {
-          type: "paragraph",
-          text:
-            "Post staje się zaproszeniem, nie celem.",
-        },
         {
           type: "subheading",
           text: "Od akcji do środowiska",
