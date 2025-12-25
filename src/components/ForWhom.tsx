@@ -26,8 +26,8 @@ const industries = [
     icon: Globe,
     title: "Projekty międzynarodowe",
     description: "Prowadzę komunikację po polsku i po angielsku, zachowując spójność wizerunku"
-  }
-  
+  },
+
   {
     icon:  Stethoscope ,
     title: "Medycyna i HealthCare",
