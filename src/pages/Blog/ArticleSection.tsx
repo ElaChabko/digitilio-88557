@@ -61,21 +61,28 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
                   </blockquote>
                 );
                 case "image":
-  return (
-    <figure key={i} className="my-8">
-      <img
-        src={block.src}
-        alt={block.alt ?? ""}
-        className="w-full rounded-2xl border border-border/50"
-        loading="lazy"
-      />
-      {block.caption && (
-        <figcaption className="mt-3 text-sm text-muted-foreground">
-          {block.caption}
-        </figcaption>
-      )}
-    </figure>
-  );
+                return (
+                  <figure key={i} className="my-8">
+                    <img
+                      src={block.src}
+                      alt={block.alt ?? ""}
+                      className="w-full rounded-2xl border border-border/50"
+                      loading="lazy"
+                    />
+                    {block.caption && (
+                      <figcaption className="mt-3 text-sm text-muted-foreground">
+                        {block.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                );
+                case "subheading":
+                return (
+                  <h3 key={i} className="text-xl sm:text-2xl font-semibold text-foreground mt-10">
+                    {block.text}
+                  </h3>
+                );
+
 
 
               default:
