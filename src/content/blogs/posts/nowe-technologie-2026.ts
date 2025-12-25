@@ -82,7 +82,11 @@ export const noweTechnologie2026: BlogPost = {
         },
         
         {
-          subheading: "Konwersacyjne SEO",
+          type: "subheading",
+          text: "Konwersacyjne SEO",
+        },
+        {          
+          type: "paragraph",
           text:
           "Treści muszą odpowiadać na realne pytania, formułowane naturalnym językiem. Zyskują sekcje FAQ, nagłówki w formie pytań i dłuższe frazy kontekstowe.",
             },
