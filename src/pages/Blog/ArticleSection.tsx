@@ -49,6 +49,23 @@ export const ArticleSection = ({ section }: Props) => {
                     {block.text}
                   </blockquote>
                 );
+                case "image":
+  return (
+    <figure key={i} className="my-8">
+      <img
+        src={block.src}
+        alt={block.alt ?? ""}
+        className="w-full rounded-2xl border border-border/50"
+        loading="lazy"
+      />
+      {block.caption && (
+        <figcaption className="mt-3 text-sm text-muted-foreground">
+          {block.caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+
 
               default:
                 return null;
