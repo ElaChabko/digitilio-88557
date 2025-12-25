@@ -43,7 +43,7 @@ export const ForWhom = () => {
     }} />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl">
           <motion.h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight" initial={{
           opacity: 0,
           y: 30
