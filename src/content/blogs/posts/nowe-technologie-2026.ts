@@ -1,6 +1,6 @@
 import { BlogPost } from "../types";
 import coverImage from "@/assets/blog/nowe-technologie-2026.webp";
-import diageramImage from "@/assets/blog/Digitilio blog grafiki 1.webp;
+import diagramImage from "@/assets/blog/Digitilio blog grafiki 1.webp";
 
 
 
