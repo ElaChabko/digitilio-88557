@@ -89,8 +89,7 @@ export const noweTechnologie2026: BlogPost = {
         {          
           type: "paragraph",
           text:
-          "Treści muszą odpowiadać na pytania zadawane pełnymi zdaniami. Zyskują dłuższe, naturalne frazy, sekcje FAQ, a także nagłówki sformułowane jak realne pytania użytkowników.
-",
+          "Treści muszą odpowiadać na pytania zadawane pełnymi zdaniami. Zyskują dłuższe, naturalne frazy, sekcje FAQ, a także nagłówki sformułowane jak realne pytania użytkowników.",
             },
          {
           type: "subheading",
