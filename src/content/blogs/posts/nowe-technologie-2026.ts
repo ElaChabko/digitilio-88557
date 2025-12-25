@@ -80,22 +80,22 @@ export const noweTechnologie2026: BlogPost = {
           type: "paragraph",
           text: "To wymusza inną konstrukcję treści.",
         },
-      ],
-    },
-
-    {
-      subheading: "Konwersacyjne SEO",
-      blocks: [
+        
         {
-          type: "paragraph",
+          subheading: "Konwersacyjne SEO",
           text:
-            "Treści muszą odpowiadać na realne pytania, formułowane naturalnym językiem. Zyskują sekcje FAQ, nagłówki w formie pytań i dłuższe frazy kontekstowe.",
-        },
+          "Treści muszą odpowiadać na realne pytania, formułowane naturalnym językiem. Zyskują sekcje FAQ, nagłówki w formie pytań i dłuższe frazy kontekstowe.",
+            },
+
+
+
+
+        
       ],
+      subheading: "Połączenie głosu z social mediami",
     },
 
     {
-      subheading: "Połączenie głosu z social mediami",
       blocks: [
         {
           type: "paragraph",
