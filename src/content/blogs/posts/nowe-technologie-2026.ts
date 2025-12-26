@@ -14,7 +14,7 @@ export const noweTechnologie2026: BlogPost = {
   title:
     "Nowe technologie społecznościowe 2026–2027: głos, wirtualne doświadczenia i AI",
   excerpt:
-    "Jak przygotować marketing na kolejną falę zmian i projektować doświadczenia wykraczające poza feed.",
+    "Jak przygotować się na kolejną falę zmian i projektować doświadczenia wykraczające poza feed.",
   date: "2025-12-17",
   readTime: "8 min",
   category: "Social Media",
