@@ -2,6 +2,8 @@ import { BlogPost } from "../types";
 import coverImage from "@/assets/blog/nowe-technologie-2026.webp";
 import diagramImage from "@/assets/blog/Digitilio blog grafiki 1.webp";
 import examplesImage from "@/assets/blog/Digitilio blog grafiki 2.webp";
+import CustomerJurneyMapImage from "@/assets/blog/Digitilio blog grafiki 3.webp";
+
 
 
 
@@ -228,6 +230,11 @@ export const noweTechnologie2026: BlogPost = {
             "może wejść do wirtualnego świata, showroomu czy eventu,",
             "otrzymuje spersonalizowane rekomendacje generowane przez AI.",
           ],
+        },
+        {
+          type: "image",
+          src: CustomerJurneyMapImage,
+          alt: "Mapa podróży klienta",
         },
         {
           type: "paragraph",
