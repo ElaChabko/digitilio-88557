@@ -75,13 +75,13 @@ export default function BlogPost() {
                 src={post.image}
                 alt={post.title}
                 className=" w-full
-    w-full
-    max-h-[220px]
-    sm:max-h-[260px]
-    md:max-h-[300px]
-    object-cover
-    object-center
-    rounded-3xl"
+                w-full
+                max-h-[220px]
+                sm:max-h-[260px]
+                md:max-h-[300px]
+                object-cover
+                object-center
+                rounded-3xl"
                 loading="eager"
               />
             </motion.div>
@@ -95,7 +95,7 @@ export default function BlogPost() {
 
           
           {/* CONTENT */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {post.content.map((section, index) => (
               <ArticleSection
                 key={index}
