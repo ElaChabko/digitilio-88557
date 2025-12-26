@@ -12,7 +12,7 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
   }
 
   return (
-    <section className="py-6 sm:py-8 md:py-5">
+    <section className="py-4 sm:py-6 md:py-3">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
