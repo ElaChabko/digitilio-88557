@@ -1,6 +1,8 @@
 import { BlogPost } from "../types";
 import coverImage from "@/assets/blog/nowe-technologie-2026.webp";
 import diagramImage from "@/assets/blog/Digitilio blog grafiki 1.webp";
+import examplesImage from "@/assets/blog/Digitilio blog grafiki 2.webp";
+
 
 
 
@@ -134,6 +136,11 @@ export const noweTechnologie2026: BlogPost = {
           type: "paragraph",
           text:
             "Przykłady marek, które konsekwentnie rozwijają swoje obecności, to między innymi Nike z Nikelandem na Robloxie czy Gucci z wirtualnymi przestrzeniami i kolekcjami cyfrowych produktów (kubbco.com). Inne brandy tworzą własne showroomy, gry, eventy czy programy lojalnościowe osadzone w wirtualnym świecie.",
+        },
+        {
+          type: "image",
+          src: examplesImage,
+          alt: "Przykłady marek wykorzytsujących Metaverse",
         },
         {
           type: "paragraph",
