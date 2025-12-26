@@ -61,6 +61,8 @@ export default function BlogPost() {
             </div>
           </motion.header>
 
+
+
           {/* COVER IMAGE */}
           {post.image && (
             <motion.div
@@ -89,8 +91,11 @@ export default function BlogPost() {
                 {post.excerpt}
               </p>
             )}
+          <hr className="my-10 border-t border-muted-foreground/20" />
+
+          
           {/* CONTENT */}
-          <div className="space-y-12">
+          <div className="space-y-8">
             {post.content.map((section, index) => (
               <ArticleSection
                 key={index}
