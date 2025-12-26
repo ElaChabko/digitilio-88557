@@ -104,7 +104,7 @@ export default function BlogPost() {
   initial={{ opacity: 0, y: 24 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.5 }}
-  className="mt-16 flex justify-center"
+  className="mt-10 flex justify-center"
 >
   <Button
     asChild
