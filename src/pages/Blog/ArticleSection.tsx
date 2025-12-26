@@ -52,13 +52,22 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
             />
             );
               case "list":
-                return (
-                  <ul key={i} className="list-disc pl-6 space-y-2">
-                    {block.items.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                );
+  return (
+    <ul key={i} className="list-disc pl-6 space-y-2">
+      {block.items.map((item, idx) => (
+        <li
+          key={idx}
+          dangerouslySetInnerHTML={{
+            __html: item.replace(
+              /\*\*(.*?)\*\*/g,
+              "<strong>$1</strong>"
+            ),
+          }}
+        />
+      ))}
+    </ul>
+  );
+
 
               case "quote":
                 return (
@@ -87,7 +96,7 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
                 );
                 case "subheading":
                 return (
-                  <h3 key={i} className="text-base sm:text-lg md:text-xl font-medium text-foreground tracking-tight pt-6">
+                  <h3 key={i} className="text-base sm:text-lg md:text-xl font-semibold text-foreground tracking-tight pt-6">
                     {block.text}
                   </h3>
                 );
