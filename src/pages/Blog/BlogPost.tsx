@@ -48,24 +48,6 @@ export default function BlogPost() {
               {post.title}
             </h1>
 
-            {post.excerpt && (
-              <p className="mt-4 text-lg text-muted-foreground">
-                {post.excerpt}
-              </p>
-            )}
-
-            <div className="mt-6 flex gap-6 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                {post.date}
-              </span>
-              <span className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                {post.readTime}
-              </span>
-            </div>
-          </motion.header>
-
           {/* COVER IMAGE */}
           {post.image && (
             <motion.div
@@ -89,6 +71,24 @@ export default function BlogPost() {
               />
             </motion.div>
           )}
+            {post.excerpt && (
+              <p className="mt-4 text-lg text-muted-foreground">
+                {post.excerpt}
+              </p>
+            )}
+
+            <div className="mt-6 flex gap-6 text-sm text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                {post.date}
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="w-4 h-4" />
+                {post.readTime}
+              </span>
+            </div>
+          </motion.header>
+
           {/* CONTENT */}
           <div className="space-y-16">
             {post.content.map((section, index) => (
