@@ -36,7 +36,7 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
   );
 })()}
 
-        <div className="space-y-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+        <div className="space-y-2 text-base sm:text-lg text-muted-foreground leading-relaxed">
           {section.blocks.map((block, i) => {
             switch (block.type) {
               case "paragraph":
