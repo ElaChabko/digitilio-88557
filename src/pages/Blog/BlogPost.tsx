@@ -67,7 +67,7 @@ export default function BlogPost() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-16"
+              className="mb-8"
             >
               <img
                 src={post.image}
@@ -90,7 +90,7 @@ export default function BlogPost() {
               </p>
             )}
           {/* CONTENT */}
-          <div className="space-y-16">
+          <div className="space-y-12">
             {post.content.map((section, index) => (
               <ArticleSection
                 key={index}
