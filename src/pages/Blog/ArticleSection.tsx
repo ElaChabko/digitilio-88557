@@ -40,8 +40,17 @@ export const ArticleSection = ({ section, level = 2 }: Props) => {
           {section.blocks.map((block, i) => {
             switch (block.type) {
               case "paragraph":
-                return <p key={i}>{block.text}</p>;
-
+                return (
+                  <p
+                  key={i}
+                  dangerouslySetInnerHTML={{
+                  __html: block.text.replace(
+                  /\*\*(.*?)\*\*/g,
+                  "<strong>$1</strong>"
+                ),
+              }}
+            />
+            );
               case "list":
                 return (
                   <ul key={i} className="list-disc pl-6 space-y-2">
