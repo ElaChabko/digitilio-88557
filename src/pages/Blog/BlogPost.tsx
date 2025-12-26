@@ -38,7 +38,7 @@ export default function BlogPost() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-16"
+            className="mt-8 mb-6"
           >
             <span className="inline-block text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
               {post.category}
