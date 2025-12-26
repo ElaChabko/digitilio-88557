@@ -32,29 +32,6 @@ export default function BlogPost() {
 
       <article className="pt-32 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
-          {/* COVER IMAGE */}
-          {post.image && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-16"
-            >
-              <img
-                src={post.image}
-                alt={post.title}
-                className=" w-full
-    w-full
-    max-h-[220px]
-    sm:max-h-[260px]
-    md:max-h-[300px]
-    object-cover
-    object-center
-    rounded-3xl"
-                loading="eager"
-              />
-            </motion.div>
-          )}
 
           {/* HEADER */}
           <motion.header
@@ -89,6 +66,29 @@ export default function BlogPost() {
             </div>
           </motion.header>
 
+          {/* COVER IMAGE */}
+          {post.image && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-16"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className=" w-full
+    w-full
+    max-h-[220px]
+    sm:max-h-[260px]
+    md:max-h-[300px]
+    object-cover
+    object-center
+    rounded-3xl"
+                loading="eager"
+              />
+            </motion.div>
+          )}
           {/* CONTENT */}
           <div className="space-y-16">
             {post.content.map((section, index) => (
