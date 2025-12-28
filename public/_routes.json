@@ -1,8 +1,19 @@
 {
   "version": 1,
   "include": ["/*"],
-  "exclude": ["/assets/*", "/favicon.png", "/robots.txt", "/sitemap.xml"],
+  "exclude": [
+    "/assets/*",
+    "/og/*",
+    "/share/*",
+    "/favicon.ico",
+    "/favicon.png",
+    "/robots.txt",
+    "/sitemap.xml"
+  ],
   "routes": [
-    { "src": "/.*", "dest": "/index.html" }
+    {
+      "src": "^/(?!assets/|og/|share/|favicon\\.ico$|favicon\\.png$|robots\\.txt$|sitemap\\.xml$).*",
+      "dest": "/index.html"
+    }
   ]
 }
