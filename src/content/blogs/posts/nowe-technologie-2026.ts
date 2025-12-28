@@ -10,7 +10,7 @@ import CustomerJurneyMapImage from "@/assets/blog/Digitilio blog grafiki 3.webp"
 
 export const noweTechnologie2026: BlogPost = {
   id: 1,
-  slug: "nowe-technologie-spolecznosciowe-2026-2027",
+  slug: "nowe-technologie-spolecznosciowe na lata 2026-2027",
   title:
     "Nowe technologie społecznościowe 2026–2027: głos, wirtualne doświadczenia i AI",
   excerpt:
