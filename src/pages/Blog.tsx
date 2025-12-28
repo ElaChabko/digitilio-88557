@@ -18,22 +18,22 @@ type BlogListItem = {
 export default function Blog() {
   const posts: BlogListItem[] = [
     ...blogPosts,
-    {
-      id: 9991,
-      title: "Trendy w marketingu 2026",
-      excerpt: "Blog wkrótce dostępny.",
-      date: "Coming soon",
-      readTime: "7 min",
-      category: "Marketing",
-    },
-    {
-      id: 9992,
-      title: "AI w komunikacji marki",
-      excerpt: "Dowiesz się wkrótce.",
-      date: "Coming soon",
-      readTime: "6 min",
-      category: "AI",
-    },
+    // {
+    //   id: 9991,
+    //   title: "Trendy w marketingu 2026",
+    //   excerpt: "Blog wkrótce dostępny.",
+    //   date: "Coming soon",
+    //   readTime: "7 min",
+    //   category: "Marketing",
+    // },
+    // {
+    //   id: 9992,
+    //   title: "AI w komunikacji marki",
+    //   excerpt: "Dowiesz się wkrótce.",
+    //   date: "Coming soon",
+    //   readTime: "6 min",
+    //   category: "AI",
+    // },
   ];
 
   return (
