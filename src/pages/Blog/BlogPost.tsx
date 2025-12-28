@@ -14,6 +14,10 @@ export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : null;
 
+  console.log("BlogPost slug:", slug);
+console.log("BlogPost post:", post);
+
+
   if (!post) {
     return (
       <div className="min-h-screen flex flex-col">
