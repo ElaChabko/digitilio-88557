@@ -81,7 +81,7 @@ export const About = () => {
             transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* TEXT BLOCK */}
-            <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
+            <div className="space-y-3 sm:space-y-4 md:space-y-4 lg:space-y-5">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
