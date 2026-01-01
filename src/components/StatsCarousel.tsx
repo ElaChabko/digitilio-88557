@@ -25,7 +25,7 @@ export const StatsCarousel = ({
       items ?? [
         { value: "20+", label: "marek", hint: "projekty B2B i B2C" },
         { value: "25+", label: "przeprowadzonych szkoleń", hint: "online i stacjonarnie" },
-        { value: "8+", label: "lat doświadczeń", hint: "strategia i content" },
+        { value: "8+", label: "lat doświadczenia", hint: "strategia i content" },
       ],
     [items]
   );
@@ -97,11 +97,5 @@ export const StatsCarousel = ({
           </div>
         </div>
       </div>
-
-      {/* opcjonalnie: mały dopisek pod boxem */}
-      <div className="mt-2 text-xs text-slate-400">
-        Dane orientacyjne. Dopasuję je do aktualnego portfolio.
-      </div>
-    </div>
   );
 };
