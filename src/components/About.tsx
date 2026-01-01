@@ -145,6 +145,8 @@ export const About = () => {
           }} className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground font-normal leading-relaxed">
               Chcesz, by Twoja marka była widoczna i przynosiła wyniki? Zacznijmy działać.
             </motion.p>
+            <div className="pt-2 sm:pt-3 space-y-4 sm:space-y-5 max-w-2xl">
+
             <a href="mailto:elachabko@digitilio.pl" className="inline-flex">
   <Button
     size="lg"
@@ -169,7 +171,8 @@ export const About = () => {
     ]}
   />
 </motion.div>
-
+              
+ </div>
           </motion.div>
         </div>
       </div>
