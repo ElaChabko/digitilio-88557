@@ -30,15 +30,16 @@ export const StatsCarousel = ({
     [items]
   );
 
-  const [index, setIndex] = useState(0);
+ const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (data.length <= 1) return;
-    const t = setInterval(() => {
+
+    const t = window.setInterval(() => {
       setIndex((prev) => (prev + 1) % data.length);
     }, intervalMs);
 
-    return () => clearInterval(t);
+    return () => window.clearInterval(t);
   }, [data.length, intervalMs]);
 
   const current = data[index];
@@ -65,22 +66,24 @@ export const StatsCarousel = ({
                   transition={{ duration: prefersReducedMotion ? 0 : 0.35 }}
                 >
                   <div className="flex items-baseline gap-3">
-                    <div className="text-3xl md:text-4xl font-semibold tracking-tight text-[#3E2C6D]">
+                    <div className="text-3xl md:text-4xl font-semibold tracking-tight text-primary">
                       {current.value}
                     </div>
-                    <div className="text-base md:text-lg font-medium text-slate-900">
+                    <div className="text-base md:text-lg font-medium text-foreground">
                       {current.label}
                     </div>
                   </div>
+
                   {current.hint ? (
-                    <div className="mt-1 text-sm text-slate-500">{current.hint}</div>
+                    <div className="mt-1 text-sm text-muted-foreground">
+                      {current.hint}
+                    </div>
                   ) : null}
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Dots */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               {data.map((_, i) => (
                 <button
                   key={i}
@@ -89,7 +92,9 @@ export const StatsCarousel = ({
                   onClick={() => setIndex(i)}
                   className={[
                     "h-2.5 rounded-full transition-all",
-                    i === index ? "w-7 bg-[#3E2C6D]" : "w-2.5 bg-slate-300 hover:bg-slate-400",
+                    i === index
+                      ? "w-7 bg-primary"
+                      : "w-2.5 bg-muted hover:bg-muted-foreground/40",
                   ].join(" ")}
                 />
               ))}
@@ -97,5 +102,6 @@ export const StatsCarousel = ({
           </div>
         </div>
       </div>
+    </div>
   );
 };
