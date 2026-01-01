@@ -128,7 +128,7 @@ export const About = () => {
             </div>
 
             {/* CTA BLOCK: pushed down to align with carousel */}
-            <div className="mt-6 md:mt-auto pt-2">
+            <div className="mt-6 md:mt-auto md:pt-10">
               <a href="mailto:elachabko@digitilio.pl" className="inline-flex">
                 <Button
                   size="lg"
