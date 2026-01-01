@@ -165,7 +165,7 @@ export const About = () => {
     items={[
       { value: "20+", label: "marek", hint: "projekty B2B i B2C" },
       { value: "25+", label: "przeprowadzonych szkoleń", hint: "online i stacjonarnie" },
-      { value: "8+", label: "lat doświadczeń", hint: "strategia i content" },
+      { value: "8+", label: "lat doświadczenia", hint: "strategia i content" },
     ]}
   />
 </motion.div>
