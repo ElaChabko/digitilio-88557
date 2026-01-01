@@ -145,7 +145,7 @@ export const About = () => {
           }} className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground font-normal leading-relaxed">
               Chcesz, by Twoja marka była widoczna i przynosiła wyniki? Zacznijmy działać.
             </motion.p>
-            <a href="mailto:elachabko@digitilio.pl" className="inline-block">
+            <a href="mailto:elachabko@digitilio.pl" className="inline-flex">
   <Button
     size="lg"
     className="text-base md:text-lg lg:text-xl px-6 py-6 md:px-8 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
@@ -158,7 +158,7 @@ export const About = () => {
   initial={{ opacity: 0, y: 16 }}
   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
   transition={{ duration: 0.5, delay: 0.75 }}
-  className="pt-4 sm:pt-5"
+  className="mt-4 sm:mt-5 max-w-xl"
 >
   <StatsCarousel
     intervalMs={3500}
