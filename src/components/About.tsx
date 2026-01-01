@@ -4,6 +4,9 @@ import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { StatsCarousel } from "@/components/StatsCarousel";
+
+
 export const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -151,6 +154,22 @@ export const About = () => {
     Napisz do mnie
   </Button>
 </a>
+            <motion.div
+  initial={{ opacity: 0, y: 16 }}
+  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+  transition={{ duration: 0.5, delay: 0.75 }}
+  className="pt-4 sm:pt-5"
+>
+  <StatsCarousel
+    intervalMs={3500}
+    items={[
+      { value: "20+", label: "marek", hint: "projekty B2B i B2C" },
+      { value: "25+", label: "przeprowadzonych szkoleń", hint: "online i stacjonarnie" },
+      { value: "8+", label: "lat doświadczeń", hint: "strategia i content" },
+    ]}
+  />
+</motion.div>
+
           </motion.div>
         </div>
       </div>
