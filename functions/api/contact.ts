@@ -1,7 +1,9 @@
 export const onRequestGet: PagesFunction = async () => {
-  return new Response("OK /api/contact (function active)", { status: 200 });
+  return new Response(JSON.stringify({ ok: true, route: "/api/contact" }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 };
-
 
 type Env = {
   RESEND_API_KEY: string;
@@ -11,10 +13,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   try {
     const contentType = request.headers.get("content-type") || "";
     if (!contentType.includes("application/json")) {
-      return new Response(JSON.stringify({ ok: false, error: "Invalid content type" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ ok: false, error: "Invalid content type" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const { name, email, message, company, website } = (await request.json()) as {
@@ -28,22 +33,29 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     // honeypot: boty wypełniają ukryte pole
     if (website) {
       return new Response(JSON.stringify({ ok: true }), {
+        status: 200,
         headers: { "Content-Type": "application/json" },
       });
     }
 
     if (!email || !message) {
-      return new Response(JSON.stringify({ ok: false, error: "Missing required fields" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ ok: false, error: "Missing required fields" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     if (!env.RESEND_API_KEY) {
-      return new Response(JSON.stringify({ ok: false, error: "Missing RESEND_API_KEY" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ ok: false, error: "Missing RESEND_API_KEY" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const safeName = (name || "Unknown").trim();
@@ -85,19 +97,30 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
     if (!resp.ok) {
       const errText = await resp.text().catch(() => "");
-      return new Response(JSON.stringify({ ok: false, error: "Resend error", details: errText }), {
-        status: 502,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ ok: false, error: "Resend error", details: errText }),
+        {
+          status: 502,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     return new Response(JSON.stringify({ ok: true }), {
+      status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch {
-    return new Response(JSON.stringify({ ok: false, error: "Server error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+  } catch (err) {
+    return new Response(
+      JSON.stringify({
+        ok: false,
+        error: "Server error",
+        details: err instanceof Error ? err.message : String(err),
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 };
