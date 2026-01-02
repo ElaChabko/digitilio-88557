@@ -133,6 +133,21 @@ export const ContactForm = ({ onSuccess }: Props) => {
           </span>
         )}
       </div>
+      <p className="text-xs text-muted-foreground leading-relaxed mt-4">
+  Administratorem Twoich danych osobowych jest Digitilio. Dane przetwarzane są
+  wyłącznie w celu obsługi zapytania przesłanego przez formularz kontaktowy.
+  Podanie danych jest dobrowolne, ale niezbędne do udzielenia odpowiedzi.{" "}
+  <a
+    href="https://digitilio.pl/polityka-prywatnosci"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="underline hover:text-foreground"
+  >
+    Polityka prywatności
+  </a>
+  .
+</p>
+
     </form>
   );
 };
