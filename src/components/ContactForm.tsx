@@ -29,7 +29,6 @@ export const ContactForm = ({ onSuccess }: Props) => {
       website: String(form.get("website") || ""), // honeypot
     };
 
-    // Minimalna walidacja po stronie UI (backend i tak waliduje)
     if (!payload.email || !payload.message) {
       setStatus("err");
       setLoading(false);
@@ -39,32 +38,33 @@ export const ContactForm = ({ onSuccess }: Props) => {
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
         body: JSON.stringify(payload),
       });
 
-      // Cloudflare/Fetch czasem oddaje pusty body lub HTML -> czytamy jako text
-      const text = await res.text().catch(() => "");
+      // Zawsze czytamy jako tekst (Cloudflare/edge potrafi oddać puste lub HTML)
+      const raw = await res.text().catch(() => "");
       let data: any = null;
 
       try {
-        data = text ? JSON.parse(text) : null;
+        data = raw ? JSON.parse(raw) : null;
       } catch {
         data = null;
       }
 
-      // Sukces tylko gdy:
-      // - HTTP 2xx
-      // - oraz { ok: true }
-      if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || data?.details || "Send failed");
-      }
+      // Log diagnostyczny – możesz potem usunąć
+      // console.log("CONTACT:", { status: res.status, ok: res.ok, raw, data });
+
+      // Jeśli HTTP ok, to traktujemy jako sukces,
+      // chyba że backend jawnie zwrócił { ok: false }
+      if (!res.ok) throw new Error("HTTP error");
+      if (data?.ok === false) throw new Error("Backend ok=false");
 
       setStatus("ok");
       formEl.reset();
-
-      // Jeśli chcesz zamykać modal dopiero po krótkiej chwili,
-      // możesz dać setTimeout. Na razie zamykamy od razu.
       onSuccess?.();
     } catch {
       setStatus("err");
@@ -75,7 +75,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      {/* honeypot - ukryte pole antyspam (ukryte wizualnie, ale w DOM) */}
+      {/* honeypot */}
       <div className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden">
         <label>
           Website
