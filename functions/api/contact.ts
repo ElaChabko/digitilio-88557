@@ -1,3 +1,8 @@
+export const onRequestGet: PagesFunction = async () => {
+  return new Response("OK /api/contact (function active)", { status: 200 });
+};
+
+
 type Env = {
   RESEND_API_KEY: string;
 };
