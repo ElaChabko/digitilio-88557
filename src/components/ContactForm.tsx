@@ -5,16 +5,21 @@ type Props = {
   onSuccess?: () => void;
 };
 
+type Status = null | "ok" | "err";
+
 export const ContactForm = ({ onSuccess }: Props) => {
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<null | "ok" | "err">(null);
+  const [status, setStatus] = useState<Status>(null);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+
     setLoading(true);
     setStatus(null);
 
-    const form = new FormData(e.currentTarget);
+    const formEl = e.currentTarget;
+    const form = new FormData(formEl);
 
     const payload = {
       name: String(form.get("name") || "").trim(),
@@ -24,6 +29,13 @@ export const ContactForm = ({ onSuccess }: Props) => {
       website: String(form.get("website") || ""), // honeypot
     };
 
+    // Minimalna walidacja po stronie UI (backend i tak waliduje)
+    if (!payload.email || !payload.message) {
+      setStatus("err");
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -31,12 +43,28 @@ export const ContactForm = ({ onSuccess }: Props) => {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json().catch(() => null);
+      // Cloudflare/Fetch czasem oddaje pusty body lub HTML -> czytamy jako text
+      const text = await res.text().catch(() => "");
+      let data: any = null;
 
-      if (!res.ok || !data?.ok) throw new Error("Send failed");
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch {
+        data = null;
+      }
+
+      // Sukces tylko gdy:
+      // - HTTP 2xx
+      // - oraz { ok: true }
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || data?.details || "Send failed");
+      }
 
       setStatus("ok");
-      e.currentTarget.reset();
+      formEl.reset();
+
+      // Jeśli chcesz zamykać modal dopiero po krótkiej chwili,
+      // możesz dać setTimeout. Na razie zamykamy od razu.
       onSuccess?.();
     } catch {
       setStatus("err");
@@ -47,14 +75,19 @@ export const ContactForm = ({ onSuccess }: Props) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      {/* honeypot - ukryte pole antyspam */}
-      <input
-        type="text"
-        name="website"
-        tabIndex={-1}
-        autoComplete="off"
-        className="hidden"
-      />
+      {/* honeypot - ukryte pole antyspam (ukryte wizualnie, ale w DOM) */}
+      <div className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden">
+        <label>
+          Website
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+        </label>
+      </div>
 
       <input
         name="name"
