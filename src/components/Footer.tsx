@@ -17,6 +17,7 @@ export const Footer = () => {
             © {currentYear} Digitilio. Wszystkie prawa zastrzeżone.
           </p>
           <div className="mt-6 flex gap-3 items-center opacity-60">
+ <div className="mt-6 flex gap-4 items-center">
   <a
     href="https://verify.skilljar.com/c/6cwoxoibxdxa"
     target="_blank"
@@ -26,7 +27,7 @@ export const Footer = () => {
     <img
       src={badgeContent}
       alt="LinkedIn Marketing Labs – Content & Creative Design"
-      className="h-6 w-auto hover:opacity-100 transition"
+      className="h-9 w-auto opacity-80 hover:opacity-100 transition"
       loading="lazy"
     />
   </a>
@@ -40,7 +41,7 @@ export const Footer = () => {
     <img
       src={badgeFundamentals}
       alt="LinkedIn Marketing Labs – Marketing Fundamentals"
-      className="h-6 w-auto hover:opacity-100 transition"
+      className="h-9 w-auto opacity-80 hover:opacity-100 transition"
       loading="lazy"
     />
   </a>
@@ -54,11 +55,12 @@ export const Footer = () => {
     <img
       src={badgeStrategy}
       alt="LinkedIn Marketing Labs – Marketing Strategy"
-      className="h-6 w-auto hover:opacity-100 transition"
+      className="h-9 w-auto opacity-80 hover:opacity-100 transition"
       loading="lazy"
     />
   </a>
 </div>
+
 
           <div className="flex items-center gap-6">
             <a 
