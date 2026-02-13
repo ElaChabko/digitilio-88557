@@ -24,7 +24,7 @@ export const Footer = () => {
               <img
                 src={badgeContent}
                 alt="LinkedIn Marketing Labs – Content & Creative Design"
-                className="h-14 w-auto opacity-90 hover:opacity-100 transition"
+                className="h-18 w-auto opacity-90 hover:opacity-100 transition"
                 loading="lazy"
               />
             </a>
@@ -38,7 +38,7 @@ export const Footer = () => {
               <img
                 src={badgeFundamentals}
                 alt="LinkedIn Marketing Labs – Marketing Fundamentals"
-                className="h-14 w-auto opacity-90 hover:opacity-100 transition"
+                className="h-18 w-auto opacity-90 hover:opacity-100 transition"
                 loading="lazy"
               />
             </a>
@@ -52,7 +52,7 @@ export const Footer = () => {
               <img
                 src={badgeStrategy}
                 alt="LinkedIn Marketing Labs – Marketing Strategy"
-                className="h-14 w-auto opacity-90 hover:opacity-100 transition"
+                className="h-18 w-auto opacity-90 hover:opacity-100 transition"
                 loading="lazy"
               />
             </a>
