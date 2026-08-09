@@ -13,3 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
+Sitemap: https://digitilio.pl/sitemap.xml
