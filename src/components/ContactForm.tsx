@@ -60,12 +60,18 @@ export const ContactForm = ({ onSuccess }: Props) => {
 
       // Jeśli HTTP ok, to traktujemy jako sukces,
       // chyba że backend jawnie zwrócił { ok: false }
-      if (!res.ok) throw new Error("HTTP error");
-      if (data?.ok === false) throw new Error("Backend ok=false");
+if (!res.ok) throw new Error("HTTP error");
+if (data?.ok === false) throw new Error("Backend ok=false");
 
-      setStatus("ok");
-      formEl.reset();
-      onSuccess?.();
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  event: "lead_form_success",
+  form_name: "contact",
+});
+
+setStatus("ok");
+formEl.reset();
+onSuccess?.();
     } catch {
       setStatus("err");
     } finally {
