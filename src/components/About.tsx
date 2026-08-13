@@ -1,9 +1,9 @@
 import aboutPhoto from "@/assets/about-photo-new.webp";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { ArrowRight } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const stats = [
   {
@@ -24,13 +24,7 @@ const stats = [
 ];
 
 export const About = () => {
-  const ref = useRef(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
-
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-80px",
-  });
 
   return (
     <section
@@ -43,27 +37,23 @@ export const About = () => {
         aria-hidden="true"
       />
 
-      <div
-        ref={ref}
-        className="container relative z-10 mx-auto px-4 sm:px-6"
-      >
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 xl:gap-20">
-            
-            {/* LEFT: zdjęcie + proof */}
-            <motion.div
-              initial={{ opacity: 0, x: -32 }}
-              animate={
-                isInView
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 0, x: -32 }
-              }
-              transition={{
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
+
+            {/* LEWA STRONA */}
+            <div>
+              {/* Zdjęcie */}
+              <motion.div
+                initial={{ opacity: 0, x: -60, scale: 0.96 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  duration: 0.75,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="relative overflow-hidden rounded-2xl sm:rounded-3xl"
+              >
                 <img
                   src={aboutPhoto}
                   alt="Ela Chabko - Digitilio"
@@ -74,71 +64,84 @@ export const About = () => {
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-transparent" />
-              </div>
+              </motion.div>
 
               {/* Statystyki */}
-              <motion.div
-                className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3"
-                initial={{ opacity: 0, y: 16 }}
-                animate={
-                  isInView
-                    ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 16 }
-                }
-                transition={{
-                  duration: 0.5,
-                  delay: 0.25,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                {stats.map((stat) => (
-                  <div
+              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {stats.map((stat, index) => (
+                  <motion.div
                     key={stat.label}
-                    className="bg-background px-5 py-6 sm:px-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    whileHover={{ y: -4 }}
+                    className="rounded-2xl border border-border/70 bg-background/80 p-5 shadow-sm transition-shadow duration-300 hover:shadow-md"
                   >
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold tracking-tight text-primary">
-                        {stat.value}
-                      </span>
+                    <span className="block text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+                      {stat.value}
+                    </span>
 
-                      <span className="text-sm font-medium text-foreground">
-                        {stat.label}
-                      </span>
-                    </div>
+                    <span className="mt-1 block text-sm font-semibold text-foreground sm:text-base">
+                      {stat.label}
+                    </span>
 
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    <span className="mt-3 block text-sm leading-relaxed text-muted-foreground">
                       {stat.hint}
-                    </p>
-                  </div>
+                    </span>
+                  </motion.div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            {/* RIGHT: treść */}
+            {/* PRAWA STRONA */}
             <motion.div
-              className="flex flex-col justify-center"
-              initial={{ opacity: 0, x: 32 }}
-              animate={
-                isInView
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 0, x: 32 }
-              }
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{
-                duration: 0.6,
+                duration: 0.75,
                 delay: 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
+              className="flex flex-col justify-center"
             >
-              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+                className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base"
+              >
                 O mnie
-              </p>
+              </motion.p>
 
-              <h2 className="max-w-2xl text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              <motion.h2
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="max-w-2xl text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl"
+              >
                 Marketing znam z kilku stron stołu.
-              </h2>
+              </motion.h2>
 
               <div className="mt-8 max-w-2xl space-y-5">
-                <p className="text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+                <motion.p
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                  className="text-lg font-light leading-relaxed text-muted-foreground sm:text-xl"
+                >
                   Nazywam się{" "}
                   <strong className="font-semibold text-foreground">
                     Ela Chabko
@@ -148,34 +151,65 @@ export const About = () => {
                   tylko przez pryzmat tego, jak brzmią na prezentacji, ale
                   również tego, czy firma rzeczywiście będzie w stanie je
                   wykorzystać.
-                </p>
+                </motion.p>
 
-                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <motion.p
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.22 }}
+                  className="text-base leading-relaxed text-muted-foreground sm:text-lg"
+                >
                   Pracuję przy strategii, komunikacji, social mediach, content
                   marketingu, kampaniach i analityce. Korzystam również z AI i
                   automatyzacji, ale tylko tam, gdzie pomagają usprawnić proces,
                   poprawić jakość pracy albo podejmować decyzje na lepszej
                   podstawie.
-                </p>
+                </motion.p>
 
-                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                <motion.p
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.29 }}
+                  className="text-base leading-relaxed text-muted-foreground sm:text-lg"
+                >
                   Nie interesuje mnie dokładanie kolejnych działań tylko po to,
                   żeby marketing wyglądał na bardziej aktywny. Znacznie
                   ważniejsze jest dla mnie ustalenie, co naprawdę ma sens dla
                   konkretnej firmy, jej Klientów, budżetu i możliwości zespołu.
-                </p>
+                </motion.p>
               </div>
 
               {/* Statement */}
-              <div className="mt-8 border-l-2 border-primary/40 pl-5 sm:pl-6">
+              <motion.div
+                initial={{ opacity: 0, x: 25 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.55,
+                  delay: 0.35,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mt-8 border-l-2 border-primary/40 pl-5 sm:pl-6"
+              >
                 <p className="max-w-xl text-lg font-medium leading-relaxed text-foreground sm:text-xl">
                   Strategia powinna pomagać podejmować decyzje, a nie tylko
                   dobrze wyglądać w prezentacji.
                 </p>
-              </div>
+              </motion.div>
 
               {/* CTA */}
-              <div className="mt-9">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.42,
+                }}
+                className="mt-9"
+              >
                 <Button
                   type="button"
                   size="lg"
@@ -185,7 +219,7 @@ export const About = () => {
                   Porozmawiajmy o Twoim marketingu
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
