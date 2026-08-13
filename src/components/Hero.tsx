@@ -140,11 +140,12 @@ export const Hero = () => {
                 Mniej przypadkowych działań.
               </motion.span>
               <motion.span 
-                className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                className="block overflow-visible"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
+               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent box-decoration-clone">
                Więcej dobrych decyzji marketingowych.
               </motion.span>
               <motion.span 
