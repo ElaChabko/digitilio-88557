@@ -130,7 +130,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight leading-[1.08]">
               <motion.span 
                 className="block"
                 initial={{ opacity: 0, x: -20 }}
@@ -162,7 +162,7 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              Pomagam firmom uporządkować marketing, wybrać priorytety i przełożyć strategię na działania, które da się realnie wdrożyć.
+              Pomagam firmom uporządkować marketing, wybrać priorytety i przełożyć strategię na działania, które da się optymalnie wdrożyć.
             </motion.p>
             
             <motion.div 
