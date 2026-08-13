@@ -145,7 +145,7 @@ export const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                AI.
+               Więcej dobrych decyzji marketingowych.
               </motion.span>
               <motion.span 
                 className="block"
@@ -153,7 +153,6 @@ export const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                Emocje.
               </motion.span>
             </h1>
             
@@ -163,7 +162,7 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
+              Pomagam firmom uporządkować marketing, wybrać priorytety i przełożyć strategię na działania, które da się realnie wdrożyć.
             </motion.p>
             
             <motion.div 
