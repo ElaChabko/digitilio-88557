@@ -1,108 +1,199 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2, Lightbulb, Rocket, Target, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import benefitsBg from "@/assets/benefits-bg.jpg";
 
 const benefits = [
   {
-    icon: Target,
-    title: "Widoczność, która się opłaca",
-    description: "Treści zaprojektowane tak, by przyciągały i konwertowały.",
+    title: "Klarowność",
+    description:
+      "Wiesz, gdzie naprawdę leży problem i które działania mają największe znaczenie dla dalszego marketingu.",
   },
   {
-    icon: Rocket,
-    title: "Oszczędność czasu",
-    description: "Automatyzacje i planowanie, które działają za Ciebie.",
+    title: "Priorytety",
+    description:
+      "Masz jasność, czym warto zająć się teraz, co może poczekać i z czego lepiej świadomie zrezygnować.",
   },
   {
-    icon: TrendingUp,
-    title: "Większe zasięgi, lepsze wyniki",
-    description: "Realne dane, nie obietnice.",
+    title: "Plan do wdrożenia",
+    description:
+      "Rekomendacje uwzględniają realny budżet, czas i możliwości zespołu, zamiast kończyć się na prezentacji pełnej dobrych pomysłów.",
   },
   {
-    icon: Lightbulb,
-    title: "Partner, nie wykonawca",
-    description: "Transparentna współpraca i stały kontakt.",
+    title: "Lepsze decyzje",
+    description:
+      "Kolejne działania oceniasz na podstawie celu, danych i kontekstu biznesowego, a nie wyłącznie intuicji albo aktualnego trendu.",
   },
 ];
 
 export const Benefits = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="benefits" className="py-12 sm:py-16 md:py-20 lg:py-32 relative overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0" style={{ opacity: 0.25 }}>
-        <img 
-          src={benefitsBg} 
-          alt="" 
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background/85" />
-      </div>
-      
-      {/* Decorative light - static */}
-      <div 
-        className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl z-[1] opacity-15 hidden md:block"
+    <section
+      id="benefits"
+      className="relative overflow-hidden bg-[#17131f] py-20 sm:py-24 lg:py-28"
+    >
+      {/* Subtelne światło */}
+      <motion.div
+        className="pointer-events-none absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-primary/20 blur-[140px]"
+        animate={{
+          x: [0, 35, 0],
+          y: [0, 25, 0],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        aria-hidden="true"
       />
-      
-      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
-        <motion.div 
-          className="mb-10 sm:mb-12 md:mb-16 lg:mb-24 max-w-5xl"
-          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-5 sm:mb-6 md:mb-8 tracking-tight leading-tight">
-            Co<br />zyskujesz?
-          </h2>
-          <motion.p 
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Współpraca ze mną to nie tylko profesjonalna obsługa social mediów, ale przede
-            wszystkim realne korzyści dla Twojego biznesu.
-          </motion.p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-16 max-w-6xl">
-          {benefits.map((benefit, index) => (
+
+      <motion.div
+        className="pointer-events-none absolute -bottom-48 right-0 h-[520px] w-[520px] rounded-full bg-accent/10 blur-[140px]"
+        animate={{
+          x: [0, -30, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 16,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtelny grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, white 1px, transparent 1px),
+            linear-gradient(to bottom, white 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+
+          {/* Intro */}
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
             <motion.div
-              key={index}
-              className="group relative space-y-3 sm:space-y-4 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:hover:bg-gradient-to-br md:hover:from-secondary/30 md:hover:to-accent/10 md:hover:shadow-lg"
-              style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              whileHover={{ y: -8 }}
-              transition={{ 
-                duration: 0.5,
-                delay: index * 0.1,
-                ease: [0.22, 1, 0.36, 1]
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.65,
+                ease: [0.22, 1, 0.36, 1],
               }}
             >
-              {/* Gradient border effect - simplified */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 md:group-hover:opacity-70 blur transition-opacity duration-300 -z-10" />
-              
-              <div 
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-300 md:group-hover:bg-gradient-to-br md:group-hover:from-primary md:group-hover:to-accent md:group-hover:shadow-lg"
-              >
-                <benefit.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary transition-colors duration-300 md:group-hover:text-white" />
-              </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary leading-tight">
-                {benefit.title}
-              </h3>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
-                {benefit.description}
+              <p className="mb-4 text-sm font-medium tracking-wide text-primary-foreground/55 sm:text-base">
+                Co zyskujesz?
+              </p>
+
+              <h2 className="max-w-xl text-3xl font-bold leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl">
+                Po współpracy wiesz, co robić dalej.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.65,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="lg:pt-8"
+            >
+              <p className="max-w-2xl text-lg font-light leading-relaxed text-white/65 sm:text-xl">
+                Efektem współpracy nie ma być dłuższa lista działań.
+                Potrzebujesz wiedzieć, co jest priorytetem, dlaczego właśnie to
+                i jak przełożyć decyzje na codzienną pracę marketingu.
               </p>
             </motion.div>
-          ))}
+          </div>
+
+          {/* Korzyści */}
+          <div className="mt-16 border-t border-white/10 lg:mt-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+              {benefits.map((benefit, index) => (
+                <motion.article
+                  key={benefit.title}
+                  initial={{
+                    opacity: 0,
+                    y: 36,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.3,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className={[
+                    "group relative border-b border-white/10 px-0 py-9 md:px-8 md:py-10 lg:min-h-[300px] lg:border-b-0 lg:px-8 lg:py-12",
+                    index === 0 ? "md:pl-0 lg:pl-0" : "",
+                    index !== benefits.length - 1
+                      ? "lg:border-r lg:border-white/10"
+                      : "",
+                  ].join(" ")}
+                >
+                  {/* Mały akcent */}
+                  <motion.div
+                    className="mb-8 h-[3px] w-10 rounded-full bg-primary"
+                    whileHover={{ width: 72 }}
+                    transition={{
+                      duration: 0.35,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  />
+
+                  <h3 className="text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl">
+                    {benefit.title}
+                  </h3>
+
+                  <p className="mt-5 max-w-sm text-base leading-relaxed text-white/60 sm:text-lg">
+                    {benefit.description}
+                  </p>
+
+                  {/* Hover glow */}
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    style={{
+                      background:
+                        "radial-gradient(circle at 50% 25%, hsl(var(--primary) / 0.10), transparent 60%)",
+                    }}
+                    aria-hidden="true"
+                  />
+                </motion.article>
+              ))}
+            </div>
+          </div>
+
+          {/* Pointa */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              duration: 0.65,
+              delay: 0.25,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mt-12 border-t border-white/10 pt-9 lg:mt-16 lg:pt-10"
+          >
+            <p className="max-w-4xl text-xl font-medium leading-snug tracking-tight text-white sm:text-2xl">
+              Dobry marketing nie polega na robieniu wszystkiego. Część wartości
+              polega właśnie na tym, żeby wiedzieć, czego nie robić.
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>
