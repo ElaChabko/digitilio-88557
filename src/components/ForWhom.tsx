@@ -2,28 +2,36 @@ import { motion } from "framer-motion";
 
 const situations = [
   {
-    number: "01",
+    eyebrow: "Porządkowanie",
     title: "Marketing działa po kawałku",
     description:
-      "Social media, kampanie, strona i content są prowadzone przez różne osoby lub dostawców, ale brakuje jednego kierunku i jasnych priorytetów.",
+      "Social media, kampanie, strona i content są prowadzone, ale brakuje jednego kierunku i jasnej hierarchii priorytetów.",
+    className: "md:col-span-2",
+    initial: { opacity: 0, x: -40, y: 20 },
   },
   {
-    number: "02",
-    title: "Firma stoi przed ważną zmianą",
+    eyebrow: "Zmiana",
+    title: "Firma jest przed ważnym ruchem",
     description:
-      "Przed Wami nowa strona, zmiana komunikacji, rozwój social media, wejście w kolejny kanał albo uporządkowanie sposobu pozyskiwania Klientów.",
+      "Nowa strona, zmiana komunikacji, kolejny kanał albo przebudowa sposobu pozyskiwania Klientów wymagają szerszej decyzji niż wybór kolejnego narzędzia.",
+    className: "md:col-span-1",
+    initial: { opacity: 0, x: 40, y: 20 },
   },
   {
-    number: "03",
+    eyebrow: "Perspektywa",
     title: "Brakuje senioralnego spojrzenia",
     description:
-      "Marketing jest już prowadzony, ale potrzebujesz kogoś, kto spojrzy na działania szerzej, połączy dane z kontekstem biznesowym i pomoże ocenić, co naprawdę ma sens.",
+      "Zespół działa, ale potrzebuje kogoś, kto połączy dane, kontekst biznesowy i wykonanie, a następnie pomoże ocenić, co rzeczywiście ma sens.",
+    className: "md:col-span-1",
+    initial: { opacity: 0, x: -40, y: 20 },
   },
   {
-    number: "04",
-    title: "Potrzebujesz partnera do decyzji",
+    eyebrow: "Decyzje",
+    title: "Potrzebujesz partnera do myślenia",
     description:
-      "Nie szukasz kolejnej osoby do realizowania listy zadań. Potrzebujesz wsparcia w ustalaniu kierunku, ocenie pomysłów i podejmowaniu kolejnych decyzji marketingowych.",
+      "Nie kolejnej osoby do realizowania listy zadań, ale kogoś, z kim można zweryfikować kierunek, priorytety i kolejne decyzje marketingowe.",
+    className: "md:col-span-2",
+    initial: { opacity: 0, x: 40, y: 20 },
   },
 ];
 
@@ -33,107 +41,161 @@ export const ForWhom = () => {
       id="for-whom"
       className="relative overflow-hidden bg-background py-20 sm:py-24 lg:py-28"
     >
-      {/* Subtelny akcent tła */}
-      <div
-        className="pointer-events-none absolute -left-40 top-1/3 h-[480px] w-[480px] rounded-full bg-accent/[0.07] blur-[120px]"
+      {/* Tło */}
+      <motion.div
+        className="pointer-events-none absolute -left-40 top-10 h-[500px] w-[500px] rounded-full bg-primary/[0.07] blur-[120px]"
+        animate={{
+          x: [0, 40, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        aria-hidden="true"
+      />
+
+      <motion.div
+        className="pointer-events-none absolute -bottom-48 right-0 h-[520px] w-[520px] rounded-full bg-accent/[0.07] blur-[120px]"
+        animate={{
+          x: [0, -30, 0],
+          y: [0, -20, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
         aria-hidden="true"
       />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 xl:gap-24">
 
-            {/* LEFT */}
-            <motion.div
-              initial={{ opacity: 0, x: -32 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{
-                duration: 0.65,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="lg:sticky lg:top-28 lg:self-start"
-            >
-              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
-                Dla kogo?
-              </p>
+          {/* Intro */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              duration: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mx-auto mb-12 max-w-4xl text-center sm:mb-16 lg:mb-20"
+          >
+            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+              Dla kogo?
+            </p>
 
-              <h2 className="max-w-xl text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                Najczęściej pracuję z firmami, które nie zaczynają marketingu od zera.
-              </h2>
+            <h2 className="text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              Nie musisz zaczynać marketingu od zera, żeby potrzebować nowego
+              kierunku.
+            </h2>
 
-              <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
-                Działania już są, ale z czasem pojawiło się więcej kanałów,
-                pomysłów i decyzji niż jasności, co naprawdę powinno być
-                priorytetem.
-              </p>
+            <p className="mx-auto mt-7 max-w-3xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+              Najczęściej pracuję z właścicielami i osobami odpowiedzialnymi za
+              marketing w firmach, w których działania już trwają, ale coraz
+              trudniej ocenić, co powinno być kolejnym krokiem.
+            </p>
+          </motion.div>
 
-              <div className="mt-9 border-l-2 border-primary/40 pl-5 sm:pl-6">
-                <p className="max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-                  Digitilio ma sens wtedy, gdy potrzebujesz uporządkowania,
-                  kierunku i partnera do myślenia, a nie wyłącznie kolejnej
-                  pary rąk do realizacji.
-                </p>
-              </div>
-            </motion.div>
+          {/* Bento */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-6">
+            {situations.map((situation, index) => (
+              <motion.article
+                key={situation.title}
+                initial={situation.initial}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  duration: 0.65,
+                  delay: index * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.01,
+                }}
+                className={[
+                  situation.className,
+                  "group relative min-h-[260px] overflow-hidden rounded-2xl border border-border/70 bg-secondary/[0.08] p-7 transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/5 sm:p-8 lg:min-h-[280px] lg:p-10",
+                ].join(" ")}
+              >
+                {/* Akcent w tle */}
+                <motion.div
+                  className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-primary/[0.08] blur-3xl"
+                  whileHover={{
+                    scale: 1.35,
+                    opacity: 1,
+                  }}
+                  transition={{ duration: 0.5 }}
+                  aria-hidden="true"
+                />
 
-            {/* RIGHT */}
-            <div className="border-t border-border/70">
-              {situations.map((situation, index) => (
-                <motion.article
-                  key={situation.number}
-                  initial={{ opacity: 0, x: 32 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                {/* Cienka linia */}
+                <motion.div
+                  className="absolute left-0 top-0 h-[3px] bg-gradient-to-r from-primary via-accent to-transparent"
+                  initial={{ width: "42px" }}
+                  whileHover={{ width: "100%" }}
                   transition={{
-                    duration: 0.55,
-                    delay: index * 0.08,
+                    duration: 0.5,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group grid grid-cols-[48px_1fr] gap-5 border-b border-border/70 py-8 sm:grid-cols-[64px_1fr] sm:gap-7 sm:py-10"
-                >
-                  <span className="pt-1 text-sm font-medium text-primary sm:text-base">
-                    {situation.number}
-                  </span>
+                />
 
-                  <div>
-                    <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-2xl">
-                      {situation.title}
-                    </h3>
+                <div className="relative z-10 flex h-full flex-col">
+                  <p className="text-sm font-medium tracking-wide text-primary sm:text-base">
+                    {situation.eyebrow}
+                  </p>
 
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                      {situation.description}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
+                  <h3 className="mt-7 max-w-xl text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
+                    {situation.title}
+                  </h3>
+
+                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                    {situation.description}
+                  </p>
+
+                  <motion.div
+                    className="mt-auto pt-8"
+                    initial={{ opacity: 0.5 }}
+                    whileHover={{ opacity: 1 }}
+                  >
+                    <div className="h-px w-10 bg-primary/40 transition-all duration-500 group-hover:w-20 group-hover:bg-primary" />
+                  </motion.div>
+                </div>
+              </motion.article>
+            ))}
           </div>
 
-          {/* NOT FOR EVERYONE */}
+          {/* Statement */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
             transition={{
-              duration: 0.6,
+              duration: 0.65,
               delay: 0.15,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mt-16 rounded-2xl bg-secondary/10 px-6 py-7 sm:px-8 sm:py-8 lg:mt-20"
+            className="mt-6 overflow-hidden rounded-2xl bg-primary px-6 py-8 sm:px-9 sm:py-10 lg:px-12"
           >
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-[0.55fr_1.45fr] lg:gap-12">
-              <div>
-                <p className="text-sm font-medium tracking-wide text-primary sm:text-base">
-                  Nie dla każdego
-                </p>
-              </div>
+            <div className="grid grid-cols-1 items-center gap-5 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
+              <p className="max-w-4xl text-xl font-semibold leading-snug tracking-tight text-primary-foreground sm:text-2xl lg:text-3xl">
+                Nie szukasz „więcej marketingu”. Potrzebujesz wiedzieć, co
+                zrobić dalej.
+              </p>
 
-              <p className="max-w-4xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Jeśli szukasz wyłącznie najtańszej produkcji postów, gwarancji
-                wyniku bez dostępu do danych albo współpracy rozliczanej przede
-                wszystkim liczbą materiałów miesięcznie, prawdopodobnie nie
-                będziemy najlepszym dopasowaniem.
+              <p className="max-w-xl text-base leading-relaxed text-primary-foreground/70 sm:text-lg">
+                Zakres współpracy wynika z sytuacji firmy, jej celów i realnych
+                możliwości, a nie z gotowego pakietu działań.
               </p>
             </div>
           </motion.div>
