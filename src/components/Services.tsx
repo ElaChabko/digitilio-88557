@@ -6,19 +6,19 @@ const services = [
     number: "01",
     title: "Diagnoza marketingu",
     description:
-      "Gdy działań jest dużo, ale trudno ocenić, które z nich rzeczywiście warto rozwijać. Analizuję komunikację, kanały, dane i dotychczasowe działania, a następnie porządkuję problemy i priorytety.",
+      "Gdy działań jest dużo, ale trudno ocenić, które naprawdę warto rozwijać. Analizuję komunikację, kanały i dane, a następnie porządkuję problemy oraz priorytety.",
   },
   {
     number: "02",
     title: "Strategia marketingowa i komunikacji",
     description:
-      "Gdy potrzebujesz jednego kierunku zamiast kolejnych niezależnych pomysłów. Porządkujemy pozycjonowanie, komunikację, rolę kanałów, cele i sposób wdrożenia.",
+      "Gdy potrzebujesz jednego kierunku zamiast kolejnych niezależnych działań. Porządkujemy pozycjonowanie, komunikację, rolę kanałów, cele i sposób wdrożenia.",
   },
   {
     number: "03",
     title: "Wsparcie we wdrożeniu",
     description:
-      "Gdy kierunek jest już ustalony, ale potrzebujesz pomocy w jego realizacji. Zakres może obejmować social media, content, kampanie, analitykę lub wykorzystanie AI, jeśli wynikają ze strategii.",
+      "Gdy kierunek jest już ustalony, ale potrzebujesz pomocy w realizacji. Zakres może obejmować social media, content, kampanie, analitykę lub wykorzystanie AI.",
   },
   {
     number: "04",
@@ -34,7 +34,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.1,
+      delayChildren: 0.15,
     },
   },
 };
@@ -47,11 +47,16 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   },
 };
 
 export const Services = () => {
   const ref = useRef(null);
+
   const isInView = useInView(ref, {
     once: true,
     margin: "-80px",
@@ -60,12 +65,30 @@ export const Services = () => {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-secondary/5 py-16 sm:py-20 lg:py-24"
+      className="relative overflow-hidden bg-primary py-20 sm:py-24 lg:py-28"
     >
-      {/* Delikatny akcent tła */}
+      {/* Delikatne światło w tle */}
       <div
-        className="pointer-events-none absolute -right-32 top-0 h-[420px] w-[420px] rounded-full bg-primary/5 blur-3xl"
+        className="pointer-events-none absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-accent/20 blur-[120px]"
         aria-hidden="true"
+      />
+
+      <div
+        className="pointer-events-none absolute -bottom-48 -right-40 h-[520px] w-[520px] rounded-full bg-background/10 blur-[120px]"
+        aria-hidden="true"
+      />
+
+      {/* Subtelny grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px",
+        }}
       />
 
       <div
@@ -73,10 +96,9 @@ export const Services = () => {
         className="container relative z-10 mx-auto px-4 sm:px-6"
       >
         <div className="mx-auto max-w-7xl">
-
-          {/* Nagłówek sekcji */}
+          {/* Nagłówek */}
           <motion.div
-            className="mb-10 max-w-3xl sm:mb-12 lg:mb-14"
+            className="mb-12 max-w-3xl sm:mb-14 lg:mb-16"
             initial={{ opacity: 0, y: 24 }}
             animate={
               isInView
@@ -84,60 +106,62 @@ export const Services = () => {
                 : { opacity: 0, y: 24 }
             }
             transition={{
-              duration: 0.55,
+              duration: 0.6,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+            <p className="mb-5 text-sm font-medium tracking-wide text-primary-foreground/60 sm:text-base">
               Jak mogę pomóc?
             </p>
 
-            <h2 className="max-w-3xl text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
-              Zakres współpracy wynika z problemu, który trzeba rozwiązać.
+            <h2 className="max-w-3xl text-3xl font-bold leading-[1.08] tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
+              Od diagnozy problemu po wsparcie we wdrożeniu.
             </h2>
 
-            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
-              Nie zaczynam od wyboru kanału ani listy działań. Najpierw
-              ustalamy, czego naprawdę potrzebuje marketing firmy, a dopiero
-              później dobieramy właściwy zakres wsparcia.
+            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-primary-foreground/70 sm:text-xl">
+              Zakres współpracy dobieramy do sytuacji firmy, a nie do gotowego
+              pakietu usług.
             </p>
           </motion.div>
 
-          {/* Moduły */}
+          {/* Karty */}
           <motion.div
-            className="grid grid-cols-1 border-t border-border/70 md:grid-cols-2"
+            className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:gap-6"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            {services.map((service, index) => (
+            {services.map((service) => (
               <motion.article
                 key={service.number}
                 variants={itemVariants}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className={[
-                  "group relative border-b border-border/70 py-8 sm:py-10",
-                  index % 2 === 0
-                    ? "md:border-r md:pr-10 lg:pr-14"
-                    : "md:pl-10 lg:pl-14",
-                ].join(" ")}
+                whileHover={{ y: -4 }}
+                className="group relative min-h-[280px] overflow-hidden rounded-2xl border border-primary-foreground/10 bg-background/[0.06] p-7 backdrop-blur-sm transition-colors duration-300 hover:bg-background/[0.1] sm:p-8 lg:min-h-[300px] lg:p-10"
               >
-                <div className="flex gap-5 sm:gap-6">
-                  <span className="shrink-0 pt-1 text-sm font-medium text-primary sm:text-base">
+                {/* Duży numer w tle */}
+                <span
+                  className="pointer-events-none absolute -right-2 -top-8 select-none text-[8rem] font-bold leading-none tracking-tighter text-primary-foreground/[0.04] sm:text-[10rem]"
+                  aria-hidden="true"
+                >
+                  {service.number}
+                </span>
+
+                <div className="relative z-10 flex h-full flex-col">
+                  <span className="mb-10 text-sm font-medium text-primary-foreground/50 sm:text-base">
                     {service.number}
                   </span>
 
-                  <div>
-                    <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-2xl">
-                      {service.title}
-                    </h3>
+                  <h3 className="max-w-md text-2xl font-semibold leading-tight tracking-tight text-primary-foreground transition-colors duration-300 group-hover:text-white sm:text-3xl">
+                    {service.title}
+                  </h3>
 
-                    <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                      {service.description}
-                    </p>
+                  <p className="mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/70 sm:text-lg">
+                    {service.description}
+                  </p>
+
+                  {/* Delikatny akcent na dole */}
+                  <div className="mt-auto pt-8">
+                    <div className="h-px w-12 bg-primary-foreground/30 transition-all duration-500 group-hover:w-24 group-hover:bg-primary-foreground/60" />
                   </div>
                 </div>
               </motion.article>
@@ -146,7 +170,7 @@ export const Services = () => {
 
           {/* Domknięcie */}
           <motion.div
-            className="mt-10 border-l-2 border-primary/40 pl-5 sm:mt-12 sm:pl-6"
+            className="mt-10 flex max-w-3xl items-start gap-4 sm:mt-12"
             initial={{ opacity: 0, y: 16 }}
             animate={
               isInView
@@ -155,12 +179,14 @@ export const Services = () => {
             }
             transition={{
               duration: 0.5,
-              delay: 0.45,
+              delay: 0.55,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Nie wiesz, który zakres jest właściwy? Zaczynamy od sytuacji i
+            <div className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/50" />
+
+            <p className="text-base leading-relaxed text-primary-foreground/65 sm:text-lg">
+              Nie wiesz, który zakres będzie właściwy? Zaczynamy od sytuacji i
               problemu, a nie od wyboru usługi.
             </p>
           </motion.div>
