@@ -2,9 +2,26 @@ import aboutPhoto from "@/assets/about-photo-new.webp";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
-import { Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { StatsCarousel } from "@/components/StatsCarousel";
+
+const stats = [
+  {
+    value: "20+",
+    label: "marek",
+    hint: "projekty B2B i B2C",
+  },
+  {
+    value: "25+",
+    label: "szkoleń",
+    hint: "online i stacjonarnie",
+  },
+  {
+    value: "8+",
+    label: "lat doświadczenia",
+    hint: "marketing i komunikacja",
+  },
+];
 
 export const About = () => {
   const ref = useRef(null);
@@ -12,140 +29,168 @@ export const About = () => {
 
   const isInView = useInView(ref, {
     once: true,
-    margin: "-100px",
+    margin: "-80px",
   });
 
   return (
     <section
       id="about"
-      className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden"
+      className="relative overflow-hidden bg-secondary/5 py-20 sm:py-24 lg:py-28"
     >
-      {/* Decorative elements - static */}
-      <div className="absolute bottom-20 right-20 w-[350px] h-[350px] bg-accent/10 rounded-full blur-3xl opacity-12 hidden md:block" />
+      {/* Delikatny akcent tła */}
+      <div
+        className="pointer-events-none absolute -bottom-40 -right-32 h-[480px] w-[480px] rounded-full bg-primary/[0.08] blur-[120px]"
+        aria-hidden="true"
+      />
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
-        <motion.div
-          className="mb-10 sm:mb-12 md:mb-16 lg:mb-24"
-          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tight leading-tight">
-            O mnie
-          </h2>
-        </motion.div>
-
-        <div className="max-w-6xl mx-auto grid md:grid-cols-5 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-start">
-          {/* LEFT: photo + carousel */}
-          <motion.div
-            className="md:col-span-2 group space-y-4 sm:space-y-5"
-            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl md:group-hover:shadow-2xl transition-shadow duration-300 hover-scale">
-              <img
-                src={aboutPhoto}
-                alt="Ela Chabko - Digitilio"
-                width={768}
-                height={768}
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-
+      <div
+        ref={ref}
+        className="container relative z-10 mx-auto px-4 sm:px-6"
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 xl:gap-20">
+            
+            {/* LEFT: zdjęcie + proof */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ duration: 0.45, delay: 0.25 }}
-              className="w-full"
+              initial={{ opacity: 0, x: -32 }}
+              animate={
+                isInView
+                  ? { opacity: 1, x: 0 }
+                  : { opacity: 0, x: -32 }
+              }
+              transition={{
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
-              <StatsCarousel
-                intervalMs={3500}
-                items={[
-                  { value: "20+", label: "marek", hint: "projekty B2B i B2C" },
-                  { value: "25+", label: "szkoleń", hint: "online i stacjonarnie" },
-                  { value: "8+", label: "lat doświadczenia", hint: "strategia i content" },
-                ]}
-              />
+              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
+                <img
+                  src={aboutPhoto}
+                  alt="Ela Chabko - Digitilio"
+                  width={768}
+                  height={768}
+                  className="w-full object-cover"
+                  loading="lazy"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-transparent" />
+              </div>
+
+              {/* Statystyki */}
+              <motion.div
+                className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3"
+                initial={{ opacity: 0, y: 16 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 16 }
+                }
+                transition={{
+                  duration: 0.5,
+                  delay: 0.25,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-background px-5 py-6 sm:px-4"
+                  >
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-bold tracking-tight text-primary">
+                        {stat.value}
+                      </span>
+
+                      <span className="text-sm font-medium text-foreground">
+                        {stat.label}
+                      </span>
+                    </div>
+
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {stat.hint}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
             </motion.div>
-          </motion.div>
 
-          {/* RIGHT: text + CTA aligned to carousel height */}
-          <motion.div
-            className="md:col-span-3 flex flex-col"
-            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {/* TEXT BLOCK */}
-            <div className="space-y-3 sm:space-y-4 md:space-y-4 lg:space-y-5">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light leading-relaxed"
-              >
-                Nazywam się{" "}
-                <strong className="text-foreground font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Ela Chabko
-                </strong>{" "}
-                i jestem specjalistką od strategii komunikacji w social mediach.
-              </motion.p>
+            {/* RIGHT: treść */}
+            <motion.div
+              className="flex flex-col justify-center"
+              initial={{ opacity: 0, x: 32 }}
+              animate={
+                isInView
+                  ? { opacity: 1, x: 0 }
+                  : { opacity: 0, x: 32 }
+              }
+              transition={{
+                duration: 0.6,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+                O mnie
+              </p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-base sm:text-lg md:text-xl text-muted-foreground font-light leading-relaxed"
-              >
-                Tworzę treści, które sprzedają, budują pozycję eksperta i przyciągają uwagę. Nie
-                wierzę w posty „dla postów” – każdy ma cel i działa. Połączenie strategii,
-                kreatywności i AI to moja siła.
-              </motion.p>
+              <h2 className="max-w-2xl text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                Marketing znam z kilku stron stołu.
+              </h2>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="text-base sm:text-lg md:text-xl text-muted-foreground font-light leading-relaxed"
-              >
-                Pracowałam z markami różnej wielkości – od lokalnych firm po rozpoznawalne brandy.
-                Wiem, jak ważna jest elastyczność i realizm. Trzymam się liczb, badam wyniki, nie
-                boję się zmian.
-              </motion.p>
+              <div className="mt-8 max-w-2xl space-y-5">
+                <p className="text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+                  Nazywam się{" "}
+                  <strong className="font-semibold text-foreground">
+                    Ela Chabko
+                  </strong>
+                  . Łączę strategiczne spojrzenie z doświadczeniem w codziennym
+                  wdrażaniu marketingu, dzięki czemu rekomendacje oceniam nie
+                  tylko przez pryzmat tego, jak brzmią na prezentacji, ale
+                  również tego, czy firma rzeczywiście będzie w stanie je
+                  wykorzystać.
+                </p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground font-normal leading-relaxed"
-              >
-                Chcesz, by Twoja marka była widoczna i przynosiła wyniki? Zacznijmy działać.
-              </motion.p>
-            </div>
+                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  Pracuję przy strategii, komunikacji, social mediach, content
+                  marketingu, kampaniach i analityce. Korzystam również z AI i
+                  automatyzacji, ale tylko tam, gdzie pomagają usprawnić proces,
+                  poprawić jakość pracy albo podejmować decyzje na lepszej
+                  podstawie.
+                </p>
 
-            {/* CTA BLOCK: pushed down to align with carousel */}
-            <div className="mt-6 md:mt-auto md:pt-10">
-              <Button
-                type="button"
-                size="lg"
-                onClick={() => setIsContactOpen(true)}
-                className="text-base md:text-lg lg:text-xl px-6 py-6 md:px-8 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
-              >
-                <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-                Napisz do mnie
-              </Button>
-            </div>
-          </motion.div>
+                <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  Nie interesuje mnie dokładanie kolejnych działań tylko po to,
+                  żeby marketing wyglądał na bardziej aktywny. Znacznie
+                  ważniejsze jest dla mnie ustalenie, co naprawdę ma sens dla
+                  konkretnej firmy, jej Klientów, budżetu i możliwości zespołu.
+                </p>
+              </div>
+
+              {/* Statement */}
+              <div className="mt-8 border-l-2 border-primary/40 pl-5 sm:pl-6">
+                <p className="max-w-xl text-lg font-medium leading-relaxed text-foreground sm:text-xl">
+                  Strategia powinna pomagać podejmować decyzje, a nie tylko
+                  dobrze wyglądać w prezentacji.
+                </p>
+              </div>
+
+              {/* CTA */}
+              <div className="mt-9">
+                <Button
+                  type="button"
+                  size="lg"
+                  onClick={() => setIsContactOpen(true)}
+                  className="group h-auto rounded-full bg-primary px-7 py-5 text-base text-primary-foreground shadow-lg transition-all duration-300 hover:bg-primary/90 hover:shadow-xl sm:px-8 sm:text-lg"
+                >
+                  Porozmawiajmy o Twoim marketingu
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Contact dialog */}
       <ContactFormDialog
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
