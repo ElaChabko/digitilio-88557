@@ -1,166 +1,170 @@
-import { Share2, TrendingUp, Brain } from "lucide-react";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
-const services = [{
-  icon: Share2,
-  title: "Zarządzanie Social Media",
-  description: "Od strategii po publikacje. Tworzę spójną komunikację, która zwiększa widoczność, buduje zaufanie i generuje realne zapytania.",
-  gradient: "from-pink-500/20 via-purple-500/20 to-violet-500/20",
-  glowColor: "rgba(236, 72, 153, 0.3)"
-}, {
-  icon: Brain,
-  title: "AI / Automatyzacja",
-  description: "Nie tylko treści – także inteligentne procesy. Automatyzuję komunikację i wdrażam rozwiązania, które oszczędzają Twój czas.",
-  gradient: "from-blue-500/20 via-purple-500/20 to-indigo-500/20",
-  glowColor: "rgba(99, 102, 241, 0.3)"
-}, {
-  icon: TrendingUp,
-  title: "Strategia komunikacji",
-  description: "Każdy post ma sens, bo wynika z planu. Opracowuję strategie, które wspierają Twój cel biznesowy – od employer brandingu po sprzedaż.",
-  gradient: "from-violet-500/20 via-fuchsia-500/20 to-purple-500/20",
-  glowColor: "rgba(168, 85, 247, 0.3)"
-}];
+const services = [
+  {
+    number: "01",
+    title: "Diagnoza marketingu",
+    description:
+      "Gdy działań jest dużo, ale trudno ocenić, które z nich rzeczywiście warto rozwijać. Analizuję komunikację, kanały, dane i dotychczasowe działania, a następnie porządkuję problemy i priorytety.",
+  },
+  {
+    number: "02",
+    title: "Strategia marketingowa i komunikacji",
+    description:
+      "Gdy potrzebujesz jednego kierunku zamiast kolejnych niezależnych pomysłów. Porządkujemy pozycjonowanie, komunikację, rolę kanałów, cele i sposób wdrożenia.",
+  },
+  {
+    number: "03",
+    title: "Wsparcie we wdrożeniu",
+    description:
+      "Gdy kierunek jest już ustalony, ale potrzebujesz pomocy w jego realizacji. Zakres może obejmować social media, content, kampanie, analitykę lub wykorzystanie AI, jeśli wynikają ze strategii.",
+  },
+  {
+    number: "04",
+    title: "Stałe wsparcie marketingowe",
+    description:
+      "Gdy potrzebujesz regularnego spojrzenia na wyniki, priorytety i bieżące decyzje bez zatrudniania senior marketing managera na pełny etat.",
+  },
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
     y: 0,
-    scale: 1
-  }
+  },
 };
 
 export const Services = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const isMobile = useIsMobile();
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "-80px",
+  });
 
   return (
-    <section id="services" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-b from-background via-secondary/5 to-background relative overflow-hidden">
-      {/* Floating light orbs */}
-      <motion.div 
-        className="absolute top-20 right-10 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl opacity-15"
-        style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-        animate={isMobile ? {} : {
-          scale: [1, 1.2, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear"
-        }}
+    <section
+      id="services"
+      className="relative overflow-hidden bg-secondary/5 py-16 sm:py-20 lg:py-24"
+    >
+      {/* Delikatny akcent tła */}
+      <div
+        className="pointer-events-none absolute -right-32 top-0 h-[420px] w-[420px] rounded-full bg-primary/5 blur-3xl"
+        aria-hidden="true"
       />
-      
-      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
-        <motion.div 
-          className="mb-10 sm:mb-12 md:mb-16 lg:mb-24 max-w-4xl"
-          style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-0 tracking-tight leading-tight">
-            Czym się<br />zajmuję?
-          </h2>
-        </motion.div>
-        
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-6 lg:gap-10 max-w-6xl"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {services.map((service, index) => (
-            <motion.div 
-              key={index} 
-              variants={itemVariants}
-              whileHover={isMobile ? {} : { y: -8, scale: 1.02 }}
-              className="group space-y-4 sm:space-y-5 md:space-y-6 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden border border-primary/10"
-              style={{
-                background: `linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)/0.3) 100%)`,
-                willChange: "transform, opacity",
-                transform: "translateZ(0)"
-              }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Animated gradient background */}
-              <motion.div 
-                className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0`}
-                whileHover={isMobile ? {} : { opacity: 0.7 }}
-                transition={{ duration: 0.5 }}
-              />
-              
-              {/* Glowing border effect */}
-              <motion.div 
-                className="absolute inset-0 rounded-3xl opacity-0"
-                style={{
-                  background: `linear-gradient(135deg, ${service.glowColor}, transparent)`,
-                  filter: 'blur(15px)',
-                }}
-                whileHover={isMobile ? {} : { opacity: 0.5 }}
-                transition={{ duration: 0.3 }}
-              />
-              
-              <div className="relative z-10">
-                <motion.div 
-                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/20 mb-6 sm:mb-7 md:mb-8"
-                  whileHover={isMobile ? {} : {
-                    background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))",
-                    borderColor: "hsl(var(--primary) / 0.4)",
-                    boxShadow: "0 10px 30px -10px hsl(var(--primary) / 0.3)"
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.div
-                    whileHover={isMobile ? {} : { color: "hsl(var(--primary-foreground))" }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <service.icon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary" />
-                  </motion.div>
-                </motion.div>
-                
-                <motion.h3 
-                  className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight leading-tight mb-3"
-                  whileHover={isMobile ? {} : { color: "hsl(var(--primary))" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {service.title}
-                </motion.h3>
-                
-                <motion.p 
-                  className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed"
-                  whileHover={isMobile ? {} : { color: "hsl(var(--foreground) / 0.9)" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {service.description}
-                </motion.p>
 
-                {/* Bottom accent line */}
-                <motion.div 
-                  className="mt-6 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full"
-                  initial={{ width: 0 }}
-                  whileHover={isMobile ? {} : { width: "100%" }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+      <div
+        ref={ref}
+        className="container relative z-10 mx-auto px-4 sm:px-6"
+      >
+        <div className="mx-auto max-w-7xl">
+
+          {/* Nagłówek sekcji */}
+          <motion.div
+            className="mb-10 max-w-3xl sm:mb-12 lg:mb-14"
+            initial={{ opacity: 0, y: 24 }}
+            animate={
+              isInView
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 24 }
+            }
+            transition={{
+              duration: 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+              Jak mogę pomóc?
+            </p>
+
+            <h2 className="max-w-3xl text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              Zakres współpracy wynika z problemu, który trzeba rozwiązać.
+            </h2>
+
+            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+              Nie zaczynam od wyboru kanału ani listy działań. Najpierw
+              ustalamy, czego naprawdę potrzebuje marketing firmy, a dopiero
+              później dobieramy właściwy zakres wsparcia.
+            </p>
+          </motion.div>
+
+          {/* Moduły */}
+          <motion.div
+            className="grid grid-cols-1 border-t border-border/70 md:grid-cols-2"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            {services.map((service, index) => (
+              <motion.article
+                key={service.number}
+                variants={itemVariants}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={[
+                  "group relative border-b border-border/70 py-8 sm:py-10",
+                  index % 2 === 0
+                    ? "md:border-r md:pr-10 lg:pr-14"
+                    : "md:pl-10 lg:pl-14",
+                ].join(" ")}
+              >
+                <div className="flex gap-5 sm:gap-6">
+                  <span className="shrink-0 pt-1 text-sm font-medium text-primary sm:text-base">
+                    {service.number}
+                  </span>
+
+                  <div>
+                    <h3 className="text-xl font-semibold leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-2xl">
+                      {service.title}
+                    </h3>
+
+                    <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          {/* Domknięcie */}
+          <motion.div
+            className="mt-10 border-l-2 border-primary/40 pl-5 sm:mt-12 sm:pl-6"
+            initial={{ opacity: 0, y: 16 }}
+            animate={
+              isInView
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 16 }
+            }
+            transition={{
+              duration: 0.5,
+              delay: 0.45,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Nie wiesz, który zakres jest właściwy? Zaczynamy od sytuacji i
+              problemu, a nie od wyboru usługi.
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
