@@ -130,7 +130,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-[4rem] font-bold text-foreground tracking-tight leading-[1.08]">
               <motion.span 
                 className="block"
                 initial={{ opacity: 0, x: -20 }}
