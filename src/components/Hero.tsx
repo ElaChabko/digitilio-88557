@@ -131,31 +131,26 @@ export const Hero = () => {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-[4rem] font-bold text-foreground tracking-tight leading-[1.08]">
-              <motion.span 
-                className="block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Mniej przypadkowych działań.
-              </motion.span>
-              <motion.span 
-                className="block overflow-visible"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent box-decoration-clone">
-               Więcej dobrych decyzji marketingowych.
-              </motion.span>
-              <motion.span 
-                className="block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-              </motion.span>
-            </h1>
+  <motion.span 
+    className="block"
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, delay: 0.2 }}
+  >
+    Mniej przypadkowych działań.
+  </motion.span>
+
+  <motion.span 
+    className="block overflow-visible"
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, delay: 0.4 }}
+  >
+    <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent box-decoration-clone">
+      Więcej dobrych decyzji marketingowych.
+    </span>
+  </motion.span>
+</h1>
             
             <motion.p 
               className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light leading-relaxed"
