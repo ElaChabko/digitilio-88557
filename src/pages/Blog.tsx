@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 
@@ -12,6 +13,7 @@ type BlogListItem = {
   date: string;
   readTime: string;
   category: string;
+  image: string;
   slug?: string;
 };
 
@@ -25,6 +27,7 @@ export default function Blog() {
     //   date: "Coming soon",
     //   readTime: "7 min",
     //   category: "Marketing",
+    //   image: "/placeholder.jpg",
     // },
     // {
     //   id: 9992,
@@ -33,11 +36,18 @@ export default function Blog() {
     //   date: "Coming soon",
     //   readTime: "6 min",
     //   category: "AI",
+    //   image: "/placeholder.jpg",
     // },
   ];
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Blog o marketingu, strategii i danych | Digitilio"
+        description="Analizy, strategie i praktyczne spojrzenie na marketing, dane, social media i AI. Z naciskiem na decyzje, nie kolejne taktyki."
+        canonical="https://digitilio.pl/blog"
+      />
+
       <Navigation />
 
       {/* HERO */}
@@ -52,8 +62,10 @@ export default function Blog() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Blog
             </h1>
+
             <p className="text-lg text-muted-foreground">
-              Wiedza o social media, strategiach komunikacji i AI.
+              Analizy, strategie i praktyczne spojrzenie na marketing, dane,
+              social media i AI.
             </p>
           </motion.div>
         </div>
@@ -66,47 +78,45 @@ export default function Blog() {
             {posts.map((post, index) => {
               const Card = (
                 <div
-                  className={`bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 ${
+                  className={`group bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 ${
                     post.slug
                       ? "hover:shadow-lg hover:-translate-y-1 cursor-pointer"
                       : "opacity-70"
                   }`}
                 >
                   <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl">
+                    {/* OBRAZEK */}
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
 
-  {/* OBRAZEK */}
-  <img
-    src={post.image}
-    alt={post.title}
-    loading="lazy"
-    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-  />
-
-  {/* GRADIENT / CIEŃ – overlay */}
-  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
-
-</div>
-
+                    {/* GRADIENT / CIEŃ */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
+                  </div>
 
                   <div className="p-6">
                     <span className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
                       {post.category}
                     </span>
 
-                    <h3 className="text-xl font-bold mt-3 mb-3">
+                    <h2 className="text-xl font-bold mt-3 mb-3">
                       {post.title}
-                    </h3>
+                    </h2>
 
                     <p className="text-muted-foreground mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
 
                     <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex gap-4">
+                      <div className="flex flex-wrap gap-4">
                         <span>
                           <Calendar className="inline w-4 h-4 mr-1" />
                           {post.date}
                         </span>
+
                         <span>
                           <Clock className="inline w-4 h-4 mr-1" />
                           {post.readTime}
@@ -114,7 +124,7 @@ export default function Blog() {
                       </div>
 
                       {post.slug && (
-                        <ArrowRight className="w-5 h-5 text-primary opacity-70" />
+                        <ArrowRight className="w-5 h-5 text-primary opacity-70 transition-transform duration-300 group-hover:translate-x-1" />
                       )}
                     </div>
                   </div>
@@ -126,10 +136,19 @@ export default function Blog() {
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                  }}
                 >
                   {post.slug ? (
-                    <a href={`/blog/${post.slug}`}>{Card}</a>
+                    <a
+                      href={`/blog/${post.slug}`}
+                      className="block h-full"
+                      aria-label={`Czytaj artykuł: ${post.title}`}
+                    >
+                      {Card}
+                    </a>
                   ) : (
                     Card
                   )}
