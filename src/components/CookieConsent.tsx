@@ -1,173 +1,312 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
-type Consent = {
-  necessary: true;
-  analytics: boolean;
-  marketing: boolean;
-  ad_storage: boolean;
-  ad_user_data: boolean;
-  ad_personalization: boolean;
-  timestamp: string;
-  version: string;
-};
+import { Link } from "react-router-dom";
+import { X } from "lucide-react";
 
-const STORAGE_KEY = "cookieConsentDigitilio";
-const CONSENT_VERSION = "2025-11-13";
-
-function getStoredConsent(): Consent | null {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Consent) : null;
-  } catch {
-    return null;
-  }
-}
-
-function saveConsent(consent: Omit<Consent, "timestamp">) {
-  const payload: Consent = { ...consent, timestamp: new Date().toISOString() };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-  window.dispatchEvent(new Event("cookie-consent-updated"));
-}
+import {
+  applyGoogleConsent,
+  CONSENT_VERSION,
+  createConsentChoice,
+  getValidStoredConsent,
+  OPEN_COOKIE_SETTINGS_EVENT,
+  pushConsentSubmittedEvent,
+  saveConsent,
+} from "@/lib/consent";
 
 export const CookieConsent: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [analytics, setAnalytics] = useState(false);
-  const [marketing, setMarketing] = useState(false);
 
-  useEffect(() => {
-    const stored = getStoredConsent();
-    if (!stored || stored.version !== CONSENT_VERSION) setOpen(true);
+  const [analytics, setAnalytics] =
+    useState(false);
+
+  const [marketing, setMarketing] =
+    useState(false);
+
+  const [hasSavedConsent, setHasSavedConsent] =
+    useState(false);
+
+  const showCookieSettings = useCallback(() => {
+    const stored = getValidStoredConsent();
+
+    if (stored) {
+      setAnalytics(stored.analytics);
+      setMarketing(stored.marketing);
+      setHasSavedConsent(true);
+    } else {
+      setAnalytics(false);
+      setMarketing(false);
+      setHasSavedConsent(false);
+    }
+
+    setOpen(true);
   }, []);
 
- const acceptAll = () => {
-  // 1. Consent Mode
-  window.gtag?.('consent', 'update', {
-    ad_storage: 'granted',
-    analytics_storage: 'granted',
-    ad_user_data: 'granted',
-    ad_personalization: 'granted'
-  });
+  useEffect(() => {
+    const stored = getValidStoredConsent();
 
-  // 2. Zapis w localStorage
-  saveConsent({
-    necessary: true,
-    analytics: true,
-    marketing: true,
-    ad_storage: true,
-    ad_user_data: true,
-    ad_personalization: true,
-    version: CONSENT_VERSION
-  });
+    if (stored) {
+      setAnalytics(stored.analytics);
+      setMarketing(stored.marketing);
+      setHasSavedConsent(true);
+    } else {
+      setOpen(true);
+    }
 
-  // 3. Event do GTM → odpala tag GA4 Event
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "cookie_consent_submitted",
-    consent_action: "accept_all",
-    consent_analytics: "granted",
-    consent_marketing: "granted",
-    consent_ad_storage: "granted",
-    consent_ad_user_data: "granted",
-    consent_ad_personalization: "granted"
-  });
+    window.addEventListener(
+      OPEN_COOKIE_SETTINGS_EVENT,
+      showCookieSettings
+    );
 
-  setOpen(false);
-};
+    return () => {
+      window.removeEventListener(
+        OPEN_COOKIE_SETTINGS_EVENT,
+        showCookieSettings
+      );
+    };
+  }, [showCookieSettings]);
 
-const saveChoices = () => {
-  const adGranted = marketing;
+  const saveChoice = (
+    analyticsValue: boolean,
+    marketingValue: boolean,
+    action:
+      | "accept_all"
+      | "reject_all"
+      | "save_choices"
+  ) => {
+    const choice = createConsentChoice(
+      analyticsValue,
+      marketingValue
+    );
 
-  // 1. Consent Mode
-  window.gtag?.('consent', 'update', {
-    ad_storage: adGranted ? 'granted' : 'denied',
-    ad_user_data: adGranted ? 'granted' : 'denied',
-    ad_personalization: adGranted ? 'granted' : 'denied',
-    analytics_storage: analytics ? 'granted' : 'denied'
-  });
+    /*
+     * Najpierw aktualizujemy Consent Mode.
+     */
+    applyGoogleConsent(choice);
 
-  // 2. Zapis w localStorage
-  saveConsent({
-    necessary: true,
-    analytics,
-    marketing,
-    ad_storage: adGranted,
-    ad_user_data: adGranted,
-    ad_personalization: adGranted,
-    version: CONSENT_VERSION
-  });
+    /*
+     * Następnie zapisujemy decyzję użytkownika.
+     */
+    saveConsent(choice);
 
-  // 3. Event do GTM
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "cookie_consent_submitted",
-    consent_action: "save_choices",
-    consent_analytics: analytics ? "granted" : "denied",
-    consent_marketing: marketing ? "granted" : "denied",
-    consent_ad_storage: adGranted ? "granted" : "denied",
-    consent_ad_user_data: adGranted ? "granted" : "denied",
-    consent_ad_personalization: adGranted ? "granted" : "denied"
-  });
+    /*
+     * Na końcu wysyłamy event informacyjny
+     * do dataLayer.
+     */
+    pushConsentSubmittedEvent(
+      action,
+      choice
+    );
 
-  setOpen(false);
-};
+    setAnalytics(analyticsValue);
+    setMarketing(marketingValue);
 
+    setHasSavedConsent(true);
+    setOpen(false);
+  };
 
+  const acceptAll = () => {
+    saveChoice(
+      true,
+      true,
+      "accept_all"
+    );
+  };
 
-  if (!open) return null;
+  const rejectAdditional = () => {
+    saveChoice(
+      false,
+      false,
+      "reject_all"
+    );
+  };
+
+  const saveChoices = () => {
+    saveChoice(
+      analytics,
+      marketing,
+      "save_choices"
+    );
+  };
+
+  if (!open) {
+    return null;
+  }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-      <div className="w-full max-w-xl rounded-xl bg-white p-6 shadow-2xl">
-        <h2 className="text-lg font-semibold mb-2">Ustawienia plików cookies</h2>
-        <p className="text-sm text-slate-700 mb-4">
-          Używamy niezbędnych cookies do działania strony. Dodatkowe (analityczne i marketingowe)
-          tylko za Twoją zgodą. Szczegóły znajdziesz w&nbsp;
-          <a href="/polityka-cookies" className="underline text-indigo-600">polityce cookies</a> oraz&nbsp;
-          <a href="/polityka-prywatnosci" className="underline text-indigo-600">polityce prywatności</a>.
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4 backdrop-blur-[2px]"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cookie-consent-title"
+    >
+      <div className="relative w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
+        {/* CLOSE - tylko jeśli użytkownik już wcześniej dokonał wyboru */}
+        {hasSavedConsent && (
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+            aria-label="Zamknij ustawienia cookies"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
+
+        <div className="pr-10">
+          <p className="mb-2 text-sm font-medium text-primary">
+            Prywatność
+          </p>
+
+          <h2
+            id="cookie-consent-title"
+            className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
+          >
+            Ustawienia plików cookies
+          </h2>
+        </div>
+
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
+          Używamy niezbędnych cookies do
+          prawidłowego działania strony.
+          Cookies analityczne i marketingowe
+          wykorzystujemy tylko zgodnie z Twoimi
+          ustawieniami.
         </p>
 
-        <div className="grid gap-3 md:grid-cols-3 mb-4">
-          <label className="flex items-start gap-3 rounded-lg border p-3 text-sm">
-            <input type="checkbox" checked readOnly className="mt-1" />
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">
+          Szczegóły znajdziesz w{" "}
+          <Link
+            to="/polityka-cookies"
+            className="font-medium text-primary underline-offset-4 hover:underline"
+          >
+            polityce cookies
+          </Link>{" "}
+          oraz{" "}
+          <Link
+            to="/polityka-prywatnosci"
+            className="font-medium text-primary underline-offset-4 hover:underline"
+          >
+            polityce prywatności
+          </Link>
+          .
+        </p>
+
+        {/* CATEGORIES */}
+        <div className="mt-7 grid gap-3">
+          {/* NECESSARY */}
+          <div className="flex items-start gap-4 rounded-xl border border-slate-200 p-4">
+            <input
+              type="checkbox"
+              checked
+              disabled
+              className="mt-1 h-4 w-4"
+              aria-label="Cookies niezbędne - zawsze aktywne"
+            />
+
             <div>
-              <div className="font-medium">Niezbędne</div>
-              <div className="text-slate-600">Zawsze aktywne – potrzebne do działania strony.</div>
+              <div className="font-medium text-slate-900">
+                Niezbędne
+              </div>
+
+              <div className="mt-1 text-sm leading-relaxed text-slate-600">
+                Potrzebne do prawidłowego
+                działania strony i zapisania
+                Twoich ustawień prywatności.
+              </div>
+            </div>
+          </div>
+
+          {/* ANALYTICS */}
+          <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-4 transition-colors hover:border-primary/30">
+            <input
+              type="checkbox"
+              checked={analytics}
+              onChange={(event) =>
+                setAnalytics(
+                  event.target.checked
+                )
+              }
+              className="mt-1 h-4 w-4"
+            />
+
+            <div>
+              <div className="font-medium text-slate-900">
+                Analityczne
+              </div>
+
+              <div className="mt-1 text-sm leading-relaxed text-slate-600">
+                Pomagają zrozumieć, w jaki
+                sposób użytkownicy korzystają
+                ze strony i jak można ją
+                ulepszać, np. za pomocą
+                Google Analytics.
+              </div>
             </div>
           </label>
 
-          <label className="flex items-start gap-3 rounded-lg border p-3 text-sm">
-            <input type="checkbox" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} className="mt-1" />
-            <div>
-              <div className="font-medium">Analityczne</div>
-              <div className="text-slate-600">Pomagają nam ulepszać serwis (np. GA).</div>
-            </div>
-          </label>
+          {/* MARKETING */}
+          <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-4 transition-colors hover:border-primary/30">
+            <input
+              type="checkbox"
+              checked={marketing}
+              onChange={(event) =>
+                setMarketing(
+                  event.target.checked
+                )
+              }
+              className="mt-1 h-4 w-4"
+            />
 
-          <label className="flex items-start gap-3 rounded-lg border p-3 text-sm">
-            <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} className="mt-1" />
             <div>
-              <div className="font-medium">Marketingowe</div>
-              <div className="text-slate-600">Wspierają personalizację reklam.</div>
+              <div className="font-medium text-slate-900">
+                Marketingowe
+              </div>
+
+              <div className="mt-1 text-sm leading-relaxed text-slate-600">
+                Pozwalają mierzyć działania
+                reklamowe i personalizować
+                komunikację marketingową, jeśli
+                takie narzędzia są używane w
+                Serwisie.
+              </div>
             </div>
           </label>
         </div>
 
-        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
+        {/* ACTIONS */}
+        <div className="mt-7 grid gap-3 sm:grid-cols-3">
           <button
+            type="button"
+            onClick={rejectAdditional}
+            className="rounded-lg border border-slate-300 px-4 py-3 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-50"
+          >
+            Odrzuć dodatkowe
+          </button>
+
+          <button
+            type="button"
             onClick={saveChoices}
-            className="rounded-md border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50"
+            className="rounded-lg border border-primary px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/5"
           >
             Zapisz wybór
           </button>
+
           <button
+            type="button"
             onClick={acceptAll}
-            className="rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-500"
+            className="rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-primary/90"
           >
             Akceptuj wszystkie
           </button>
         </div>
 
-        <p className="mt-3 text-xs text-slate-400 text-right">Wersja zgód: {CONSENT_VERSION}</p>
+        <p className="mt-5 text-right text-xs text-slate-400">
+          Wersja zgód: {CONSENT_VERSION}
+        </p>
       </div>
     </div>
   );

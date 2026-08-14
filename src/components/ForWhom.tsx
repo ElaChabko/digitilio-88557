@@ -1,150 +1,206 @@
 import { motion } from "framer-motion";
-import { Factory, Laptop, ShoppingCart, Truck, ShieldCheck, Globe, Stethoscope  } from "lucide-react";
 
-const industries = [
+const situations = [
   {
-    icon: Factory,
-    title: "Produkcja i przemysł",
-    description: "Pokazuję, że nawet techniczne tematy mogą przyciągać uwagę"
+    eyebrow: "Porządkowanie",
+    title: "Marketing działa po kawałku",
+    description:
+      "Social media, kampanie, strona i content są prowadzone, ale brakuje jednego kierunku i jasnej hierarchii priorytetów.",
+    className: "md:col-span-2",
+    initial: { opacity: 0, x: -40, y: 20 },
   },
   {
-    icon: Laptop,
-    title: "IT i nowe technologie",
-    description: "Łączę merytorykę z kreatywną formą"
+    eyebrow: "Zmiana",
+    title: "Firma jest przed ważnym ruchem",
+    description:
+      "Nowa strona, zmiana komunikacji, kolejny kanał albo przebudowa sposobu pozyskiwania Klientów wymagają szerszej decyzji niż wybór kolejnego narzędzia.",
+    className: "md:col-span-1",
+    initial: { opacity: 0, x: 40, y: 20 },
   },
   {
-    icon: ShoppingCart,
-    title: "Handel detaliczny i e-commerce",
-    description: "Pomagam budować markę i wspierać sprzedaż"
+    eyebrow: "Perspektywa",
+    title: "Brakuje senioralnego spojrzenia",
+    description:
+      "Zespół działa, ale potrzebuje kogoś, kto połączy dane, kontekst biznesowy i wykonanie, a następnie pomoże ocenić, co rzeczywiście ma sens.",
+    className: "md:col-span-1",
+    initial: { opacity: 0, x: -40, y: 20 },
   },
   {
-    icon: ShieldCheck,
-    title: "Specjalistyczne usługi",
-    description: "Wspieram marki w edukacji i employer brandingu"
+    eyebrow: "Decyzje",
+    title: "Potrzebujesz partnera do myślenia",
+    description:
+      "Nie kolejnej osoby do realizowania listy zadań, ale kogoś, z kim można zweryfikować kierunek, priorytety i kolejne decyzje marketingowe.",
+    className: "md:col-span-2",
+    initial: { opacity: 0, x: 40, y: 20 },
   },
-  {
-    icon: Globe,
-    title: "Projekty międzynarodowe",
-    description: "Prowadzę komunikację po polsku i po angielsku, zachowując spójność wizerunku"
-  },
-
-  {
-    icon:  Stethoscope ,
-    title: "Medycyna i HealthCare",
-    description: "Łączę merytorykę z etycznym marketingiem, budując wizerunek eksperta."
-  }
 ];
 
 export const ForWhom = () => {
-  return <section id="for-whom" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background via-accent/5 to-background relative overflow-hidden">
-      {/* Floating gradient orb */}
-      <motion.div className="absolute top-1/2 right-10 w-[500px] h-[500px] bg-accent/15 rounded-full blur-3xl" animate={{
-      y: [0, 40, 0],
-      scale: [1, 1.15, 1],
-      opacity: [0.15, 0.25, 0.15]
-    }} transition={{
-      duration: 13,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }} />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl">
-          <motion.h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 md:mb-8 leading-tight tracking-tight" initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true,
-          margin: "-100px"
-        }} transition={{
-          duration: 0.6
-        }}>
-            Dla kogo?
-          </motion.h2>
+  return (
+    <section
+      id="for-whom"
+      className="relative overflow-hidden bg-background py-20 sm:py-24 lg:py-28"
+    >
+      {/* Tło */}
+      <motion.div
+        className="pointer-events-none absolute -left-40 top-10 h-[500px] w-[500px] rounded-full bg-primary/[0.07] blur-[120px]"
+        animate={{
+          x: [0, 40, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        aria-hidden="true"
+      />
 
-          <motion.p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed font-light mb-8 md:mb-12 lg:mb-16 max-w-4xl" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true,
-          margin: "-100px"
-        }} transition={{
-          duration: 0.6,
-          delay: 0.15
-        }}>
-            Jeśli wiesz, że Twoja marka może robić więcej w social mediach, ale brakuje Ci czasu, pomysłu lub strategii to zajmę się tym kompleksowo. Od pierwszego audytu po raport z wynikami – wszystko po to, byś mógł skupić się na prowadzeniu firmy.
-          </motion.p>
+      <motion.div
+        className="pointer-events-none absolute -bottom-48 right-0 h-[520px] w-[520px] rounded-full bg-accent/[0.07] blur-[120px]"
+        animate={{
+          x: [0, -30, 0],
+          y: [0, -20, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        aria-hidden="true"
+      />
 
-          <motion.h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-8 md:mb-10 lg:mb-12" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true,
-          margin: "-100px"
-        }} transition={{
-          duration: 0.6,
-          delay: 0.25
-        }}>
-            Pracuję z firmami z różnych branż:
-          </motion.h3>
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 lg:mb-16">
-            {industries.map((industry, index) => (
-              <motion.div key={industry.title} className="group p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10" initial={{
-              opacity: 0,
-              y: 20
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} viewport={{
-              once: true,
-              margin: "-100px"
-            }} transition={{
-              duration: 0.5,
-              delay: 0.35 + index * 0.1
-            }}>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300">
-                    <industry.icon className="w-6 h-6 text-accent" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-foreground mb-2 text-base sm:text-lg">
-                      {industry.title}
-                    </h4>
-                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                      {industry.description}
-                    </p>
-                  </div>
+          {/* Intro */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              duration: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mx-auto mb-12 max-w-4xl text-center sm:mb-16 lg:mb-20"
+          >
+            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+              Dla kogo?
+            </p>
+
+            <h2 className="text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              Nie musisz zaczynać marketingu od zera, żeby potrzebować nowego
+              kierunku.
+            </h2>
+
+            <p className="mx-auto mt-7 max-w-3xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+              Najczęściej pracuję z właścicielami i osobami odpowiedzialnymi za
+              marketing w firmach, w których działania już trwają, ale coraz
+              trudniej ocenić, co powinno być kolejnym krokiem.
+            </p>
+          </motion.div>
+
+          {/* Bento */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-6">
+            {situations.map((situation, index) => (
+              <motion.article
+                key={situation.title}
+                initial={situation.initial}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  duration: 0.65,
+                  delay: index * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.01,
+                }}
+                className={[
+                  situation.className,
+                  "group relative min-h-[260px] overflow-hidden rounded-2xl border border-border/70 bg-secondary/[0.08] p-7 transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/5 sm:p-8 lg:min-h-[280px] lg:p-10",
+                ].join(" ")}
+              >
+                {/* Akcent w tle */}
+                <motion.div
+                  className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-primary/[0.08] blur-3xl"
+                  whileHover={{
+                    scale: 1.35,
+                    opacity: 1,
+                  }}
+                  transition={{ duration: 0.5 }}
+                  aria-hidden="true"
+                />
+
+                {/* Cienka linia */}
+                <motion.div
+                  className="absolute left-0 top-0 h-[3px] bg-gradient-to-r from-primary via-accent to-transparent"
+                  initial={{ width: "42px" }}
+                  whileHover={{ width: "100%" }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                />
+
+                <div className="relative z-10 flex h-full flex-col">
+                  <p className="text-sm font-medium tracking-wide text-primary sm:text-base">
+                    {situation.eyebrow}
+                  </p>
+
+                  <h3 className="mt-7 max-w-xl text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
+                    {situation.title}
+                  </h3>
+
+                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                    {situation.description}
+                  </p>
+
+                  <motion.div
+                    className="mt-auto pt-8"
+                    initial={{ opacity: 0.5 }}
+                    whileHover={{ opacity: 1 }}
+                  >
+                    <div className="h-px w-10 bg-primary/40 transition-all duration-500 group-hover:w-20 group-hover:bg-primary" />
+                  </motion.div>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
 
-          <motion.p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed font-light max-w-4xl" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true,
-          margin: "-100px"
-        }} transition={{
-          duration: 0.6,
-          delay: 0.95
-        }}>
-            Niezależnie od wielkości firmy — pracuję strategicznie, elastycznie i z pełnym zaangażowaniem. <span className="text-foreground font-medium">Najważniejsze są dla mnie efekty, nie obietnice.</span>
-          </motion.p>
+          {/* Statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{
+              duration: 0.65,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mt-6 overflow-hidden rounded-2xl bg-primary px-6 py-8 sm:px-9 sm:py-10 lg:px-12"
+          >
+            <div className="grid grid-cols-1 items-center gap-5 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
+              <p className="max-w-4xl text-xl font-semibold leading-snug tracking-tight text-primary-foreground sm:text-2xl lg:text-3xl">
+                Nie szukasz „więcej marketingu”. Potrzebujesz wiedzieć, co
+                zrobić dalej.
+              </p>
+
+              <p className="max-w-xl text-base leading-relaxed text-primary-foreground/70 sm:text-lg">
+                Zakres współpracy wynika z sytuacji firmy, jej celów i realnych
+                możliwości, a nie z gotowego pakietu działań.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };

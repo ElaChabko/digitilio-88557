@@ -1,122 +1,134 @@
-import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
-import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import contactBottomImage from "@/assets/contact-bottom-image.webp";
+import { ArrowRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { ContactFormDialog } from "@/components/ContactFormDialog";
 
 export const ContactCTA = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
-  const openContactForm = () => {
-    setIsContactFormOpen(true);
-  };
-
   return (
-    <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden bg-gradient-to-br from-primary/5 via-accent/10 to-background">
-      {/* Animated gradient orbs */}
-      <motion.div 
-        className="absolute top-20 left-20 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl"
-        animate={{ 
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.3, 0.2]
-        }}
-        transition={{ 
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-accent/25 rounded-full blur-3xl"
-        animate={{ 
-          scale: [1, 1.25, 1],
-          opacity: [0.2, 0.35, 0.2]
-        }}
-        transition={{ 
-          duration: 11,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
+    <section className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-28">
+      {/* SUBTELNE TŁO */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, hsl(var(--foreground)) 1px, transparent 1px),
+            linear-gradient(to bottom, hsl(var(--foreground)) 1px, transparent 1px)
+          `,
+          backgroundSize: "72px 72px",
         }}
       />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-7xl flex flex-col lg:flex-row items-start lg:items-center gap-8 md:gap-10 lg:gap-16">
-          <div className="flex-1">
-            <motion.h2 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 md:mb-10 lg:mb-12 leading-tight tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
+
+      <div
+        className="pointer-events-none absolute -left-32 top-0 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px]"
+        aria-hidden="true"
+      />
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            {/* EYEBROW */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
+              className="text-sm font-medium text-primary sm:text-base"
             >
-              Gotowy na markę,<br />o której się mówi?
-            </motion.h2>
-            <motion.p 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-8 md:mb-12 lg:mb-16 font-light leading-relaxed max-w-4xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-            >
-              Umów krótką rozmowę i zobacz, jak połączenie strategii i AI może odmienić Twoją komunikację.
+              Następny krok
             </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+
+            {/* HEADLINE */}
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{
+                duration: 0.55,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="mt-5 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl"
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.98 }}
+              Nie wiesz, co powinno być kolejnym krokiem w marketingu?
+            </motion.h2>
+
+            {/* DESCRIPTION */}
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{
+                duration: 0.55,
+                delay: 0.08,
+              }}
+              className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
+            >
+              Nie musisz mieć gotowego briefu ani listy działań. Na krótkiej
+              rozmowie przyjrzymy się sytuacji i sprawdzimy, gdzie mogę realnie
+              pomóc.
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{
+                duration: 0.55,
+                delay: 0.16,
+              }}
+              className="mt-8 sm:mt-10"
+            >
+              <Button
+                type="button"
+                onClick={() => setIsContactFormOpen(true)}
+                className="
+                  group
+                  h-auto
+                  w-full
+                  max-w-full
+                  whitespace-normal
+                  rounded-2xl
+                  bg-primary
+                  px-5
+                  py-4
+                  text-center
+                  text-base
+                  font-medium
+                  leading-snug
+                  text-primary-foreground
+                  transition-all
+                  duration-300
+                  hover:bg-primary/90
+                  sm:w-auto
+                  sm:rounded-full
+                  sm:px-8
+                  sm:py-5
+                  sm:text-lg
+                "
               >
-                <Button
-                  onClick={openContactForm}
-                  size="lg"
-                  className="text-base md:text-lg lg:text-xl px-6 py-6 md:px-8 md:py-7 lg:px-10 lg:py-8 h-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group shadow-[0_0_40px_hsl(263_33%_35%/0.3)] hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)] transition-all duration-500"
-                >
-                  <Mail className="mr-3 w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-                  Zacznijmy współpracę
-                </Button>
-              </motion.div>
-              <motion.p 
-                className="text-muted-foreground text-base mt-6"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                Bez zobowiązań • Pierwsza konsultacja
-              </motion.p>
+                <span className="min-w-0 flex-1 text-center sm:flex-none">
+                  Porozmawiajmy o Twoim marketingu
+                </span>
+
+                <ArrowRight className="ml-2 h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
+
+              <p className="mt-4 text-sm text-muted-foreground sm:text-base">
+                15 min • bez zobowiązań
+              </p>
             </motion.div>
           </div>
-
-          {/* Image */}
-          <motion.div 
-            className="flex-shrink-0"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-           <img 
-  src={contactBottomImage} 
-  alt="Contact visual" 
-  width={768}
-  height={768}
-  className="w-full max-w-sm aspect-square object-cover rounded-2xl shadow-2xl"
-  loading="lazy"
-/>
-
-          </motion.div>
         </div>
       </div>
 
-      <ContactFormDialog 
-        isOpen={isContactFormOpen} 
-        onClose={() => setIsContactFormOpen(false)} 
+      <ContactFormDialog
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
       />
     </section>
   );

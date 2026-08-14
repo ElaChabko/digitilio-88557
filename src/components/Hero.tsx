@@ -130,32 +130,27 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-[1.1]">
-              <motion.span 
-                className="block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Strategia.
-              </motion.span>
-              <motion.span 
-                className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                AI.
-              </motion.span>
-              <motion.span 
-                className="block"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                Emocje.
-              </motion.span>
-            </h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[3.75rem] font-bold text-foreground tracking-tight leading-[1.08]">
+  <motion.span 
+    className="block"
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, delay: 0.2 }}
+  >
+    Mniej przypadkowych działań.
+  </motion.span>
+
+  <motion.span 
+    className="block overflow-visible"
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, delay: 0.4 }}
+  >
+    <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent box-decoration-clone">
+      Więcej dobrych decyzji marketingowych.
+    </span>
+  </motion.span>
+</h1>
             
             <motion.p 
               className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light leading-relaxed"
@@ -163,7 +158,7 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              Tworzę komunikację, która przyciąga uwagę i działa. Łączę analityczne podejście z kreatywnością, by Twoja marka była widoczna, zapamiętana i skuteczna.
+              Pomagam firmom uporządkować marketing, wybrać priorytety i przełożyć strategię na działania, które da się optymalnie wdrożyć.
             </motion.p>
             
             <motion.div 

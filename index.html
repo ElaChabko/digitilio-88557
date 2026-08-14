@@ -1,66 +1,105 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
   <head>
-   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
 
-    // 1. Domyślne zgody (MUSI być przed GTM)
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      analytics_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      wait_for_update: 500
-    });
+      // 1. Domyślne zgody (MUSI być przed GTM)
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
 
-    // 2. Event pomocniczy (opcjonalny, ale ok)
-    window.dataLayer.push({
-      event: 'consent_defaults_set'
-    });
-  </script>
+      // 2. Event pomocniczy (opcjonalny, ale ok)
+      window.dataLayer.push({
+        event: 'consent_defaults_set'
+      });
+    </script>
 
-  <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5N9FPPB7');
-  </script>
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5N9FPPB7');
+    </script>
 
     <meta charset="UTF-8" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      as="style"
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Digitilio - Social Media i AI Specialist | Komunikacja z Charakterem</title>
-    <meta name="description" content="Social media z planem. Treści z celem. Komunikacja z charakterem. Profesjonalna obsługa social mediów i wdrażanie rozwiązań AI dla firm.">
+
+    <title>Strategia marketingowa i doradztwo | Digitilio</title>
+
+    <meta
+      name="description"
+      content="Pomagam firmom uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć."
+    >
+
     <meta name="author" content="Digitilio" />
-    <meta name="keywords" content="social media, AI, marketing, content, strategia, digital marketing, social media management">
 
-    
-    
+    <meta
+      name="keywords"
+      content="strategia marketingowa, doradztwo marketingowe, strategia komunikacji, social media, analityka marketingowa, AI w marketingu, Digitilio"
+    >
+
+    <meta property="og:site_name" content="Digitilio" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/p2Dx27ZKwue6aOhv0OknoGRMQGk2/social-images/social-1759738184174-Zdj w tle FB (820 x 312 px).png">
 
+    <meta
+      property="og:image"
+      content="https://storage.googleapis.com/gpt-engineer-file-uploads/p2Dx27ZKwue6aOhv0OknoGRMQGk2/social-images/social-1759738184174-Zdj w tle FB (820 x 312 px).png"
+    >
 
-  <meta property="og:title" content="Digitilio - Social Media i AI Specialist | Komunikacja z Charakterem">
-  <meta name="twitter:title" content="Digitilio - Social Media i AI Specialist | Komunikacja z Charakterem">
-  <meta property="og:description" content="Social media z planem. Treści z celem. Komunikacja z charakterem. Profesjonalna obsługa social mediów i wdrażanie rozwiązań AI dla firm.">
-  <meta name="twitter:description" content="Social media z planem. Treści z celem. Komunikacja z charakterem. Profesjonalna obsługa social mediów i wdrażanie rozwiązań AI dla firm.">
-</head>
+    <meta
+      property="og:title"
+      content="Mniej przypadkowych działań. Więcej dobrych decyzji marketingowych. | Digitilio"
+    >
+
+    <meta
+      property="og:description"
+      content="Pomagam firmom uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć."
+    >
+
+    <meta
+      name="twitter:title"
+      content="Mniej przypadkowych działań. Więcej dobrych decyzji marketingowych. | Digitilio"
+    >
+
+    <meta
+      name="twitter:description"
+      content="Pomagam firmom uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć."
+    >
+  </head>
 
   <body>
-    
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5N9FPPB7"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5N9FPPB7"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
 
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
