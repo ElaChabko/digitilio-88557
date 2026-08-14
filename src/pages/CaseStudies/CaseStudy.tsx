@@ -8,7 +8,9 @@ import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
+import { StructuredData } from "@/components/StructuredData";
 
+import { createBreadcrumbSchema } from "@/lib/structuredData";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
 
 export default function CaseStudy() {
@@ -45,6 +47,37 @@ export default function CaseStudy() {
 
   const canonicalUrl = `https://digitilio.pl/wspolprace/${caseStudy.slug}`;
 
+  const caseStudySchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${canonicalUrl}#article`,
+    url: canonicalUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+    headline: caseStudy.title,
+    description: caseStudy.lead,
+    publisher: {
+      "@id": "https://digitilio.pl/#organization",
+    },
+  };
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    {
+      name: "Digitilio",
+      url: "https://digitilio.pl/",
+    },
+    {
+      name: "Współprace",
+      url: "https://digitilio.pl/wspolprace",
+    },
+    {
+      name: caseStudy.title,
+      url: canonicalUrl,
+    },
+  ]);
+
   return (
     <div className="min-h-screen bg-background">
       <SEO
@@ -52,6 +85,9 @@ export default function CaseStudy() {
         description={caseStudy.seoDescription}
         canonical={canonicalUrl}
       />
+
+      <StructuredData data={caseStudySchema} />
+      <StructuredData data={breadcrumbSchema} />
 
       <Navigation />
 
@@ -222,7 +258,6 @@ export default function CaseStudy() {
         {/* DYNAMICZNE SEKCJE */}
         {caseStudy.sections.map((section, sectionIndex) => {
           switch (section.type) {
-            /* TEXT */
             case "text":
               return (
                 <section
@@ -279,7 +314,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* DECISION */
             case "decision": {
               const isDark = section.theme === "dark";
 
@@ -317,9 +351,7 @@ export default function CaseStudy() {
                           <p
                             className={[
                               "text-7xl font-bold tracking-tight sm:text-8xl",
-                              isDark
-                                ? "text-white/10"
-                                : "text-primary/15",
+                              isDark ? "text-white/10" : "text-primary/15",
                             ].join(" ")}
                           >
                             {section.number}
@@ -438,7 +470,6 @@ export default function CaseStudy() {
               );
             }
 
-            /* COMPARISON */
             case "comparison":
               return (
                 <section
@@ -532,7 +563,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* GROWTH */
             case "growth":
               return (
                 <section
@@ -594,7 +624,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* SPOTLIGHT */
             case "spotlight":
               return (
                 <section
@@ -658,7 +687,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* CHANNELS */
             case "channels":
               return (
                 <section
@@ -708,7 +736,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* SUMMARY */
             case "summary":
               return (
                 <section
@@ -784,7 +811,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* NOTE */
             case "note":
               return (
                 <section
@@ -823,7 +849,6 @@ export default function CaseStudy() {
                 </section>
               );
 
-            /* FINAL */
             case "final":
               return (
                 <section
