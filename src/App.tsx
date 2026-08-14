@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 
 import { CookieConsent } from "@/components/CookieConsent";
 import { LazyGtag } from "@/components/LazyGtag";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
       <CookieConsent />
 
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
 
