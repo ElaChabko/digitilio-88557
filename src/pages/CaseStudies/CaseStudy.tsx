@@ -108,7 +108,7 @@ export default function CaseStudy() {
                   delay: 0.05,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mt-8 max-w-5xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl"
+                className="mt-8 max-w-6xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-[3.5rem] lg:text-[4rem]"
               >
                 {caseStudy.title}
               </motion.h1>
@@ -120,7 +120,7 @@ export default function CaseStudy() {
                   duration: 0.65,
                   delay: 0.15,
                 }}
-                className="mt-8 max-w-4xl text-lg font-light leading-relaxed text-white/70 sm:text-xl"
+                className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-white/75 sm:text-xl"
               >
                 {caseStudy.lead}
               </motion.p>
@@ -193,13 +193,13 @@ export default function CaseStudy() {
                       delay: index * 0.08,
                     }}
                     className={[
-                      "py-8 md:p-8 lg:min-h-[270px]",
+                      "py-8 md:p-8 lg:min-h-[240px]",
                       index !== caseStudy.results.length - 1
                         ? "lg:border-r lg:border-border"
                         : "",
                     ].join(" ")}
                   >
-                    <p className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                    <p className="whitespace-nowrap text-4xl font-bold tracking-tight text-foreground lg:text-[2.7rem] xl:text-5xl">
                       {result.value}
                     </p>
 
@@ -342,7 +342,7 @@ export default function CaseStudy() {
                           className={[
                             "space-y-6 text-lg leading-relaxed",
                             isDark
-                              ? "text-white/65"
+                              ? "text-white/75"
                               : "text-muted-foreground",
                           ].join(" ")}
                         >
@@ -387,7 +387,7 @@ export default function CaseStudy() {
                                     className={[
                                       "mt-2 text-sm leading-relaxed",
                                       isDark
-                                        ? "text-white/50"
+                                        ? "text-white/55"
                                         : "text-muted-foreground",
                                     ].join(" ")}
                                   >
@@ -399,15 +399,15 @@ export default function CaseStudy() {
                           )}
 
                           {section.flow && section.flow.length > 0 && (
-                            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+                            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                               {section.flow.map((step, index) => (
                                 <div
                                   key={`${step.label}-${index}`}
-                                  className="flex items-center gap-3 sm:flex-1"
+                                  className="relative"
                                 >
                                   <div
                                     className={[
-                                      "flex-1 rounded-full border px-4 py-3 text-center text-sm font-medium",
+                                      "flex min-h-[52px] items-center justify-center rounded-full border px-4 py-3 text-center text-sm font-medium",
                                       isDark
                                         ? "border-white/10 bg-white/[0.05] text-white"
                                         : "border-border bg-background text-foreground",
@@ -416,10 +416,10 @@ export default function CaseStudy() {
                                     {step.label}
                                   </div>
 
-                                  {index !== section.flow!.length - 1 && (
+                                  {index !== section.flow.length - 1 && (
                                     <ArrowRight
                                       className={[
-                                        "hidden h-4 w-4 flex-shrink-0 sm:block",
+                                        "absolute -right-[10px] top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 lg:block",
                                         isDark
                                           ? "text-white/35"
                                           : "text-muted-foreground",
@@ -603,7 +603,7 @@ export default function CaseStudy() {
                 >
                   <div className="container relative z-10 mx-auto px-4 sm:px-6">
                     <div className="mx-auto max-w-7xl">
-                      <p className="text-sm font-medium text-white/55">
+                      <p className="text-sm font-medium text-white/60">
                         {section.eyebrow}
                       </p>
 
@@ -613,11 +613,11 @@ export default function CaseStudy() {
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                         >
-                          <p className="text-7xl font-bold tracking-tight sm:text-8xl md:text-9xl">
+                          <p className="whitespace-nowrap text-7xl font-bold tracking-tight sm:text-8xl md:text-9xl">
                             {section.value}
                           </p>
 
-                          <p className="mt-4 text-lg text-white/65">
+                          <p className="mt-4 text-lg text-white/70">
                             {section.label}
                           </p>
 
@@ -628,7 +628,7 @@ export default function CaseStudy() {
                                   {stat.value}
                                 </p>
 
-                                <p className="mt-2 text-sm text-white/55">
+                                <p className="mt-2 text-sm text-white/60">
                                   {stat.label}
                                 </p>
                               </div>
@@ -640,7 +640,7 @@ export default function CaseStudy() {
                           initial={{ opacity: 0, x: 30 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
-                          className="space-y-6 text-lg leading-relaxed text-white/70"
+                          className="space-y-6 text-lg leading-relaxed text-white/80"
                         >
                           {section.paragraphs.map((paragraph, index) => (
                             <p key={index}>{paragraph}</p>
@@ -774,7 +774,6 @@ export default function CaseStudy() {
                               className="flex gap-3 text-lg leading-relaxed text-muted-foreground"
                             >
                               <span className="mt-[10px] h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
-
                               <span>{result}</span>
                             </li>
                           ))}
@@ -865,7 +864,7 @@ export default function CaseStudy() {
                           className="mt-12 border-t border-white/10 pt-10"
                         >
                           {section.ctaText && (
-                            <p className="text-lg text-white/65">
+                            <p className="text-lg text-white/70">
                               {section.ctaText}
                             </p>
                           )}
