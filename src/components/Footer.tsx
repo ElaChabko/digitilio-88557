@@ -67,7 +67,7 @@ export const Footer = () => {
 
               {/* UMIEJĘTNOŚCI JUTRA */}
               <a
-                href="/certyfikaty/umiejesntosci_jutra.pdf"
+                href="/certyfikaty/umiejetnosci-jutra-ai-2.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
