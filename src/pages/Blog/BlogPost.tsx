@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 
@@ -22,20 +23,33 @@ export default function BlogPost() {
     return (
       <div className="min-h-screen flex flex-col">
         <Navigation />
+
         <main className="flex-1 flex items-center justify-center">
-          <p className="text-muted-foreground">Nie znaleziono artykułu.</p>
+          <p className="text-muted-foreground">
+            Nie znaleziono artykułu.
+          </p>
         </main>
+
         <Footer />
       </div>
     );
   }
 
+  const canonicalUrl = `https://digitilio.pl/blog/${post.slug}`;
+
   return (
     <div className="min-h-screen">
+      <SEO
+        title={`${post.title} | Digitilio`}
+        description={post.excerpt}
+        canonical={canonicalUrl}
+      />
+
       <Navigation />
 
       <article className="pt-32 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
+
           {/* HEADER */}
           <motion.header
             initial={{ opacity: 0, y: 20 }}
@@ -51,11 +65,12 @@ export default function BlogPost() {
               {post.title}
             </h1>
 
-            <div className="mt-6 flex gap-6 text-sm text-muted-foreground">
+            <div className="mt-6 flex flex-wrap gap-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
                 {post.date}
               </span>
+
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
                 {post.readTime}
@@ -68,7 +83,10 @@ export default function BlogPost() {
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="mb-8"
             >
               <img
@@ -88,8 +106,11 @@ export default function BlogPost() {
             </motion.div>
           )}
 
+          {/* EXCERPT */}
           {post.excerpt && (
-            <p className="mt-4 text-lg text-muted-foreground">{post.excerpt}</p>
+            <p className="mt-4 text-lg text-muted-foreground">
+              {post.excerpt}
+            </p>
           )}
 
           <hr className="my-10 border-t border-muted-foreground/20" />
@@ -105,10 +126,11 @@ export default function BlogPost() {
             ))}
           </div>
 
-          {/* CTA: OPEN FORM (not mailto) */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="mt-10 flex justify-center"
           >
@@ -135,7 +157,6 @@ export default function BlogPost() {
 
       <Footer />
 
-      {/* DIALOG */}
       <ContactFormDialog
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
