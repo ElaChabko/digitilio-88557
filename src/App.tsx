@@ -26,10 +26,11 @@ const App = () => (
       <Sonner />
 
       <LazyGtag />
-      <CookieConsent />
+     
 
       <BrowserRouter>
         <ScrollToTop />
+         <CookieConsent />
         <Routes>
           <Route path="/" element={<Index />} />
 
