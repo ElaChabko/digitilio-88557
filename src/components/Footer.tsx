@@ -1,7 +1,15 @@
 import { BadgeCheck, Linkedin } from "lucide-react";
 
+import { OPEN_COOKIE_SETTINGS_EVENT } from "@/lib/consent";
+
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const openCookieSettings = () => {
+    window.dispatchEvent(
+      new Event(OPEN_COOKIE_SETTINGS_EVENT)
+    );
+  };
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -110,6 +118,14 @@ export const Footer = () => {
             >
               Polityka plików cookies
             </a>
+
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="text-sm text-white/60 transition-colors hover:text-white"
+            >
+              Ustawienia cookies
+            </button>
 
             <a
               href="https://www.linkedin.com/in/ela-chabko/"
