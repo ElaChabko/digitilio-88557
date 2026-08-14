@@ -1,74 +1,102 @@
-import { Linkedin } from "lucide-react";
-import badgeContent from "@/assets/1.webp";
-import badgeFundamentals from "@/assets/2.webp";
-import badgeStrategy from "@/assets/3.webp";
+import { BadgeCheck, Linkedin } from "lucide-react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-primary-foreground py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-8">
-          <p className="text-sm text-center md:text-left">
+    <footer className="bg-primary text-primary-foreground">
+      <div className="container mx-auto px-4 sm:px-6">
+
+        {/* CERTYFIKATY */}
+        <div className="border-b border-white/10 py-10 md:py-12">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+
+            <div>
+              <p className="text-sm font-medium text-white/55">
+                Certyfikaty i programy
+              </p>
+
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/75">
+                Kompetencje rozwijane w obszarze strategii marketingowej,
+                komunikacji, email marketingu i praktycznego wykorzystania AI.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+
+              {/* LINKEDIN */}
+              <a
+                href="https://verify.skilljar.com/c/zak7b7u7mapy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  group flex items-center gap-2
+                  rounded-full border border-white/15
+                  bg-white/[0.06]
+                  px-4 py-2.5
+                  text-sm text-white/85
+                  transition-all duration-300
+                  hover:border-white/30
+                  hover:bg-white/[0.1]
+                  hover:text-white
+                "
+                aria-label="Zweryfikuj certyfikat LinkedIn Marketing Strategy"
+              >
+                <BadgeCheck className="h-4 w-4 text-white/60 transition-colors group-hover:text-white" />
+                LinkedIn Marketing Strategy
+              </a>
+
+              {/* HUBSPOT */}
+              <div
+                className="
+                  flex items-center gap-2
+                  rounded-full border border-white/15
+                  bg-white/[0.06]
+                  px-4 py-2.5
+                  text-sm text-white/85
+                "
+              >
+                <BadgeCheck className="h-4 w-4 text-white/60" />
+                HubSpot Email Marketing
+              </div>
+
+              {/* AI */}
+              <div
+                className="
+                  flex items-center gap-2
+                  rounded-full border border-white/15
+                  bg-white/[0.06]
+                  px-4 py-2.5
+                  text-sm text-white/85
+                "
+              >
+                <BadgeCheck className="h-4 w-4 text-white/60" />
+                Google + SGH · Umiejętności Jutra AI 2.0
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* FOOTER BOTTOM */}
+        <div className="grid grid-cols-1 gap-6 py-8 md:grid-cols-[1fr_auto] md:items-center">
+
+          <p className="text-center text-sm text-white/60 md:text-left">
             © {currentYear} Digitilio. Wszystkie prawa zastrzeżone.
           </p>
 
-          <div className="flex justify-center gap-6">
-            <a
-              href="https://verify.skilljar.com/c/6cwoxoibxdxa"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Marketing Labs – Content & Creative Design"
-            >
-              <img
-                src={badgeContent}
-                alt="LinkedIn Marketing Labs – Content & Creative Design"
-                className="h-18 w-auto opacity-90 hover:opacity-100 transition"
-                loading="lazy"
-              />
-            </a>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-end">
 
-            <a
-              href="https://verify.skilljar.com/c/vdsyqw26eqnt"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Marketing Labs – Marketing Fundamentals"
-            >
-              <img
-                src={badgeFundamentals}
-                alt="LinkedIn Marketing Labs – Marketing Fundamentals"
-                className="h-18 w-auto opacity-90 hover:opacity-100 transition"
-                loading="lazy"
-              />
-            </a>
-
-            <a
-              href="https://verify.skilljar.com/c/zak7b7u7mapy"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Marketing Labs – Marketing Strategy"
-            >
-              <img
-                src={badgeStrategy}
-                alt="LinkedIn Marketing Labs – Marketing Strategy"
-                className="h-18 w-auto opacity-90 hover:opacity-100 transition"
-                loading="lazy"
-              />
-            </a>
-          </div>
-
-          <div className="flex justify-center md:justify-end items-center gap-6">
             <a
               href="/polityka-prywatnosci"
-              className="text-sm hover:text-accent transition-colors"
+              className="text-sm text-white/60 transition-colors hover:text-white"
             >
               Polityka prywatności
             </a>
 
             <a
               href="/polityka-cookies"
-              className="text-sm hover:text-accent transition-colors"
+              className="text-sm text-white/60 transition-colors hover:text-white"
             >
               Polityka plików cookies
             </a>
@@ -77,11 +105,20 @@ export const Footer = () => {
               href="https://www.linkedin.com/in/ela-chabko/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent transition-colors"
-              aria-label="LinkedIn"
+              className="
+                flex h-9 w-9 items-center justify-center
+                rounded-full border border-white/15
+                text-white/70
+                transition-all duration-300
+                hover:border-white/30
+                hover:bg-white/10
+                hover:text-white
+              "
+              aria-label="LinkedIn Ela Chabko"
             >
-              <Linkedin className="w-5 h-5" />
+              <Linkedin className="h-4 w-4" />
             </a>
+
           </div>
         </div>
       </div>
