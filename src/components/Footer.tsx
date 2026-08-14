@@ -6,11 +6,9 @@ export const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6">
-
         {/* CERTYFIKATY */}
         <div className="border-b border-white/10 py-10 md:py-12">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-
             <div>
               <p className="text-sm font-medium text-white/55">
                 Certyfikaty i programy
@@ -23,7 +21,6 @@ export const Footer = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-
               {/* LINKEDIN */}
               <a
                 href="https://verify.skilljar.com/c/zak7b7u7mapy"
@@ -40,53 +37,66 @@ export const Footer = () => {
                   hover:bg-white/[0.1]
                   hover:text-white
                 "
-                aria-label="Zweryfikuj certyfikat LinkedIn Marketing Strategy"
+                aria-label="Zobacz certyfikat LinkedIn Marketing Strategy"
               >
                 <BadgeCheck className="h-4 w-4 text-white/60 transition-colors group-hover:text-white" />
-                LinkedIn Marketing Strategy
+                <span>LinkedIn Marketing Strategy</span>
               </a>
 
               {/* HUBSPOT */}
-              <div
+              <a
+                href="/certyfikaty/certyfikat%20hubspot.png"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
-                  flex items-center gap-2
+                  group flex items-center gap-2
                   rounded-full border border-white/15
                   bg-white/[0.06]
                   px-4 py-2.5
                   text-sm text-white/85
+                  transition-all duration-300
+                  hover:border-white/30
+                  hover:bg-white/[0.1]
+                  hover:text-white
                 "
+                aria-label="Zobacz certyfikat HubSpot Email Marketing"
               >
-                <BadgeCheck className="h-4 w-4 text-white/60" />
-                HubSpot Email Marketing
-              </div>
+                <BadgeCheck className="h-4 w-4 text-white/60 transition-colors group-hover:text-white" />
+                <span>HubSpot Email Marketing</span>
+              </a>
 
-              {/* AI */}
-              <div
+              {/* UMIEJĘTNOŚCI JUTRA */}
+              <a
+                href="/certyfikaty/umiejesntosci_jutra.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
-                  flex items-center gap-2
+                  group flex items-center gap-2
                   rounded-full border border-white/15
                   bg-white/[0.06]
                   px-4 py-2.5
                   text-sm text-white/85
+                  transition-all duration-300
+                  hover:border-white/30
+                  hover:bg-white/[0.1]
+                  hover:text-white
                 "
+                aria-label="Zobacz certyfikat Umiejętności Jutra AI 2.0"
               >
-                <BadgeCheck className="h-4 w-4 text-white/60" />
-                Google + SGH · Umiejętności Jutra AI 2.0
-              </div>
-
+                <BadgeCheck className="h-4 w-4 text-white/60 transition-colors group-hover:text-white" />
+                <span>Google + SGH · Umiejętności Jutra AI 2.0</span>
+              </a>
             </div>
           </div>
         </div>
 
         {/* FOOTER BOTTOM */}
         <div className="grid grid-cols-1 gap-6 py-8 md:grid-cols-[1fr_auto] md:items-center">
-
           <p className="text-center text-sm text-white/60 md:text-left">
             © {currentYear} Digitilio. Wszystkie prawa zastrzeżone.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-end">
-
             <a
               href="/polityka-prywatnosci"
               className="text-sm text-white/60 transition-colors hover:text-white"
@@ -114,11 +124,10 @@ export const Footer = () => {
                 hover:bg-white/10
                 hover:text-white
               "
-              aria-label="LinkedIn Ela Chabko"
+              aria-label="Profil LinkedIn Ela Chabko"
             >
               <Linkedin className="h-4 w-4" />
             </a>
-
           </div>
         </div>
       </div>
