@@ -191,11 +191,11 @@ export default function CookiesPolicy() {
                     </li>
 
                     <li className="list-disc">
-                      <strong>Netlify i GitHub Pages</strong> – jako dostawcy
-                      infrastruktury hostingowej, mogą przetwarzać dane
-                      techniczne niezbędne do zapewnienia prawidłowego działania
-                      strony.
-                    </li>
+  <strong>Cloudflare Pages</strong> – jako dostawca infrastruktury
+  hostingowej Serwisu może przetwarzać dane techniczne niezbędne
+  do zapewnienia bezpieczeństwa, dostępności i prawidłowego
+  działania strony.
+</li>
                   </ul>
 
                   <p>
