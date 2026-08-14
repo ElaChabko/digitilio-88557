@@ -10,7 +10,7 @@ export default function CookiesPolicy() {
     <div className="min-h-screen bg-background">
       <SEO
         title="Polityka plików cookies | Digitilio"
-        description="Polityka plików cookies serwisu Digitilio.pl oraz informacje dotyczące wykorzystywania plików cookies i narzędzi analitycznych."
+        description="Polityka plików cookies serwisu Digitilio.pl oraz informacje dotyczące plików cookies, Consent Mode i narzędzi analitycznych."
         canonical="https://digitilio.pl/polityka-cookies"
       />
 
@@ -51,7 +51,7 @@ export default function CookiesPolicy() {
               </h1>
 
               <p className="mt-6 text-sm text-white/55 sm:text-base">
-                Data ostatniej aktualizacji: 11 listopada 2025 r.
+                Data ostatniej aktualizacji: 14 sierpnia 2026 r.
               </p>
             </div>
           </div>
@@ -61,7 +61,6 @@ export default function CookiesPolicy() {
         <section className="py-16 sm:py-20 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6">
             <article className="mx-auto max-w-4xl">
-
               {/* 1 */}
               <section className="border-b border-border pb-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
@@ -71,22 +70,27 @@ export default function CookiesPolicy() {
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
                     Niniejsza Polityka plików cookies określa zasady
-                    przechowywania i uzyskiwania dostępu do informacji na
-                    urządzeniach użytkowników korzystających ze strony
-                    internetowej <strong>digitilio.pl</strong> (dalej:
-                    „Serwis”).
+                    wykorzystywania plików cookies oraz podobnych technologii
+                    w związku z korzystaniem ze strony internetowej{" "}
+                    <strong>digitilio.pl</strong> (dalej: „Serwis”).
                   </p>
 
                   <p>
                     Operatorem Serwisu i administratorem danych jest{" "}
                     <strong>Elżbieta Chabko</strong>, prowadząca działalność
-                    gospodarczą pod nazwą Digitilio, z siedzibą w Polsce, adres
-                    e-mail:{" "}
+                    gospodarczą pod nazwą Digitilio, z siedzibą w Polsce,
+                    NIP: 6871986208.
+                  </p>
+
+                  <p>
+                    W sprawach związanych z prywatnością oraz wykorzystywaniem
+                    plików cookies można skontaktować się z Administratorem pod
+                    adresem:{" "}
                     <a
-                      href="mailto:kontakt@digitilio.pl"
+                      href="mailto:elachabko@digitilio.pl"
                       className="font-medium text-primary underline-offset-4 hover:underline"
                     >
-                      kontakt@digitilio.pl
+                      elachabko@digitilio.pl
                     </a>
                     .
                   </p>
@@ -96,24 +100,31 @@ export default function CookiesPolicy() {
               {/* 2 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  2. Czym są pliki cookies
+                  2. Czym są pliki cookies i podobne technologie
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    Pliki cookies (tzw. „ciasteczka”) to niewielkie pliki
-                    tekstowe zapisywane na urządzeniu końcowym użytkownika
-                    (np. komputerze, smartfonie, tablecie) podczas korzystania
-                    z Serwisu. Cookies pozwalają na rozpoznanie urządzenia
-                    użytkownika i odpowiednie wyświetlenie strony internetowej,
-                    a także umożliwiają korzystanie z jej funkcjonalności.
+                    Pliki cookies to niewielkie informacje zapisywane na
+                    urządzeniu użytkownika podczas korzystania ze strony
+                    internetowej. Mogą służyć m.in. do zapewnienia działania
+                    Serwisu, zapamiętywania ustawień oraz prowadzenia pomiarów
+                    i analiz.
                   </p>
 
                   <p>
-                    Cookies nie służą identyfikacji użytkownika i nie
-                    umożliwiają ustalenia jego tożsamości. Dane zbierane za
-                    pomocą cookies nie są łączone z danymi osobowymi
-                    użytkowników.
+                    Serwis może również wykorzystywać inne mechanizmy
+                    przechowywania informacji w przeglądarce. W szczególności
+                    wybór użytkownika dotyczący zgód na analitykę i marketing
+                    jest zapisywany lokalnie w pamięci przeglądarki
+                    (localStorage), aby Serwis mógł zapamiętać podjętą decyzję.
+                  </p>
+
+                  <p>
+                    Pliki cookies i podobne technologie mogą wiązać się z
+                    przetwarzaniem informacji technicznych dotyczących
+                    urządzenia, przeglądarki, sposobu korzystania z Serwisu lub
+                    połączenia sieciowego.
                   </p>
                 </div>
               </section>
@@ -121,86 +132,98 @@ export default function CookiesPolicy() {
               {/* 3 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  3. Rodzaje wykorzystywanych plików cookies
+                  3. Kategorie wykorzystywanych technologii
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    W Serwisie mogą być stosowane następujące rodzaje plików
-                    cookies:
+                    W Serwisie wykorzystywane lub obsługiwane są następujące
+                    kategorie technologii:
                   </p>
 
                   <ul className="space-y-4 pl-6">
                     <li className="list-disc">
-                      <strong>a) Cookies niezbędne</strong> – pliki, które
-                      umożliwiają prawidłowe funkcjonowanie Serwisu, logowanie,
-                      wyświetlanie treści oraz utrzymanie sesji użytkownika. Bez
-                      ich użycia strona może działać niepoprawnie.
+                      <strong>Niezbędne</strong> – technologie potrzebne do
+                      prawidłowego działania Serwisu oraz zapamiętania ustawień
+                      prywatności użytkownika. Nie można ich wyłączyć w
+                      ustawieniach zgód Serwisu, jeżeli są konieczne do
+                      realizacji tych funkcji.
                     </li>
 
                     <li className="list-disc">
-                      <strong>b) Cookies funkcjonalne</strong> – ułatwiają
-                      korzystanie z Serwisu, zapamiętując preferencje
-                      użytkownika (np. język, układ strony, zgody).
+                      <strong>Analityczne</strong> – służą do pomiaru i analizy
+                      sposobu korzystania z Serwisu, np. liczby odwiedzin,
+                      odwiedzanych podstron i podstawowych informacji o sposobie
+                      korzystania ze strony.
                     </li>
 
                     <li className="list-disc">
-                      <strong>c) Cookies analityczne (statystyczne)</strong> –
-                      pomagają zrozumieć, w jaki sposób użytkownicy korzystają
-                      ze strony, umożliwiając ulepszanie jej struktury i treści.
-                      W tym celu Serwis może korzystać z narzędzi analitycznych,
-                      takich jak Google Analytics.
-                    </li>
-
-                    <li className="list-disc">
-                      <strong>d) Cookies marketingowe</strong> – mogą być
-                      wykorzystywane do wyświetlania użytkownikom
-                      spersonalizowanych treści reklamowych, jeśli takie funkcje
-                      zostaną w przyszłości włączone w Serwisie.
+                      <strong>Marketingowe</strong> – mogą być wykorzystywane w
+                      związku z narzędziami reklamowymi, pomiarem skuteczności
+                      działań marketingowych lub personalizacją reklam, jeżeli
+                      takie narzędzia są aktywne w Serwisie.
                     </li>
                   </ul>
+
+                  <p>
+                    Technologie analityczne i marketingowe są obsługiwane
+                    zgodnie z decyzją użytkownika podjętą w panelu ustawień
+                    cookies.
+                  </p>
                 </div>
               </section>
 
               {/* 4 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  4. Narzędzia zewnętrzne
+                  4. Google Analytics, Google Tag Manager i Consent Mode
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    Serwis może korzystać z zewnętrznych usług analitycznych lub
-                    marketingowych, które również stosują pliki cookies, w
-                    szczególności:
+                    Serwis korzysta z Google Tag Manager oraz Google Analytics
+                    w celu zarządzania tagami i analizy sposobu korzystania ze
+                    strony.
                   </p>
 
-                  <ul className="space-y-4 pl-6">
-                    <li className="list-disc">
-                      <strong>Google Analytics</strong> (dostarczany przez Google
-                      Ireland Ltd.) – do analizy sposobu korzystania z Serwisu.
-                      Informacje o prywatności Google dostępne są pod adresem:{" "}
-                      <a
-                        href="https://policies.google.com/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-primary underline-offset-4 hover:underline"
-                      >
-                        https://policies.google.com/privacy
-                      </a>
-                    </li>
-
-                    <li className="list-disc">
-  <strong>Cloudflare Pages</strong> – jako dostawca infrastruktury
-  hostingowej Serwisu może przetwarzać dane techniczne niezbędne
-  do zapewnienia bezpieczeństwa, dostępności i prawidłowego
-  działania strony.
-</li>
-                  </ul>
+                  <p>
+                    Ustawienia usług Google są powiązane z Google Consent Mode.
+                    Przy pierwszej wizycie domyślne wartości dla zgód
+                    analitycznych i reklamowych są ustawiane jako{" "}
+                    <strong>denied</strong>, a następnie aktualizowane zgodnie z
+                    wyborem użytkownika.
+                  </p>
 
                   <p>
-                    Użytkownik może zapoznać się z zasadami ochrony prywatności
-                    tych podmiotów, odwiedzając ich oficjalne strony.
+                    Serwis przekazuje do Consent Mode ustawienia dotyczące m.in.
+                    parametrów:
+                    <strong> analytics_storage</strong>,{" "}
+                    <strong>ad_storage</strong>,{" "}
+                    <strong>ad_user_data</strong> oraz{" "}
+                    <strong>ad_personalization</strong>.
+                  </p>
+
+                  <p>
+                    Jeżeli użytkownik nie wyrazi zgody na analitykę, Google
+                    Analytics nie powinien ustawiać, odczytywać ani wykorzystywać
+                    plików cookies Analytics. W konfiguracji Consent Mode mogą
+                    jednak być wysyłane do Google sygnały pomiarowe bez
+                    wykorzystywania cookies, zgodnie z zasadami działania tego
+                    mechanizmu.
+                  </p>
+
+                  <p>
+                    Informacje o zasadach prywatności Google są dostępne na
+                    stronie:{" "}
+                    <a
+                      href="https://policies.google.com/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      policies.google.com/privacy
+                    </a>
+                    .
                   </p>
                 </div>
               </section>
@@ -208,23 +231,28 @@ export default function CookiesPolicy() {
               {/* 5 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  5. Zgoda na korzystanie z plików cookies
+                  5. Cloudflare
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    Podczas pierwszej wizyty w Serwisie użytkownik ma możliwość
-                    wyrażenia zgody na stosowanie plików cookies poprzez
-                    odpowiedni baner lub komunikat. Użytkownik może w każdej
-                    chwili zmienić swoje preferencje, cofając zgodę lub
-                    modyfikując ustawienia cookies w przeglądarce internetowej.
+                    Serwis korzysta z infrastruktury Cloudflare, w tym
+                    Cloudflare Pages. Cloudflare wspiera hosting, dostarczanie
+                    treści, bezpieczeństwo i dostępność Serwisu.
                   </p>
 
                   <p>
-                    Brak zgody na stosowanie niektórych rodzajów cookies
-                    (np. analitycznych lub marketingowych) może ograniczyć
-                    funkcjonalność Serwisu, ale nie uniemożliwia jego
-                    przeglądania.
+                    W związku ze świadczeniem tych usług Cloudflare może
+                    przetwarzać dane techniczne związane z ruchem do Serwisu,
+                    takie jak adres IP, informacje o routingu ruchu,
+                    konfiguracji systemu oraz inne dane techniczne niezbędne do
+                    świadczenia usług infrastrukturalnych i bezpieczeństwa.
+                  </p>
+
+                  <p>
+                    Szczegółowe informacje dotyczące przetwarzania danych przez
+                    Cloudflare znajdują się w polityce prywatności tego
+                    dostawcy.
                   </p>
                 </div>
               </section>
@@ -232,60 +260,81 @@ export default function CookiesPolicy() {
               {/* 6 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  6. Zarządzanie plikami cookies
+                  6. Zarządzanie zgodami
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    Większość przeglądarek internetowych domyślnie akceptuje
-                    pliki cookies. Użytkownik może jednak samodzielnie zmienić
-                    ustawienia dotyczące cookies w dowolnym momencie, w tym:
+                    Przy pierwszej wizycie w Serwisie użytkownik otrzymuje
+                    możliwość zdecydowania, czy wyraża zgodę na wykorzystywanie
+                    technologii analitycznych i marketingowych.
+                  </p>
+
+                  <p>
+                    Użytkownik może:
                   </p>
 
                   <ul className="space-y-3 pl-6">
                     <li className="list-disc">
-                      zablokować automatyczną obsługę plików cookies,
+                      zaakceptować wszystkie dodatkowe kategorie,
                     </li>
 
                     <li className="list-disc">
-                      usuwać już zapisane pliki,
+                      odrzucić wszystkie dodatkowe kategorie,
                     </li>
 
                     <li className="list-disc">
-                      ustawić powiadomienie o każdorazowym zapisaniu pliku
-                      cookie.
+                      samodzielnie wybrać poszczególne kategorie.
                     </li>
                   </ul>
 
                   <p>
-                    Sposób zmiany ustawień różni się w zależności od
-                    przeglądarki. Poniżej znajdują się linki do instrukcji dla
-                    najpopularniejszych z nich:
+                    Udzielona zgoda może zostać zmieniona lub wycofana w
+                    dowolnym momencie. W tym celu należy skorzystać z przycisku{" "}
+                    <strong>„Ustawienia cookies”</strong> dostępnego w stopce
+                    Serwisu.
                   </p>
 
-                  <ul className="space-y-3 pl-6">
-                    <li className="list-disc">Google Chrome</li>
-                    <li className="list-disc">Mozilla Firefox</li>
-                    <li className="list-disc">Microsoft Edge</li>
-                    <li className="list-disc">Safari</li>
-                  </ul>
+                  <p>
+                    Zmiana lub wycofanie zgody nie wpływa na zgodność z prawem
+                    działań wykonanych przed jej zmianą.
+                  </p>
                 </div>
               </section>
 
               {/* 7 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  7. Okres przechowywania plików cookies
+                  7. Ustawienia przeglądarki
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    Niektóre pliki cookies są usuwane po zakończeniu sesji
-                    przeglądarki (tzw. cookies sesyjne), inne przechowywane są
-                    na urządzeniu użytkownika przez określony czas lub do
-                    momentu ich usunięcia (tzw. cookies trwałe). Okres
-                    przechowywania zależy od celu ich użycia oraz ustawień
-                    przeglądarki użytkownika.
+                    Niezależnie od ustawień dostępnych w Serwisie użytkownik
+                    może również zarządzać plikami cookies bezpośrednio w swojej
+                    przeglądarce internetowej.
+                  </p>
+
+                  <p>W zależności od przeglądarki można m.in.:</p>
+
+                  <ul className="space-y-3 pl-6">
+                    <li className="list-disc">
+                      blokować zapisywanie wybranych lub wszystkich plików
+                      cookies,
+                    </li>
+
+                    <li className="list-disc">
+                      usuwać zapisane wcześniej pliki cookies,
+                    </li>
+
+                    <li className="list-disc">
+                      ustawić powiadomienia dotyczące zapisywania cookies.
+                    </li>
+                  </ul>
+
+                  <p>
+                    Ograniczenie lub usunięcie niektórych technologii może
+                    wpłynąć na sposób działania wybranych funkcji Serwisu.
                   </p>
                 </div>
               </section>
@@ -293,41 +342,95 @@ export default function CookiesPolicy() {
               {/* 8 */}
               <section className="border-b border-border py-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  8. Zmiany w Polityce cookies
+                  8. Okres przechowywania
                 </h2>
 
                 <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                   <p>
-                    Administrator może wprowadzać zmiany w niniejszej Polityce,
-                    aby dostosować ją do zmian w przepisach prawa, technologii
-                    lub sposobu działania Serwisu.
+                    Okres przechowywania informacji zależy od rodzaju
+                    wykorzystywanej technologii oraz celu jej zastosowania.
                   </p>
 
                   <p>
-                    Aktualna wersja Polityki cookies jest zawsze dostępna pod
-                    adresem{" "}
-                    <a
-                      href="https://digitilio.pl/polityka-cookies"
-                      className="font-medium text-primary underline-offset-4 hover:underline"
-                    >
-                      digitilio.pl/polityka-cookies
-                    </a>
-                    .
+                    Niektóre pliki cookies mogą mieć charakter sesyjny i być
+                    usuwane po zakończeniu sesji przeglądarki, natomiast inne
+                    mogą pozostawać zapisane przez określony czas lub do
+                    momentu ich ręcznego usunięcia.
+                  </p>
+
+                  <p>
+                    Informacja o wyborze użytkownika dotyczącym kategorii
+                    cookies jest zapisywana w pamięci lokalnej przeglądarki w
+                    celu zapamiętania ustawień zgody.
+                  </p>
+
+                  <p>
+                    W przypadku zmiany wersji mechanizmu zgód Serwis może
+                    ponownie poprosić użytkownika o dokonanie wyboru.
                   </p>
                 </div>
               </section>
 
               {/* 9 */}
+              <section className="border-b border-border py-12">
+                <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  9. Dane osobowe
+                </h2>
+
+                <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  <p>
+                    Szczegółowe informacje dotyczące przetwarzania danych
+                    osobowych, odbiorców danych, podstaw prawnych, transferów
+                    danych oraz praw użytkowników znajdują się w{" "}
+                    <Link
+                      to="/polityka-prywatnosci"
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      Polityce prywatności
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </section>
+
+              {/* 10 */}
+              <section className="border-b border-border py-12">
+                <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  10. Zmiany w Polityce plików cookies
+                </h2>
+
+                <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  <p>
+                    Administrator może aktualizować niniejszą Politykę w
+                    przypadku zmian w sposobie działania Serwisu,
+                    wykorzystywanych narzędziach, konfiguracji mechanizmu zgód
+                    lub obowiązujących przepisach.
+                  </p>
+
+                  <p>
+                    Aktualna wersja Polityki plików cookies jest zawsze dostępna
+                    pod adresem{" "}
+                    <Link
+                      to="/polityka-cookies"
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      digitilio.pl/polityka-cookies
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </section>
+
+              {/* 11 */}
               <section className="pt-12">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  9. Kontakt
+                  11. Kontakt
                 </h2>
 
                 <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/[0.05] p-6 sm:p-8">
                   <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-                    W sprawach dotyczących niniejszej Polityki cookies można
-                    skontaktować się z Administratorem za pośrednictwem poczty
-                    elektronicznej:{" "}
+                    W sprawach dotyczących niniejszej Polityki plików cookies
+                    można skontaktować się z Administratorem pod adresem:{" "}
                     <a
                       href="mailto:elachabko@digitilio.pl"
                       className="font-medium text-primary underline-offset-4 hover:underline"
