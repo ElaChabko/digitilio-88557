@@ -1,8 +1,28 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
-import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { caseStudies } from "@/content/caseStudies";
+
+const getCaseStudyMeta = (scope: string, industry: string) => {
+  const mainScope = scope
+    .split(",")[0]
+    ?.trim()
+    .replace(/^strategia\s+/i, "");
+
+  const mainIndustry = industry.split("/")[0]?.trim();
+
+  return [mainScope, mainIndustry].filter(Boolean).join(" · ");
+};
+
+const getCaseStudyExcerpt = (lead: string) => {
+  const firstSentence = lead.match(/^[^.!?]+[.!?]/);
+
+  return firstSentence ? firstSentence[0].trim() : lead;
+};
 
 export default function Wspolprace() {
   return (
@@ -90,81 +110,76 @@ export default function Wspolprace() {
                 Case studies
               </motion.p>
 
-              {/* CASE 01 */}
-              <a
-                href="/wspolprace/meta-ads-lokalny-biznes"
-                className="group block"
-              >
-                <motion.article
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.65,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="relative overflow-hidden border-y border-border py-10 sm:py-12 lg:py-14"
-                >
-                  <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-16">
-                    {/* OPIS */}
-                    <div>
-                      <p className="mb-4 text-sm font-medium text-muted-foreground">
-                        Meta Ads · lokalne usługi specjalistyczne
-                      </p>
+              <div className="divide-y divide-border border-y border-border">
+                {caseStudies.map((caseStudy, caseIndex) => {
+                  const results = caseStudy.results.slice(0, 3);
 
-                      <h2 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-                        Od 443 do 1830 obserwujących na Facebooku. Jak
-                        rozwijaliśmy Meta Ads lokalnego gabinetu podologicznego
-                      </h2>
+                  return (
+                    <Link
+                      key={caseStudy.slug}
+                      to={`/wspolprace/${caseStudy.slug}`}
+                      className="group block"
+                    >
+                      <motion.article
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.15 }}
+                        transition={{
+                          duration: 0.65,
+                          delay: caseIndex * 0.06,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="relative py-10 sm:py-12 lg:py-14"
+                      >
+                        <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-16">
+                          {/* OPIS */}
+                          <div>
+                            <p className="mb-4 text-sm font-medium text-muted-foreground">
+                              {getCaseStudyMeta(
+                                caseStudy.scope,
+                                caseStudy.industry
+                              )}
+                            </p>
 
-                      <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-                        Meta Ads miały nie tylko zwiększać widoczność gabinetu,
-                        ale przede wszystkim pomóc ustalić, które działania
-                        rzeczywiście warto rozwijać na lokalnym rynku.
-                      </p>
+                            <h2 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-4xl">
+                              {caseStudy.title}
+                            </h2>
 
-                      <div className="mt-8 flex items-center gap-2 font-medium text-primary">
-                        <span>Zobacz case study</span>
+                            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+                              {getCaseStudyExcerpt(caseStudy.lead)}
+                            </p>
 
-                        <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </div>
-                    </div>
+                            <div className="mt-8 flex items-center gap-2 font-medium text-primary">
+                              <span>Zobacz case study</span>
 
-                    {/* WYNIKI */}
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-8 sm:grid-cols-3 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-                      <div>
-                        <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                          443 → 1830
-                        </p>
+                              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                            </div>
+                          </div>
 
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          obserwujących na Facebooku
-                        </p>
-                      </div>
+                          {/* WYNIKI */}
+                          {results.length > 0 && (
+                            <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-8 sm:grid-cols-3 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                              {results.map((result, resultIndex) => (
+                                <div
+                                  key={`${caseStudy.slug}-${result.value}-${resultIndex}`}
+                                >
+                                  <p className="whitespace-nowrap text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                                    {result.value}
+                                  </p>
 
-                      <div>
-                        <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                          0,14 zł
-                        </p>
-
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          za odwiedziny strony
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                          2335
-                        </p>
-
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          odwiedzin profili i stron w lipcu
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.article>
-              </a>
+                                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                                    {result.label}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </motion.article>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
