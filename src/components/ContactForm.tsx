@@ -7,6 +7,8 @@ type Props = {
 
 type Status = null | "ok" | "err";
 
+const MARKETING_CONSENT_VERSION = "2026-08-14";
+
 export const ContactForm = ({ onSuccess }: Props) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>(null);
@@ -29,7 +31,18 @@ export const ContactForm = ({ onSuccess }: Props) => {
       email: String(form.get("email") || "").trim(),
       company: String(form.get("company") || "").trim(),
       message: String(form.get("message") || "").trim(),
+
+      // Honeypot
       website: String(form.get("website") || ""),
+
+      // Dobrowolna zgoda marketingowa
+      marketingConsent:
+        form.get("marketingConsent") === "yes",
+
+      // Przydatne do udokumentowania,
+      // jaką wersję zgody zaakceptował użytkownik.
+      marketingConsentVersion:
+        MARKETING_CONSENT_VERSION,
     };
 
     if (!payload.email || !payload.message) {
@@ -67,8 +80,8 @@ export const ContactForm = ({ onSuccess }: Props) => {
       }
 
       /*
-       * Event jest wysyłany dopiero po
-       * potwierdzonym sukcesie backendu.
+       * Event wysyłamy dopiero po potwierdzonym
+       * sukcesie backendu.
        */
       window.dataLayer = window.dataLayer || [];
 
@@ -81,9 +94,8 @@ export const ContactForm = ({ onSuccess }: Props) => {
       formEl.reset();
 
       /*
-       * Nie zamykamy formularza natychmiast.
-       * Użytkownik powinien najpierw zobaczyć
-       * potwierdzenie wysłania.
+       * Dajemy użytkownikowi chwilę na zobaczenie
+       * potwierdzenia przed zamknięciem modala.
        */
       if (onSuccess) {
         window.setTimeout(() => {
@@ -101,7 +113,6 @@ export const ContactForm = ({ onSuccess }: Props) => {
     <form
       onSubmit={onSubmit}
       className="space-y-5"
-      noValidate={false}
     >
       {/* HONEYPOT */}
       <div
@@ -219,13 +230,28 @@ export const ContactForm = ({ onSuccess }: Props) => {
         />
       </div>
 
+      {/* MARKETING CONSENT */}
+      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-muted/20 p-4">
+        <input
+          type="checkbox"
+          name="marketingConsent"
+          value="yes"
+          className="mt-1 h-4 w-4 shrink-0 accent-primary"
+        />
+
+        <span className="text-xs leading-relaxed text-muted-foreground">
+          Chcę otrzymywać od Digitilio na podany adres e-mail informacje,
+          materiały i oferty marketingowe dotyczące usług i marketingu.
+          Zgodę mogę wycofać w dowolnym momencie.
+        </span>
+      </label>
+
       {/* PRIVACY */}
       <p className="text-xs leading-relaxed text-muted-foreground">
-        Administratorem podanych danych osobowych jest
-        Elżbieta Chabko, prowadząca działalność gospodarczą
-        pod nazwą Digitilio. Dane wykorzystam w celu
-        odpowiedzi na Twoje zapytanie i prowadzenia związanej
-        z nim korespondencji. Szczegółowe informacje dotyczące
+        Administratorem podanych danych osobowych jest Elżbieta Chabko,
+        prowadząca działalność gospodarczą pod nazwą Digitilio. Dane
+        wykorzystam w celu odpowiedzi na Twoje zapytanie i prowadzenia
+        związanej z nim korespondencji. Szczegółowe informacje dotyczące
         przetwarzania danych znajdziesz w{" "}
         <a
           href="/polityka-prywatnosci"
@@ -263,8 +289,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
 
           {status === "err" && (
             <span className="text-sm text-destructive">
-              Nie udało się wysłać wiadomości. Spróbuj
-              ponownie.
+              Nie udało się wysłać wiadomości. Spróbuj ponownie.
             </span>
           )}
         </div>
