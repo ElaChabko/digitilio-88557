@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/Blog/BlogPost";
 import Wspolprace from "./pages/Wspolprace";
+import CaseStudy from "./pages/CaseStudies/CaseStudy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import NotFound from "./pages/NotFound";
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
 
           <Route path="/wspolprace" element={<Wspolprace />} />
+          <Route path="/wspolprace/:slug" element={<CaseStudy />} />
 
           <Route
             path="/polityka-prywatnosci"
