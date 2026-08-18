@@ -2,7 +2,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
@@ -26,20 +31,31 @@ const App = () => (
       <Sonner />
 
       <LazyGtag />
-     
 
       <BrowserRouter>
         <ScrollToTop />
-         <CookieConsent />
+        <CookieConsent />
+
         <Routes>
           <Route path="/" element={<Index />} />
 
-          <Route path="/blog" element={<Blog />} />
+          {/* BAZA WIEDZY */}
+          <Route path="/baza-wiedzy" element={<Blog />} />
+
+          {/* STARY /BLOG PRZEKIEROWUJEMY DO BAZY WIEDZY */}
+          <Route
+            path="/blog"
+            element={<Navigate to="/baza-wiedzy" replace />}
+          />
+
+          {/* ISTNIEJĄCE ARTYKUŁY ZOSTAJĄ POD /BLOG/:SLUG */}
           <Route path="/blog/:slug" element={<BlogPost />} />
 
+          {/* WSPÓŁPRACE */}
           <Route path="/wspolprace" element={<Wspolprace />} />
           <Route path="/wspolprace/:slug" element={<CaseStudy />} />
 
+          {/* POLITYKI */}
           <Route
             path="/polityka-prywatnosci"
             element={<PrivacyPolicy />}
