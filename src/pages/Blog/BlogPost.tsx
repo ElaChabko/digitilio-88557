@@ -47,39 +47,40 @@ export default function BlogPost() {
     : undefined;
 
   const blogPostSchema = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "@id": `${canonicalUrl}#article`,
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${canonicalUrl}#article`,
 
-  url: canonicalUrl,
+    url: canonicalUrl,
 
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": canonicalUrl,
-  },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
 
-  headline: post.title,
-  description: post.excerpt,
-  datePublished: post.date,
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
 
-  ...(absoluteImageUrl
-    ? {
-        image: [absoluteImageUrl],
-      }
-    : {}),
+    ...(absoluteImageUrl
+      ? {
+          image: [absoluteImageUrl],
+        }
+      : {}),
 
-  publisher: {
-    "@id": "https://digitilio.pl/#organization",
-  },
-};
+    publisher: {
+      "@id": "https://digitilio.pl/#organization",
+    },
+  };
+
   const breadcrumbSchema = createBreadcrumbSchema([
     {
       name: "Digitilio",
       url: "https://digitilio.pl/",
     },
     {
-      name: "Blog",
-      url: "https://digitilio.pl/blog",
+      name: "Baza wiedzy",
+      url: "https://digitilio.pl/baza-wiedzy",
     },
     {
       name: post.title,
