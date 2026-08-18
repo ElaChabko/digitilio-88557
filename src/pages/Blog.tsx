@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
   Calendar,
   Clock,
+  ExternalLink,
   SlidersHorizontal,
 } from "lucide-react";
 
@@ -14,17 +15,6 @@ import { SEO } from "@/components/SEO";
 
 import { blogPosts } from "@/content/blogs/index";
 
-type BlogListItem = {
-  id: number;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  category: string;
-  image: string;
-  slug?: string;
-};
-
 type KnowledgeArea =
   | "Wszystkie"
   | "Decyzje marketingowe"
@@ -33,7 +23,38 @@ type KnowledgeArea =
   | "Social media"
   | "AI w praktyce";
 
-const knowledgeAreas: KnowledgeArea[] = [
+type KnowledgeSource = "blog" | "medium";
+
+type KnowledgeItem = {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  image: string | null;
+  source: KnowledgeSource;
+  href: string;
+  categories: string[];
+  knowledgeArea: Exclude<KnowledgeArea, "Wszystkie">;
+};
+
+type MediumApiPost = {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  link: string;
+  image: string | null;
+  categories: string[];
+  readTime: string;
+};
+
+type MediumApiResponse = {
+  ok: boolean;
+  posts?: MediumApiPost[];
+};
+
+const knowledgeAreaOrder: KnowledgeArea[] = [
   "Wszystkie",
   "Decyzje marketingowe",
   "Diagnoza i analityka",
@@ -42,41 +63,43 @@ const knowledgeAreas: KnowledgeArea[] = [
   "AI w praktyce",
 ];
 
-/**
- * Na razie wykorzystujemy istniejące pole `category`.
- * Kiedy będziemy podpinać Medium, dodamy osobne pole `knowledgeArea`
- * do wspólnego modelu treści.
- */
-const getKnowledgeArea = (post: BlogListItem): KnowledgeArea => {
-  const category = post.category.toLowerCase();
+const getKnowledgeArea = (
+  categories: string[]
+): Exclude<KnowledgeArea, "Wszystkie"> => {
+  const value = categories.join(" ").toLowerCase();
 
   if (
-    category.includes("social") ||
-    category.includes("instagram") ||
-    category.includes("facebook") ||
-    category.includes("linkedin")
-  ) {
-    return "Social media";
-  }
-
-  if (
-    category.includes("ai") ||
-    category.includes("sztuczna inteligencja")
+    value.includes("ai") ||
+    value.includes("artificial intelligence") ||
+    value.includes("ai_governance") ||
+    value.includes("ai-governance")
   ) {
     return "AI w praktyce";
   }
 
   if (
-    category.includes("anality") ||
-    category.includes("dane") ||
-    category.includes("analytics")
+    value.includes("analytics") ||
+    value.includes("anality") ||
+    value.includes("data") ||
+    value.includes("dane") ||
+    value.includes("pomiar")
   ) {
     return "Diagnoza i analityka";
   }
 
   if (
-    category.includes("strateg") ||
-    category.includes("komunik")
+    value.includes("social") ||
+    value.includes("instagram") ||
+    value.includes("facebook") ||
+    value.includes("linkedin")
+  ) {
+    return "Social media";
+  }
+
+  if (
+    value.includes("strateg") ||
+    value.includes("communication") ||
+    value.includes("komunik")
   ) {
     return "Strategia i komunikacja";
   }
@@ -98,27 +121,164 @@ const formatDate = (date: string) => {
   }).format(parsedDate);
 };
 
+const KnowledgeLink = ({
+  item,
+  children,
+  className,
+}: {
+  item: KnowledgeItem;
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  if (item.source === "medium") {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        aria-label={`Czytaj na Medium: ${item.title}`}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      to={item.href}
+      className={className}
+      aria-label={`Czytaj artykuł: ${item.title}`}
+    >
+      {children}
+    </Link>
+  );
+};
+
 export default function Blog() {
+  const [mediumPosts, setMediumPosts] = useState<MediumApiPost[]>([]);
   const [activeArea, setActiveArea] =
     useState<KnowledgeArea>("Wszystkie");
 
-  const posts: BlogListItem[] = [...blogPosts];
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadMediumPosts = async () => {
+      try {
+        const response = await fetch("/api/medium");
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data: MediumApiResponse = await response.json();
+
+        if (
+          isMounted &&
+          data.ok &&
+          Array.isArray(data.posts)
+        ) {
+          setMediumPosts(data.posts);
+        }
+      } catch (error) {
+        console.error("Nie udało się pobrać publikacji Medium:", error);
+      }
+    };
+
+    loadMediumPosts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const knowledgeItems = useMemo<KnowledgeItem[]>(() => {
+    const localItems: KnowledgeItem[] = blogPosts.map((post) => {
+      const categories = [post.category];
+
+      return {
+        id: `blog-${post.id}`,
+        title: post.title,
+        excerpt: post.excerpt,
+        date: post.date,
+        readTime: post.readTime,
+        image: post.image,
+        source: "blog",
+        href: `/blog/${post.slug}`,
+        categories,
+        knowledgeArea: getKnowledgeArea(categories),
+      };
+    });
+
+    const mediumItems: KnowledgeItem[] = mediumPosts.map((post) => ({
+      id: `medium-${post.id}`,
+      title: post.title,
+      excerpt: post.excerpt,
+      date: post.date,
+      readTime: post.readTime,
+      image: post.image,
+      source: "medium",
+      href: post.link,
+      categories: post.categories,
+      knowledgeArea: getKnowledgeArea(post.categories),
+    }));
+
+    return [...localItems, ...mediumItems].sort((a, b) => {
+      const aTime = new Date(a.date).getTime();
+      const bTime = new Date(b.date).getTime();
+
+      if (Number.isNaN(aTime) || Number.isNaN(bTime)) {
+        return 0;
+      }
+
+      return bTime - aTime;
+    });
+  }, [mediumPosts]);
 
   /**
-   * Na razie pierwszy artykuł traktujemy jako wyróżniony.
-   * Później możemy dodać np. `featured: true` do danych artykułu.
+   * Najnowszy materiał jest na razie wyróżniony automatycznie.
+   * Później możemy sterować featured ręcznie.
    */
-  const featuredPost = posts[0];
+  const featuredItem = knowledgeItems[0];
 
-  const filteredPosts = useMemo(() => {
-    if (activeArea === "Wszystkie") {
-      return posts;
+  const availableAreas = useMemo(() => {
+    const usedAreas = new Set(
+      knowledgeItems.map((item) => item.knowledgeArea)
+    );
+
+    return knowledgeAreaOrder.filter(
+      (area) => area === "Wszystkie" || usedAreas.has(area)
+    );
+  }, [knowledgeItems]);
+
+  const filteredItems = useMemo(() => {
+    const items =
+      activeArea === "Wszystkie"
+        ? knowledgeItems
+        : knowledgeItems.filter(
+            (item) => item.knowledgeArea === activeArea
+          );
+
+    /**
+     * Featured nie pojawia się drugi raz w bibliotece.
+     */
+    if (
+      activeArea === "Wszystkie" &&
+      featuredItem
+    ) {
+      return items.filter(
+        (item) => item.id !== featuredItem.id
+      );
     }
 
-    return posts.filter(
-      (post) => getKnowledgeArea(post) === activeArea
-    );
-  }, [activeArea, posts]);
+    return items;
+  }, [activeArea, knowledgeItems, featuredItem]);
+
+  useEffect(() => {
+    if (!availableAreas.includes(activeArea)) {
+      setActiveArea("Wszystkie");
+    }
+  }, [availableAreas, activeArea]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -165,7 +325,7 @@ export default function Blog() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45 }}
-                className="text-sm font-medium text-primary-foreground/60"
+                className="text-sm font-medium text-white/55"
               >
                 Baza wiedzy
               </motion.p>
@@ -178,7 +338,7 @@ export default function Blog() {
                   delay: 0.05,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mt-5 max-w-5xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl"
+                className="mt-5 max-w-4xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-[3.4rem]"
               >
                 Lepsze decyzje marketingowe zaczynają się od właściwej diagnozy.
               </motion.h1>
@@ -210,7 +370,7 @@ export default function Blog() {
               </div>
 
               <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
-                {knowledgeAreas.map((area) => {
+                {availableAreas.map((area) => {
                   const isActive = activeArea === area;
 
                   return (
@@ -235,7 +395,7 @@ export default function Blog() {
         </section>
 
         {/* FEATURED */}
-        {featuredPost && activeArea === "Wszystkie" && (
+        {featuredItem && activeArea === "Wszystkie" && (
           <section className="py-16 sm:py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6">
               <div className="mx-auto max-w-7xl">
@@ -255,60 +415,71 @@ export default function Blog() {
                   transition={{ duration: 0.55 }}
                   className="mt-6 overflow-hidden rounded-3xl border border-border bg-card"
                 >
-                  {featuredPost.slug ? (
-                    <Link
-                      to={`/blog/${featuredPost.slug}`}
-                      className="group grid lg:grid-cols-[1.05fr_0.95fr]"
-                    >
-                      <div className="relative min-h-[260px] overflow-hidden sm:min-h-[340px] lg:min-h-[460px]">
+                  <KnowledgeLink
+                    item={featuredItem}
+                    className="group grid lg:grid-cols-[1.05fr_0.95fr]"
+                  >
+                    <div className="relative min-h-[260px] overflow-hidden sm:min-h-[340px] lg:min-h-[440px]">
+                      {featuredItem.image ? (
                         <img
-                          src={featuredPost.image}
-                          alt={featuredPost.title}
+                          src={featuredItem.image}
+                          alt={featuredItem.title}
                           loading="eager"
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
                         />
+                      ) : (
+                        <div className="absolute inset-0 bg-primary/10" />
+                      )}
 
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    </div>
+
+                    <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary">
+                          {featuredItem.knowledgeArea}
+                        </span>
+
+                        <span className="text-xs text-muted-foreground">
+                          {featuredItem.source === "medium"
+                            ? "MEDIUM ↗"
+                            : "ARTYKUŁ"}
+                        </span>
                       </div>
 
-                      <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary">
-                            {getKnowledgeArea(featuredPost)}
-                          </span>
+                      <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
+                        {featuredItem.title}
+                      </h2>
 
-                          <span className="text-xs text-muted-foreground">
-                            ARTYKUŁ
-                          </span>
-                        </div>
+                      <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                        {featuredItem.excerpt}
+                      </p>
 
-                        <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-                          {featuredPost.title}
-                        </h2>
+                      <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Calendar className="h-4 w-4" />
+                          {formatDate(featuredItem.date)}
+                        </span>
 
-                        <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                          {featuredPost.excerpt}
-                        </p>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Clock className="h-4 w-4" />
+                          {featuredItem.readTime}
+                        </span>
+                      </div>
 
-                        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                          <span className="inline-flex items-center gap-1.5">
-                            <Calendar className="h-4 w-4" />
-                            {formatDate(featuredPost.date)}
-                          </span>
+                      <div className="mt-9 inline-flex items-center gap-2 font-medium text-foreground">
+                        {featuredItem.source === "medium"
+                          ? "Czytaj na Medium"
+                          : "Czytaj materiał"}
 
-                          <span className="inline-flex items-center gap-1.5">
-                            <Clock className="h-4 w-4" />
-                            {featuredPost.readTime}
-                          </span>
-                        </div>
-
-                        <div className="mt-9 inline-flex items-center gap-2 font-medium text-foreground">
-                          Czytaj materiał
+                        {featuredItem.source === "medium" ? (
+                          <ExternalLink className="h-4 w-4 text-primary" />
+                        ) : (
                           <ArrowRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
-                        </div>
+                        )}
                       </div>
-                    </Link>
-                  ) : null}
+                    </div>
+                  </KnowledgeLink>
                 </motion.article>
               </div>
             </div>
@@ -316,13 +487,7 @@ export default function Blog() {
         )}
 
         {/* LIBRARY */}
-        <section
-          className={
-            activeArea === "Wszystkie"
-              ? "border-t border-border bg-secondary/15 py-16 sm:py-20 lg:py-24"
-              : "py-16 sm:py-20 lg:py-24"
-          }
-        >
+        <section className="border-t border-border bg-secondary/15 py-16 sm:py-20 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="mx-auto max-w-7xl">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -341,27 +506,24 @@ export default function Blog() {
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  {filteredPosts.length}{" "}
-                  {filteredPosts.length === 1
+                  {filteredItems.length}{" "}
+                  {filteredItems.length === 1
                     ? "materiał"
-                    : "materiałów"}
+                    : "materiały"}
                 </p>
               </div>
 
-              {filteredPosts.length > 0 ? (
+              {filteredItems.length > 0 ? (
                 <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-12">
-                  {filteredPosts.map((post, index) => {
+                  {filteredItems.map((item, index) => {
                     const isWide =
-                      filteredPosts.length > 2 &&
-                      (index === 0 || index % 5 === 0);
-
-                    if (!post.slug) {
-                      return null;
-                    }
+                      filteredItems.length === 1 ||
+                      (filteredItems.length > 2 &&
+                        (index === 0 || index % 5 === 0));
 
                     return (
                       <motion.article
-                        key={post.id}
+                        key={item.id}
                         initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
@@ -370,13 +532,15 @@ export default function Blog() {
                           delay: Math.min(index * 0.05, 0.2),
                         }}
                         className={
-                          isWide
+                          filteredItems.length === 1
                             ? "md:col-span-2 lg:col-span-8"
-                            : "lg:col-span-4"
+                            : isWide
+                              ? "md:col-span-2 lg:col-span-8"
+                              : "lg:col-span-4"
                         }
                       >
-                        <Link
-                          to={`/blog/${post.slug}`}
+                        <KnowledgeLink
+                          item={item}
                           className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
                         >
                           <div
@@ -387,12 +551,16 @@ export default function Blog() {
                                 : "aspect-[16/10]",
                             ].join(" ")}
                           >
-                            <img
-                              src={post.image}
-                              alt={post.title}
-                              loading="lazy"
-                              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                            />
+                            {item.image ? (
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                loading="lazy"
+                                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                              />
+                            ) : (
+                              <div className="absolute inset-0 bg-primary/10" />
+                            )}
 
                             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
                           </div>
@@ -400,11 +568,18 @@ export default function Blog() {
                           <div className="flex flex-1 flex-col p-6 sm:p-7">
                             <div className="flex flex-wrap items-center justify-between gap-3">
                               <span className="text-xs font-medium uppercase tracking-[0.1em] text-primary">
-                                {getKnowledgeArea(post)}
+                                {item.knowledgeArea}
                               </span>
 
-                              <span className="text-xs text-muted-foreground">
-                                ARTYKUŁ
+                              <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                                {item.source === "medium" ? (
+                                  <>
+                                    MEDIUM
+                                    <ExternalLink className="h-3 w-3" />
+                                  </>
+                                ) : (
+                                  "ARTYKUŁ"
+                                )}
                               </span>
                             </div>
 
@@ -416,30 +591,34 @@ export default function Blog() {
                                   : "text-xl sm:text-2xl",
                               ].join(" ")}
                             >
-                              {post.title}
+                              {item.title}
                             </h3>
 
                             <p className="mt-4 line-clamp-3 text-base leading-relaxed text-muted-foreground">
-                              {post.excerpt}
+                              {item.excerpt}
                             </p>
 
                             <div className="mt-auto flex items-end justify-between gap-5 pt-8">
                               <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
                                 <span className="inline-flex items-center gap-1.5">
                                   <Calendar className="h-3.5 w-3.5" />
-                                  {formatDate(post.date)}
+                                  {formatDate(item.date)}
                                 </span>
 
                                 <span className="inline-flex items-center gap-1.5">
                                   <Clock className="h-3.5 w-3.5" />
-                                  {post.readTime}
+                                  {item.readTime}
                                 </span>
                               </div>
 
-                              <ArrowRight className="h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+                              {item.source === "medium" ? (
+                                <ExternalLink className="h-5 w-5 shrink-0 text-primary" />
+                              ) : (
+                                <ArrowRight className="h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+                              )}
                             </div>
                           </div>
-                        </Link>
+                        </KnowledgeLink>
                       </motion.article>
                     );
                   })}
@@ -448,11 +627,6 @@ export default function Blog() {
                 <div className="mt-10 rounded-3xl border border-border bg-background p-8 sm:p-10">
                   <p className="text-lg font-medium text-foreground">
                     W tej kategorii nie ma jeszcze materiałów.
-                  </p>
-
-                  <p className="mt-2 text-muted-foreground">
-                    Kolejne analizy i publikacje będą pojawiać się tutaj wraz z
-                    rozwojem Bazy wiedzy.
                   </p>
                 </div>
               )}
