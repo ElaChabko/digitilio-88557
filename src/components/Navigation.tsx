@@ -62,9 +62,9 @@ export const Navigation = () => {
       id: "about",
     },
     {
-      label: "Blog",
+      label: "Baza wiedzy",
       type: "route",
-      path: "/blog",
+      path: "/baza-wiedzy",
     },
   ];
 
@@ -144,6 +144,25 @@ export const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const isRouteActive = (path: string) => {
+    /**
+     * Baza wiedzy ma być aktywna zarówno na:
+     * /baza-wiedzy
+     * jak i na istniejących artykułach /blog/:slug
+     */
+    if (path === "/baza-wiedzy") {
+      return (
+        location.pathname === "/baza-wiedzy" ||
+        location.pathname.startsWith("/blog/")
+      );
+    }
+
+    return (
+      location.pathname === path ||
+      location.pathname.startsWith(`${path}/`)
+    );
+  };
+
   return (
     <>
       <nav
@@ -176,10 +195,7 @@ export const Navigation = () => {
 
               const isActiveRoute =
                 item.type === "route" &&
-                (
-                  location.pathname === item.path ||
-                  location.pathname.startsWith(`${item.path}/`)
-                );
+                isRouteActive(item.path);
 
               return (
                 <button
@@ -248,10 +264,7 @@ export const Navigation = () => {
 
                 const isActiveRoute =
                   item.type === "route" &&
-                  (
-                    location.pathname === item.path ||
-                    location.pathname.startsWith(`${item.path}/`)
-                  );
+                  isRouteActive(item.path);
 
                 return (
                   <button
