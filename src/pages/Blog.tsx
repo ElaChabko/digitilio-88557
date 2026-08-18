@@ -1,4 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -121,13 +126,25 @@ const formatDate = (date: string) => {
   }).format(parsedDate);
 };
 
+const getMaterialCountLabel = (count: number) => {
+  if (count === 1) {
+    return "1 materiał";
+  }
+
+  if (count >= 2 && count <= 4) {
+    return `${count} materiały`;
+  }
+
+  return `${count} materiałów`;
+};
+
 const KnowledgeLink = ({
   item,
   children,
   className,
 }: {
   item: KnowledgeItem;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   if (item.source === "medium") {
@@ -181,7 +198,10 @@ export default function Blog() {
           setMediumPosts(data.posts);
         }
       } catch (error) {
-        console.error("Nie udało się pobrać publikacji Medium:", error);
+        console.error(
+          "Nie udało się pobrać publikacji Medium:",
+          error
+        );
       }
     };
 
@@ -236,8 +256,8 @@ export default function Blog() {
   }, [mediumPosts]);
 
   /**
-   * Najnowszy materiał jest na razie wyróżniony automatycznie.
-   * Później możemy sterować featured ręcznie.
+   * Najnowszy materiał jest wyróżniony.
+   * Nadal pozostaje również w pełnej bibliotece poniżej.
    */
   const featuredItem = knowledgeItems[0];
 
@@ -247,32 +267,24 @@ export default function Blog() {
     );
 
     return knowledgeAreaOrder.filter(
-      (area) => area === "Wszystkie" || usedAreas.has(area)
+      (area) =>
+        area === "Wszystkie" || usedAreas.has(area)
     );
   }, [knowledgeItems]);
 
+  /**
+   * Biblioteka pokazuje wszystkie materiały.
+   * Featured NIE jest z niej usuwany.
+   */
   const filteredItems = useMemo(() => {
-    const items =
-      activeArea === "Wszystkie"
-        ? knowledgeItems
-        : knowledgeItems.filter(
-            (item) => item.knowledgeArea === activeArea
-          );
-
-    /**
-     * Featured nie pojawia się drugi raz w bibliotece.
-     */
-    if (
-      activeArea === "Wszystkie" &&
-      featuredItem
-    ) {
-      return items.filter(
-        (item) => item.id !== featuredItem.id
-      );
+    if (activeArea === "Wszystkie") {
+      return knowledgeItems;
     }
 
-    return items;
-  }, [activeArea, knowledgeItems, featuredItem]);
+    return knowledgeItems.filter(
+      (item) => item.knowledgeArea === activeArea
+    );
+  }, [activeArea, knowledgeItems]);
 
   useEffect(() => {
     if (!availableAreas.includes(activeArea)) {
@@ -340,7 +352,8 @@ export default function Blog() {
                 }}
                 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-[3.4rem]"
               >
-                Lepsze decyzje marketingowe zaczynają się od właściwej diagnozy.
+                Lepsze decyzje marketingowe zaczynają się od właściwej
+                diagnozy.
               </motion.h1>
 
               <motion.p
@@ -486,7 +499,7 @@ export default function Blog() {
           </section>
         )}
 
-        {/* LIBRARY */}
+        {/* BIBLIOTEKA */}
         <section className="border-t border-border bg-secondary/15 py-16 sm:py-20 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="mx-auto max-w-7xl">
@@ -506,20 +519,21 @@ export default function Blog() {
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  {filteredItems.length}{" "}
-                  {filteredItems.length === 1
-                    ? "materiał"
-                    : "materiały"}
+                  {getMaterialCountLabel(filteredItems.length)}
                 </p>
               </div>
 
               {filteredItems.length > 0 ? (
                 <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-12">
                   {filteredItems.map((item, index) => {
+                    const itemCount = filteredItems.length;
+
+                    const isSingle = itemCount === 1;
+                    const isTwoItems = itemCount === 2;
+
                     const isWide =
-                      filteredItems.length === 1 ||
-                      (filteredItems.length > 2 &&
-                        (index === 0 || index % 5 === 0));
+                      itemCount >= 3 &&
+                      (index === 0 || index % 5 === 0);
 
                     return (
                       <motion.article
@@ -532,11 +546,13 @@ export default function Blog() {
                           delay: Math.min(index * 0.05, 0.2),
                         }}
                         className={
-                          filteredItems.length === 1
+                          isSingle
                             ? "md:col-span-2 lg:col-span-8"
-                            : isWide
-                              ? "md:col-span-2 lg:col-span-8"
-                              : "lg:col-span-4"
+                            : isTwoItems
+                              ? "md:col-span-1 lg:col-span-6"
+                              : isWide
+                                ? "md:col-span-2 lg:col-span-8"
+                                : "lg:col-span-4"
                         }
                       >
                         <KnowledgeLink
@@ -546,9 +562,13 @@ export default function Blog() {
                           <div
                             className={[
                               "relative overflow-hidden",
-                              isWide
-                                ? "aspect-[16/8] lg:aspect-[16/7]"
-                                : "aspect-[16/10]",
+                              isSingle
+                                ? "aspect-[16/8]"
+                                : isTwoItems
+                                  ? "aspect-[16/9]"
+                                  : isWide
+                                    ? "aspect-[16/8] lg:aspect-[16/7]"
+                                    : "aspect-[16/10]",
                             ].join(" ")}
                           >
                             {item.image ? (
@@ -583,14 +603,7 @@ export default function Blog() {
                               </span>
                             </div>
 
-                            <h3
-                              className={[
-                                "mt-4 font-bold leading-tight tracking-tight text-foreground",
-                                isWide
-                                  ? "text-2xl sm:text-3xl"
-                                  : "text-xl sm:text-2xl",
-                              ].join(" ")}
-                            >
+                            <h3 className="mt-4 text-xl font-bold leading-tight tracking-tight text-foreground sm:text-2xl">
                               {item.title}
                             </h3>
 
