@@ -18,6 +18,7 @@ export type BlogPost = {
   date: string;
   readTime: string;
   category: string;
-  image: string; 
-  content: ArticleSection[];
+  image: string;
+  content?: ArticleSection[];
+  externalUrl?: string;
 };
