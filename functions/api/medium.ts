@@ -1,4 +1,4 @@
-const MEDIUM_FEED_URL = "https://medium.com/feed/@elachabko";
+const MEDIUM_FEED_URL = "https://medium.com/feed/@elachabko-digitilio";
 
 type MediumPost = {
   id: string;
