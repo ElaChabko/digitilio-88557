@@ -2,7 +2,7 @@ import { BlogPost } from "./types";
 import { noweTechnologie2026 } from "./posts/nowe-technologie-2026";
 
 export const blogPosts: BlogPost[] = [
-  metaSupportAutomatyzacja,
+  noweTechnologie2026,
   
 ];
 
