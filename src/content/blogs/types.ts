@@ -18,6 +18,6 @@ export type BlogPost = {
   date: string;
   readTime: string;
   category: string;
-  image: string; 
+  image: string;
   content: ArticleSection[];
 };
