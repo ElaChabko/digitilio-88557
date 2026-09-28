@@ -94,6 +94,27 @@ export const Footer = () => {
                 <BadgeCheck className="h-4 w-4 text-white/60 transition-colors group-hover:text-white" />
                 <span>Google + SGH · Umiejętności Jutra AI 2.0</span>
               </a>
+              {/* AI VISIBILITY / GEO */}
+<a
+  href="/certyfikaty/ai-visibility-brand24-chatbeat.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    group flex items-center gap-2
+    rounded-full border border-white/15
+    bg-white/[0.06]
+    px-4 py-2.5
+    text-sm text-white/85
+    transition-all duration-300
+    hover:border-white/30
+    hover:bg-white/[0.1]
+    hover:text-white
+  "
+  aria-label="Zobacz certyfikat GEO w praktyce i AI Visibility"
+>
+  <BadgeCheck className="h-4 w-4 text-white/60 transition-colors group-hover:text-white" />
+  <span>Brand24 + Chatbeat · AI Visibility / GEO</span>
+</a>
             </div>
           </div>
         </div>
