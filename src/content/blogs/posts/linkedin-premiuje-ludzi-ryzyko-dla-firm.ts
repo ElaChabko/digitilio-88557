@@ -1,4 +1,5 @@
 import { BlogPost } from "../types";
+import coverImage from "@/assets/blog/linkedin-ludzie-firmy-ryzyko.webp";
 
 export const linkedinPremiujeLudzi: BlogPost = {
   id: 2,
@@ -10,7 +11,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
   date: "2026-10-05",
   readTime: "10 min",
   category: "Social Media",
-  image: "",
+  image: coverImage,
 
   content: [
     {
