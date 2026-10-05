@@ -5,7 +5,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
   id: 2,
   slug: "linkedin-premiuje-ludzi-ryzyko-dla-firm",
   title:
-    "LinkedIn przestał premiować firmy. Zaczął premiować ludzi — i to nowe ryzyko",
+    "LinkedIn przestał premiować firmy. Zaczął premiować ludzi - i to nowe ryzyko",
   excerpt:
     "LinkedIn coraz mocniej nagradza ekspertyzę konkretnych osób zamiast komunikacji stron firmowych. Dla firm to skuteczna strategia dystrybucji, ale też nowe ryzyko: kto właściwie posiada publiczność zbudowaną na profilu foundera lub CEO?",
   date: "2026-10-05",
@@ -20,7 +20,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "**LinkedIn nagradza dziś ekspertyzę osoby, nie zasięg strony firmowej — a firmy przesuwają na to budżet, nie pytając, kto właściwie posiada tę publiczność.**",
+            "**LinkedIn nagradza dziś ekspertyzę osoby, nie zasięg strony firmowej, a firmy przesuwają na to budżet, nie pytając, kto właściwie posiada tę publiczność.**",
         },
         {
           type: "paragraph",
@@ -30,7 +30,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "To nie wrażenie jednej osoby przeglądającej feed. To efekt świadomej decyzji platformy — i coraz częściej lustrzanej decyzji firm, które reagują na nią, nie pytając, co właściwie na tę decyzję odpowiadają.",
+            "To nie wrażenie jednej osoby przeglądającej feed. To efekt świadomej decyzji platformy i coraz częściej lustrzanej decyzji firm, które reagują na nią, nie pytając, co właściwie na tę decyzję odpowiadają.",
         },
       ],
     },
@@ -41,33 +41,33 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "LinkedIn oficjalnie opisał na swoim blogu inżynieryjnym przebudowę systemu, który decyduje, co trafia do feedu. Kierunek zmiany jest jasny: mniej wagi dla samego zasięgu czy wielkości followingu, więcej dla sygnałów jakości — głębi interakcji, powtarzalnej ekspertyzy, tego, czy ludzie naprawdę reagują na treść, a nie tylko ją mijają wzrokiem.",
+            "LinkedIn oficjalnie opisał na swoim blogu inżynieryjnym przebudowę systemu, który decyduje, co trafia do feedu. Kierunek zmiany jest jasny: mniej wagi dla samego zasięgu czy wielkości followingu, więcej dla sygnałów jakości, głębi interakcji, powtarzalnej ekspertyzy, tego, czy ludzie naprawdę reagują na treść, a nie tylko ją mijają wzrokiem.",
         },
         {
           type: "paragraph",
           text:
-            "Równolegle LinkedIn od dawna wprost zakazuje w swoim regulaminie, w Professional Community Policies, sztucznego podbijania zaangażowania — grup wzajemnie klikających polubienia, treści budowanych wyłącznie pod reakcję typu „napisz TAK w komentarzu”. To nie plotka z branżowego bloga. To opublikowana, obowiązująca polityka platformy.",
+            "Równolegle LinkedIn od dawna wprost zakazuje w swoim regulaminie, w Professional Community Policies, sztucznego podbijania zaangażowania: grup wzajemnie klikających polubienia, treści budowanych wyłącznie pod reakcję typu „napisz TAK w komentarzu”. To nie plotka z branżowego bloga, a opublikowana, obowiązująca polityka platformy.",
         },
         {
           type: "paragraph",
           text:
-            "Efekt tej zmiany nie jest przypadkowy. Strona firmowa ze swojej natury komunikuje bezosobowo — ogłoszenia, aktualizacje produktowe, cytaty z raportów. Osoba komunikuje naturalnie w sposób, który system dziś premiuje: reaguje, spiera się, dopowiada, ma zdanie.",
+            "Efekt tej zmiany nie jest przypadkowy, bo strona firmowa ze swojej natury komunikuje bezosobowo ogłoszenia, aktualizacje produktowe, cytaty z raportów, a ssoba komunikuje naturalnie w sposób, który system dziś premiuje: reaguje, spiera się, dopowiada, ma zdanie.",
         },
         {
           type: "quote",
           text:
-            "LinkedIn nie faworyzuje dziś ludzi przez przypadek algorytmu. Faworyzuje ich, bo tak zaprojektował swój system rankingu.",
+            "LinkedIn nie faworyzuje dziś ludzi przez przypadek algorytmu, ale dlatego że tak zaprojektował swój system rankingu.",
         },
       ],
     },
 
     {
-      heading: "Firmy reagują racjonalnie — i to jest właśnie problem",
+      heading: "Firmy reagują racjonalnie, to może być problem",
       blocks: [
         {
           type: "paragraph",
           text:
-            "Reakcja firm na tę zmianę jest zrozumiała. Skoro platforma nagradza osoby, naturalnym ruchem jest przesunięcie ciężaru komunikacji na osobę — najczęściej foundera albo CEO.",
+            "Reakcja firm na tę zmianę jest zrozumiała. Skoro platforma nagradza osoby, naturalnym ruchem jest przesunięcie ciężaru komunikacji na osobę, czyli najczęściej foundera albo CEO.",
         },
         {
           type: "paragraph",
@@ -77,22 +77,22 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "To nie jest twierdzenie odosobnione — dziennikarka Inc.com, opisując swój przegląd stron firmowych startupów B2B w lipcu 2026 roku, ujęła to jeszcze prościej: strony firmowe wyglądają na opuszczone, a to na profilach founderów firmy „naprawdę żyją”.",
+            "To nie jest twierdzenie odosobnione, dziennikarka Inc.com, opisując swój przegląd stron firmowych startupów B2B w lipcu 2026 roku, ujęła to jeszcze prościej: strony firmowe wyglądają na opuszczone, a to na profilach founderów firmy „naprawdę żyją”.",
         },
         {
           type: "paragraph",
           text:
-            "Warto być tu precyzyjnym co do tego, czego ten artykuł nie twierdzi. Po LinkedIn krążą konkretne mnożniki — „profile osobiste generują pięć razy więcej zaangażowania niż strony firmowe” i podobne wartości procentowe przypisywane różnym indeksom branżowym. Żaden z nich nie wytrzymuje sprawdzenia u źródła pierwotnego: cytowania prowadzą od jednego bloga do drugiego, aż w końcu do strony, która danej liczby w ogóle nie zawiera.",
+            "Warto być tu precyzyjnym co do tego, czego ten artykuł nie twierdzi. Po LinkedIn krążą konkretne mnożniki: „profile osobiste generują pięć razy więcej zaangażowania niż strony firmowe” i podobne wartości procentowe przypisywane różnym indeksom branżowym. Żaden z nich nie wytrzymuje sprawdzenia u źródła pierwotnego: cytowania prowadzą od jednego bloga do drugiego, aż w końcu do strony, która danej liczby w ogóle nie zawiera.",
         },
         {
           type: "paragraph",
           text:
-            "Sam kierunek zjawiska jest realny i potwierdzony niezależnie. Jego dokładna skala — nie, przynajmniej nie w formie, w jakiej krąży po LinkedIn.",
+            "Sam kierunek zjawiska jest realny i potwierdzony niezależnie. Jego dokładna skala - nie, przynajmniej nie w formie, w jakiej krąży po LinkedIn.",
         },
         {
           type: "quote",
           text:
-            "Łatwo przyjąć efektowną liczbę, bo brzmi przekonująco, i zbudować na niej decyzję, zamiast sprawdzić, czy w ogóle istnieje.",
+            "Łatwo przyjąć efektowną liczbę, bo brzmi przekonująco i zbudować na niej decyzję, zamiast sprawdzić, czy w ogóle istnieje.",
         },
       ],
     },
@@ -113,17 +113,17 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "To pytanie brzmi abstrakcyjnie tylko do momentu, gdy ktoś faktycznie odejdzie z firmy albo dojdzie do konfliktu. Wtedy okazuje się, że nie jest ono ani nowe, ani teoretyczne — sądy już się nim zajmowały, z konkretnymi, nazwiskowymi sprawami po obu stronach sporu.",
+            "To pytanie brzmi abstrakcyjnie tylko do momentu, gdy ktoś faktycznie odejdzie z firmy albo dojdzie do konfliktu. Wtedy okazuje się, że nie jest ono ani nowe, ani teoretyczne, bo sądy już się nim zajmowały, z konkretnymi sprawami po obu stronach sporu.",
         },
         {
           type: "paragraph",
           text:
-            "W sprawie Eagle v. Morgan (Sąd Okręgowy dla Wschodniego Dystryktu Pensylwanii, wyrok z marca 2013 roku) firma edukacyjna zmieniła hasło do konta LinkedIn swojej byłej dyrektor generalnej zaraz po jej zwolnieniu i podmieniła jej nazwisko oraz zdjęcie na dane osoby, która przejęła jej stanowisko — zachowując przy tym całą sieć kontaktów i historię, którą tamta osoba zbudowała przez lata.",
+            "W sprawie Eagle v. Morgan (Sąd Okręgowy dla Wschodniego Dystryktu Pensylwanii, wyrok z marca 2013 roku) firma edukacyjna zmieniła hasło do konta LinkedIn swojej byłej dyrektor generalnej zaraz po jej zwolnieniu i podmieniła jej nazwisko oraz zdjęcie na dane osoby, która przejęła jej stanowisko, zachowując przy tym całą sieć kontaktów i historię, którą tamta osoba zbudowała przez lata.",
         },
         {
           type: "paragraph",
           text:
-            "Sąd ostatecznie uznał, że to była pracownica właścicielką konta, nie firma — choć nie przyznał jej żadnego odszkodowania, bo nie zdołała udowodnić konkretnej straty finansowej.",
+            "Sąd ostatecznie uznał, że to była pracownica właścicielką konta, nie firma, choć nie przyznał jej żadnego odszkodowania, bo nie zdołała udowodnić konkretnej straty finansowej.",
         },
         {
           type: "paragraph",
@@ -138,7 +138,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Odpowiedź sądu w obu przypadkach nie była automatyczna ani oczywista dla żadnej ze stron — co samo w sobie powinno być ostrzeżeniem, że nie da się tego pytania po prostu założyć.",
+            "Odpowiedź sądu w obu przypadkach nie była automatyczna ani oczywista dla żadnej ze stron, co samo w sobie powinno być ostrzeżeniem, że nie da się tego pytania po prostu założyć.",
         },
       ],
     },
@@ -149,7 +149,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Byłoby zbyt wygodne sprowadzić ten wniosek do rekomendacji „podpiszcie odpowiednią umowę” i zamknąć temat. Umowa reguluje formalną własność konta, ale nie rozwiązuje głębszego problemu strukturalnego: im mocniej cała dystrybucja marki opiera się na jednym głosie, tym bardziej krucha staje się ta dystrybucja jako całość — niezależnie od tego, co jest zapisane w umowie o pracę.",
+            "Byłoby zbyt wygodne sprowadzić ten wniosek do rekomendacji „podpiszcie odpowiednią umowę” i zamknąć temat. Umowa reguluje formalną własność konta, ale nie rozwiązuje głębszego problemu strukturalnego: im mocniej cała dystrybucja marki opiera się na jednym głosie, tym bardziej krucha staje się ta dystrybucja jako całość, niezależnie od tego, co jest zapisane w umowie o pracę.",
         },
         {
           type: "paragraph",
@@ -159,7 +159,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Jeśli ta osoba zmieni priorytety, przejdzie na urlop macierzyński, odejdzie w konflikcie albo po prostu przestanie mieć czas na regularne publikowanie, dystrybucja firmy nie słabnie stopniowo — znika niemal z dnia na dzień, razem z jedynym kanałem, który w międzyczasie stał się główny.",
+            "Jeśli ta osoba zmieni priorytety, przejdzie na urlop macierzyński, odejdzie w konflikcie albo po prostu przestanie mieć czas na regularne publikowanie, dystrybucja firmy nie słabnie stopniowo, a znika niemal z dnia na dzień, razem z jedynym kanałem, który w międzyczasie stał się główny.",
         },
       ],
     },
@@ -170,12 +170,12 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Zgodnie z zasadą, którą Digitilio stosuje do każdej decyzji o automatyzacji czy nowym kanale — dobry marketing to również decyzja, czego nie robić, a odpowiedzialność za strategiczną decyzję nie powinna być oddzielona od decyzji o narzędziu czy taktyce, którą się tę strategię realizuje.",
+            "Zgodnie z zasadą, którą Digitilio stosuje do każdej decyzji o automatyzacji czy nowym kanale: dobry marketing to również decyzja, czego nie robić, a odpowiedzialność za strategiczną decyzję nie powinna być oddzielona od decyzji o narzędziu czy taktyce, którą się tę strategię realizuje.",
         },
         {
           type: "paragraph",
           text:
-            "Przesunięcie dystrybucji na osobisty profil nie jest błędem. Błędem jest traktowanie tego wyłącznie jako taktyki contentowej, a nie jako decyzji o tym, gdzie mieszka główny kanał dotarcia do klientów — i kto go kontroluje.",
+            "Przesunięcie dystrybucji na osobisty profil nie jest błędem, ale błędem jest traktowanie tego wyłącznie jako taktyki contentowej, a nie jako decyzji o tym, gdzie mieszka główny kanał dotarcia do klientów i kto go kontroluje.",
         },
         {
           type: "paragraph",
@@ -185,9 +185,9 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "list",
           items: [
-            "Czy istnieje pisemne ustalenie — niekoniecznie skomplikowana umowa, ale jasny zapis — regulujące, co się dzieje z tą aktywnością, jeśli współpraca się zakończy?",
+            "Czy istnieje pisemne ustalenie, niekoniecznie skomplikowana umowa, ale jasny zapis, regulujące, co się dzieje z tą aktywnością, jeśli współpraca się zakończy?",
             "Czy dystrybucja opiera się wyłącznie na jednym głosie, czy firma świadomie buduje więcej niż jeden rozpoznawalny profil, tak by nie każda zmiana kadrowa oznaczała utratę głównego kanału?",
-            "Czy ktoś w firmie w ogóle odpowiada za tę zależność jako za ryzyko biznesowe — a nie tylko czerpie z niej korzyści, dopóki działa?",
+            "Czy ktoś w firmie w ogóle odpowiada za tę zależność jako za ryzyko biznesowe, a nie tylko czerpie z niej korzyści, dopóki działa?",
           ],
         },
         {
@@ -198,7 +198,7 @@ export const linkedinPremiujeLudzi: BlogPost = {
         {
           type: "quote",
           text:
-            "LinkedIn nagrodził dziś ludzi, nie firmy — to fakt, z którym trudno dyskutować. Ale to wciąż firma, nie platforma, odpowiada za to, co się stanie, gdy ten człowiek przestanie być jej częścią.",
+            "LinkedIn nagrodził dziś ludzi, nie firmy, to fakt, z którym trudno dyskutować, ale to wciąż firma, nie platforma, odpowiada za to, co się stanie, gdy ten człowiek przestanie być jej częścią.",
         },
       ],
     },
