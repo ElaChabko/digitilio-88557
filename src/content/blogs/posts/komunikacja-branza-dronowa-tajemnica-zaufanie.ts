@@ -161,28 +161,28 @@ export const komunikacjaBranzaDronowa: BlogPost = {
       ],
     },
     {
-      heading: "Od czego zacząć w firmie dronowej",
-      blocks: [
-        {
-          type: "paragraph",
-          text:
-            "Jeśli prowadzisz firmę w tej branży albo odpowiadasz w niej za komunikację, te kroki dają solidną podstawę:",
-        },
-        {
-          type: "list",
-          items: [
-            "1. Spisz trzy listy tematów: co mówimy swobodnie, co wymaga akceptacji i czego nie mówimy nigdy.",
-            "2. Wyznacz osobę, która zatwierdza każdą treść wychodzącą na zewnątrz pod kątem bezpieczeństwa, a nie tylko wizerunku.",
-            "3. Wybierz dwie lub trzy twarze firmy i zbuduj ich ekspercką obecność na LinkedIn.",
-            "4. Ustal zasady dla pracowników dotyczące prywatnych mediów społecznościowych i zdjęć z pracy.",
-            "5. Zabezpiecz konta firmowe i sposób przekazywania materiałów partnerom.",
-            "6. Przygotuj procedurę na wypadek fałszywej informacji o firmie, zanim będzie potrzebna.",
-            "7. Jeśli działasz w obszarze dual-use, zdecyduj, do którego rynku mówisz najpierw, i ułóż pod to przekaz.",
-            "8. Pokazuj zastosowania cywilne tam, gdzie możesz, bo budują akceptację dla całej branży.",
-          ],
-        },
+  heading: "Od czego zacząć w firmie dronowej",
+  blocks: [
+    {
+      type: "paragraph",
+      text:
+        "Jeśli prowadzisz firmę w tej branży albo odpowiadasz w niej za komunikację, te kroki dają solidną podstawę:",
+    },
+    {
+      type: "list",
+      items: [
+        "Spisz trzy listy tematów: co mówimy swobodnie, co wymaga akceptacji i czego nie mówimy nigdy.",
+        "Wyznacz osobę, która zatwierdza każdą treść wychodzącą na zewnątrz pod kątem bezpieczeństwa, a nie tylko wizerunku.",
+        "Wybierz dwie lub trzy twarze firmy i zbuduj ich ekspercką obecność na LinkedIn.",
+        "Ustal zasady dla pracowników dotyczące prywatnych mediów społecznościowych i zdjęć z pracy.",
+        "Zabezpiecz konta firmowe i sposób przekazywania materiałów partnerom.",
+        "Przygotuj procedurę na wypadek fałszywej informacji o firmie, zanim będzie potrzebna.",
+        "Jeśli działasz w obszarze dual-use, zdecyduj, do którego rynku mówisz najpierw, i ułóż pod to przekaz.",
+        "Pokazuj zastosowania cywilne tam, gdzie możesz, bo budują akceptację dla całej branży.",
       ],
     },
+  ],
+},
     {
       heading: "Na koniec",
       blocks: [
@@ -199,22 +199,49 @@ export const komunikacjaBranzaDronowa: BlogPost = {
       ],
     },
     {
-      heading: "Źródła",
-      blocks: [
-        {
-          type: "list",
-          items: [
-            "Carpathian Drone Summit 2026, zapowiedź wydarzenia — https://belgium.pl/pl/events/carpathian-drone-summit-2026/",
-            "Podkarpacie chce i może być europejskim centrum dronowym, SmartAge — https://www.smartage.pl/podkarpacie-chce-i-moze-byc-europejskim-centrum-dronowym-29-30-wrzesnia-carpathian-drone-summit/",
-            "Carpathian Drone Summit 2026 zakończony. W Jasionce rozmawiali o przyszłości dronów, Carpatia Biznes — https://www.carpatiabiznes.pl/carpathian-drone-summit-2026-zakonczony-w-jasionce-rozmawiali-o-przyszlosci-dronow/",
-            "Drony nad Podkarpaciem: I edycja Carpathian Drone Summit, Defence24 — https://defence24.pl/przemysl/drony-nad-podkarpaciem-29-30-wrzesnia-i-edycja-carpathian-drone-summit",
-            "Tomczyk: zdolność do szybkiej produkcji dronów jednym z celów Wojska Polskiego, PAP — https://www.pap.pl/aktualnosci/tomczyk-zdolnosc-do-szybkiej-produkcji-dronow-jednym-z-celow-wojska-polskiego-zdjecia",
-            "Polska największym beneficjentem programu SAFE, Bankier — https://www.bankier.pl/wiadomosc/Polska-najwiekszym-beneficjentem-programu-SAFE-UE-podala-dokladne-kwoty-9006076.html",
-            "PAŻP: nowe przepisy dotyczące dronów, Android.com.pl — https://android.com.pl/tech/898752-pazp-nowe-przepisy-dotyczace-dronow/",
-            "Responsible investing in defence, security and resilience, Altiorem — https://altiorem.org/research/responsible-investing-in-defence-security-and-resilience/",
-          ],
-        },
-      ],
+  heading: "Źródła",
+  blocks: [
+    {
+      type: "paragraph",
+      text:
+        "[Carpathian Drone Summit 2026, zapowiedź wydarzenia](https://belgium.pl/pl/events/carpathian-drone-summit-2026/)",
     },
+    {
+      type: "paragraph",
+      text:
+        "[Podkarpacie chce i może być europejskim centrum dronowym — SmartAge](https://www.smartage.pl/podkarpacie-chce-i-moze-byc-europejskim-centrum-dronowym-29-30-wrzesnia-carpathian-drone-summit/)",
+    },
+    {
+      type: "paragraph",
+      text:
+        "[Carpathian Drone Summit 2026 zakończony. W Jasionce rozmawiali o przyszłości dronów — Carpatia Biznes](https://www.carpatiabiznes.pl/carpathian-drone-summit-2026-zakonczony-w-jasionce-rozmawiali-o-przyszlosci-dronow/)",
+    },
+    {
+      type: "paragraph",
+      text:
+        "[Drony nad Podkarpaciem: I edycja Carpathian Drone Summit — Defence24](https://defence24.pl/przemysl/drony-nad-podkarpaciem-29-30-wrzesnia-i-edycja-carpathian-drone-summit)",
+    },
+    {
+      type: "paragraph",
+      text:
+        "[Tomczyk: zdolność do szybkiej produkcji dronów jednym z celów Wojska Polskiego — PAP](https://www.pap.pl/aktualnosci/tomczyk-zdolnosc-do-szybkiej-produkcji-dronow-jednym-z-celow-wojska-polskiego-zdjecia)",
+    },
+    {
+      type: "paragraph",
+      text:
+        "[Polska największym beneficjentem programu SAFE — Bankier](https://www.bankier.pl/wiadomosc/Polska-najwiekszym-beneficjentem-programu-SAFE-UE-podala-dokladne-kwoty-9006076.html)",
+    },
+    {
+      type: "paragraph",
+      text:
+        "[PAŻP: nowe przepisy dotyczące dronów — Android.com.pl](https://android.com.pl/tech/898752-pazp-nowe-przepisy-dotyczace-dronow/)",
+    },
+    {
+      type: "paragraph",
+      text:
+        "[Responsible investing in defence, security and resilience — Altiorem](https://altiorem.org/research/responsible-investing-in-defence-security-and-resilience/)",
+    },
+  ],
+},
   ],
 };
