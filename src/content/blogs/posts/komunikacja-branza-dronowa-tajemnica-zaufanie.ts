@@ -1,4 +1,5 @@
 import { BlogPost } from "../types";
+import coverImage from "@/assets/blog/komunikacja_drony.webp";
 
 export const komunikacjaBranzaDronowa: BlogPost = {
   id: 3,
@@ -9,7 +10,7 @@ export const komunikacjaBranzaDronowa: BlogPost = {
   date: "2026-10-09",
   readTime: "10 min",
   category: "Strategia",
-  image: "",
+  image: coverImage,
 
   content: [
     {
