@@ -354,12 +354,14 @@ export default function Wspolprace() {
                                         </a>
                                       </div>
 
-                                      <iframe
-                                        src={reference.pdf}
-                                        title={`Referencje ${reference.company}`}
-                                        className="h-[480px] w-full rounded-lg border border-border bg-white sm:h-[650px] lg:h-[800px]"
-                                        loading="lazy"
-                                      />
+
+<img
+  src="/referencje/ideo-force-referencje.webp"
+  alt="Pełna treść referencji Ideo Force wystawionych przez Joannę Tymowicz"
+  className="block h-auto w-full rounded-lg bg-white"
+  loading="lazy"
+/>
+
                                     </div>
                                   </motion.div>
                                 )}
