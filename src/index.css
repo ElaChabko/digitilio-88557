@@ -232,3 +232,39 @@ All colors MUST be HSL.
     animation: glow-pulse 3s ease-in-out infinite;
   }
 }
+
+/* Animacje wejścia sekcji hero – w CSS, żeby działały bez czekania na JavaScript */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-slide-in {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero-fade-up {
+  animation: hero-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-slide-in {
+  animation: hero-slide-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-scale-in {
+  animation: hero-scale-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up,
+  .hero-slide-in,
+  .hero-scale-in {
+    animation: none;
+  }
+}

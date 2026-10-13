@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect } from "react";
 
 export const SITE_URL = "https://digitilio.pl";
 
-export const DEFAULT_OG_IMAGE =
-  "https://storage.googleapis.com/gpt-engineer-file-uploads/p2Dx27ZKwue6aOhv0OknoGRMQGk2/social-images/social-1759738184174-Zdj%20w%20tle%20FB%20(820%20x%20312%20px).png";
+// Grafika do podglądów linków (1200×630) – trzymana w repozytorium: public/og/
+export const DEFAULT_OG_IMAGE = "/og/digitilio-og.png";
 
 export type HeadData = {
   title?: string;
