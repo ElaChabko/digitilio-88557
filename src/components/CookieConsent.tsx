@@ -143,7 +143,7 @@ export const CookieConsent: React.FC = () => {
       aria-modal="true"
       aria-labelledby="cookie-consent-title"
     >
-      <div className="relative w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
+      <div className="relative max-h-[85dvh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl sm:max-h-none sm:p-8">
         {/* CLOSE - tylko jeśli użytkownik już wcześniej dokonał wyboru */}
         {hasSavedConsent && (
           <button
@@ -169,7 +169,7 @@ export const CookieConsent: React.FC = () => {
           </h2>
         </div>
 
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-600 sm:mt-4">
           Używamy niezbędnych cookies do
           prawidłowego działania strony.
           Cookies analityczne i marketingowe
@@ -196,9 +196,9 @@ export const CookieConsent: React.FC = () => {
         </p>
 
         {/* CATEGORIES */}
-        <div className="mt-7 grid gap-3">
+        <div className="mt-4 grid gap-2 sm:mt-7 sm:gap-3">
           {/* NECESSARY */}
-          <div className="flex items-start gap-4 rounded-xl border border-slate-200 p-4">
+          <div className="flex items-start gap-4 rounded-xl border border-slate-200 p-3 sm:p-4">
             <input
               type="checkbox"
               checked
@@ -221,7 +221,7 @@ export const CookieConsent: React.FC = () => {
           </div>
 
           {/* ANALYTICS */}
-          <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-4 transition-colors hover:border-primary/30">
+          <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-3 transition-colors hover:border-primary/30 sm:p-4">
             <input
               type="checkbox"
               checked={analytics}
@@ -249,7 +249,7 @@ export const CookieConsent: React.FC = () => {
           </label>
 
           {/* MARKETING */}
-          <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-4 transition-colors hover:border-primary/30">
+          <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-slate-200 p-3 transition-colors hover:border-primary/30 sm:p-4">
             <input
               type="checkbox"
               checked={marketing}
@@ -278,11 +278,11 @@ export const CookieConsent: React.FC = () => {
         </div>
 
         {/* ACTIONS */}
-        <div className="mt-7 grid gap-3 sm:grid-cols-3">
+        <div className="mt-4 grid gap-2 sm:mt-7 sm:grid-cols-3 sm:gap-3">
           <button
             type="button"
             onClick={rejectAdditional}
-            className="rounded-lg border border-slate-300 px-4 py-3 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-50"
+            className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-50 sm:py-3"
           >
             Odrzuć dodatkowe
           </button>
@@ -290,7 +290,7 @@ export const CookieConsent: React.FC = () => {
           <button
             type="button"
             onClick={saveChoices}
-            className="rounded-lg border border-primary px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/5"
+            className="rounded-lg border border-primary px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/5 sm:py-3"
           >
             Zapisz wybór
           </button>
@@ -298,13 +298,13 @@ export const CookieConsent: React.FC = () => {
           <button
             type="button"
             onClick={acceptAll}
-            className="rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+            className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90 sm:py-3"
           >
             Akceptuj wszystkie
           </button>
         </div>
 
-        <p className="mt-5 text-right text-xs text-slate-400">
+        <p className="mt-3 text-right text-xs text-slate-400 sm:mt-5">
           Wersja zgód: {CONSENT_VERSION}
         </p>
       </div>
