@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { StructuredData } from "@/components/StructuredData";
 
-import { createBreadcrumbSchema } from "@/lib/structuredData";
+import { createBreadcrumbSchema, PERSON_ID } from "@/lib/structuredData";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
 
 export default function CaseStudy() {
@@ -58,6 +58,12 @@ export default function CaseStudy() {
     },
     headline: caseStudy.title,
     description: caseStudy.lead,
+    inLanguage: "pl-PL",
+    author: {
+      "@id": PERSON_ID,
+      "@type": "Person",
+      name: "Ela Chabko",
+    },
     publisher: {
       "@id": "https://digitilio.pl/#organization",
     },

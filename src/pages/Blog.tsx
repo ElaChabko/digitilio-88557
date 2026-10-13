@@ -17,6 +17,8 @@ import {
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { StructuredData } from "@/components/StructuredData";
+import { createCollectionSchema } from "@/lib/structuredData";
 
 import { blogPosts } from "@/content/blogs/index";
 
@@ -298,6 +300,19 @@ export default function Blog() {
         title="Baza wiedzy o marketingu, strategii i AI | Digitilio"
         description="Analizy, obserwacje z projektów i praktyczne materiały o strategii, danych, komunikacji i AI. Wiedza, która pomaga podejmować lepsze decyzje marketingowe."
         canonical="https://digitilio.pl/baza-wiedzy"
+      />
+
+      <StructuredData
+        data={createCollectionSchema({
+          name: "Baza wiedzy Digitilio",
+          description:
+            "Analizy, obserwacje z projektów i praktyczne materiały o strategii, danych, komunikacji i AI.",
+          url: "https://digitilio.pl/baza-wiedzy",
+          items: blogPosts.map((post) => ({
+            name: post.title,
+            url: `https://digitilio.pl/blog/${post.slug}`,
+          })),
+        })}
       />
 
       <Navigation />

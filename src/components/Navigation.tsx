@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-nav.webp";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 
 type NavItem =
@@ -204,6 +204,8 @@ export const Navigation = () => {
             <img
               src={logo}
               alt="Digitilio"
+              width={40}
+              height={40}
               className="h-10 w-auto"
             />
           </Link>

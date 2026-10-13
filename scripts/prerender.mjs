@@ -85,8 +85,11 @@ const buildHead = (head) => {
   return tags.join("\n    ");
 };
 
+const pageHeads = new Map();
+
 const renderPage = (url) => {
   const { html, head } = render(url);
+  pageHeads.set(url, head);
 
   if (!head.title) {
     throw new Error(`Brak <SEO> na stronie ${url} – każda trasa musi mieć tytuł.`);
@@ -129,3 +132,39 @@ ${routes
 
 fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemap);
 console.log(`sitemap    ${routes.length} adresów -> sitemap.xml`);
+
+// llms.txt – krótki spis treści strony dla modeli AI (ChatGPT, Claude, Perplexity)
+const cleanTitle = (title) => title.replace(/\s*\|\s*(Case study )?Digitilio$/, "");
+const entry = (route) => {
+  const head = pageHeads.get(route) || {};
+  const desc = head.description ? `: ${head.description}` : "";
+  return `- [${cleanTitle(head.title || route)}](${SITE_URL}${route})${desc}`;
+};
+const routePaths = routes.map((r) => r.path);
+const pick = (fn) => routePaths.filter(fn).map(entry).join("\n");
+
+const llms = `# Digitilio
+
+> Digitilio to jednoosobowa firma doradczo-marketingowa Eli Chabko. Pomaga firmom, szczególnie B2B, uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć: strategia komunikacji, LinkedIn i social media, Meta Ads, analityka marketingowa i praktyczne wykorzystanie AI.
+
+Kontakt: elachabko@digitilio.pl · LinkedIn: https://www.linkedin.com/in/ela-chabko/
+
+## Główne strony
+
+${pick((r) => ["/", "/wspolprace", "/baza-wiedzy"].includes(r))}
+
+## Case studies
+
+${pick((r) => r.startsWith("/wspolprace/"))}
+
+## Artykuły
+
+${pick((r) => r.startsWith("/blog/"))}
+
+## Informacje prawne
+
+${pick((r) => r.startsWith("/polityka-"))}
+`;
+
+fs.writeFileSync(path.join(distDir, "llms.txt"), llms);
+console.log("llms.txt   -> llms.txt");

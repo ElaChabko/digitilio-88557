@@ -13,6 +13,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { caseStudies } from "@/content/caseStudies";
+import { StructuredData } from "@/components/StructuredData";
+import { createCollectionSchema } from "@/lib/structuredData";
 
 const getCaseStudyMeta = (scope: string, industry: string) => {
   const mainScope = scope
@@ -64,6 +66,19 @@ export default function Wspolprace() {
         title="Współprace i case studies | Digitilio"
         description="Wybrane projekty Digitilio pokazujące, jak strategia, dane i decyzje przekładają się na konkretne działania marketingowe."
         canonical="https://digitilio.pl/wspolprace"
+      />
+
+      <StructuredData
+        data={createCollectionSchema({
+          name: "Współprace i case studies Digitilio",
+          description:
+            "Wybrane projekty pokazujące, jak strategia, dane i decyzje przekładają się na konkretne działania marketingowe.",
+          url: "https://digitilio.pl/wspolprace",
+          items: caseStudies.map((caseStudy) => ({
+            name: caseStudy.title,
+            url: `https://digitilio.pl/wspolprace/${caseStudy.slug}`,
+          })),
+        })}
       />
 
       <Navigation />

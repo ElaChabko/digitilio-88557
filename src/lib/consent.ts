@@ -16,13 +16,6 @@ export const CONSENT_VERSION = "2025-11-13";
 
 export const OPEN_COOKIE_SETTINGS_EVENT = "open-cookie-settings";
 
-declare global {
-  interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
-  }
-}
-
 export function getStoredConsent(): Consent | null {
   try {
     const raw = localStorage.getItem(CONSENT_STORAGE_KEY);
