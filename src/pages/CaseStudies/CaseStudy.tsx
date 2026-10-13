@@ -84,6 +84,7 @@ export default function CaseStudy() {
         title={caseStudy.seoTitle}
         description={caseStudy.seoDescription}
         canonical={canonicalUrl}
+        ogType="article"
       />
 
       <StructuredData data={caseStudySchema} />

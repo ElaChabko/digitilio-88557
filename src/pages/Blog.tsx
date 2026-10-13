@@ -297,7 +297,7 @@ export default function Blog() {
       <SEO
         title="Baza wiedzy o marketingu, strategii i AI | Digitilio"
         description="Analizy, obserwacje z projektów i praktyczne materiały o strategii, danych, komunikacji i AI. Wiedza, która pomaga podejmować lepsze decyzje marketingowe."
-        canonical="https://digitilio.pl/blog"
+        canonical="https://digitilio.pl/baza-wiedzy"
       />
 
       <Navigation />
