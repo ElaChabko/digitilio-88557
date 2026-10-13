@@ -1,9 +1,10 @@
+import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-nav.webp";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 
 type NavItem =
@@ -130,7 +131,17 @@ export const Navigation = () => {
     });
   };
 
-  const handleNavItem = (item: NavItem) => {
+  const handleNavItem = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    item: NavItem
+  ) => {
+    // Pozwól otworzyć link w nowej karcie (Ctrl/Cmd + klik)
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
+      return;
+    }
+
+    event.preventDefault();
+
     if (item.type === "route") {
       goToRoute(item.path);
       return;
@@ -138,6 +149,13 @@ export const Navigation = () => {
 
     scrollToSection(item.id);
   };
+
+  /**
+   * Prawdziwe adresy w href – roboty mogą przejść po menu,
+   * a kliknięcie działa jak wcześniej (płynne przewijanie / nawigacja).
+   */
+  const hrefFor = (item: NavItem) =>
+    item.type === "route" ? item.path : `/#${item.id}`;
 
   const openContactForm = () => {
     setIsContactFormOpen(true);
@@ -174,18 +192,23 @@ export const Navigation = () => {
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-5">
           {/* LOGO */}
-          <button
-            type="button"
-            onClick={goHome}
+          <Link
+            to="/"
+            onClick={(event) => {
+              event.preventDefault();
+              goHome();
+            }}
             className="transition-all duration-300 hover:scale-105 hover:opacity-80"
             aria-label="Przejdź na stronę główną Digitilio"
           >
             <img
               src={logo}
               alt="Digitilio"
+              width={40}
+              height={40}
               className="h-10 w-auto"
             />
-          </button>
+          </Link>
 
           {/* DESKTOP MENU */}
           <div className="hidden items-center gap-8 md:flex">
@@ -198,10 +221,10 @@ export const Navigation = () => {
                 isRouteActive(item.path);
 
               return (
-                <button
+                <a
                   key={key}
-                  type="button"
-                  onClick={() => handleNavItem(item)}
+                  href={hrefFor(item)}
+                  onClick={(event) => handleNavItem(event, item)}
                   className={`group relative text-sm font-medium tracking-wide transition-all duration-300 ${
                     isActiveRoute
                       ? "text-primary"
@@ -217,7 +240,7 @@ export const Navigation = () => {
                         : "w-0 group-hover:w-full"
                     }`}
                   />
-                </button>
+                </a>
               );
             })}
 
@@ -267,10 +290,10 @@ export const Navigation = () => {
                   isRouteActive(item.path);
 
                 return (
-                  <button
+                  <a
                     key={key}
-                    type="button"
-                    onClick={() => handleNavItem(item)}
+                    href={hrefFor(item)}
+                    onClick={(event) => handleNavItem(event, item)}
                     className={`text-left text-sm font-medium transition-colors ${
                       isActiveRoute
                         ? "text-primary"
@@ -278,7 +301,7 @@ export const Navigation = () => {
                     }`}
                   >
                     {item.label}
-                  </button>
+                  </a>
                 );
               })}
 

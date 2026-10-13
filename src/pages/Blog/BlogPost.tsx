@@ -12,7 +12,7 @@ import { Mail, Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { getPostBySlug } from "@/content/blogs/index";
-import { createBreadcrumbSchema } from "@/lib/structuredData";
+import { createBreadcrumbSchema, PERSON_ID } from "@/lib/structuredData";
 
 import { ArticleSection } from "./ArticleSection";
 
@@ -61,6 +61,15 @@ export default function BlogPost() {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
+    dateModified: post.date,
+    inLanguage: "pl-PL",
+
+    author: {
+      "@id": PERSON_ID,
+      "@type": "Person",
+      name: "Ela Chabko",
+      url: "https://www.linkedin.com/in/ela-chabko/",
+    },
 
     ...(absoluteImageUrl
       ? {
@@ -94,6 +103,8 @@ export default function BlogPost() {
         title={`${post.title} | Digitilio`}
         description={post.excerpt}
         canonical={canonicalUrl}
+        ogImage={absoluteImageUrl}
+        ogType="article"
       />
 
       <StructuredData data={blogPostSchema} />

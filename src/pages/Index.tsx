@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
 import { ProblemSection } from "@/components/ProblemSection";
@@ -14,6 +16,21 @@ import { StructuredData } from "@/components/StructuredData";
 import { digitilioSiteSchema } from "@/lib/structuredData";
 
 const Index = () => {
+  const { hash } = useLocation();
+
+  // Obsługa linków typu /#services (np. otwartych w nowej karcie)
+  useEffect(() => {
+    if (!hash) return;
+
+    const timer = window.setTimeout(() => {
+      document
+        .getElementById(hash.slice(1))
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+
+    return () => window.clearTimeout(timer);
+  }, [hash]);
+
   return (
     <div className="min-h-screen">
             <SEO

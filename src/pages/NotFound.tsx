@@ -1,18 +1,20 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
 
 const NotFound = () => {
-  useEffect(() => {
-    document.title = "Strona nie została znaleziona | Digitilio";
-  }, []);
-
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <SEO
+        title="Strona nie została znaleziona | Digitilio"
+        description="Ta strona nie istnieje. Wróć na stronę główną Digitilio lub do bazy wiedzy."
+        noindex
+      />
+
       <Navigation />
 
       <main className="flex flex-1">

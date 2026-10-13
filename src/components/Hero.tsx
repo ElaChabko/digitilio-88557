@@ -7,6 +7,13 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import heroVisual from "@/assets/hero-visual.jpg";
 import heroPortrait from "@/assets/hero-portrait.webp";
 
+// Stałe (deterministyczne) pozycje cząsteczek – identyczne w HTML z buildu
+// i po załadowaniu JS, więc nic nie „skacze” przy hydracji.
+const particle = (i: number, salt: number) => {
+  const x = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453;
+  return x - Math.floor(x);
+};
+
 export const Hero = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const isMobile = useIsMobile();
@@ -26,7 +33,8 @@ export const Hero = () => {
           src={heroVisual} 
           alt="" 
           className="w-full h-full object-cover"
-          loading="lazy"
+          loading="eager"
+          decoding="async"
           style={{ opacity: 0.35 }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
@@ -48,18 +56,18 @@ export const Hero = () => {
           className="absolute w-2 h-2 bg-primary/60 rounded-full z-[5]"
           style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
           initial={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: `${particle(i, 1) * 100}%`,
+            top: `${particle(i, 2) * 100}%`,
           }}
           animate={{
             y: [0, -30, 0],
             opacity: [0.4, 0.8, 0.4],
           }}
           transition={{
-            duration: 3 + Math.random() * 2,
+            duration: 3 + particle(i, 3) * 2,
             repeat: Infinity,
             ease: "linear",
-            delay: Math.random() * 2,
+            delay: particle(i, 4) * 2,
           }}
         />
       ))}
@@ -123,49 +131,37 @@ export const Hero = () => {
 <div className="container mx-auto px-4 sm:px-6 pt-32 pb-20 sm:py-24 md:py-24 lg:py-32 relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 md:gap-14 lg:gap-16 items-center">
           {/* Text Content */}
-          <motion.div 
-            className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12"
-            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
+          {/* Animacje wejścia w CSS: tekst jest w HTML i pojawia się od razu,
+              bez czekania na JavaScript (lepsze LCP i widoczność dla robotów). */}
+          <div className="hero-fade-up space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[3.75rem] font-bold text-foreground tracking-tight leading-[1.08]">
-  <motion.span 
-    className="block"
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6, delay: 0.2 }}
+  <span
+    className="hero-slide-in block"
+    style={{ animationDelay: "0.2s" }}
   >
     Mniej przypadkowych działań.
-  </motion.span>
+  </span>
 
-  <motion.span 
-    className="block overflow-visible"
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6, delay: 0.4 }}
+  <span
+    className="hero-slide-in block overflow-visible"
+    style={{ animationDelay: "0.4s" }}
   >
     <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent box-decoration-clone">
       Więcej dobrych decyzji marketingowych.
     </span>
-  </motion.span>
+  </span>
 </h1>
             
-            <motion.p 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+            <p
+              className="hero-fade-up text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl font-light leading-relaxed"
+              style={{ animationDelay: "0.8s" }}
             >
               Pomagam firmom uporządkować marketing, wybrać priorytety i przełożyć strategię na działania, które da się optymalnie wdrożyć.
-            </motion.p>
+            </p>
             
-            <motion.div 
-              className="flex flex-col gap-4 items-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
+            <div
+              className="hero-fade-up flex flex-col gap-4 items-start"
+              style={{ animationDelay: "1s" }}
             >
               <Button
                 size="lg"
@@ -178,16 +174,13 @@ export const Hero = () => {
               <p className="text-muted-foreground text-sm sm:text-base">
                 Bez zobowiązań • 15 min rozmowy
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Portrait Image */}
-          <motion.div 
-            className="relative group mt-10 sm:mt-12 lg:mt-0"
-            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          <div
+            className="hero-scale-in relative group mt-10 sm:mt-12 lg:mt-0"
+            style={{ animationDelay: "0.3s" }}
           >
             <div className="relative rounded-2xl md:rounded-3xl overflow-hidden max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0">
               {/* Glowing border effect */}
@@ -209,7 +202,9 @@ export const Hero = () => {
   width={768}
   height={960}
   className="w-full h-auto object-cover"
-  loading="lazy"
+  loading="eager"
+  decoding="async"
+  {...{ fetchpriority: "high" }}
 />
 
                 
@@ -221,7 +216,7 @@ export const Hero = () => {
                 />
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
