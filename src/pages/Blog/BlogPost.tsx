@@ -94,6 +94,8 @@ export default function BlogPost() {
         title={`${post.title} | Digitilio`}
         description={post.excerpt}
         canonical={canonicalUrl}
+        ogImage={absoluteImageUrl}
+        ogType="article"
       />
 
       <StructuredData data={blogPostSchema} />
