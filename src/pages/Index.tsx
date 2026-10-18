@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
-import { Hero } from "@/components/Hero";
-import { ProblemSection } from "@/components/ProblemSection";
-import { Services } from "@/components/Services";
-import { Process } from "@/components/Process";
-import { About } from "@/components/About";
-import { ForWhom } from "@/components/ForWhom";
 import { LatestArticles } from "@/components/LatestArticles";
-import { Benefits } from "@/components/Benefits";
-import { ContactCTA } from "@/components/ContactCTA";
+import { HomeHero } from "@/components/home/HomeHero";
+import { LogoStrip } from "@/components/home/LogoStrip";
+import { HomeProblem } from "@/components/home/HomeProblem";
+import { HomeServices } from "@/components/home/HomeServices";
+import { HomeWork } from "@/components/home/HomeWork";
+import { HomeProcess } from "@/components/home/HomeProcess";
+import { HomeAbout } from "@/components/home/HomeAbout";
+import { HomeForWhom } from "@/components/home/HomeForWhom";
+import { HomeBenefits } from "@/components/home/HomeBenefits";
+import { HomeContact } from "@/components/home/HomeContact";
 import { Footer } from "@/components/Footer";
 import { SEO, HOME_ALTERNATES } from "@/components/SEO";
 
@@ -33,7 +35,7 @@ const Index = () => {
   }, [hash]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
             <SEO
         title="Strategia marketingowa i doradztwo | Digitilio"
         description="Pomagam firmom uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć."
@@ -42,15 +44,17 @@ const Index = () => {
       />
       <StructuredData data={digitilioSiteSchema} />
       <Navigation />
-      <Hero />
-      <ProblemSection />
-      <Services />
-      <Process />
-      <About />
+      <HomeHero />
+      <LogoStrip />
+      <HomeProblem />
+      <HomeServices />
+      <HomeWork />
+      <HomeProcess />
+      <HomeAbout />
+      <HomeForWhom />
+      <HomeBenefits />
       <LatestArticles />
-      <ForWhom />
-      <Benefits />
-      <ContactCTA />
+      <HomeContact />
       <Footer />
     </div>
   );

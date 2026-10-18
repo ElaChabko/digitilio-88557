@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { blogPosts } from "@/content/blogs/index";
+import { Eyebrow, RevealText } from "@/components/home/primitives";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -30,7 +31,7 @@ export const LatestArticles = () => {
   return (
     <section
       id="articles"
-      className="relative overflow-hidden bg-secondary/20 py-20 sm:py-24 lg:py-28"
+      className="relative overflow-hidden bg-background py-24 sm:py-28 lg:py-36"
     >
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
         <div className="mx-auto max-w-7xl">
@@ -42,12 +43,11 @@ export const LatestArticles = () => {
               transition={{ duration: 0.6, ease: EASE }}
               className="max-w-2xl"
             >
-              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
-                Baza wiedzy
-              </p>
-              <h2 className="text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                Zobacz, jak myślę o marketingu.
-              </h2>
+              <Eyebrow>Baza wiedzy</Eyebrow>
+              <RevealText
+                text="Zobacz, jak myślę o marketingu."
+                className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-6xl"
+              />
             </motion.div>
 
             <Link
@@ -68,7 +68,7 @@ export const LatestArticles = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: EASE }}
                 whileHover={{ y: -6 }}
-                className="group overflow-hidden rounded-2xl bg-background shadow-[0_2px_20px_-8px_hsl(263_33%_35%/0.25)] transition-shadow duration-300 hover:shadow-[0_20px_50px_-15px_hsl(263_33%_35%/0.35)]"
+                className="group overflow-hidden rounded-3xl bg-paper transition-shadow duration-300 hover:shadow-[0_24px_60px_-20px_hsl(263_33%_35%/0.35)]"
               >
                 <Link to={`/blog/${post.slug}`} className="flex h-full flex-col">
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -88,7 +88,7 @@ export const LatestArticles = () => {
                     <p className="text-sm text-muted-foreground">
                       {formatDate(post.date)} · {post.readTime}
                     </p>
-                    <h3 className="mt-3 text-xl font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+                    <h3 className="mt-3 text-xl font-bold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
                       {post.title}
                     </h3>
                     {post.excerpt && (

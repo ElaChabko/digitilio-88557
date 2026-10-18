@@ -8,11 +8,15 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 15%;
+    /* Redesign: ciepła złamana biel + prawie czarny z nutą fioletu */
+    --background: 40 23% 97%;
+    --foreground: 260 18% 8%;
+    --ink: 260 22% 6%;
+    --ink-soft: 260 16% 11%;
+    --paper: 0 0% 100%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 15%;
+    --card-foreground: 260 18% 8%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 15%;
@@ -32,8 +36,8 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 270 13% 85%;
-    --input: 270 13% 85%;
+    --border: 40 8% 86%;
+    --input: 40 8% 82%;
     --ring: 263 33% 35%;
 
     --radius: 0.75rem;
@@ -267,4 +271,20 @@ All colors MUST be HSL.
   .hero-scale-in {
     animation: none;
   }
+}
+
+/* ===== Redesign: wspólne elementy ===== */
+
+/* Przesuwający się pasek (logotypy) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
 }

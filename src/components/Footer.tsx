@@ -12,7 +12,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-ink text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6">
         {/* CERTYFIKATY */}
         <div className="border-b border-white/10 py-10 md:py-12">
