@@ -82,6 +82,16 @@ const buildHead = (head) => {
 
   tags.push(`<meta name="twitter:card" content="summary_large_image" />`);
 
+  for (const alt of head.alternates || []) {
+    tags.push(
+      `<link rel="alternate" hreflang="${escapeAttr(alt.hreflang)}" href="${escapeAttr(alt.href)}" />`
+    );
+  }
+
+  if (head.lang && head.lang !== "pl") {
+    tags.push(`<meta property="og:locale" content="en_US" />`);
+  }
+
   return tags.join("\n    ");
 };
 
@@ -96,6 +106,7 @@ const renderPage = (url) => {
   }
 
   return stripPageHead(template)
+    .replace(/<html lang="[^"]*">/, `<html lang="${escapeAttr(head.lang || "pl")}">`)
     .replace("</head>", `    ${buildHead(head)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${html}</div>`);
 };
@@ -164,6 +175,10 @@ ${pick((r) => r.startsWith("/blog/"))}
 ## Informacje prawne
 
 ${pick((r) => r.startsWith("/polityka-"))}
+
+## English
+
+${pick((r) => r === "/en")}
 `;
 
 fs.writeFileSync(path.join(distDir, "llms.txt"), llms);

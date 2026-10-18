@@ -5,8 +5,15 @@ export const SITE_URL = "https://digitilio.pl";
 // Grafika do podglądów linków (1200×630) – trzymana w repozytorium: public/og/
 export const DEFAULT_OG_IMAGE = "/og/digitilio-og.png";
 
+export type HeadAlternate = {
+  hreflang: string;
+  href: string;
+};
+
 export type HeadData = {
   title?: string;
+  lang?: string;
+  alternates?: HeadAlternate[];
   description?: string;
   canonical?: string;
   ogImage?: string;
@@ -23,6 +30,10 @@ export const HeadContext = createContext<HeadData | null>(null);
 
 type SEOProps = {
   title: string;
+  /** Język strony, np. "en" – domyślnie "pl" */
+  lang?: string;
+  /** Wersje językowe tej samej strony (hreflang) */
+  alternates?: HeadAlternate[];
   description?: string;
   canonical?: string;
   ogImage?: string;
@@ -60,6 +71,8 @@ export const SEO = ({
   ogImage,
   ogType = "website",
   noindex = false,
+  lang = "pl",
+  alternates,
 }: SEOProps) => {
   const serverHead = useContext(HeadContext);
 
@@ -73,11 +86,26 @@ export const SEO = ({
       ogImage: image,
       ogType,
       noindex,
+      lang,
+      alternates,
     });
   }
 
   useEffect(() => {
     document.title = title;
+    document.documentElement.lang = lang;
+
+    document
+      .querySelectorAll('link[rel="alternate"][hreflang]')
+      .forEach((tag) => tag.remove());
+
+    alternates?.forEach(({ hreflang, href }) => {
+      const tag = document.createElement("link");
+      tag.rel = "alternate";
+      tag.hreflang = hreflang;
+      tag.href = href;
+      document.head.appendChild(tag);
+    });
 
     if (description) {
       setMeta("name", "description", description);
@@ -105,7 +133,14 @@ export const SEO = ({
       canonicalTag.href = canonical;
       setMeta("property", "og:url", canonical);
     }
-  }, [title, description, canonical, image, ogType, noindex]);
+  }, [title, description, canonical, image, ogType, noindex, lang, alternates]);
 
   return null;
 };
+
+/** Wersje językowe strony głównej – używane na / i /en */
+export const HOME_ALTERNATES: HeadAlternate[] = [
+  { hreflang: "pl", href: `${SITE_URL}/` },
+  { hreflang: "en", href: `${SITE_URL}/en` },
+  { hreflang: "x-default", href: `${SITE_URL}/` },
+];

@@ -1,15 +1,67 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
+type Lang = "pl" | "en";
+
 type Props = {
   onSuccess?: () => void;
+  lang?: Lang;
 };
+
+const COPY = {
+  pl: {
+    name: "Imię",
+    optional: "(opcjonalnie)",
+    namePh: "Jak masz na imię?",
+    email: "E-mail",
+    emailPh: "twoj@email.pl",
+    company: "Firma",
+    companyPh: "Nazwa firmy",
+    message: "Wiadomość",
+    messagePh: "Napisz krótko, z czym mogę Ci pomóc.",
+    consent:
+      "Chcę otrzymywać od Digitilio na podany adres e-mail informacje, materiały i oferty marketingowe dotyczące usług i marketingu. Zgodę mogę wycofać w dowolnym momencie.",
+    privacyBefore:
+      "Administratorem podanych danych osobowych jest Elżbieta Chabko, prowadząca działalność gospodarczą pod nazwą Digitilio. Dane wykorzystam w celu odpowiedzi na Twoje zapytanie i prowadzenia związanej z nim korespondencji. Szczegółowe informacje dotyczące przetwarzania danych znajdziesz w",
+    privacyLink: "Polityce prywatności",
+    privacyAfter: ".",
+    sending: "Wysyłam...",
+    sent: "Wysłano",
+    send: "Wyślij wiadomość",
+    ok: "Dziękuję. Wiadomość została wysłana.",
+    err: "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
+  },
+  en: {
+    name: "Name",
+    optional: "(optional)",
+    namePh: "Your name",
+    email: "Email",
+    emailPh: "you@company.com",
+    company: "Company",
+    companyPh: "Company name",
+    message: "Message",
+    messagePh:
+      "A few sentences about your company and what you need help with.",
+    consent:
+      "I would like to receive information, materials and marketing offers from Digitilio at the email address provided. I can withdraw this consent at any time.",
+    privacyBefore:
+      "Your personal data is controlled by Elżbieta Chabko, running a business under the name Digitilio (Poland). I will use it only to reply to your inquiry and for related correspondence. Details are in the",
+    privacyLink: "Privacy Policy",
+    privacyAfter: " (in Polish).",
+    sending: "Sending...",
+    sent: "Sent",
+    send: "Send message",
+    ok: "Thank you. Your message has been sent.",
+    err: "The message could not be sent. Please try again.",
+  },
+} satisfies Record<Lang, Record<string, string>>;
 
 type Status = null | "ok" | "err";
 
 const MARKETING_CONSENT_VERSION = "2026-08-14";
 
-export const ContactForm = ({ onSuccess }: Props) => {
+export const ContactForm = ({ onSuccess, lang = "pl" }: Props) => {
+  const t = COPY[lang];
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>(null);
 
@@ -138,9 +190,9 @@ export const ContactForm = ({ onSuccess }: Props) => {
           htmlFor="contact-name"
           className="text-sm font-medium text-foreground"
         >
-          Imię{" "}
+          {t.name}{" "}
           <span className="font-normal text-muted-foreground">
-            (opcjonalnie)
+            {t.optional}
           </span>
         </label>
 
@@ -150,7 +202,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
           type="text"
           autoComplete="name"
           maxLength={120}
-          placeholder="Jak masz na imię?"
+          placeholder={t.namePh}
           className="w-full rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
         />
       </div>
@@ -161,7 +213,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
           htmlFor="contact-email"
           className="text-sm font-medium text-foreground"
         >
-          E-mail
+          {t.email}
           <span
             className="ml-1 text-primary"
             aria-hidden="true"
@@ -177,7 +229,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
           required
           autoComplete="email"
           maxLength={254}
-          placeholder="twoj@email.pl"
+          placeholder={t.emailPh}
           className="w-full rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
         />
       </div>
@@ -188,9 +240,9 @@ export const ContactForm = ({ onSuccess }: Props) => {
           htmlFor="contact-company"
           className="text-sm font-medium text-foreground"
         >
-          Firma{" "}
+          {t.company}{" "}
           <span className="font-normal text-muted-foreground">
-            (opcjonalnie)
+            {t.optional}
           </span>
         </label>
 
@@ -200,7 +252,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
           type="text"
           autoComplete="organization"
           maxLength={160}
-          placeholder="Nazwa firmy"
+          placeholder={t.companyPh}
           className="w-full rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
         />
       </div>
@@ -211,7 +263,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
           htmlFor="contact-message"
           className="text-sm font-medium text-foreground"
         >
-          Wiadomość
+          {t.message}
           <span
             className="ml-1 text-primary"
             aria-hidden="true"
@@ -225,7 +277,7 @@ export const ContactForm = ({ onSuccess }: Props) => {
           name="message"
           required
           maxLength={5000}
-          placeholder="Napisz krótko, z czym mogę Ci pomóc."
+          placeholder={t.messagePh}
           className="min-h-[140px] w-full resize-none rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
         />
       </div>
@@ -240,28 +292,22 @@ export const ContactForm = ({ onSuccess }: Props) => {
         />
 
         <span className="text-xs leading-relaxed text-muted-foreground">
-          Chcę otrzymywać od Digitilio na podany adres e-mail informacje,
-          materiały i oferty marketingowe dotyczące usług i marketingu.
-          Zgodę mogę wycofać w dowolnym momencie.
+          {t.consent}
         </span>
       </label>
 
       {/* PRIVACY */}
       <p className="text-xs leading-relaxed text-muted-foreground">
-        Administratorem podanych danych osobowych jest Elżbieta Chabko,
-        prowadząca działalność gospodarczą pod nazwą Digitilio. Dane
-        wykorzystam w celu odpowiedzi na Twoje zapytanie i prowadzenia
-        związanej z nim korespondencji. Szczegółowe informacje dotyczące
-        przetwarzania danych znajdziesz w{" "}
+        {t.privacyBefore}{" "}
         <a
           href="/polityka-prywatnosci"
           target="_blank"
           rel="noopener noreferrer"
           className="font-medium underline underline-offset-2 transition-colors hover:text-foreground"
         >
-          Polityce prywatności
+          {t.privacyLink}
         </a>
-        .
+        {t.privacyAfter}
       </p>
 
       {/* ACTION */}
@@ -271,10 +317,10 @@ export const ContactForm = ({ onSuccess }: Props) => {
           disabled={loading || status === "ok"}
         >
           {loading
-            ? "Wysyłam..."
+            ? t.sending
             : status === "ok"
-              ? "Wysłano"
-              : "Wyślij wiadomość"}
+              ? t.sent
+              : t.send}
         </Button>
 
         <div
@@ -283,13 +329,13 @@ export const ContactForm = ({ onSuccess }: Props) => {
         >
           {status === "ok" && (
             <span className="text-sm text-muted-foreground">
-              Dziękuję. Wiadomość została wysłana.
+              {t.ok}
             </span>
           )}
 
           {status === "err" && (
             <span className="text-sm text-destructive">
-              Nie udało się wysłać wiadomości. Spróbuj ponownie.
+              {t.err}
             </span>
           )}
         </div>

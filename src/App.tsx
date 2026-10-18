@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 import Index from "./pages/Index";
+import English from "./pages/English";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/Blog/BlogPost";
 import Wspolprace from "./pages/Wspolprace";
@@ -36,6 +37,9 @@ export const AppRoutes = () => (
 
     <Routes>
       <Route path="/" element={<Index />} />
+
+      {/* WERSJA ANGIELSKA (jedna podstrona) */}
+      <Route path="/en" element={<English />} />
 
       {/* BAZA WIEDZY */}
       <Route path="/baza-wiedzy" element={<Blog />} />
