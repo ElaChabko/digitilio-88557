@@ -19,7 +19,6 @@ const proof = [
   { value: "20+", label: "marek B2B i B2C" },
   { value: "25+", label: "przeprowadzonych szkoleń" },
   { value: "8+", label: "lat w marketingu" },
-  { value: "4", label: "lata wykładów na studiach podyplomowych" },
 ];
 
 export const Hero = () => {
@@ -190,7 +189,7 @@ export const Hero = () => {
 
         {/* Pasek dowodów */}
         <div
-          className="hero-fade-up mx-auto mt-14 grid max-w-7xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:mt-16 lg:mt-20 lg:grid-cols-4"
+          className="hero-fade-up mx-auto mt-14 grid max-w-7xl grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:mt-16 lg:mt-20"
           style={{ animationDelay: "1.2s" }}
         >
           {proof.map((item) => (
