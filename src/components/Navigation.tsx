@@ -244,6 +244,16 @@ export const Navigation = () => {
               );
             })}
 
+            <a
+              href="/en"
+              hrefLang="en"
+              lang="en"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              aria-label="English version"
+            >
+              EN
+            </a>
+
             <Button
               variant="hero"
               onClick={openContactForm}
@@ -304,6 +314,15 @@ export const Navigation = () => {
                   </a>
                 );
               })}
+
+              <a
+                href="/en"
+                hrefLang="en"
+                lang="en"
+                className="text-left text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                English
+              </a>
 
               <Button
                 variant="hero"

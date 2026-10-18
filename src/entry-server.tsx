@@ -13,6 +13,7 @@ import { caseStudies } from "@/content/caseStudies";
  */
 export const getPrerenderRoutes = () => [
   { path: "/", lastmod: undefined as string | undefined },
+  { path: "/en", lastmod: undefined },
   { path: "/baza-wiedzy", lastmod: blogPosts[0]?.date },
   { path: "/wspolprace", lastmod: undefined },
   ...blogPosts.map((post) => ({

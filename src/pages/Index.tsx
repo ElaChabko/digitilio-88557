@@ -10,7 +10,7 @@ import { ForWhom } from "@/components/ForWhom";
 import { Benefits } from "@/components/Benefits";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Footer } from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, HOME_ALTERNATES } from "@/components/SEO";
 
 import { StructuredData } from "@/components/StructuredData";
 import { digitilioSiteSchema } from "@/lib/structuredData";
@@ -37,6 +37,7 @@ const Index = () => {
         title="Strategia marketingowa i doradztwo | Digitilio"
         description="Pomagam firmom uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć."
         canonical="https://digitilio.pl/"
+        alternates={HOME_ALTERNATES}
       />
       <StructuredData data={digitilioSiteSchema} />
       <Navigation />

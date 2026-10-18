@@ -4,7 +4,7 @@ import React, {
   useState,
 } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 
 import {
@@ -17,7 +17,68 @@ import {
   saveConsent,
 } from "@/lib/consent";
 
+const COPY = {
+  pl: {
+    close: "Zamknij ustawienia cookies",
+    eyebrow: "Prywatność",
+    title: "Ustawienia plików cookies",
+    intro:
+      "Używamy niezbędnych cookies do prawidłowego działania strony. Cookies analityczne i marketingowe wykorzystujemy tylko zgodnie z Twoimi ustawieniami.",
+    detailsBefore: "Szczegóły znajdziesz w",
+    cookiesLink: "polityce cookies",
+    and: "oraz",
+    privacyLink: "polityce prywatności",
+    detailsAfter: ".",
+    necessaryAria: "Cookies niezbędne - zawsze aktywne",
+    necessary: "Niezbędne",
+    necessaryDesc:
+      "Potrzebne do prawidłowego działania strony i zapisania Twoich ustawień prywatności.",
+    analytics: "Analityczne",
+    analyticsDesc:
+      "Pomagają zrozumieć, w jaki sposób użytkownicy korzystają ze strony i jak można ją ulepszać, np. za pomocą Google Analytics.",
+    marketing: "Marketingowe",
+    marketingDesc:
+      "Pozwalają mierzyć działania reklamowe i personalizować komunikację marketingową, jeśli takie narzędzia są używane w Serwisie.",
+    reject: "Odrzuć dodatkowe",
+    save: "Zapisz wybór",
+    accept: "Akceptuj wszystkie",
+    version: "Wersja zgód",
+  },
+  en: {
+    close: "Close cookie settings",
+    eyebrow: "Privacy",
+    title: "Cookie settings",
+    intro:
+      "We use necessary cookies to make this website work. Analytics and marketing cookies are used only in line with your settings.",
+    detailsBefore: "Details are in the",
+    cookiesLink: "Cookie Policy",
+    and: "and",
+    privacyLink: "Privacy Policy",
+    detailsAfter: " (both in Polish).",
+    necessaryAria: "Necessary cookies - always active",
+    necessary: "Necessary",
+    necessaryDesc:
+      "Required for the website to work and to remember your privacy settings.",
+    analytics: "Analytics",
+    analyticsDesc:
+      "Help me understand how visitors use the website and how to improve it, e.g. with Google Analytics.",
+    marketing: "Marketing",
+    marketingDesc:
+      "Allow measuring advertising and personalising marketing communication, if such tools are used on the website.",
+    reject: "Reject optional",
+    save: "Save choices",
+    accept: "Accept all",
+    version: "Consent version",
+  },
+};
+
 export const CookieConsent: React.FC = () => {
+  const { pathname } = useLocation();
+  const t =
+    pathname === "/en" || pathname.startsWith("/en/")
+      ? COPY.en
+      : COPY.pl;
+
   const [open, setOpen] = useState(false);
 
   const [analytics, setAnalytics] =
@@ -150,7 +211,7 @@ export const CookieConsent: React.FC = () => {
             type="button"
             onClick={() => setOpen(false)}
             className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
-            aria-label="Zamknij ustawienia cookies"
+            aria-label={t.close}
           >
             <X className="h-5 w-5" />
           </button>
@@ -158,41 +219,37 @@ export const CookieConsent: React.FC = () => {
 
         <div className="pr-10">
           <p className="mb-2 text-sm font-medium text-primary">
-            Prywatność
+            {t.eyebrow}
           </p>
 
           <h2
             id="cookie-consent-title"
             className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl"
           >
-            Ustawienia plików cookies
+            {t.title}
           </h2>
         </div>
 
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-600 sm:mt-4">
-          Używamy niezbędnych cookies do
-          prawidłowego działania strony.
-          Cookies analityczne i marketingowe
-          wykorzystujemy tylko zgodnie z Twoimi
-          ustawieniami.
+          {t.intro}
         </p>
 
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          Szczegóły znajdziesz w{" "}
+          {t.detailsBefore}{" "}
           <Link
             to="/polityka-cookies"
             className="font-medium text-primary underline-offset-4 hover:underline"
           >
-            polityce cookies
+            {t.cookiesLink}
           </Link>{" "}
-          oraz{" "}
+          {t.and}{" "}
           <Link
             to="/polityka-prywatnosci"
             className="font-medium text-primary underline-offset-4 hover:underline"
           >
-            polityce prywatności
+            {t.privacyLink}
           </Link>
-          .
+          {t.detailsAfter}
         </p>
 
         {/* CATEGORIES */}
@@ -204,18 +261,16 @@ export const CookieConsent: React.FC = () => {
               checked
               disabled
               className="mt-1 h-4 w-4"
-              aria-label="Cookies niezbędne - zawsze aktywne"
+              aria-label={t.necessaryAria}
             />
 
             <div>
               <div className="font-medium text-slate-900">
-                Niezbędne
+                {t.necessary}
               </div>
 
               <div className="mt-1 text-sm leading-relaxed text-slate-600">
-                Potrzebne do prawidłowego
-                działania strony i zapisania
-                Twoich ustawień prywatności.
+                {t.necessaryDesc}
               </div>
             </div>
           </div>
@@ -235,15 +290,11 @@ export const CookieConsent: React.FC = () => {
 
             <div>
               <div className="font-medium text-slate-900">
-                Analityczne
+                {t.analytics}
               </div>
 
               <div className="mt-1 text-sm leading-relaxed text-slate-600">
-                Pomagają zrozumieć, w jaki
-                sposób użytkownicy korzystają
-                ze strony i jak można ją
-                ulepszać, np. za pomocą
-                Google Analytics.
+                {t.analyticsDesc}
               </div>
             </div>
           </label>
@@ -263,15 +314,11 @@ export const CookieConsent: React.FC = () => {
 
             <div>
               <div className="font-medium text-slate-900">
-                Marketingowe
+                {t.marketing}
               </div>
 
               <div className="mt-1 text-sm leading-relaxed text-slate-600">
-                Pozwalają mierzyć działania
-                reklamowe i personalizować
-                komunikację marketingową, jeśli
-                takie narzędzia są używane w
-                Serwisie.
+                {t.marketingDesc}
               </div>
             </div>
           </label>
@@ -284,7 +331,7 @@ export const CookieConsent: React.FC = () => {
             onClick={rejectAdditional}
             className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-50 sm:py-3"
           >
-            Odrzuć dodatkowe
+            {t.reject}
           </button>
 
           <button
@@ -292,7 +339,7 @@ export const CookieConsent: React.FC = () => {
             onClick={saveChoices}
             className="rounded-lg border border-primary px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/5 sm:py-3"
           >
-            Zapisz wybór
+            {t.save}
           </button>
 
           <button
@@ -300,12 +347,12 @@ export const CookieConsent: React.FC = () => {
             onClick={acceptAll}
             className="rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90 sm:py-3"
           >
-            Akceptuj wszystkie
+            {t.accept}
           </button>
         </div>
 
         <p className="mt-3 text-right text-xs text-slate-400 sm:mt-5">
-          Wersja zgód: {CONSENT_VERSION}
+          {t.version}: {CONSENT_VERSION}
         </p>
       </div>
     </div>
