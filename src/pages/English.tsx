@@ -145,6 +145,18 @@ const particle = (i: number, salt: number) => {
   return x - Math.floor(x);
 };
 
+// Wyrazy z łącznikiem (np. „e-commerce”) nie łamią się na końcu linii
+const keepHyphenated = (text: string) =>
+  text.split(/(\S+-\S+)/).map((part, i) =>
+    /\S+-\S+/.test(part) ? (
+      <span key={i} className="whitespace-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+
 const scrollToContact = (event: React.MouseEvent<HTMLAnchorElement>) => {
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
     return;
@@ -405,10 +417,10 @@ const English = () => {
                   className="rounded-2xl border border-border/70 bg-background/80 p-7 shadow-sm backdrop-blur-sm transition-shadow duration-300 hover:shadow-md sm:p-8"
                 >
                   <h3 className="text-xl font-semibold tracking-tight text-foreground">
-                    {item.title}
+                    {keepHyphenated(item.title)}
                   </h3>
                   <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                    {item.description}
+                    {keepHyphenated(item.description)}
                   </p>
                 </motion.article>
               ))}
@@ -477,7 +489,7 @@ const English = () => {
                       {service.title}
                     </h3>
                     <p className="mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/70 sm:text-lg">
-                      {service.description}
+                      {keepHyphenated(service.description)}
                     </p>
                     <div className="mt-auto pt-8">
                       <div className="h-px w-12 bg-primary-foreground/30 transition-all duration-500 group-hover:w-24 group-hover:bg-primary-foreground/60" />
@@ -529,10 +541,10 @@ const English = () => {
                   className="grid grid-cols-1 gap-3 py-7 md:grid-cols-[0.8fr_1.2fr] md:gap-10"
                 >
                   <h3 className="text-lg font-semibold text-foreground sm:text-xl">
-                    {item.sector}
+                    {keepHyphenated(item.sector)}
                   </h3>
                   <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-                    {item.work}
+                    {keepHyphenated(item.work)}
                   </p>
                 </motion.div>
               ))}
@@ -569,7 +581,7 @@ const English = () => {
                     {step.title}
                   </h3>
                   <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-                    {step.description}
+                    {keepHyphenated(step.description)}
                   </p>
                 </motion.li>
               ))}
