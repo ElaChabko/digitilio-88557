@@ -133,7 +133,7 @@ export default function Wspolprace() {
                   duration: 0.6,
                   delay: 0.1,
                 }}
-                className="mt-7 max-w-2xl text-lg font-light leading-relaxed text-white/65 sm:text-xl"
+                className="mt-7 max-w-2xl text-lg font-normal leading-relaxed text-white/65 sm:text-xl"
               >
                 Pokazuję nie tylko efekty działań, ale również decyzje, które do
                 nich prowadziły - co analizowaliśmy, co zmienialiśmy i dlaczego.

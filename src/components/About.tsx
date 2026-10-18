@@ -140,7 +140,7 @@ export const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.15 }}
-                  className="text-lg font-light leading-relaxed text-muted-foreground sm:text-xl"
+                  className="text-lg font-normal leading-relaxed text-muted-foreground sm:text-xl"
                 >
                   Nazywam się{" "}
                   <strong className="font-semibold text-foreground">

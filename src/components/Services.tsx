@@ -118,7 +118,7 @@ export const Services = () => {
               Od diagnozy problemu po wsparcie we wdrożeniu.
             </h2>
 
-            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-primary-foreground/70 sm:text-xl">
+            <p className="mt-6 max-w-2xl text-lg font-normal leading-relaxed text-primary-foreground/70 sm:text-xl">
               Zakres współpracy dobieramy do sytuacji firmy, a nie do gotowego
               pakietu usług.
             </p>

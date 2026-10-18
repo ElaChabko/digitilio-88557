@@ -106,7 +106,7 @@ export const Benefits = () => {
               }}
               className="lg:pt-8"
             >
-              <p className="max-w-2xl text-lg font-light leading-relaxed text-white/65 sm:text-xl">
+              <p className="max-w-2xl text-lg font-normal leading-relaxed text-white/65 sm:text-xl">
                 Efektem współpracy nie ma być dłuższa lista działań.
                 Potrzebujesz wiedzieć, co jest priorytetem, dlaczego właśnie to
                 i jak przełożyć decyzje na codzienną pracę marketingu.

@@ -163,7 +163,7 @@ export default function CaseStudy() {
                   duration: 0.65,
                   delay: 0.15,
                 }}
-                className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-white/75 sm:text-xl"
+                className="mt-8 max-w-3xl text-lg font-normal leading-relaxed text-white/75 sm:text-xl"
               >
                 {caseStudy.lead}
               </motion.p>

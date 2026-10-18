@@ -53,7 +53,7 @@ export const ProblemSection = () => {
                 Marketing działa. Tylko coraz trudniej powiedzieć, co naprawdę ma sens.
               </h2>
 
-              <p className="mt-7 text-lg sm:text-xl text-muted-foreground font-light leading-relaxed max-w-xl">
+              <p className="mt-7 text-lg sm:text-xl text-muted-foreground font-normal leading-relaxed max-w-xl">
                 W wielu firmach problemem nie jest brak działań. Publikacje
                 powstają, kampanie są uruchamiane i pojawiają się kolejne
                 pomysły, ale z czasem coraz trudniej zdecydować, które z nich

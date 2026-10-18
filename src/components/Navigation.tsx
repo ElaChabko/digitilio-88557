@@ -162,6 +162,9 @@ export const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Na górze strony głównej menu leży na ciemnym hero – przezroczyste, jasne linki
+  const overDarkHero = location.pathname === "/" && !isScrolled && !isMobileMenuOpen;
+
   const isRouteActive = (path: string) => {
     /**
      * Baza wiedzy ma być aktywna zarówno na:
@@ -185,9 +188,11 @@ export const Navigation = () => {
     <>
       <nav
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "border-b border-border/50 bg-background/95 shadow-lg backdrop-blur-xl"
-            : "bg-background/80 shadow-md backdrop-blur-md"
+          overDarkHero
+            ? "bg-transparent"
+            : isScrolled
+              ? "border-b border-border/50 bg-background/95 shadow-lg backdrop-blur-xl"
+              : "bg-background/80 shadow-md backdrop-blur-md"
         }`}
       >
         <div className="container mx-auto flex items-center justify-between px-4 py-5">
@@ -206,7 +211,7 @@ export const Navigation = () => {
               alt="Digitilio"
               width={40}
               height={40}
-              className="h-10 w-auto"
+              className={`h-10 w-auto ${overDarkHero ? "rounded-lg" : ""}`}
             />
           </Link>
 
@@ -226,9 +231,11 @@ export const Navigation = () => {
                   href={hrefFor(item)}
                   onClick={(event) => handleNavItem(event, item)}
                   className={`group relative text-sm font-medium tracking-wide transition-all duration-300 ${
-                    isActiveRoute
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
+                    overDarkHero
+                      ? "text-white/85 hover:text-white"
+                      : isActiveRoute
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
                   }`}
                 >
                   {item.label}
@@ -248,7 +255,11 @@ export const Navigation = () => {
               href="/en"
               hrefLang="en"
               lang="en"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className={`text-sm font-medium transition-colors ${
+                overDarkHero
+                  ? "text-white/65 hover:text-white"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
               aria-label="English version"
             >
               EN
@@ -257,7 +268,11 @@ export const Navigation = () => {
             <Button
               variant="hero"
               onClick={openContactForm}
-              className="bg-primary text-gray-50 transition-all duration-300 hover:scale-105 hover:bg-primary/90 hover:shadow-lg"
+              className={`transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                overDarkHero
+                  ? "bg-white text-primary hover:bg-white/90"
+                  : "bg-primary text-gray-50 hover:bg-primary/90"
+              }`}
             >
               Skontaktuj się
             </Button>
@@ -266,7 +281,9 @@ export const Navigation = () => {
           {/* MOBILE BUTTON */}
           <button
             type="button"
-            className="text-foreground transition-colors md:hidden"
+            className={`transition-colors md:hidden ${
+              overDarkHero ? "text-white" : "text-foreground"
+            }`}
             onClick={() =>
               setIsMobileMenuOpen((prev) => !prev)
             }

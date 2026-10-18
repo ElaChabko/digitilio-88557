@@ -321,7 +321,7 @@ const English = () => {
               </h1>
 
               <p
-                className="hero-fade-up max-w-4xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl"
+                className="hero-fade-up max-w-4xl text-lg font-normal leading-relaxed text-muted-foreground sm:text-xl md:text-2xl"
                 style={{ animationDelay: "0.8s" }}
               >
                 I help B2B and B2C companies bring order to their marketing,
@@ -460,7 +460,7 @@ const English = () => {
               <h2 className="max-w-3xl text-3xl font-bold leading-[1.08] tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
                 From diagnosing the problem to supporting implementation.
               </h2>
-              <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-primary-foreground/70 sm:text-xl">
+              <p className="mt-6 max-w-2xl text-lg font-normal leading-relaxed text-primary-foreground/70 sm:text-xl">
                 The scope is matched to your situation, not to a ready-made
                 package.
               </p>
@@ -525,7 +525,7 @@ const English = () => {
               <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
                 Different industries, the same approach.
               </h2>
-              <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground">
+              <p className="mt-6 max-w-2xl text-lg font-normal leading-relaxed text-muted-foreground">
                 A few examples of projects I am working on.
               </p>
             </motion.div>
@@ -707,7 +707,7 @@ const English = () => {
               <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
                 Tell me where your marketing is stuck.
               </h2>
-              <p className="mt-6 text-lg font-light leading-relaxed text-muted-foreground">
+              <p className="mt-6 text-lg font-normal leading-relaxed text-muted-foreground">
                 Write a few sentences about your company and what you need. I
                 will get back to you by email, usually within two business
                 days.

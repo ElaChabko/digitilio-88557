@@ -77,7 +77,7 @@ export const Process = () => {
             </div>
 
             <div className="lg:pt-8">
-              <p className="max-w-2xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+              <p className="max-w-2xl text-lg font-normal leading-relaxed text-muted-foreground sm:text-xl">
                 Nie zaczynam od kanału, formatu ani listy działań. Najpierw chcę
                 zrozumieć, co dzieje się w marketingu firmy, gdzie rzeczywiście
                 leży problem i jakie decyzje mają dziś największe znaczenie.

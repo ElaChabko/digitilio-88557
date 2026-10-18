@@ -95,7 +95,7 @@ export const ForWhom = () => {
               kierunku.
             </h2>
 
-            <p className="mx-auto mt-7 max-w-3xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl">
+            <p className="mx-auto mt-7 max-w-3xl text-lg font-normal leading-relaxed text-muted-foreground sm:text-xl">
               Najczęściej pracuję z właścicielami i osobami odpowiedzialnymi za
               marketing w firmach, w których działania już trwają, ale coraz
               trudniej ocenić, co powinno być kolejnym krokiem.
