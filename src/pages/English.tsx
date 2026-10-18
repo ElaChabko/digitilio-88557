@@ -1,13 +1,16 @@
 import { ArrowRight, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { SEO, HOME_ALTERNATES } from "@/components/SEO";
 import { StructuredData } from "@/components/StructuredData";
 import { ContactForm } from "@/components/ContactForm";
 import { ORGANIZATION_ID, PERSON_ID } from "@/lib/structuredData";
 import { OPEN_COOKIE_SETTINGS_EVENT } from "@/lib/consent";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 import logo from "@/assets/logo-nav.webp";
 import heroPortrait from "@/assets/hero-portrait.webp";
+import heroVisual from "@/assets/hero-visual.jpg";
 import aboutPhoto from "@/assets/about-photo-new.webp";
 
 /**
@@ -59,6 +62,11 @@ const audiences = [
       "Firms with strong expertise and real projects, but little time to turn them into consistent communication.",
   },
   {
+    title: "Consumer brands & e-commerce",
+    description:
+      "Online stores and service brands that run ads and social media, but want clearer data and better-spent budgets.",
+  },
+  {
     title: "Teams without a senior marketer",
     description:
       "Founders and small teams who do marketing “on the side” and want an outside view on what to focus on.",
@@ -73,10 +81,6 @@ const experience = [
   {
     sector: "AI & software development",
     work: "Positioning, service structure and website messaging, including communication aimed at the US market.",
-  },
-  {
-    sector: "Elevator & lift manufacturer",
-    work: "Brand narrative for a technical company, communication of completed projects and a clear content approval process.",
   },
   {
     sector: "E-commerce, medical devices",
@@ -118,11 +122,27 @@ const englishPageSchema = {
   "@type": "WebPage",
   "@id": `${SITE}/en#webpage`,
   url: `${SITE}/en`,
-  name: "Digitilio – Marketing strategy & B2B communication",
+  name: "Digitilio – Marketing strategy & consulting",
   inLanguage: "en",
   isPartOf: { "@id": `${SITE}/#website` },
   about: { "@id": ORGANIZATION_ID },
   author: { "@id": PERSON_ID },
+};
+
+// Te same krzywe i tempo co w polskiej wersji strony
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6, delay, ease: EASE },
+});
+
+// Deterministyczne pozycje cząsteczek (jak w Hero.tsx) – bez skoku przy hydracji
+const particle = (i: number, salt: number) => {
+  const x = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453;
+  return x - Math.floor(x);
 };
 
 const scrollToContact = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -138,12 +158,13 @@ const scrollToContact = (event: React.MouseEvent<HTMLAnchorElement>) => {
 
 const English = () => {
   const currentYear = new Date().getFullYear();
+  const isMobile = useIsMobile();
 
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Marketing strategy & B2B communication | Digitilio"
-        description="I help B2B and technology companies bring order to their marketing, set priorities and turn strategy into work their team can actually implement."
+        title="Marketing strategy & consulting | Digitilio"
+        description="I help companies bring order to their marketing, set priorities and turn strategy into work their team can actually implement."
         canonical={`${SITE}/en`}
         lang="en"
         alternates={HOME_ALTERNATES}
@@ -184,38 +205,122 @@ const English = () => {
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background pb-20 pt-32 sm:pb-24 sm:pt-36 lg:pb-28 lg:pt-40">
+      {/* HERO – tło i animacje jak w polskim Hero.tsx */}
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-background via-secondary/10 to-background">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heroVisual}
+            alt=""
+            className="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+            style={{ opacity: 0.35 }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
+        </div>
+
         <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-primary/[0.12] blur-[120px]"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -bottom-40 -left-40 h-[460px] w-[460px] rounded-full bg-accent/[0.12] blur-[120px]"
-          aria-hidden="true"
+          className="absolute inset-0 z-[1]"
+          style={{
+            background:
+              "radial-gradient(at 40% 20%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(var(--secondary) / 0.4) 0px, transparent 50%), radial-gradient(at 80% 50%, hsl(var(--primary) / 0.4) 0px, transparent 50%), radial-gradient(at 0% 100%, hsl(var(--accent) / 0.45) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(var(--primary) / 0.5) 0px, transparent 50%), radial-gradient(at 0% 0%, hsl(var(--accent) / 0.4) 0px, transparent 50%)",
+            opacity: 0.8,
+          }}
         />
 
-        <div className="container relative z-10 mx-auto px-4 sm:px-6">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-            <div className="hero-fade-up space-y-7 sm:space-y-9">
-              <p className="text-sm font-medium tracking-wide text-primary sm:text-base">
-                Digitilio · Marketing strategy &amp; B2B communication
+        {[...Array(isMobile ? 8 : 30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute z-[5] h-2 w-2 rounded-full bg-primary/60"
+            style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
+            initial={{
+              left: `${particle(i, 1) * 100}%`,
+              top: `${particle(i, 2) * 100}%`,
+            }}
+            animate={{ y: [0, -30, 0], opacity: [0.4, 0.8, 0.4] }}
+            transition={{
+              duration: 3 + particle(i, 3) * 2,
+              repeat: Infinity,
+              ease: "linear",
+              delay: particle(i, 4) * 2,
+            }}
+          />
+        ))}
+
+        <motion.div
+          className="absolute left-1/4 top-1/4 z-[1] h-[400px] w-[400px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)",
+            filter: isMobile ? "blur(30px)" : "blur(40px)",
+            opacity: 0.5,
+          }}
+          animate={isMobile ? {} : { scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
+
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 z-[1] h-[350px] w-[350px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, hsl(var(--accent) / 0.4) 0%, transparent 70%)",
+            filter: isMobile ? "blur(30px)" : "blur(40px)",
+            opacity: 0.45,
+          }}
+          animate={isMobile ? {} : { scale: [1, 1.3, 1], opacity: [0.45, 0.65, 0.45] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 1 }}
+        />
+
+        <div
+          className="absolute inset-0 z-[3] hidden md:block"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+            maskImage: "radial-gradient(ellipse at center, black 0%, transparent 75%)",
+            opacity: 0.7,
+          }}
+        />
+
+        <div className="container relative z-10 mx-auto px-4 pb-20 pt-32 sm:px-6 sm:py-24 lg:py-32">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
+            <div className="hero-fade-up space-y-6 sm:space-y-8 md:space-y-10">
+              <p
+                className="hero-fade-up text-sm font-medium tracking-wide text-primary sm:text-base"
+                style={{ animationDelay: "0.1s" }}
+              >
+                Digitilio · Marketing strategy &amp; consulting
               </p>
 
-              <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]">
-                <span className="block">Fewer random tactics.</span>
-                <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Better marketing decisions.
+              <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[3.75rem]">
+                <span className="hero-slide-in block" style={{ animationDelay: "0.2s" }}>
+                  Fewer random tactics.
+                </span>
+                <span
+                  className="hero-slide-in block overflow-visible"
+                  style={{ animationDelay: "0.4s" }}
+                >
+                  <span className="box-decoration-clone bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    Better marketing decisions.
+                  </span>
                 </span>
               </h1>
 
-              <p className="max-w-2xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl lg:text-2xl">
-                I help B2B and technology companies bring order to their
-                marketing, set priorities and turn strategy into work their
-                team can actually implement.
+              <p
+                className="hero-fade-up max-w-4xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl"
+                style={{ animationDelay: "0.8s" }}
+              >
+                I help B2B and B2C companies bring order to their marketing,
+                set priorities and turn strategy into work their team can
+                actually implement.
               </p>
 
-              <div className="flex flex-col items-start gap-4">
+              <div
+                className="hero-fade-up flex flex-col items-start gap-4"
+                style={{ animationDelay: "1s" }}
+              >
                 <a
                   href="#contact"
                   onClick={scrollToContact}
@@ -231,17 +336,31 @@ const English = () => {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
-              <div className="overflow-hidden rounded-2xl shadow-xl md:rounded-3xl">
-                <img
-                  src={heroPortrait}
-                  alt="Ela Chabko – Digitilio"
-                  width={768}
-                  height={960}
-                  className="h-auto w-full object-cover"
-                  loading="eager"
-                  decoding="async"
+            <div
+              className="hero-scale-in group relative mt-6 lg:mt-0"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="relative mx-auto max-w-md overflow-hidden rounded-2xl md:max-w-lg md:rounded-3xl lg:mx-0 lg:max-w-none">
+                <motion.div
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30 opacity-50 blur-xl md:rounded-3xl"
+                  whileHover={isMobile ? {} : { opacity: 0.8 }}
+                  transition={{ duration: 0.5 }}
                 />
+                <motion.div
+                  className="relative overflow-hidden rounded-2xl shadow-xl md:rounded-3xl"
+                  whileHover={isMobile ? {} : { scale: 1.02 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={heroPortrait}
+                    alt="Ela Chabko – Digitilio"
+                    width={768}
+                    height={960}
+                    className="h-auto w-full object-cover"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </motion.div>
               </div>
             </div>
           </div>
@@ -249,29 +368,49 @@ const English = () => {
       </section>
 
       {/* WHO I WORK WITH */}
-      <section className="bg-background py-20 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="mx-auto max-w-7xl">
-            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
-              Who I work with
-            </p>
-            <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
-              Companies with real expertise and messy marketing.
-            </h2>
+      <section className="relative overflow-hidden bg-background py-20 sm:py-24 lg:py-28">
+        <motion.div
+          className="pointer-events-none absolute -left-40 top-10 h-[500px] w-[500px] rounded-full bg-primary/[0.07] blur-[120px]"
+          animate={{ x: [0, 40, 0], y: [0, 30, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden="true"
+        />
+        <motion.div
+          className="pointer-events-none absolute -bottom-48 right-0 h-[520px] w-[520px] rounded-full bg-accent/[0.07] blur-[120px]"
+          animate={{ x: [0, -30, 0], y: [0, -20, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden="true"
+        />
 
-            <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
-              {audiences.map((item) => (
-                <article
+        <div className="container relative z-10 mx-auto px-4 sm:px-6">
+          <div className="mx-auto max-w-7xl">
+            <motion.div {...fadeUp()}>
+              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+                Who I work with
+              </p>
+              <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                Companies with real expertise and scattered marketing.
+              </h2>
+            </motion.div>
+
+            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+              {audiences.map((item, index) => (
+                <motion.article
                   key={item.title}
-                  className="rounded-2xl border border-border/70 bg-secondary/5 p-7 sm:p-8"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40, y: 20 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.08, ease: EASE }}
+                  whileHover={{ y: -4 }}
+                  className="rounded-2xl border border-border/70 bg-background/80 p-7 shadow-sm backdrop-blur-sm transition-shadow duration-300 hover:shadow-md sm:p-8"
                 >
-                  <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground">
                     {item.title}
                   </h3>
                   <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
@@ -284,47 +423,81 @@ const English = () => {
           className="pointer-events-none absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-accent/20 blur-[120px]"
           aria-hidden="true"
         />
+        <div
+          className="pointer-events-none absolute -bottom-48 -right-40 h-[520px] w-[520px] rounded-full bg-background/10 blur-[120px]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          aria-hidden="true"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, currentColor 1px, transparent 1px),
+              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+          }}
+        />
 
         <div className="container relative z-10 mx-auto px-4 sm:px-6">
           <div className="mx-auto max-w-7xl">
-            <p className="mb-5 text-sm font-medium tracking-wide text-primary-foreground/60 sm:text-base">
-              How I can help
-            </p>
-            <h2 className="max-w-3xl text-3xl font-bold leading-[1.08] tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
-              From diagnosing the problem to supporting implementation.
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-primary-foreground/70 sm:text-xl">
-              The scope is matched to your situation, not to a ready-made
-              package.
-            </p>
+            <motion.div {...fadeUp()}>
+              <p className="mb-5 text-sm font-medium tracking-wide text-primary-foreground/60 sm:text-base">
+                How I can help
+              </p>
+              <h2 className="max-w-3xl text-3xl font-bold leading-[1.08] tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
+                From diagnosing the problem to supporting implementation.
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-primary-foreground/70 sm:text-xl">
+                The scope is matched to your situation, not to a ready-made
+                package.
+              </p>
+            </motion.div>
 
             <div className="mt-12 grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:gap-6">
-              {services.map((service) => (
-                <article
+              {services.map((service, index) => (
+                <motion.article
                   key={service.number}
-                  className="relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-background/[0.06] p-7 sm:p-8 lg:p-10"
+                  {...fadeUp(0.15 + index * 0.1)}
+                  whileHover={{ y: -4 }}
+                  className="group relative min-h-[260px] overflow-hidden rounded-2xl border border-primary-foreground/10 bg-background/[0.06] p-7 backdrop-blur-sm transition-colors duration-300 hover:bg-background/[0.1] sm:p-8 lg:p-10"
                 >
-                  <span className="text-sm font-medium text-primary-foreground/50 sm:text-base">
+                  <span
+                    className="pointer-events-none absolute -right-2 -top-8 select-none text-[8rem] font-bold leading-none tracking-tighter text-primary-foreground/[0.04] sm:text-[10rem]"
+                    aria-hidden="true"
+                  >
                     {service.number}
                   </span>
-                  <h3 className="mt-8 text-2xl font-semibold leading-tight tracking-tight text-primary-foreground sm:text-3xl">
-                    {service.title}
-                  </h3>
-                  <p className="mt-5 text-base leading-relaxed text-primary-foreground/70 sm:text-lg">
-                    {service.description}
-                  </p>
-                </article>
+
+                  <div className="relative z-10 flex h-full flex-col">
+                    <span className="mb-8 text-sm font-medium text-primary-foreground/50 sm:text-base">
+                      {service.number}
+                    </span>
+                    <h3 className="max-w-md text-2xl font-semibold leading-tight tracking-tight text-primary-foreground transition-colors duration-300 group-hover:text-white sm:text-3xl">
+                      {service.title}
+                    </h3>
+                    <p className="mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/70 sm:text-lg">
+                      {service.description}
+                    </p>
+                    <div className="mt-auto pt-8">
+                      <div className="h-px w-12 bg-primary-foreground/30 transition-all duration-500 group-hover:w-24 group-hover:bg-primary-foreground/60" />
+                    </div>
+                  </div>
+                </motion.article>
               ))}
             </div>
 
-            <div className="mt-10 flex max-w-3xl items-start gap-4">
+            <motion.div
+              {...fadeUp(0.5)}
+              className="mt-10 flex max-w-3xl items-start gap-4"
+            >
               <div className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-foreground/50" />
               <p className="text-base leading-relaxed text-primary-foreground/65 sm:text-lg">
                 Need a website or a web app as well? I work with a trusted
                 development team, so strategy, content and build can come from
                 one place.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -333,20 +506,26 @@ const English = () => {
       <section className="bg-background py-20 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="mx-auto max-w-7xl">
-            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
-              Selected experience
-            </p>
-            <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
-              Complex products, explained simply.
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground">
-              Recent work, described without client names.
-            </p>
+            <motion.div {...fadeUp()}>
+              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+                Selected experience
+              </p>
+              <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                Different industries, the same approach.
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground">
+                A few examples of projects I am working on.
+              </p>
+            </motion.div>
 
             <div className="mt-12 divide-y divide-border/70 border-y border-border/70">
-              {experience.map((item) => (
-                <div
+              {experience.map((item, index) => (
+                <motion.div
                   key={item.sector}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.55, delay: index * 0.1, ease: EASE }}
                   className="grid grid-cols-1 gap-3 py-7 md:grid-cols-[0.8fr_1.2fr] md:gap-10"
                 >
                   <h3 className="text-lg font-semibold text-foreground sm:text-xl">
@@ -355,7 +534,7 @@ const English = () => {
                   <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
                     {item.work}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -363,21 +542,25 @@ const English = () => {
       </section>
 
       {/* HOW WE WORK */}
-      <section className="bg-secondary/5 py-20 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="relative overflow-hidden bg-secondary/5 py-20 sm:py-24">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6">
           <div className="mx-auto max-w-7xl">
-            <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
-              How we would work together
-            </p>
-            <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
-              Remote, written and structured.
-            </h2>
+            <motion.div {...fadeUp()}>
+              <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
+                How we would work together
+              </p>
+              <h2 className="max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                Remote, written and structured.
+              </h2>
+            </motion.div>
 
             <ol className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
               {steps.map((step, index) => (
-                <li
+                <motion.li
                   key={step.title}
-                  className="rounded-2xl border border-border/70 bg-background p-6 sm:p-7"
+                  {...fadeUp(0.1 + index * 0.1)}
+                  whileHover={{ y: -4 }}
+                  className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-7"
                 >
                   <span className="text-sm font-medium text-primary">
                     {String(index + 1).padStart(2, "0")}
@@ -388,7 +571,7 @@ const English = () => {
                   <p className="mt-3 text-base leading-relaxed text-muted-foreground">
                     {step.description}
                   </p>
-                </li>
+                </motion.li>
               ))}
             </ol>
           </div>
@@ -396,11 +579,22 @@ const English = () => {
       </section>
 
       {/* ABOUT */}
-      <section className="bg-background py-20 sm:py-24 lg:py-28">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="relative overflow-hidden bg-background py-20 sm:py-24 lg:py-28">
+        <div
+          className="pointer-events-none absolute -bottom-40 -right-32 h-[480px] w-[480px] rounded-full bg-primary/[0.08] blur-[120px]"
+          aria-hidden="true"
+        />
+
+        <div className="container relative z-10 mx-auto px-4 sm:px-6">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <div>
-              <div className="overflow-hidden rounded-2xl sm:rounded-3xl">
+              <motion.div
+                initial={{ opacity: 0, x: -60, scale: 0.96 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.75, ease: EASE }}
+                className="relative overflow-hidden rounded-2xl sm:rounded-3xl"
+              >
                 <img
                   src={aboutPhoto}
                   alt="Ela Chabko – Digitilio"
@@ -409,13 +603,19 @@ const English = () => {
                   className="w-full object-cover"
                   loading="lazy"
                 />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-transparent" />
+              </motion.div>
 
               <div className="mt-5 grid grid-cols-3 gap-3">
-                {stats.map((stat) => (
-                  <div
+                {stats.map((stat, index) => (
+                  <motion.div
                     key={stat.label}
-                    className="rounded-2xl border border-border/70 bg-background p-4 sm:p-5"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: index * 0.1, ease: EASE }}
+                    whileHover={{ y: -4 }}
+                    className="rounded-2xl border border-border/70 bg-background/80 p-4 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-5"
                   >
                     <span className="block text-2xl font-bold tracking-tight text-primary sm:text-4xl">
                       {stat.value}
@@ -426,12 +626,18 @@ const English = () => {
                     <span className="mt-2 hidden text-sm leading-relaxed text-muted-foreground sm:block">
                       {stat.hint}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col justify-center">
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
+              className="flex flex-col justify-center"
+            >
               <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
                 About me
               </p>
@@ -449,21 +655,28 @@ const English = () => {
                   team can actually use them.
                 </p>
                 <p>
-                  I work across strategy, B2B communication, LinkedIn,
-                  content, paid social and analytics. I also teach marketing
-                  in postgraduate programs and run trainings for companies. I
-                  use AI and automation where they genuinely improve the
-                  process or the quality of decisions.
+                  I work across strategy, communication, social media,
+                  content, paid campaigns and analytics, for both B2B and
+                  consumer brands. I also teach marketing in postgraduate
+                  programs and run trainings for companies. I use AI and
+                  automation where they genuinely improve the process or the
+                  quality of decisions.
                 </p>
               </div>
 
-              <div className="mt-8 border-l-2 border-primary/40 pl-5 sm:pl-6">
+              <motion.div
+                initial={{ opacity: 0, x: 25 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.35, ease: EASE }}
+                className="mt-8 border-l-2 border-primary/40 pl-5 sm:pl-6"
+              >
                 <p className="max-w-xl text-lg font-medium leading-relaxed text-foreground sm:text-xl">
                   A strategy should help you make decisions, not just look
                   good in a slide deck.
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -475,7 +688,7 @@ const English = () => {
       >
         <div className="container mx-auto px-4 sm:px-6">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <div>
+            <motion.div {...fadeUp()}>
               <p className="mb-4 text-sm font-medium tracking-wide text-primary sm:text-base">
                 Contact
               </p>
@@ -506,11 +719,14 @@ const English = () => {
                   LinkedIn
                 </a>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm sm:p-8">
+            <motion.div
+              {...fadeUp(0.15)}
+              className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm sm:p-8"
+            >
               <ContactForm lang="en" />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
