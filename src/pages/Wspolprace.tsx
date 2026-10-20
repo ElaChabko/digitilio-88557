@@ -37,6 +37,7 @@ const references = [
   {
     id: "ideo-force",
     company: "Ideo Force",
+    website: "https://ideoforce.pl",
     logo: "/logos/ideo-force.svg",
     pdf: "/referencje/Ela%20Referencje.pdf",
     author: "Joanna Tymowicz",
@@ -315,6 +316,16 @@ export default function Wspolprace() {
                                 <p className="mt-1 text-sm text-muted-foreground">
                                   {reference.position}
                                 </p>
+
+                                <a
+                                  href={reference.website}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="mt-2 flex w-fit items-center gap-1 text-sm font-medium text-primary hover:underline"
+                                >
+                                  {reference.website.replace(/^https?:\/\//, "")}
+                                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                                </a>
 
                                 <button
                                   type="button"
