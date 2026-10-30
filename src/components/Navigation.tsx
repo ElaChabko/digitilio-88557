@@ -1,362 +1,258 @@
 import type React from "react";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Home, Menu, X } from "lucide-react";
 
-import logo from "@/assets/logo-nav.webp";
+import logoPurple from "@/assets/logo-purple.png";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
+import { EASE } from "@/components/site/motion";
+
+/**
+ * Nawigacja w stylu Jetona:
+ * - u góry: logo w jasnej pigułce + przycisk kontaktu,
+ * - na dole ekranu: pływająca fioletowa pigułka z linkami (desktop)
+ *   lub z przyciskiem „Menu” (telefon).
+ */
 
 type NavItem =
-  | {
-      label: string;
-      type: "section";
-      id: string;
-    }
-  | {
-      label: string;
-      type: "route";
-      path: string;
-    };
+  | { label: string; type: "section"; id: string }
+  | { label: string; type: "route"; path: string };
 
-export const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+type Lang = "pl" | "en";
 
+const ITEMS: Record<Lang, NavItem[]> = {
+  pl: [
+    { label: "Usługi", type: "section", id: "services" },
+    { label: "Jak pracuję", type: "section", id: "process" },
+    { label: "Współprace", type: "route", path: "/wspolprace" },
+    { label: "O mnie", type: "section", id: "about" },
+    { label: "Baza wiedzy", type: "route", path: "/baza-wiedzy" },
+  ],
+  en: [
+    { label: "Services", type: "section", id: "services" },
+    { label: "Process", type: "section", id: "process" },
+    { label: "Work", type: "section", id: "work" },
+    { label: "About", type: "section", id: "about" },
+  ],
+};
+
+const COPY = {
+  pl: {
+    contact: "Skontaktuj się",
+    menu: "Menu",
+    close: "Zamknij menu",
+    home: "Strona główna",
+    switchLabel: "EN",
+    switchHref: "/en",
+    switchHrefLang: "en",
+    homePath: "/",
+  },
+  en: {
+    contact: "Contact",
+    menu: "Menu",
+    close: "Close menu",
+    home: "Home",
+    switchLabel: "PL",
+    switchHref: "/",
+    switchHrefLang: "pl",
+    homePath: "/en",
+  },
+};
+
+export const Navigation = ({
+  lang = "pl",
+  onContact,
+}: {
+  lang?: Lang;
+  /** Własna akcja kontaktu (np. przewinięcie do formularza na /en) */
+  onContact?: () => void;
+}) => {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const t = COPY[lang];
+  const items = ITEMS[lang];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems: NavItem[] = [
-    {
-      label: "Usługi",
-      type: "section",
-      id: "services",
-    },
-    {
-      label: "Jak pracuję",
-      type: "section",
-      id: "process",
-    },
-    {
-      label: "Współprace",
-      type: "route",
-      path: "/wspolprace",
-    },
-    {
-      label: "O mnie",
-      type: "section",
-      id: "about",
-    },
-    {
-      label: "Baza wiedzy",
-      type: "route",
-      path: "/baza-wiedzy",
-    },
-  ];
+  useEffect(() => setIsMenuOpen(false), [location.pathname]);
 
   const scrollToSection = (id: string) => {
-    setIsMobileMenuOpen(false);
-
-    if (location.pathname !== "/") {
-      navigate("/");
-
-      setTimeout(() => {
-        const element = document.getElementById(id);
-
-        if (element) {
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }, 150);
-
-      return;
-    }
-
-    const element = document.getElementById(id);
-
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    const go = () =>
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (location.pathname !== t.homePath) {
+      navigate(`${t.homePath}#${id}`);
+      window.setTimeout(go, 200);
+    } else {
+      go();
     }
   };
 
-  const goToRoute = (path: string) => {
-    setIsMobileMenuOpen(false);
-    navigate(path);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const goHome = () => {
-    setIsMobileMenuOpen(false);
-
-    if (location.pathname !== "/") {
-      navigate("/");
-
-      setTimeout(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }, 100);
-
-      return;
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const handleNavItem = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    item: NavItem
-  ) => {
-    // Pozwól otworzyć link w nowej karcie (Ctrl/Cmd + klik)
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
-      return;
-    }
-
-    event.preventDefault();
-
-    if (item.type === "route") {
-      goToRoute(item.path);
-      return;
-    }
-
-    scrollToSection(item.id);
-  };
-
-  /**
-   * Prawdziwe adresy w href – roboty mogą przejść po menu,
-   * a kliknięcie działa jak wcześniej (płynne przewijanie / nawigacja).
-   */
   const hrefFor = (item: NavItem) =>
-    item.type === "route" ? item.path : `/#${item.id}`;
+    item.type === "route" ? item.path : `${t.homePath === "/" ? "/" : t.homePath}#${item.id}`;
 
-  const openContactForm = () => {
-    setIsContactFormOpen(true);
-    setIsMobileMenuOpen(false);
+  const onItem = (event: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+    event.preventDefault();
+    setIsMenuOpen(false);
+    if (item.type === "route") {
+      navigate(item.path);
+      window.scrollTo({ top: 0 });
+    } else {
+      scrollToSection(item.id);
+    }
   };
 
-  // Na górze strony głównej menu leży na ciemnym hero – przezroczyste, jasne linki
-  const overDarkHero = location.pathname === "/" && !isScrolled && !isMobileMenuOpen;
-
-  const isRouteActive = (path: string) => {
-    /**
-     * Baza wiedzy ma być aktywna zarówno na:
-     * /baza-wiedzy
-     * jak i na istniejących artykułach /blog/:slug
-     */
-    if (path === "/baza-wiedzy") {
-      return (
-        location.pathname === "/baza-wiedzy" ||
-        location.pathname.startsWith("/blog/")
-      );
+  const isActive = (item: NavItem) => {
+    if (item.type !== "route") return false;
+    if (item.path === "/baza-wiedzy") {
+      return location.pathname === "/baza-wiedzy" || location.pathname.startsWith("/blog/");
     }
+    return location.pathname === item.path || location.pathname.startsWith(`${item.path}/`);
+  };
 
-    return (
-      location.pathname === path ||
-      location.pathname.startsWith(`${path}/`)
-    );
+  const openContact = () => {
+    setIsMenuOpen(false);
+    if (onContact) onContact();
+    else setIsContactOpen(true);
   };
 
   return (
     <>
-      <nav
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
-          overDarkHero
-            ? "bg-transparent"
-            : isScrolled
-              ? "border-b border-border/50 bg-background/95 shadow-lg backdrop-blur-xl"
-              : "bg-background/80 shadow-md backdrop-blur-md"
-        }`}
-      >
-        <div className="container mx-auto flex items-center justify-between px-4 py-5">
-          {/* LOGO */}
+      {/* GÓRNY PASEK */}
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className="mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <Link
-            to="/"
-            onClick={(event) => {
-              event.preventDefault();
-              goHome();
-            }}
-            className="transition-all duration-300 hover:scale-105 hover:opacity-80"
-            aria-label="Przejdź na stronę główną Digitilio"
+            to={t.homePath}
+            aria-label={t.home}
+            className={`pointer-events-auto flex items-center rounded-2xl bg-white/85 px-3 py-2 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] ${
+              scrolled ? "shadow-[0_8px_30px_-12px_hsl(263_40%_20%/0.35)]" : ""
+            }`}
           >
-            <img
-              src={logo}
-              alt="Digitilio"
-              width={40}
-              height={40}
-              className={`h-10 w-auto ${overDarkHero ? "rounded-lg" : ""}`}
-            />
+            <img src={logoPurple} alt="Digitilio" width={64} height={49} className="h-9 w-auto sm:h-10" />
           </Link>
 
-          {/* DESKTOP MENU */}
-          <div className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => {
-              const key =
-                item.type === "route" ? item.path : item.id;
-
-              const isActiveRoute =
-                item.type === "route" &&
-                isRouteActive(item.path);
-
-              return (
-                <a
-                  key={key}
-                  href={hrefFor(item)}
-                  onClick={(event) => handleNavItem(event, item)}
-                  className={`group relative text-sm font-medium tracking-wide transition-all duration-300 ${
-                    overDarkHero
-                      ? "text-white/85 hover:text-white"
-                      : isActiveRoute
-                        ? "text-primary"
-                        : "text-foreground hover:text-primary"
-                  }`}
-                >
-                  {item.label}
-
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary transition-all duration-500 ${
-                      isActiveRoute
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
-                    }`}
-                  />
-                </a>
-              );
-            })}
-
+          <div className="pointer-events-auto flex items-center gap-2">
             <a
-              href="/en"
-              hrefLang="en"
-              lang="en"
-              className={`text-sm font-medium transition-colors ${
-                overDarkHero
-                  ? "text-white/65 hover:text-white"
-                  : "text-muted-foreground hover:text-primary"
-              }`}
-              aria-label="English version"
+              href={t.switchHref}
+              hrefLang={t.switchHrefLang}
+              lang={t.switchHrefLang}
+              className="hidden h-11 items-center rounded-full bg-white/85 px-4 text-sm font-semibold text-violet backdrop-blur-md transition-colors hover:bg-white sm:flex"
             >
-              EN
+              {t.switchLabel}
             </a>
-
-            <Button
-              variant="hero"
-              onClick={openContactForm}
-              className={`transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-                overDarkHero
-                  ? "bg-white text-primary hover:bg-white/90"
-                  : "bg-primary text-gray-50 hover:bg-primary/90"
-              }`}
+            <button
+              type="button"
+              onClick={openContact}
+              className="hidden h-11 rounded-full bg-violet px-5 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_hsl(263_50%_30%/0.6)] transition-colors hover:bg-violet-bright md:block"
             >
-              Skontaktuj się
-            </Button>
+              {t.contact}
+            </button>
           </div>
-
-          {/* MOBILE BUTTON */}
-          <button
-            type="button"
-            className={`transition-colors md:hidden ${
-              overDarkHero ? "text-white" : "text-foreground"
-            }`}
-            onClick={() =>
-              setIsMobileMenuOpen((prev) => !prev)
-            }
-            aria-label={
-              isMobileMenuOpen
-                ? "Zamknij menu"
-                : "Otwórz menu"
-            }
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X size={24} />
-            ) : (
-              <Menu size={24} />
-            )}
-          </button>
         </div>
+      </header>
 
-        {/* MOBILE MENU */}
-        {isMobileMenuOpen && (
-          <div className="border-t border-border bg-background md:hidden">
-            <div className="container mx-auto flex flex-col gap-4 px-4 py-5">
-              {navItems.map((item) => {
-                const key =
-                  item.type === "route"
-                    ? item.path
-                    : item.id;
-
-                const isActiveRoute =
-                  item.type === "route" &&
-                  isRouteActive(item.path);
-
-                return (
+      {/* DOLNA PIGUŁKA */}
+      <nav
+        aria-label="Nawigacja główna"
+        className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 sm:bottom-6"
+      >
+        <div className="relative">
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 12, scale: 0.97 }}
+                transition={{ duration: 0.35, ease: EASE }}
+                className="absolute bottom-[calc(100%+10px)] left-1/2 w-[min(88vw,340px)] -translate-x-1/2 overflow-hidden rounded-3xl bg-violet p-2 shadow-2xl ring-1 ring-white/15"
+              >
+                {items.map((item) => (
                   <a
-                    key={key}
+                    key={item.label}
                     href={hrefFor(item)}
-                    onClick={(event) => handleNavItem(event, item)}
-                    className={`text-left text-sm font-medium transition-colors ${
-                      isActiveRoute
-                        ? "text-primary"
-                        : "text-foreground hover:text-primary"
+                    onClick={(e) => onItem(e, item)}
+                    className={`block rounded-2xl px-5 py-3.5 text-lg font-semibold text-white transition-colors hover:bg-white/10 ${
+                      isActive(item) ? "bg-white/15" : ""
                     }`}
                   >
                     {item.label}
                   </a>
-                );
-              })}
+                ))}
+                <a
+                  href={t.switchHref}
+                  hrefLang={t.switchHrefLang}
+                  className="block rounded-2xl px-5 py-3.5 text-lg font-semibold text-white/70 transition-colors hover:bg-white/10"
+                >
+                  {lang === "pl" ? "English" : "Polski"}
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-              <a
-                href="/en"
-                hrefLang="en"
-                lang="en"
-                className="text-left text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                English
-              </a>
+          <div className="flex items-center gap-1 rounded-full bg-violet p-1.5 text-white shadow-[0_18px_50px_-15px_hsl(263_60%_20%/0.7)] ring-1 ring-white/15">
+            <Link
+              to={t.homePath}
+              aria-label={t.home}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 transition-colors hover:bg-white/25"
+            >
+              <Home className="h-4 w-4" />
+            </Link>
 
-              <Button
-                variant="hero"
-                onClick={openContactForm}
-                className="mt-2 w-full bg-primary text-gray-50 hover:bg-primary/90"
-              >
-                Skontaktuj się
-              </Button>
+            {/* Desktop: wszystkie linki */}
+            <div className="hidden items-center md:flex">
+              {items.map((item) => (
+                <a
+                  key={item.label}
+                  href={hrefFor(item)}
+                  onClick={(e) => onItem(e, item)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-white/15 ${
+                    isActive(item) ? "bg-white/15" : "text-white/90"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
+
+            {/* Telefon: menu */}
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((v) => !v)}
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? t.close : t.menu}
+              className="flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors hover:bg-white/15 md:hidden"
+            >
+              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {t.menu}
+            </button>
+
+            <button
+              type="button"
+              onClick={openContact}
+              className="flex h-10 items-center rounded-full bg-white px-4 text-sm font-semibold text-violet transition-colors hover:bg-lilac-soft md:hidden"
+            >
+              {t.contact}
+            </button>
           </div>
-        )}
+        </div>
       </nav>
 
-      <ContactFormDialog
-        isOpen={isContactFormOpen}
-        onClose={() => setIsContactFormOpen(false)}
-      />
+      {!onContact && (
+        <ContactFormDialog
+          isOpen={isContactOpen}
+          onClose={() => setIsContactOpen(false)}
+        />
+      )}
     </>
   );
 };

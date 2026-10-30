@@ -26,6 +26,17 @@ export default {
           soft: "hsl(var(--ink-soft))",
         },
         paper: "hsl(var(--paper))",
+        violet: {
+          DEFAULT: "hsl(var(--violet))",
+          bright: "hsl(var(--violet-bright))",
+        },
+        lilac: {
+          DEFAULT: "hsl(var(--lilac))",
+          soft: "hsl(var(--lilac-soft))",
+        },
+        plum: "hsl(var(--plum))",
+        orchid: "hsl(var(--orchid))",
+        indigo: "hsl(var(--indigo))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

@@ -8,12 +8,21 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Redesign: ciepła złamana biel + prawie czarny z nutą fioletu */
-    --background: 40 23% 97%;
-    --foreground: 260 18% 8%;
-    --ink: 260 22% 6%;
-    --ink-soft: 260 16% 11%;
+    /* Redesign (kierunek Jeton): biel + fiolet marki na całe sekcje */
+    --background: 0 0% 100%;
+    --foreground: 265 30% 10%;
+    --ink: 264 36% 9%;
+    --ink-soft: 264 28% 14%;
     --paper: 0 0% 100%;
+
+    /* Odcienie fioletu marki */
+    --violet: 263 42% 40%;       /* główny kolor sekcji */
+    --violet-bright: 266 52% 56%;
+    --lilac: 270 70% 82%;
+    --lilac-soft: 268 60% 96%;
+    --plum: 263 38% 15%;         /* ciemne sekcje */
+    --orchid: 288 42% 56%;
+    --indigo: 248 46% 56%;
 
     --card: 0 0% 100%;
     --card-foreground: 260 18% 8%;
@@ -28,7 +37,7 @@ All colors MUST be HSL.
     --secondary-foreground: 263 33% 35%;
 
     --muted: 270 13% 90%;
-    --muted-foreground: 260 8% 32%;
+    --muted-foreground: 264 10% 36%;
 
     --accent: 270 42% 70%;
     --accent-foreground: 0 0% 15%;
@@ -36,8 +45,8 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 8% 86%;
-    --input: 40 8% 82%;
+    --border: 266 20% 90%;
+    --input: 266 18% 84%;
     --ring: 263 33% 35%;
 
     --radius: 0.75rem;
