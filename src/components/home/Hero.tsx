@@ -1,119 +1,201 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
+import heroPortrait from "@/assets/hero-portrait.webp";
 import type { HomeCopy } from "@/content/home";
-import { DotOrb } from "@/components/site/DotOrb";
+import { GradientField } from "@/components/site/GradientField";
 import { ActionButton, useCalmMotion } from "@/components/site/motion";
 
 /**
- * Hero: cały ekran w fiolecie marki. Przy przewijaniu gradient zmienia odcień,
- * kule z logo rozsypują się, a cała karta lekko się zmniejsza i zaokrągla.
+ * Hero – trzy warianty do wyboru (podgląd: ?hero=a, ?hero=b, ?hero=c):
+ *  a) „Portret”    – hasło po lewej, Ela po prawej na płynnym fiolecie
+ *  b) „Typografia” – samo duże hasło na środku
+ *  c) „Okładka”    – układ okładki magazynu: hasło za i przed portretem
+ * We wszystkich: tylko hasło i jeden przycisk.
  */
-export const Hero = ({
-  copy,
-  onCta,
-}: {
+export type HeroVariant = "a" | "b" | "c";
+
+type Props = {
   copy: HomeCopy["hero"];
   onCta: () => void;
-}) => {
-  const ref = useRef<HTMLElement | null>(null);
+  variant?: HeroVariant;
+};
+
+const useHeroMotion = (ref: React.RefObject<HTMLElement>) => {
   const calm = useCalmMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  return {
+    p: scrollYProgress,
+    calm,
+    scale: useTransform(scrollYProgress, [0, 1], [1, calm ? 1 : 0.9]),
+    radius: useTransform(scrollYProgress, [0, 1], [0, calm ? 0 : 56]),
+    textY: useTransform(scrollYProgress, [0, 1], [0, calm ? 0 : -140]),
+    fade: useTransform(scrollYProgress, [0, 0.7], [1, 0]),
+    photoY: useTransform(scrollYProgress, [0, 1], [0, calm ? 0 : 90]),
+    photoScale: useTransform(scrollYProgress, [0, 1], [1, calm ? 1 : 1.06]),
+  };
+};
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, calm ? 1 : 0.9]);
-  const radius = useTransform(scrollYProgress, [0, 1], [0, calm ? 0 : 56]);
-  const shift = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, calm ? 0 : -120]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+const Shell = ({
+  sectionRef,
+  scale,
+  radius,
+  children,
+}: {
+  sectionRef: React.RefObject<HTMLElement>;
+  scale: MotionValue<number>;
+  radius: MotionValue<number>;
+  children: React.ReactNode;
+}) => (
+  <section ref={sectionRef} id="hero" className="relative h-[100svh] min-h-[620px] bg-white">
+    <motion.div
+      className="absolute inset-0 origin-top overflow-hidden text-white"
+      style={{ scale, borderRadius: radius }}
+    >
+      <GradientField />
+      {children}
+    </motion.div>
+  </section>
+);
+
+const Headline = ({
+  copy,
+  className,
+  secondClass = "text-lilac",
+}: {
+  copy: HomeCopy["hero"];
+  className: string;
+  secondClass?: string;
+}) => (
+  <h1 className={className}>
+    <span className="hero-slide-in block" style={{ animationDelay: "0.1s" }}>
+      {copy.line1}
+    </span>
+    <span className={`hero-slide-in block ${secondClass}`} style={{ animationDelay: "0.25s" }}>
+      {copy.line2}
+    </span>
+  </h1>
+);
+
+/* ---------- A: Portret ---------- */
+const HeroPortrait = ({ copy, onCta }: Props) => {
+  const ref = useRef<HTMLElement>(null);
+  const m = useHeroMotion(ref);
 
   return (
-    <section ref={ref} id="hero" className="relative h-[100svh] min-h-[640px] bg-white">
+    <Shell sectionRef={ref} scale={m.scale} radius={m.radius}>
+      <motion.img
+        src={heroPortrait}
+        alt="Ela Chabko – Digitilio"
+        width={1080}
+        height={1350}
+        loading="eager"
+        decoding="async"
+        {...{ fetchpriority: "high" }}
+        style={{ y: m.photoY, scale: m.photoScale }}
+        className="hero-scale-in absolute bottom-0 right-[-14vw] h-[52svh] w-auto max-w-none origin-bottom object-contain sm:right-[-4vw] sm:h-[62svh] lg:right-[4vw] lg:h-[94%]"
+      />
+
       <motion.div
-        className="absolute inset-0 origin-top overflow-hidden text-white"
-        style={{ scale, borderRadius: radius }}
+        style={{ y: m.textY, opacity: m.fade }}
+        className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-5 pt-28 sm:px-8 lg:justify-end lg:px-12 lg:pb-24 lg:pt-0"
       >
-        {/* Gradient bazowy */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(120% 90% at 85% 10%, hsl(268 58% 62%) 0%, transparent 55%), linear-gradient(150deg, hsl(262 46% 30%) 0%, hsl(264 46% 40%) 45%, hsl(270 52% 56%) 100%)",
-          }}
+        <Headline
+          copy={copy}
+          className="max-w-[18ch] text-[2.6rem] font-semibold leading-[0.98] tracking-[-0.05em] sm:text-7xl lg:max-w-[60%] lg:text-[5.4rem] xl:text-[6.2rem]"
         />
-        {/* Drugi gradient – odsłania się przy przewijaniu (zmiana odcienia jak na jeton.com) */}
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            opacity: shift,
-            background:
-              "radial-gradient(110% 90% at 20% 90%, hsl(300 55% 78%) 0%, transparent 55%), linear-gradient(150deg, hsl(266 52% 48%) 0%, hsl(276 55% 64%) 55%, hsl(310 55% 82%) 100%)",
-          }}
-        />
-        {/* Ziarno – lekka faktura */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Obiekt z kul */}
-        <div className="pointer-events-none absolute right-[-30vw] top-[3%] w-[80vw] opacity-75 sm:right-[-12vw] sm:top-[5%] sm:w-[62vw] sm:opacity-90 lg:right-[3vw] lg:top-1/2 lg:w-[min(76vh,44vw)] lg:-translate-y-1/2 lg:opacity-100">
-          <DotOrb progress={scrollYProgress} mode="scatter" strength={1.1} />
+        <div className="hero-fade-up mt-8 lg:mt-10" style={{ animationDelay: "0.5s" }}>
+          <ActionButton tone="white" onClick={onCta}>
+            {copy.cta}
+          </ActionButton>
         </div>
-
-        {/* Tekst */}
-        <motion.div
-          className="absolute inset-x-0 bottom-0 z-10"
-          style={{ y: textY, opacity: textOpacity }}
-        >
-          <div className="mx-auto max-w-[1600px] px-5 pb-28 sm:px-8 lg:px-12 lg:pb-28">
-            <div className="max-w-[54rem] lg:max-w-[52%]">
-              <p
-                className="hero-fade-up mb-5 text-sm font-medium text-white/80 sm:text-base"
-                style={{ animationDelay: "0.05s" }}
-              >
-                {copy.eyebrow}
-              </p>
-              <h1 className="text-[2.35rem] font-semibold leading-[1] tracking-[-0.045em] sm:text-6xl lg:text-[4.1rem] xl:text-[4.8rem]">
-                <span className="hero-slide-in block" style={{ animationDelay: "0.15s" }}>
-                  {copy.line1}
-                </span>
-                <span
-                  className="hero-slide-in block text-white/70"
-                  style={{ animationDelay: "0.3s" }}
-                >
-                  {copy.line2}
-                </span>
-              </h1>
-
-              <div
-                className="hero-fade-up mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:gap-10"
-                style={{ animationDelay: "0.6s" }}
-              >
-                <p className="max-w-sm text-base leading-relaxed text-white/90 sm:text-lg">{copy.lead}</p>
-                <div className="flex shrink-0 flex-col items-start gap-2">
-                  <ActionButton tone="white" onClick={onCta}>
-                    {copy.cta}
-                  </ActionButton>
-                  <p className="pl-1 text-xs text-white/70 sm:text-sm">{copy.note}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <a
-          href="#problem"
-          className="absolute bottom-8 left-12 z-10 hidden items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/25 lg:flex"
-        >
-          <ArrowDown className="h-4 w-4 animate-bounce" />
-          {copy.scroll}
-        </a>
       </motion.div>
-    </section>
+    </Shell>
   );
+};
+
+/* ---------- B: Typografia ---------- */
+const HeroType = ({ copy, onCta }: Props) => {
+  const ref = useRef<HTMLElement>(null);
+  const m = useHeroMotion(ref);
+  const textScale = useTransform(m.p, [0, 1], [1, m.calm ? 1 : 0.86]);
+
+  return (
+    <Shell sectionRef={ref} scale={m.scale} radius={m.radius}>
+      <motion.div
+        style={{ scale: textScale, opacity: m.fade }}
+        className="relative z-10 flex h-full flex-col items-center justify-center px-5 pb-16 pt-24 text-center sm:px-8"
+      >
+        <Headline
+          copy={copy}
+          className="max-w-[16ch] text-[2.6rem] font-semibold leading-[0.95] tracking-[-0.055em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[5.2rem] xl:text-[6rem]"
+        />
+        <div className="hero-fade-up mt-10" style={{ animationDelay: "0.5s" }}>
+          <ActionButton tone="white" onClick={onCta}>
+            {copy.cta}
+          </ActionButton>
+        </div>
+      </motion.div>
+    </Shell>
+  );
+};
+
+/* ---------- C: Okładka ---------- */
+const HeroCover = ({ copy, onCta }: Props) => {
+  const ref = useRef<HTMLElement>(null);
+  const m = useHeroMotion(ref);
+  const backY = useTransform(m.p, [0, 1], [0, m.calm ? 0 : -60]);
+
+  return (
+    <Shell sectionRef={ref} scale={m.scale} radius={m.radius}>
+      {/* Pierwsza linia – ZA portretem */}
+      <motion.p
+        aria-hidden="true"
+        style={{ y: backY }}
+        className="hero-slide-in absolute inset-x-0 top-[13svh] z-0 px-5 text-center text-[11.2vw] font-semibold uppercase leading-[0.88] tracking-[-0.06em] text-white/95 sm:top-[12svh] lg:top-[10svh] lg:text-[8.6vw]"
+      >
+        {copy.line1.replace(/\.$/, "")}
+      </motion.p>
+
+      <div className="absolute inset-x-0 bottom-0 z-10 flex h-[66svh] justify-center lg:h-[84%]">
+        <motion.img
+          src={heroPortrait}
+          alt="Ela Chabko – Digitilio"
+          width={1080}
+          height={1350}
+          loading="eager"
+          decoding="async"
+          {...{ fetchpriority: "high" }}
+          style={{ y: m.photoY, scale: m.photoScale }}
+          className="hero-scale-in h-full w-auto max-w-none origin-bottom object-contain"
+        />
+      </div>
+
+      {/* Druga linia + przycisk – PRZED portretem */}
+      <motion.div
+        style={{ y: m.textY, opacity: m.fade }}
+        className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-[hsl(262_46%_24%/0.85)] via-[hsl(262_46%_24%/0.35)] to-transparent px-5 pb-24 pt-24 sm:px-8 lg:px-12 lg:pb-28"
+      >
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <h1 className="max-w-[20ch] text-[2.2rem] font-semibold leading-[1] tracking-[-0.045em] sm:text-5xl lg:text-[3.6rem]">
+            <span className="sr-only">{copy.line1} </span>
+            <span className="hero-slide-in block text-lilac" style={{ animationDelay: "0.3s" }}>
+              {copy.line2}
+            </span>
+          </h1>
+          <div className="hero-fade-up shrink-0" style={{ animationDelay: "0.5s" }}>
+            <ActionButton tone="white" onClick={onCta}>
+              {copy.cta}
+            </ActionButton>
+          </div>
+        </div>
+      </motion.div>
+    </Shell>
+  );
+};
+
+export const Hero = ({ variant = "a", ...props }: Props) => {
+  if (variant === "b") return <HeroType {...props} />;
+  if (variant === "c") return <HeroCover {...props} />;
+  return <HeroPortrait {...props} />;
 };

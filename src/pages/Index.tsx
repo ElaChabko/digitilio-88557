@@ -11,6 +11,7 @@ import { digitilioSiteSchema } from "@/lib/structuredData";
 import { homePl } from "@/content/home";
 
 import { Hero } from "@/components/home/Hero";
+import { HeroSwitcher, useHeroVariant } from "@/components/site/HeroSwitcher";
 import { Problem } from "@/components/home/Problem";
 import { Unify } from "@/components/home/Unify";
 import { ServicesStepper } from "@/components/home/ServicesStepper";
@@ -37,6 +38,7 @@ const Index = () => {
   }, [hash]);
 
   const copy = homePl;
+  const hero = useHeroVariant();
 
   return (
     <div className="min-h-screen bg-white">
@@ -48,9 +50,10 @@ const Index = () => {
       />
       <StructuredData data={digitilioSiteSchema} />
       <Navigation />
+      {hero.isPreview && <HeroSwitcher variant={hero.variant} choose={hero.choose} />}
 
       <main>
-        <Hero copy={copy.hero} onCta={openContact} />
+        <Hero copy={copy.hero} onCta={openContact} variant={hero.variant} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
         <ServicesStepper copy={copy.services} />

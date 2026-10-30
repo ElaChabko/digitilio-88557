@@ -1,11 +1,11 @@
 import { useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-import { DotOrb } from "./DotOrb";
+import { GradientField } from "./GradientField";
 import { Pill, useCalmMotion } from "./motion";
 
 /**
- * Nagłówek podstron: fiolet marki na całą szerokość + obiekt z kul.
+ * Nagłówek podstron: fiolet marki na całą szerokość z płynnym gradientem.
  * Przy przewijaniu karta lekko się zmniejsza i zaokrągla (jak hero strony głównej).
  */
 export const PageHero = ({
@@ -32,16 +32,9 @@ export const PageHero = ({
     <section ref={ref} className="relative bg-white">
       <motion.div
         className="relative origin-top overflow-hidden text-white"
-        style={{
-          scale,
-          borderRadius: radius,
-          background:
-            "radial-gradient(110% 90% at 90% 0%, hsl(270 55% 62%) 0%, transparent 55%), linear-gradient(155deg, hsl(262 46% 28%) 0%, hsl(264 46% 38%) 50%, hsl(270 50% 52%) 100%)",
-        }}
+        style={{ scale, borderRadius: radius }}
       >
-        <div className="pointer-events-none absolute -right-[30vw] -top-[10vw] w-[85vw] opacity-60 sm:-right-[12vw] sm:w-[55vw] lg:-right-[4vw] lg:-top-[8vh] lg:w-[min(80vh,42vw)] lg:opacity-90">
-          <DotOrb progress={scrollYProgress} mode="scatter" strength={0.9} />
-        </div>
+        <GradientField />
 
         <motion.div
           style={{ y: textY }}

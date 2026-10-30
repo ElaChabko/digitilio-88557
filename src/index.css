@@ -297,3 +297,17 @@ All colors MUST be HSL.
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
 }
+
+/* Płynny gradient (GradientField) */
+@keyframes gf-a {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-18%, 22%) scale(1.15); }
+}
+@keyframes gf-b {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(25%, -20%) scale(0.9); }
+}
+@keyframes gf-c {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(-20%, -25%) scale(0.95); }
+}

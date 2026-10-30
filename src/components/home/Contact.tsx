@@ -1,13 +1,11 @@
-import { useRef, type ReactNode } from "react";
-import { useScroll } from "framer-motion";
+import type { ReactNode } from "react";
 
 import type { HomeCopy } from "@/content/home";
-import { DotOrb } from "@/components/site/DotOrb";
+import { GradientField } from "@/components/site/GradientField";
 import { ActionButton, FadeUp, Pill } from "@/components/site/motion";
 
 /**
- * Kontakt: fiolet na cały ekran. Kule, które rozsypały się w hero,
- * tutaj przy przewijaniu wracają do pierścienia – klamra całej strony.
+ * Kontakt: fiolet na cały ekran z płynnym gradientem – klamra z hero.
  */
 export const Contact = ({
   copy,
@@ -19,22 +17,12 @@ export const Contact = ({
   /** Np. formularz na stronie /en zamiast przycisku */
   children?: ReactNode;
 }) => {
-  const ref = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
-
   return (
     <section
-      ref={ref}
       id="contact"
       className="relative scroll-mt-0 overflow-hidden px-5 py-28 text-white sm:px-8 sm:py-36 lg:px-12 lg:py-44"
-      style={{
-        background:
-          "radial-gradient(100% 80% at 90% 100%, hsl(296 50% 74%) 0%, transparent 55%), linear-gradient(160deg, hsl(262 46% 30%) 0%, hsl(265 48% 42%) 50%, hsl(272 52% 56%) 100%)",
-      }}
     >
-      <div className="pointer-events-none absolute -right-[20vw] top-1/2 w-[80vw] -translate-y-1/2 opacity-80 sm:-right-[10vw] sm:w-[60vw] lg:-right-[6vw] lg:w-[min(90vh,48vw)]">
-        <DotOrb progress={scrollYProgress} mode="gather" strength={1.4} />
-      </div>
+      <GradientField />
 
       <div className="relative mx-auto max-w-[1400px]">
         <Pill tone="light">{copy.pill}</Pill>

@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react";
 
 import type { HomeCopy, WorkItem } from "@/content/home";
-import { DotOrb } from "@/components/site/DotOrb";
 import { Pill, PlaceholderTag, useCalmMotion } from "@/components/site/motion";
 
 const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string }) => {
@@ -14,9 +13,9 @@ const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string
   if (item.type === "case") {
     return (
       <Link to={item.href} className={`group ${shell} bg-violet text-white`}>
-        <div className="pointer-events-none absolute -right-[30%] -top-[25%] w-[95%] opacity-90">
-          <StaticOrb />
-        </div>
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/15" aria-hidden="true" />
+        <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full border border-white/15" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-lilac/25 blur-3xl" aria-hidden="true" />
         <span className="relative text-sm font-medium text-white/75">Case study</span>
         <div className="relative mt-auto">
           <p className="text-5xl font-semibold tracking-[-0.05em] sm:text-6xl">{item.stat}</p>
@@ -55,12 +54,6 @@ const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string
       <p className="mt-1 text-sm text-muted-foreground">{item.meta}</p>
     </article>
   );
-};
-
-// Nieruchomy obiekt kul do kart (bez reakcji na przewijanie)
-const StaticOrb = () => {
-  const still = useMotionValue(0);
-  return <DotOrb progress={still} spin={false} />;
 };
 
 /**
