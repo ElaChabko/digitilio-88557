@@ -87,19 +87,29 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
 
         {copy.testimonials && (
           <div className="mt-24 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-32">
-            {[0, 1].map((i) => (
-              <FadeUp key={i} delay={i * 0.1}>
-                <figure className="flex h-full flex-col rounded-[2rem] border border-dashed border-white/20 bg-white/[0.04] p-8 sm:p-10">
+            {copy.testimonials.items.map((t, i) => (
+              <FadeUp key={t.author + i} delay={i * 0.1}>
+                <figure
+                  className={`flex h-full flex-col rounded-[2rem] p-8 sm:p-10 ${
+                    t.placeholder
+                      ? "border border-dashed border-white/20 bg-white/[0.04]"
+                      : "bg-violet"
+                  }`}
+                >
                   <div className="flex items-center justify-between">
-                    <Quote className="h-8 w-8 text-lilac/50" />
-                    <PlaceholderTag tone="light">{copy.testimonials!.tag}</PlaceholderTag>
+                    <Quote className={`h-8 w-8 ${t.placeholder ? "text-lilac/50" : "text-lilac"}`} />
+                    {t.placeholder && <PlaceholderTag tone="light">{copy.testimonials!.tag}</PlaceholderTag>}
                   </div>
-                  <blockquote className="mt-6 text-lg leading-relaxed text-white/45 sm:text-xl">
-                    {copy.testimonials!.text}
+                  <blockquote
+                    className={`mt-6 text-xl leading-relaxed sm:text-2xl ${
+                      t.placeholder ? "text-white/45" : "font-medium tracking-[-0.015em] text-white"
+                    }`}
+                  >
+                    {t.placeholder ? t.text : `„${t.text}”`}
                   </blockquote>
                   <figcaption className="mt-auto pt-8">
-                    <p className="font-semibold text-white/50">{copy.testimonials!.author}</p>
-                    <p className="text-sm text-white/40">{copy.testimonials!.role}</p>
+                    <p className={`font-semibold ${t.placeholder ? "text-white/50" : "text-white"}`}>{t.author}</p>
+                    <p className={`text-sm ${t.placeholder ? "text-white/40" : "text-white/70"}`}>{t.role}</p>
                   </figcaption>
                 </figure>
               </FadeUp>

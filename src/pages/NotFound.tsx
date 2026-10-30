@@ -8,7 +8,7 @@ import { SEO } from "@/components/SEO";
 
 const NotFound = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-white">
       <SEO
         title="Strona nie została znaleziona | Digitilio"
         description="Ta strona nie istnieje. Wróć na stronę główną Digitilio lub do bazy wiedzy."
@@ -18,7 +18,7 @@ const NotFound = () => {
       <Navigation />
 
       <main className="flex flex-1">
-        <section className="relative flex w-full items-center overflow-hidden bg-[#17131f] pb-24 pt-40 text-white sm:pb-28 sm:pt-44">
+        <section className="relative flex w-full items-center overflow-hidden bg-[linear-gradient(155deg,hsl(262_46%_28%)_0%,hsl(264_46%_38%)_50%,hsl(270_50%_52%)_100%)] pb-24 pt-40 text-white sm:pb-28 sm:pt-44">
           {/* Subtelny grid */}
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.035]"
@@ -34,7 +34,7 @@ const NotFound = () => {
 
           {/* Subtelne światło */}
           <div
-            className="pointer-events-none absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[150px]"
+            className="pointer-events-none absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-white/10 blur-[150px]"
             aria-hidden="true"
           />
 
@@ -52,7 +52,7 @@ const NotFound = () => {
               </p>
 
               <div className="-mt-4 max-w-3xl sm:-mt-8 lg:-mt-12">
-                <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+                <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
                   Tej strony tutaj nie ma.
                 </h1>
 
@@ -64,7 +64,7 @@ const NotFound = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="group mt-9 h-auto rounded-full bg-white px-7 py-5 text-base text-[#17131f] transition-all duration-300 hover:bg-white/90 sm:px-8"
+                  className="group mt-9 h-auto rounded-full bg-white px-7 py-5 text-base text-violet transition-all duration-300 hover:bg-white/90 sm:px-8"
                 >
                   <Link to="/">
                     <ArrowLeft className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" />

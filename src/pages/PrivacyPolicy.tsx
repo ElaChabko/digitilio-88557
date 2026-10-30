@@ -7,7 +7,7 @@ import { SEO } from "@/components/SEO";
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <SEO
         title="Polityka prywatności | Digitilio"
         description="Polityka prywatności serwisu Digitilio.pl oraz informacje dotyczące przetwarzania danych osobowych."
@@ -18,7 +18,7 @@ export default function PrivacyPolicy() {
 
       <main>
         {/* HERO */}
-        <section className="relative overflow-hidden bg-[#17131f] pb-16 pt-36 text-white sm:pb-20 sm:pt-40">
+        <section className="relative overflow-hidden bg-[linear-gradient(155deg,hsl(262_46%_28%)_0%,hsl(264_46%_38%)_50%,hsl(270_50%_52%)_100%)] pb-16 pt-36 text-white sm:pb-20 sm:pt-40">
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.03]"
             aria-hidden="true"
@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
           />
 
           <div
-            className="pointer-events-none absolute -left-40 top-0 h-[480px] w-[480px] rounded-full bg-primary/20 blur-[140px]"
+            className="pointer-events-none absolute -left-40 top-0 h-[480px] w-[480px] rounded-full bg-white/10 blur-[140px]"
             aria-hidden="true"
           />
 
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
                 Wróć na stronę główną
               </Link>
 
-              <h1 className="mt-8 max-w-4xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+              <h1 className="mt-8 max-w-4xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
                 Polityka prywatności
               </h1>
 

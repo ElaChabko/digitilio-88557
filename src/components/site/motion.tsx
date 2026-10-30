@@ -12,8 +12,17 @@ import {
 /** Wspólna krzywa animacji całej strony */
 export const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** Czy użytkownik prosi o ograniczenie ruchu (systemowe ustawienie) */
-export const useCalmMotion = () => Boolean(useReducedMotion());
+/**
+ * Czy użytkownik prosi o ograniczenie ruchu (systemowe ustawienie).
+ * Do momentu załadowania strony zwraca false, żeby HTML z buildu
+ * i pierwsze renderowanie w przeglądarce były identyczne.
+ */
+export const useCalmMotion = () => {
+  const reduced = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted && Boolean(reduced);
+};
 
 /** Etykieta w pigułce nad nagłówkiem (jak „Jeton Card”) */
 export const Pill = ({

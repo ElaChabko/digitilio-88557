@@ -12,6 +12,8 @@ import { StructuredData } from "@/components/StructuredData";
 
 import { createBreadcrumbSchema, PERSON_ID } from "@/lib/structuredData";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
+import { PageHero } from "@/components/site/PageHero";
+import { CountUp } from "@/components/site/motion";
 
 export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>();
@@ -32,7 +34,7 @@ export default function CaseStudy() {
 
             <Link
               to="/wspolprace"
-              className="mt-5 inline-flex items-center gap-2 text-primary hover:underline"
+              className="mt-5 inline-flex items-center gap-2 text-violet hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Wróć do współprac
@@ -85,7 +87,7 @@ export default function CaseStudy() {
   ]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <SEO
         title={caseStudy.seoTitle}
         description={caseStudy.seoDescription}
@@ -99,132 +101,42 @@ export default function CaseStudy() {
       <Navigation />
 
       <main>
-        {/* HERO */}
-        <section className="relative overflow-hidden bg-[#17131f] pb-20 pt-36 text-white sm:pb-24 sm:pt-40 lg:pb-28">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.035]"
-            aria-hidden="true"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, white 1px, transparent 1px),
-                linear-gradient(to bottom, white 1px, transparent 1px)
-              `,
-              backgroundSize: "80px 80px",
-            }}
-          />
-
-          <motion.div
-            className="pointer-events-none absolute -left-48 top-0 h-[560px] w-[560px] rounded-full bg-primary/25 blur-[150px]"
-            animate={{
-              x: [0, 35, 0],
-              y: [0, 25, 0],
-            }}
-            transition={{
-              duration: 16,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            aria-hidden="true"
-          />
-
-          <div className="container relative z-10 mx-auto px-4 sm:px-6">
-            <div className="mx-auto max-w-7xl">
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Link
-                  to="/wspolprace"
-                  className="inline-flex items-center gap-2 text-sm text-white/55 transition-colors hover:text-white"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Współprace
-                </Link>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.05,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="mt-8 max-w-6xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-[3.5rem] lg:text-[4rem]"
-              >
-                {caseStudy.title}
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.65,
-                  delay: 0.15,
-                }}
-                className="mt-8 max-w-3xl text-lg font-normal leading-relaxed text-white/75 sm:text-xl"
-              >
-                {caseStudy.lead}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.65,
-                  delay: 0.25,
-                }}
-                className="mt-12 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-3"
-              >
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-                    Branża
-                  </p>
-
-                  <p className="mt-3 text-sm leading-relaxed text-white/75">
-                    {caseStudy.industry}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-                    Zakres
-                  </p>
-
-                  <p className="mt-3 text-sm leading-relaxed text-white/75">
-                    {caseStudy.scope}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/40">
-                    Okres
-                  </p>
-
-                  <p className="mt-3 text-sm leading-relaxed text-white/75">
-                    {caseStudy.period}
-                  </p>
-                </div>
-              </motion.div>
-            </div>
+        <PageHero pill="Case study" size="article" title={caseStudy.title} lead={caseStudy.lead}>
+          <Link
+            to="/wspolprace"
+            className="mb-8 inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Wszystkie współprace
+          </Link>
+          <div className="grid gap-6 rounded-[1.8rem] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-md md:grid-cols-3 sm:p-8">
+            {[
+              ["Branża", caseStudy.industry],
+              ["Zakres", caseStudy.scope],
+              ["Okres", caseStudy.period],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <p className="text-sm font-medium text-lilac">{label}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/85">{value}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </PageHero>
 
         {/* NAJWAŻNIEJSZE WYNIKI */}
-        <section className="border-b border-border py-20 sm:py-24">
+        <section className="py-20 sm:py-24">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="mx-auto max-w-7xl">
               <motion.p
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mb-10 text-sm font-medium text-primary"
+                className="mb-10 text-sm font-medium text-violet"
               >
                 Najważniejsze wyniki
               </motion.p>
 
-              <div className="grid border-y border-border md:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {caseStudy.results.map((result, index) => (
                   <motion.div
                     key={`${result.value}-${index}`}
@@ -236,22 +148,20 @@ export default function CaseStudy() {
                       delay: index * 0.08,
                     }}
                     className={[
-                      "py-8 md:p-8 lg:min-h-[240px]",
-                      index !== caseStudy.results.length - 1
-                        ? "lg:border-r lg:border-border"
-                        : "",
+                      "rounded-[1.8rem] p-7 sm:p-8 lg:min-h-[260px]",
+                      index === 0 ? "bg-violet text-white" : "bg-lilac-soft",
                     ].join(" ")}
                   >
-                    <p className="whitespace-nowrap text-4xl font-bold tracking-tight text-foreground lg:text-[2.7rem] xl:text-5xl">
-                      {result.value}
+                    <p className={`whitespace-nowrap text-4xl font-semibold tracking-[-0.045em] lg:text-[2.7rem] xl:text-5xl ${index === 0 ? "text-white" : "text-violet"}`}>
+                      <CountUp value={result.value} />
                     </p>
 
-                    <p className="mt-4 font-medium leading-snug text-foreground">
+                    <p className={`mt-4 font-semibold leading-snug ${index === 0 ? "text-white" : "text-foreground"}`}>
                       {result.label}
                     </p>
 
                     {result.description && (
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      <p className={`mt-3 text-sm leading-relaxed ${index === 0 ? "text-white/75" : "text-muted-foreground"}`}>
                         {result.description}
                       </p>
                     )}
@@ -280,12 +190,12 @@ export default function CaseStudy() {
                         className="lg:sticky lg:top-32 lg:self-start"
                       >
                         {section.eyebrow && (
-                          <p className="mb-4 text-sm font-medium text-primary">
+                          <p className="mb-4 text-sm font-medium text-violet">
                             {section.eyebrow}
                           </p>
                         )}
 
-                        <h2 className="max-w-md text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+                        <h2 className="max-w-md text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
                           {section.title}
                         </h2>
                       </motion.div>
@@ -329,7 +239,7 @@ export default function CaseStudy() {
                   key={`decision-${sectionIndex}`}
                   className={
                     isDark
-                      ? "relative overflow-hidden bg-[#17131f] py-20 text-white sm:py-24 lg:py-28"
+                      ? "relative overflow-hidden bg-plum py-20 text-white sm:py-24 lg:py-28"
                       : "border-y border-border bg-secondary/20 py-20 sm:py-24 lg:py-28"
                   }
                 >
@@ -358,7 +268,7 @@ export default function CaseStudy() {
                           <p
                             className={[
                               "text-7xl font-bold tracking-tight sm:text-8xl",
-                              isDark ? "text-white/10" : "text-primary/15",
+                              isDark ? "text-white/10" : "text-violet/15",
                             ].join(" ")}
                           >
                             {section.number}
@@ -366,7 +276,7 @@ export default function CaseStudy() {
 
                           <h2
                             className={[
-                              "mt-5 max-w-md text-3xl font-bold leading-tight tracking-tight sm:text-4xl",
+                              "mt-5 max-w-md text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl",
                               isDark ? "text-white" : "text-foreground",
                             ].join(" ")}
                           >
@@ -486,18 +396,18 @@ export default function CaseStudy() {
                   <div className="container mx-auto px-4 sm:px-6">
                     <div className="mx-auto max-w-7xl">
                       {section.number && (
-                        <p className="text-7xl font-bold text-primary/15 sm:text-8xl">
+                        <p className="text-7xl font-bold text-violet/15 sm:text-8xl">
                           {section.number}
                         </p>
                       )}
 
                       {section.eyebrow && (
-                        <p className="mb-4 text-sm font-medium text-primary">
+                        <p className="mb-4 text-sm font-medium text-violet">
                           {section.eyebrow}
                         </p>
                       )}
 
-                      <h2 className="mt-4 max-w-4xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+                      <h2 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
                         {section.title}
                       </h2>
 
@@ -527,7 +437,7 @@ export default function CaseStudy() {
                                 : "",
                             ].join(" ")}
                           >
-                            <p className="text-sm font-medium text-primary">
+                            <p className="text-sm font-medium text-violet">
                               {item.name}
                             </p>
 
@@ -579,12 +489,12 @@ export default function CaseStudy() {
                   <div className="container mx-auto px-4 sm:px-6">
                     <div className="mx-auto max-w-7xl">
                       {section.eyebrow && (
-                        <p className="mb-4 text-sm font-medium text-primary">
+                        <p className="mb-4 text-sm font-medium text-violet">
                           {section.eyebrow}
                         </p>
                       )}
 
-                      <h2 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+                      <h2 className="max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
                         {section.title}
                       </h2>
 
@@ -607,7 +517,7 @@ export default function CaseStudy() {
                                 {item.from}
                               </span>
 
-                              <ArrowRight className="h-6 w-6 text-primary" />
+                              <ArrowRight className="h-6 w-6 text-violet" />
 
                               <span className="text-4xl font-bold sm:text-5xl">
                                 {item.to}
@@ -635,7 +545,7 @@ export default function CaseStudy() {
               return (
                 <section
                   key={`spotlight-${sectionIndex}`}
-                  className="relative overflow-hidden bg-primary py-20 text-primary-foreground sm:py-24 lg:py-28"
+                  className="relative overflow-hidden bg-violet py-20 text-violet-foreground sm:py-24 lg:py-28"
                 >
                   <div className="container relative z-10 mx-auto px-4 sm:px-6">
                     <div className="mx-auto max-w-7xl">
@@ -702,7 +612,7 @@ export default function CaseStudy() {
                 >
                   <div className="container mx-auto px-4 sm:px-6">
                     <div className="mx-auto max-w-7xl">
-                      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                      <h2 className="text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
                         {section.title}
                       </h2>
 
@@ -722,7 +632,7 @@ export default function CaseStudy() {
                             transition={{ delay: index * 0.08 }}
                             className="rounded-3xl border border-border p-8 sm:p-10"
                           >
-                            <p className="text-sm font-medium text-primary">
+                            <p className="text-sm font-medium text-violet">
                               {channel.name}
                             </p>
 
@@ -752,12 +662,12 @@ export default function CaseStudy() {
                   <div className="container mx-auto px-4 sm:px-6">
                     <div className="mx-auto max-w-7xl">
                       {section.eyebrow && (
-                        <p className="mb-4 text-sm font-medium text-primary">
+                        <p className="mb-4 text-sm font-medium text-violet">
                           {section.eyebrow}
                         </p>
                       )}
 
-                      <h2 className="max-w-4xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+                      <h2 className="max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
                         {section.title}
                       </h2>
 
@@ -785,7 +695,7 @@ export default function CaseStudy() {
                             }}
                             className="rounded-2xl border border-border bg-background p-5"
                           >
-                            <p className="text-xs font-medium text-primary">
+                            <p className="text-xs font-medium text-violet">
                               {String(index + 1).padStart(2, "0")}
                             </p>
 
@@ -807,7 +717,7 @@ export default function CaseStudy() {
                               key={index}
                               className="flex gap-3 text-lg leading-relaxed text-muted-foreground"
                             >
-                              <span className="mt-[10px] h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
+                              <span className="mt-[10px] h-2 w-2 flex-shrink-0 rounded-full bg-violet" />
                               <span>{result}</span>
                             </li>
                           ))}
@@ -829,10 +739,10 @@ export default function CaseStudy() {
                       initial={{ opacity: 0, y: 24 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      className="mx-auto max-w-5xl rounded-3xl border border-primary/15 bg-primary/[0.05] p-8 sm:p-10 md:p-12"
+                      className="mx-auto max-w-5xl rounded-3xl border border-violet/15 bg-violet/[0.05] p-8 sm:p-10 md:p-12"
                     >
                       {section.eyebrow && (
-                        <p className="text-sm font-medium text-primary">
+                        <p className="text-sm font-medium text-violet">
                           {section.eyebrow}
                         </p>
                       )}
@@ -860,10 +770,10 @@ export default function CaseStudy() {
               return (
                 <section
                   key={`final-${sectionIndex}`}
-                  className="relative overflow-hidden bg-[#17131f] py-20 text-white sm:py-24 lg:py-28"
+                  className="relative overflow-hidden bg-violet py-24 text-white sm:py-28 lg:py-36"
                 >
                   <motion.div
-                    className="pointer-events-none absolute -bottom-52 right-0 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[150px]"
+                    className="pointer-events-none absolute -bottom-52 right-0 h-[520px] w-[520px] rounded-full bg-violet/25 blur-[150px]"
                     animate={{
                       x: [0, -25, 0],
                       y: [0, -20, 0],
@@ -882,7 +792,7 @@ export default function CaseStudy() {
                         initial={{ opacity: 0, y: 25 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="max-w-5xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl"
+                        className="max-w-5xl text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl md:text-5xl"
                       >
                         {section.statement}
                       </motion.p>
@@ -906,7 +816,7 @@ export default function CaseStudy() {
                               type="button"
                               size="lg"
                               onClick={() => setIsContactOpen(true)}
-                              className="group mt-6 h-auto rounded-full bg-white px-7 py-5 text-base text-[#17131f] transition-all duration-300 hover:bg-white/90 sm:px-8 sm:text-lg"
+                              className="group mt-6 h-auto rounded-full bg-white px-7 py-5 text-base text-violet transition-all duration-300 hover:bg-white/90 sm:px-8 sm:text-lg"
                             >
                               {section.ctaButton}
 

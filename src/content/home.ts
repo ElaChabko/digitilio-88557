@@ -80,7 +80,10 @@ export type HomeCopy = {
     stats: { value: string; label: string; hint: string }[];
     quote: string;
     cta: string;
-    testimonials?: { tag: string; text: string; author: string; role: string };
+    testimonials?: {
+      tag: string;
+      items: { text: string; author: string; role: string; placeholder?: boolean }[];
+    };
   };
   forWhom: {
     pill: string;
@@ -251,9 +254,20 @@ export const homePl: HomeCopy = {
     cta: "Porozmawiajmy o Twoim marketingu",
     testimonials: {
       tag: "Opinia klienta",
-      text: "Tu pojawi się krótki cytat z listu referencyjnego lub opinii klienta, najlepiej z konkretnym efektem współpracy.",
-      author: "Imię i nazwisko",
-      role: "Stanowisko, firma",
+      items: [
+        {
+          // Cytat z referencji opublikowanych na stronie Współprace
+          text: "Ela potrafi dobrze łączyć strategiczne spojrzenie na komunikację z jej sprawną realizacją.",
+          author: "Joanna Tymowicz",
+          role: "Wiceprezeska Zarządu Ideo Force",
+        },
+        {
+          text: "Tu pojawi się krótki cytat z listu referencyjnego lub opinii klienta, najlepiej z konkretnym efektem współpracy.",
+          author: "Imię i nazwisko",
+          role: "Stanowisko, firma",
+          placeholder: true,
+        },
+      ],
     },
   },
   forWhom: {

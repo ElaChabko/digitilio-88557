@@ -6,19 +6,17 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Calendar,
-  Clock,
-  ExternalLink,
-  SlidersHorizontal,
-} from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { StructuredData } from "@/components/StructuredData";
 import { createCollectionSchema } from "@/lib/structuredData";
+import { PageHero } from "@/components/site/PageHero";
+import { ArticleCard } from "@/components/LatestArticles";
+import { ActionButton, EASE, FadeUp, Pill, ScrollText } from "@/components/site/motion";
+import { ContactFormDialog } from "@/components/ContactFormDialog";
 
 import { blogPosts } from "@/content/blogs/index";
 
@@ -178,6 +176,7 @@ export default function Blog() {
   const [mediumPosts, setMediumPosts] = useState<MediumApiPost[]>([]);
   const [activeArea, setActiveArea] =
     useState<KnowledgeArea>("Wszystkie");
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -295,7 +294,7 @@ export default function Blog() {
   }, [availableAreas, activeArea]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <SEO
         title="Baza wiedzy o marketingu, strategii i AI | Digitilio"
         description="Analizy, obserwacje z projektów i praktyczne materiały o strategii, danych, komunikacji i AI. Wiedza, która pomaga podejmować lepsze decyzje marketingowe."
@@ -318,376 +317,153 @@ export default function Blog() {
       <Navigation />
 
       <main>
-        {/* HERO */}
-        <section className="relative overflow-hidden bg-[#17131f] pb-16 pt-36 text-white sm:pb-20 sm:pt-40 lg:pb-24">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.03]"
-            aria-hidden="true"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, white 1px, transparent 1px),
-                linear-gradient(to bottom, white 1px, transparent 1px)
-              `,
-              backgroundSize: "80px 80px",
-            }}
-          />
+        <PageHero
+          pill="Baza wiedzy"
+          title="Lepsze decyzje marketingowe zaczynają się od właściwej diagnozy."
+          lead="Analizy, obserwacje z projektów i praktyczne materiały o strategii, danych, komunikacji i AI. Nie po to, żeby robić więcej, ale żeby lepiej oceniać, co rzeczywiście ma sens."
+        />
 
-          <motion.div
-            className="pointer-events-none absolute -left-48 top-0 h-[520px] w-[520px] rounded-full bg-primary/20 blur-[150px]"
-            animate={{
-              x: [0, 30, 0],
-              y: [0, 20, 0],
-            }}
-            transition={{
-              duration: 16,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            aria-hidden="true"
-          />
-
-          <div className="container relative z-10 mx-auto px-4 sm:px-6">
-            <div className="mx-auto max-w-7xl">
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45 }}
-                className="text-sm font-medium text-white/55"
-              >
-                Baza wiedzy
-              </motion.p>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.05,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="mt-5 max-w-4xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-[3.4rem]"
-              >
-                Lepsze decyzje marketingowe zaczynają się od właściwej
-                diagnozy.
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.15,
-                }}
-                className="mt-7 max-w-3xl text-lg leading-relaxed text-white/65 sm:text-xl"
-              >
-                Analizy, obserwacje z projektów i praktyczne materiały o
-                strategii, danych, komunikacji i AI. Nie po to, żeby robić
-                więcej, ale żeby lepiej oceniać, co rzeczywiście ma sens.
-              </motion.p>
-            </div>
-          </div>
-        </section>
-
-        {/* FILTRY */}
-        <section className="border-b border-border bg-background">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="mx-auto max-w-7xl py-6">
-              <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground md:hidden">
-                <SlidersHorizontal className="h-4 w-4" />
-                Filtruj materiały
-              </div>
-
-              <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
-                {availableAreas.map((area) => {
-                  const isActive = activeArea === area;
-
-                  return (
-                    <button
-                      key={area}
-                      type="button"
-                      onClick={() => setActiveArea(area)}
-                      className={[
-                        "shrink-0 rounded-full border px-4 py-2.5 text-sm font-medium transition-all duration-200",
-                        isActive
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground",
-                      ].join(" ")}
-                    >
-                      {area}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FEATURED */}
-        {featuredItem && activeArea === "Wszystkie" && (
-          <section className="py-16 sm:py-20 lg:py-24">
-            <div className="container mx-auto px-4 sm:px-6">
-              <div className="mx-auto max-w-7xl">
-                <motion.p
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-sm font-medium text-primary"
-                >
-                  Polecam zacząć tutaj
-                </motion.p>
-
-                <motion.article
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.55 }}
-                  className="mt-6 overflow-hidden rounded-3xl border border-border bg-card"
-                >
-                  <KnowledgeLink
-                    item={featuredItem}
-                    className="group grid lg:grid-cols-[1.05fr_0.95fr]"
+        {/* FILTRY – przyklejone pod górnym paskiem */}
+        <div className="sticky top-[76px] z-30 px-5 pt-8 sm:px-8 lg:px-12">
+          <div className="mx-auto flex max-w-[1400px] justify-center">
+            <div className="flex max-w-full gap-1 overflow-x-auto rounded-full bg-white/85 p-1.5 shadow-[0_10px_40px_-15px_hsl(263_40%_25%/0.35)] ring-1 ring-violet/10 backdrop-blur-md">
+              {availableAreas.map((area) => {
+                const isActive = activeArea === area;
+                return (
+                  <button
+                    key={area}
+                    type="button"
+                    onClick={() => setActiveArea(area)}
+                    className={`relative shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                      isActive ? "text-white" : "text-foreground/70 hover:text-violet"
+                    }`}
                   >
-                    <div className="relative min-h-[260px] overflow-hidden sm:min-h-[340px] lg:min-h-[440px]">
-                      {featuredItem.image ? (
-                        <img
-                          src={featuredItem.image}
-                          alt={featuredItem.title}
-                          loading="eager"
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 bg-primary/10" />
-                      )}
+                    {isActive && (
+                      <motion.span
+                        layoutId="area-pill"
+                        className="absolute inset-0 rounded-full bg-violet"
+                        transition={{ duration: 0.4, ease: EASE }}
+                      />
+                    )}
+                    <span className="relative">{area}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                    </div>
-
-                    <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary">
-                          {featuredItem.knowledgeArea}
-                        </span>
-
-                        <span className="text-xs text-muted-foreground">
-                          {featuredItem.source === "medium"
-                            ? "MEDIUM ↗"
-                            : "ARTYKUŁ"}
-                        </span>
-                      </div>
-
-                      <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-                        {featuredItem.title}
-                      </h2>
-
-                      <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                        {featuredItem.excerpt}
+        {/* WYRÓŻNIONY */}
+        {featuredItem && activeArea === "Wszystkie" && (
+          <section className="px-5 pt-14 sm:px-8 sm:pt-20 lg:px-12">
+            <div className="mx-auto max-w-[1400px]">
+              <FadeUp>
+                <KnowledgeLink
+                  item={featuredItem}
+                  className="group grid overflow-hidden rounded-[2.2rem] bg-lilac-soft lg:grid-cols-[1.15fr_0.85fr]"
+                >
+                  <div className="relative min-h-[260px] overflow-hidden sm:min-h-[360px] lg:min-h-[480px]">
+                    {featuredItem.image ? (
+                      <img
+                        src={featuredItem.image}
+                        alt={featuredItem.title}
+                        loading="eager"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-violet to-orchid" />
+                    )}
+                  </div>
+                  <div className="flex flex-col p-7 sm:p-10 lg:p-12">
+                    <Pill>Polecam zacząć tutaj</Pill>
+                    <h2 className="mt-6 text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-foreground transition-colors group-hover:text-violet sm:text-4xl lg:text-[2.8rem]">
+                      {featuredItem.title}
+                    </h2>
+                    <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                      {featuredItem.excerpt}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between gap-4 pt-10">
+                      <p className="text-sm text-muted-foreground">
+                        {featuredItem.knowledgeArea} · {formatDate(featuredItem.date)} · {featuredItem.readTime}
                       </p>
-
-                      <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                        <span className="inline-flex items-center gap-1.5">
-                          <Calendar className="h-4 w-4" />
-                          {formatDate(featuredItem.date)}
-                        </span>
-
-                        <span className="inline-flex items-center gap-1.5">
-                          <Clock className="h-4 w-4" />
-                          {featuredItem.readTime}
-                        </span>
-                      </div>
-
-                      <div className="mt-9 inline-flex items-center gap-2 font-medium text-foreground">
-                        {featuredItem.source === "medium"
-                          ? "Czytaj na Medium"
-                          : "Czytaj materiał"}
-
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet text-white transition-transform duration-500 group-hover:rotate-45">
                         {featuredItem.source === "medium" ? (
-                          <ExternalLink className="h-4 w-4 text-primary" />
+                          <ExternalLink className="h-5 w-5" />
                         ) : (
-                          <ArrowRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+                          <ArrowUpRight className="h-5 w-5" />
                         )}
-                      </div>
+                      </span>
                     </div>
-                  </KnowledgeLink>
-                </motion.article>
-              </div>
+                  </div>
+                </KnowledgeLink>
+              </FadeUp>
             </div>
           </section>
         )}
 
         {/* BIBLIOTEKA */}
-        <section className="border-t border-border bg-secondary/15 py-16 sm:py-20 lg:py-24">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="mx-auto max-w-7xl">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p className="text-sm font-medium text-primary">
-                    {activeArea === "Wszystkie"
-                      ? "Biblioteka"
-                      : activeArea}
-                  </p>
+        <section className="px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
+          <div className="mx-auto max-w-[1400px]">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <h2 className="text-[2.1rem] font-semibold tracking-[-0.045em] text-violet sm:text-5xl">
+                {activeArea === "Wszystkie" ? "Najnowsze materiały" : activeArea}
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                {getMaterialCountLabel(filteredItems.length)}
+              </p>
+            </div>
 
-                  <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                    {activeArea === "Wszystkie"
-                      ? "Najnowsze materiały"
-                      : "Materiały w tym obszarze"}
-                  </h2>
-                </div>
-
-                <p className="text-sm text-muted-foreground">
-                  {getMaterialCountLabel(filteredItems.length)}
+            {filteredItems.length > 0 ? (
+              <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+                {filteredItems.map((item, index) => (
+                  <ArticleCard
+                    key={item.id}
+                    href={item.href}
+                    external={item.source === "medium"}
+                    image={item.image}
+                    category={item.source === "medium" ? `${item.knowledgeArea} · Medium ↗` : item.knowledgeArea}
+                    title={item.title}
+                    excerpt={item.excerpt}
+                    meta={`${formatDate(item.date)} · ${item.readTime}`}
+                    index={index}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="mt-12 rounded-[2rem] bg-lilac-soft p-10 text-center">
+                <p className="text-lg font-medium text-violet">
+                  W tej kategorii nie ma jeszcze materiałów.
                 </p>
               </div>
-
-              {filteredItems.length > 0 ? (
-                <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-12">
-                  {filteredItems.map((item, index) => {
-                    const itemCount = filteredItems.length;
-
-                    const isSingle = itemCount === 1;
-                    const isTwoItems = itemCount === 2;
-
-                    const isWide =
-                      itemCount >= 3 &&
-                      (index === 0 || index % 5 === 0);
-
-                    return (
-                      <motion.article
-                        key={item.id}
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.1 }}
-                        transition={{
-                          duration: 0.5,
-                          delay: Math.min(index * 0.05, 0.2),
-                        }}
-                        className={
-                          isSingle
-                            ? "md:col-span-2 lg:col-span-8"
-                            : isTwoItems
-                              ? "md:col-span-1 lg:col-span-6"
-                              : isWide
-                                ? "md:col-span-2 lg:col-span-8"
-                                : "lg:col-span-4"
-                        }
-                      >
-                        <KnowledgeLink
-                          item={item}
-                          className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg"
-                        >
-                          <div
-                            className={[
-                              "relative overflow-hidden",
-                              isSingle
-                                ? "aspect-[16/8]"
-                                : isTwoItems
-                                  ? "aspect-[16/9]"
-                                  : isWide
-                                    ? "aspect-[16/8] lg:aspect-[16/7]"
-                                    : "aspect-[16/10]",
-                            ].join(" ")}
-                          >
-                            {item.image ? (
-                              <img
-                                src={item.image}
-                                alt={item.title}
-                                loading="lazy"
-                                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 bg-primary/10" />
-                            )}
-
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-                          </div>
-
-                          <div className="flex flex-1 flex-col p-6 sm:p-7">
-                            <div className="flex flex-wrap items-center justify-between gap-3">
-                              <span className="text-xs font-medium uppercase tracking-[0.1em] text-primary">
-                                {item.knowledgeArea}
-                              </span>
-
-                              <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                                {item.source === "medium" ? (
-                                  <>
-                                    MEDIUM
-                                    <ExternalLink className="h-3 w-3" />
-                                  </>
-                                ) : (
-                                  "ARTYKUŁ"
-                                )}
-                              </span>
-                            </div>
-
-                            <h3 className="mt-4 text-xl font-bold leading-tight tracking-tight text-foreground sm:text-2xl">
-                              {item.title}
-                            </h3>
-
-                            <p className="mt-4 line-clamp-3 text-base leading-relaxed text-muted-foreground">
-                              {item.excerpt}
-                            </p>
-
-                            <div className="mt-auto flex items-end justify-between gap-5 pt-8">
-                              <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
-                                <span className="inline-flex items-center gap-1.5">
-                                  <Calendar className="h-3.5 w-3.5" />
-                                  {formatDate(item.date)}
-                                </span>
-
-                                <span className="inline-flex items-center gap-1.5">
-                                  <Clock className="h-3.5 w-3.5" />
-                                  {item.readTime}
-                                </span>
-                              </div>
-
-                              {item.source === "medium" ? (
-                                <ExternalLink className="h-5 w-5 shrink-0 text-primary" />
-                              ) : (
-                                <ArrowRight className="h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1" />
-                              )}
-                            </div>
-                          </div>
-                        </KnowledgeLink>
-                      </motion.article>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="mt-10 rounded-3xl border border-border bg-background p-8 sm:p-10">
-                  <p className="text-lg font-medium text-foreground">
-                    W tej kategorii nie ma jeszcze materiałów.
-                  </p>
-                </div>
-              )}
-            </div>
+            )}
           </div>
         </section>
 
-        {/* CLOSING */}
-        <section className="border-t border-border py-16 sm:py-20 lg:py-24">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="mx-auto max-w-7xl">
-              <div className="max-w-3xl">
-                <p className="text-sm font-medium text-primary">
-                  Wiedza to punkt wyjścia
-                </p>
-
-                <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-                  Dobra praktyka nie zawsze jest dobrą decyzją w Twojej
-                  sytuacji.
-                </h2>
-
-                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-                  Materiały pomagają zrozumieć problem. Jeśli potrzebujesz
-                  przełożyć je na konkretną sytuację firmy, wtedy warto zacząć
-                  od diagnozy.
-                </p>
-              </div>
+        {/* ZAMKNIĘCIE */}
+        <section className="px-5 pb-28 sm:px-8 lg:px-12">
+          <div className="mx-auto max-w-[1400px] overflow-hidden rounded-[2.4rem] bg-violet px-7 py-14 text-white sm:px-14 sm:py-20">
+            <Pill tone="light">Wiedza to punkt wyjścia</Pill>
+            <ScrollText
+              as="h2"
+              text="Dobra praktyka nie zawsze jest dobrą decyzją w Twojej sytuacji."
+              className="mt-6 max-w-3xl text-[2rem] font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl"
+            />
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
+              Materiały pomagają zrozumieć problem. Jeśli potrzebujesz
+              przełożyć je na konkretną sytuację firmy, wtedy warto zacząć od
+              diagnozy.
+            </p>
+            <div className="mt-10">
+              <ActionButton tone="white" onClick={() => setIsContactOpen(true)}>
+                Porozmawiajmy o Twoim marketingu
+              </ActionButton>
             </div>
           </div>
         </section>
       </main>
 
       <Footer />
+      <ContactFormDialog isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }

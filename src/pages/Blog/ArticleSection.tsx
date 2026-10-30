@@ -39,7 +39,7 @@ const renderInlineText = (text: string): ReactNode[] => {
           href={match[4]}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-medium text-primary underline underline-offset-4 transition-opacity hover:opacity-70"
+          className="font-medium text-violet underline decoration-violet/40 underline-offset-4 transition-colors hover:decoration-violet"
         >
           {match[3]}
         </a>
@@ -73,10 +73,11 @@ export const ArticleSection = ({
   }
 
   return (
-    <section className="py-4 sm:py-6 md:py-3">
+    <section className="py-2">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.05 }}
         transition={{
           duration: 0.5,
           ease: [0.22, 1, 0.36, 1],
@@ -93,8 +94,8 @@ export const ArticleSection = ({
               <HeadingTag
                 className={
                   level === 2
-                    ? "text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight"
-                    : "text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight"
+                    ? "text-[1.7rem] font-semibold leading-tight tracking-[-0.035em] text-violet sm:text-4xl"
+                    : "text-2xl font-semibold leading-tight tracking-[-0.03em] text-violet sm:text-[2rem]"
                 }
               >
                 {section.heading}
@@ -102,7 +103,7 @@ export const ArticleSection = ({
             );
           })()}
 
-        <div className="space-y-2 text-base leading-relaxed text-muted-foreground sm:text-lg [&_strong]:font-semibold">
+        <div className="space-y-4 text-[17px] leading-[1.75] text-foreground/80 sm:text-lg [&_strong]:font-semibold [&_strong]:text-foreground">
           {section.blocks.map((block, i) => {
             switch (block.type) {
               case "paragraph":
@@ -116,7 +117,7 @@ export const ArticleSection = ({
                 return (
                   <ul
                     key={i}
-                    className="list-disc space-y-2 pl-6"
+                    className="space-y-3 pl-1 [&>li]:relative [&>li]:pl-7 [&>li]:before:absolute [&>li]:before:left-0 [&>li]:before:top-[0.6em] [&>li]:before:h-2.5 [&>li]:before:w-2.5 [&>li]:before:rounded-full [&>li]:before:bg-violet"
                   >
                     {block.items.map((item, idx) => (
                       <li key={idx}>
@@ -130,7 +131,7 @@ export const ArticleSection = ({
                 return (
                   <blockquote
                     key={i}
-                    className="border-l-4 border-primary pl-6 italic text-foreground"
+                    className="my-10 rounded-[1.8rem] bg-lilac-soft px-7 py-8 text-xl font-medium leading-snug tracking-[-0.015em] text-violet sm:px-10 sm:text-2xl"
                   >
                     {renderInlineText(block.text)}
                   </blockquote>
@@ -142,7 +143,7 @@ export const ArticleSection = ({
                     <img
                       src={block.src}
                       alt={block.alt ?? ""}
-                      className="w-full rounded-2xl border border-border/50"
+                      className="w-full rounded-[1.6rem]"
                       loading="lazy"
                     />
 
@@ -160,7 +161,7 @@ export const ArticleSection = ({
                 return (
                   <h3
                     key={i}
-                    className="pt-6 text-base font-semibold tracking-tight text-foreground sm:text-lg md:text-xl"
+                    className="pt-6 text-lg font-semibold tracking-[-0.01em] text-foreground sm:text-xl"
                   >
                     {renderInlineText(block.text)}
                   </h3>

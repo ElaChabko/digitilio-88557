@@ -1,15 +1,17 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { StructuredData } from "@/components/StructuredData";
-import { Button } from "@/components/ui/button";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
+import { PageHero } from "@/components/site/PageHero";
+import { ActionButton, FadeUp, Pill, useCalmMotion } from "@/components/site/motion";
+import { LatestArticles, formatPlDate } from "@/components/LatestArticles";
 
-import { Mail, Calendar, Clock } from "lucide-react";
-import { motion } from "framer-motion";
+import { Calendar, Clock } from "lucide-react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { getPostBySlug } from "@/content/blogs/index";
 import { createBreadcrumbSchema, PERSON_ID } from "@/lib/structuredData";
@@ -21,6 +23,24 @@ export default function BlogPost() {
   const post = slug ? getPostBySlug(slug) : null;
 
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const calm = useCalmMotion();
+  const articleRef = useRef<HTMLElement | null>(null);
+  const coverRef = useRef<HTMLDivElement | null>(null);
+
+  // Pasek postępu czytania
+  const { scrollYProgress: readProgress } = useScroll({
+    target: articleRef,
+    offset: ["start start", "end end"],
+  });
+  const readScale = useSpring(readProgress, { stiffness: 120, damping: 24, mass: 0.3 });
+
+  // Okładka rozszerza się przy przewijaniu
+  const { scrollYProgress: coverProgress } = useScroll({
+    target: coverRef,
+    offset: ["start end", "center center"],
+  });
+  const coverScale = useTransform(coverProgress, [0, 1], [calm ? 1 : 0.88, 1]);
+  const coverRadius = useTransform(coverProgress, [0, 1], [48, 28]);
 
   if (!post) {
     return (
@@ -98,7 +118,7 @@ export default function BlogPost() {
   ]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <SEO
         title={`${post.title} | Digitilio`}
         description={post.excerpt}
@@ -110,77 +130,62 @@ export default function BlogPost() {
       <StructuredData data={blogPostSchema} />
       <StructuredData data={breadcrumbSchema} />
 
+      {/* Pasek postępu czytania */}
+      <motion.div
+        aria-hidden="true"
+        className="fixed inset-x-0 top-0 z-[60] h-1 origin-left bg-gradient-to-r from-violet via-violet-bright to-orchid"
+        style={{ scaleX: readScale }}
+      />
+
       <Navigation />
 
-      <article className="pt-32 pb-24">
-        <div className="container mx-auto max-w-3xl px-4">
-          {/* HEADER */}
-          <motion.header
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mt-8 mb-6"
-          >
-            <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-              {post.category}
-            </span>
+      <PageHero
+        size="article"
+        pill={post.category}
+        title={post.title}
+      >
+        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80">
+          <span className="flex items-center gap-1.5">
+            <Calendar className="h-4 w-4" />
+            {formatPlDate(post.date)}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Clock className="h-4 w-4" />
+            {post.readTime}
+          </span>
+          <span>Ela Chabko</span>
+        </div>
+      </PageHero>
 
-            <h1 className="mt-5 text-4xl font-bold leading-tight md:text-5xl">
-              {post.title}
-            </h1>
-
-            <div className="mt-6 flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                {post.date}
-              </span>
-
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4" />
-                {post.readTime}
-              </span>
-            </div>
-          </motion.header>
-
-          {/* COVER IMAGE */}
-          {post.image && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="mb-8"
-            >
+      <article ref={articleRef} className="px-5 pb-20 sm:px-8 lg:px-12">
+        {/* OKŁADKA */}
+        {post.image && (
+          <div ref={coverRef} className="mx-auto mt-10 max-w-5xl sm:mt-14">
+            <motion.div style={{ scale: coverScale, borderRadius: coverRadius }} className="overflow-hidden">
               <img
                 src={post.image}
                 alt={post.title}
-                className="
-                  w-full
-                  max-h-[220px]
-                  rounded-3xl
-                  object-cover
-                  object-center
-                  sm:max-h-[260px]
-                  md:max-h-[300px]
-                "
+                className="aspect-[16/8] w-full object-cover"
                 loading="eager"
               />
             </motion.div>
-          )}
+          </div>
+        )}
 
-          {/* EXCERPT */}
+        <div className="mx-auto max-w-3xl">
+          {/* LEAD */}
           {post.excerpt && (
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              {post.excerpt}
-            </p>
+            <FadeUp>
+              <p className="mt-14 text-xl font-medium leading-relaxed tracking-[-0.01em] text-violet sm:text-2xl">
+                {post.excerpt}
+              </p>
+            </FadeUp>
           )}
 
-          <hr className="my-10 border-t border-muted-foreground/20" />
+          <hr className="my-12 border-t border-violet/15" />
 
-          {/* CONTENT */}
-          <div className="space-y-6">
+          {/* TREŚĆ */}
+          <div className="space-y-8">
             {post.content.map((section, index) => (
               <ArticleSection
                 key={index}
@@ -191,40 +196,23 @@ export default function BlogPost() {
           </div>
 
           {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mt-10 flex justify-center"
-          >
-            <Button
-              type="button"
-              size="lg"
-              onClick={() => setIsContactOpen(true)}
-              className="
-                group
-                h-auto
-                rounded-full
-                bg-primary
-                px-8
-                py-6
-                text-base
-                text-primary-foreground
-                shadow-[0_0_40px_hsl(263_33%_35%/0.3)]
-                transition-all
-                duration-500
-                hover:shadow-[0_0_60px_hsl(263_33%_35%/0.5)]
-                md:text-lg
-                lg:text-xl
-              "
-            >
-              <Mail className="mr-3 h-6 w-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" />
-              Napisz do mnie
-            </Button>
-          </motion.div>
+          <FadeUp className="mt-20">
+            <div className="relative overflow-hidden rounded-[2.2rem] bg-violet p-8 text-white sm:p-12">
+              <Pill tone="light">Masz podobny problem?</Pill>
+              <p className="mt-6 text-2xl font-semibold leading-snug tracking-[-0.03em] sm:text-3xl">
+                Porozmawiajmy o tym, jak to wygląda w Twojej firmie.
+              </p>
+              <div className="mt-8">
+                <ActionButton tone="white" onClick={() => setIsContactOpen(true)}>
+                  Napisz do mnie
+                </ActionButton>
+              </div>
+            </div>
+          </FadeUp>
         </div>
       </article>
+
+      <LatestArticles excludeSlug={post.slug} pill="Czytaj dalej" title="Więcej z Bazy wiedzy." />
 
       <Footer />
 
