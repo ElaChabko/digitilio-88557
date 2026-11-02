@@ -5,10 +5,10 @@ export const planMarketingowy2027: BlogPost = {
   id: 4,
   slug: "plan-marketingowy-2027-checklista",
   title:
-    "Jak zaplanować marketing na 2027 rok w małej firmie. Checklista przed ustaleniem budżetu",
+    "Jak zaplanować marketing na 2027 rok. Checklista przed ustaleniem budżetu",
   excerpt:
     "Zanim zaplanujesz marketing na 2027, sprawdź 7 rzeczy: wyniki 2026, koszty kanałów, GA4, akceptacje, materiały i zasady AI. Praktyczna checklista.",
-  date: "2026-11-05",
+  date: "2026-11-02",
   readTime: "6 min",
   category: "Strategia",
   image: coverImage,
@@ -52,7 +52,7 @@ export const planMarketingowy2027: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Budżet reklamowy to tylko część kosztu. Do każdego kanału doliczam czas: przygotowanie treści i grafik, akceptacje, odpowiadanie na komentarze, raportowanie. W małej firmie czas właściciela albo jednej osoby od marketingu bywa droższy niż sama reklama. Dopiero zestawienie kosztu z efektem z pierwszego punktu pokazuje, które działania są opłacalne. To dobry punkt wyjścia do ustalenia budżetu marketingowego na rok.",
+            "Budżet reklamowy to tylko część kosztu. Do każdego kanału doliczam czas: przygotowanie treści i grafik, akceptacje, odpowiadanie na komentarze, raportowanie. Czas właściciela, zespołu albo osoby od marketingu często kosztuje więcej niż sama reklama. Dopiero zestawienie kosztu z efektem z pierwszego punktu pokazuje, które działania są opłacalne. To dobry punkt wyjścia do ustalenia budżetu marketingowego na rok.",
         },
       ],
     },
@@ -118,7 +118,7 @@ export const planMarketingowy2027: BlogPost = {
         {
           type: "paragraph",
           text:
-            "Kiedy masz odpowiedzi na te pytania, plan na 2027 zaczyna się układać sam. Zamiast planować od razu cały rok, rozpisz szczegółowo pierwszy kwartał, a kolejne zostaw jako kierunki. Po trzech miesiącach sprawdzisz wyniki i skorygujesz plan na podstawie danych, a nie przeczuć. Tak w praktyce wygląda to, jak zaplanować marketing w małej firmie bez przepalania budżetu.",
+            "Kiedy masz odpowiedzi na te pytania, plan na 2027 zaczyna się układać sam. Zamiast planować od razu cały rok, rozpisz szczegółowo pierwszy kwartał, a kolejne zostaw jako kierunki. Po trzech miesiącach sprawdzisz wyniki i skorygujesz plan na podstawie danych, a nie przeczuć.",
         },
         {
           type: "subheading",
