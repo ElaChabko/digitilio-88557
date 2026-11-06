@@ -75,7 +75,7 @@ const references: Reference[] = [
     quote:
       "Praca z Elą Chabko to nie tylko przyjemność, ale i wewnętrzny spokój.",
     description:
-      "Jest całkowicie samodzielna i pokazuje wysoki poziom kompetencji zarówno w pracy hands-on, komunikacji z klientem, przygotowaniu strategii, jak i prowadzeniu projektu całościowo. Zawsze otwarcie sygnalizuje, że coś może nie zadziałać tak, jak było zakładane.",
+      "Jest całkowicie samodzielna i pokazuje wysoki poziom kompetencji zarówno w pracy hands-on, komunikacji z klientem, przygotowaniu strategii, jak i prowadzeniu projektu całościowo.",
   },
 ];
 
