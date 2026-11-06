@@ -40,12 +40,27 @@ const references = [
     website: "https://ideoforce.pl",
     logo: "/logos/ideo-force.svg",
     pdf: "/referencje/Ela%20Referencje.pdf",
+    image: "/referencje/ideo-force-referencje.webp",
     author: "Joanna Tymowicz",
     position: "Wiceprezeska Zarządu Ideo Force",
     quote:
       "Ela potrafi dobrze łączyć strategiczne spojrzenie na komunikację z jej sprawną realizacją.",
     description:
       "Zwraca uwagę nie tylko na jakość samych treści, ale również na ich spójność z celami biznesowymi, charakterem marki i szerszym kontekstem działań marketingowych.",
+  },
+  {
+    id: "id-group",
+    company: "ID Group",
+    website: "https://www.idgroup.team",
+    logo: "/logos/id-group.png",
+    pdf: "/referencje/id-group-referencje.pdf",
+    image: "/referencje/id-group-referencje.webp",
+    author: "Łukasz Szymczak",
+    position: "Founder ID Group",
+    quote:
+      "Praca z Elą Chabko to nie tylko przyjemność, ale i wewnętrzny spokój.",
+    description:
+      "Jest całkowicie samodzielna i pokazuje wysoki poziom kompetencji zarówno w pracy hands-on, komunikacji z klientem, przygotowaniu strategii, jak i prowadzeniu projektu całościowo. Zawsze otwarcie sygnalizuje, że coś może nie zadziałać tak, jak było zakładane.",
   },
 ];
 
@@ -382,8 +397,8 @@ export default function Wspolprace() {
 
 
 <img
-  src="/referencje/ideo-force-referencje.webp"
-  alt="Pełna treść referencji Ideo Force wystawionych przez Joannę Tymowicz"
+  src={reference.image}
+  alt={`Pełna treść referencji ${reference.company} wystawionych przez: ${reference.author}`}
   className="block h-auto w-full rounded-lg bg-white"
   loading="lazy"
 />
