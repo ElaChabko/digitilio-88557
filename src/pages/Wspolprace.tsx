@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -33,7 +33,21 @@ const getCaseStudyExcerpt = (lead: string) => {
   return firstSentence ? firstSentence[0].trim() : lead;
 };
 
-const references = [
+type Reference = {
+  id: string;
+  company: string;
+  website: string;
+  logo: string;
+  logoClassName?: string;
+  pdf: string;
+  image: string;
+  author: string;
+  position: string;
+  quote: string;
+  description: string;
+};
+
+const references: Reference[] = [
   {
     id: "ideo-force",
     company: "Ideo Force",
@@ -57,6 +71,7 @@ const references = [
     image: "/referencje/id-group-referencje.webp",
     author: "Łukasz Szymczak",
     position: "Founder ID Group",
+    logoClassName: "max-h-[88px]",
     quote:
       "Praca z Elą Chabko to nie tylko przyjemność, ale i wewnętrzny spokój.",
     description:
@@ -70,6 +85,27 @@ export default function Wspolprace() {
   );
 
   const [expandedPdf, setExpandedPdf] = useState<string | null>(null);
+  const [arrowLeft, setArrowLeft] = useState(40);
+  const referencesRowRef = useRef<HTMLDivElement | null>(null);
+  const tileRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Strzałka dymka wskazuje środek klikniętego kafelka z logo
+  useLayoutEffect(() => {
+    if (!activeReference) return;
+
+    const updateArrow = () => {
+      const tile = tileRefs.current[activeReference];
+      const row = referencesRowRef.current;
+      if (!tile || !row) return;
+      const tileRect = tile.getBoundingClientRect();
+      const rowRect = row.getBoundingClientRect();
+      setArrowLeft(tileRect.left - rowRect.left + tileRect.width / 2 - 12);
+    };
+
+    updateArrow();
+    window.addEventListener("resize", updateArrow);
+    return () => window.removeEventListener("resize", updateArrow);
+  }, [activeReference]);
 
   const toggleReference = (id: string) => {
     setActiveReference((current) => (current === id ? null : id));
@@ -262,20 +298,23 @@ export default function Wspolprace() {
                 </h2>
               </motion.div>
 
-              <div className="mt-12 space-y-8">
-                {references.map((reference) => {
-                  const isOpen = activeReference === reference.id;
-                  const isPdfOpen = expandedPdf === reference.id;
+              <div ref={referencesRowRef} className="relative mt-12">
+                {/* LOGA */}
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  {references.map((reference) => {
+                    const isOpen = activeReference === reference.id;
 
-                  return (
-                    <div key={reference.id}>
-                      {/* LOGO */}
+                    return (
                       <button
+                        key={reference.id}
+                        ref={(el) => {
+                          tileRefs.current[reference.id] = el;
+                        }}
                         type="button"
                         onClick={() => toggleReference(reference.id)}
                         aria-expanded={isOpen}
                         aria-controls={`reference-${reference.id}`}
-                        className={`group flex min-h-[120px] w-full max-w-[250px] items-center justify-center rounded-xl border bg-background p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                        className={`group flex min-h-[120px] w-[calc(50%-8px)] items-center justify-center rounded-xl border bg-background p-5 transition-all duration-300 hover:border-primary/50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-[250px] sm:p-6 ${
                           isOpen
                             ? "border-primary/50 shadow-md"
                             : "border-border"
@@ -284,116 +323,124 @@ export default function Wspolprace() {
                         <img
                           src={reference.logo}
                           alt={`Logo ${reference.company}`}
-                          className="max-h-16 w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                          className={`${reference.logoClassName ?? "max-h-16"} w-full object-contain transition-transform duration-300 group-hover:scale-105`}
                           loading="lazy"
                         />
                       </button>
+                    );
+                  })}
+                </div>
 
-                      {/* DYMEK */}
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            id={`reference-${reference.id}`}
-                            key={`bubble-${reference.id}`}
-                            initial={{ opacity: 0, height: 0, y: -8 }}
-                            animate={{ opacity: 1, height: "auto", y: 0 }}
-                            exit={{ opacity: 0, height: 0, y: -8 }}
-                            transition={{
-                              duration: 0.35,
-                              ease: [0.22, 1, 0.36, 1],
-                            }}
-                            className="overflow-hidden"
+                {/* DYMEK */}
+                <AnimatePresence initial={false} mode="wait">
+                  {references
+                    .filter((reference) => reference.id === activeReference)
+                    .map((reference) => {
+                      const isPdfOpen = expandedPdf === reference.id;
+
+                      return (
+                    <motion.div
+                      id={`reference-${reference.id}`}
+                      key={`bubble-${reference.id}`}
+                      initial={{ opacity: 0, height: 0, y: -8 }}
+                      animate={{ opacity: 1, height: "auto", y: 0 }}
+                      exit={{ opacity: 0, height: 0, y: -8 }}
+                      transition={{
+                        duration: 0.35,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <div style={{ marginLeft: arrowLeft }} className="h-0 w-0 border-x-[12px] border-b-[12px] border-x-transparent border-b-border" />
+
+                      <div className="rounded-xl border border-border bg-background p-6 shadow-sm sm:p-10 lg:max-w-4xl">
+                        <Quote
+                          className="mb-6 h-8 w-8 text-primary"
+                          strokeWidth={1.5}
+                          aria-hidden="true"
+                        />
+
+                        <blockquote>
+                          <p className="text-xl font-medium leading-relaxed tracking-tight text-foreground sm:text-2xl">
+                            „{reference.quote}”
+                          </p>
+
+                          <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+                            {reference.description}
+                          </p>
+                        </blockquote>
+
+                        <div className="mt-8 border-t border-border pt-6">
+                          <p className="font-semibold text-foreground">
+                            {reference.author}
+                          </p>
+
+                          <p className="mt-1 text-sm text-muted-foreground">
+                            {reference.position}
+                          </p>
+
+                          <a
+                            href={reference.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 flex w-fit items-center gap-1 text-sm font-medium text-primary hover:underline"
                           >
-                            <div className="ml-10 h-0 w-0 border-x-[12px] border-b-[12px] border-x-transparent border-b-border" />
+                            {reference.website.replace(/^https?:\/\//, "")}
+                            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                          </a>
 
-                            <div className="rounded-xl border border-border bg-background p-6 shadow-sm sm:p-10 lg:max-w-4xl">
-                              <Quote
-                                className="mb-6 h-8 w-8 text-primary"
-                                strokeWidth={1.5}
-                                aria-hidden="true"
-                              />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedPdf((current) =>
+                                current === reference.id
+                                  ? null
+                                  : reference.id
+                              )
+                            }
+                            aria-expanded={isPdfOpen}
+                            aria-controls={`pdf-${reference.id}`}
+                            className="mt-7 inline-flex items-center gap-2 rounded-lg border border-primary px-5 py-3 font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                          >
+                            {isPdfOpen
+                              ? "Ukryj pełne referencje"
+                              : "Pokaż pełne referencje"}
 
-                              <blockquote>
-                                <p className="text-xl font-medium leading-relaxed tracking-tight text-foreground sm:text-2xl">
-                                  „{reference.quote}”
-                                </p>
+                            <ChevronDown
+                              className={`h-4 w-4 transition-transform duration-300 ${
+                                isPdfOpen ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+                        </div>
 
-                                <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-                                  {reference.description}
-                                </p>
-                              </blockquote>
+                        {/* PODGLĄD PDF */}
+                        <AnimatePresence initial={false}>
+                          {isPdfOpen && (
+                            <motion.div
+                              id={`pdf-${reference.id}`}
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.35 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="mt-6">
+                                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                                  <p className="text-sm font-medium text-foreground">
+                                    Pełny dokument referencyjny
+                                  </p>
 
-                              <div className="mt-8 border-t border-border pt-6">
-                                <p className="font-semibold text-foreground">
-                                  {reference.author}
-                                </p>
-
-                                <p className="mt-1 text-sm text-muted-foreground">
-                                  {reference.position}
-                                </p>
-
-                                <a
-                                  href={reference.website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="mt-2 flex w-fit items-center gap-1 text-sm font-medium text-primary hover:underline"
-                                >
-                                  {reference.website.replace(/^https?:\/\//, "")}
-                                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                                </a>
-
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setExpandedPdf((current) =>
-                                      current === reference.id
-                                        ? null
-                                        : reference.id
-                                    )
-                                  }
-                                  aria-expanded={isPdfOpen}
-                                  aria-controls={`pdf-${reference.id}`}
-                                  className="mt-7 inline-flex items-center gap-2 rounded-lg border border-primary px-5 py-3 font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                                >
-                                  {isPdfOpen
-                                    ? "Ukryj pełne referencje"
-                                    : "Pokaż pełne referencje"}
-
-                                  <ChevronDown
-                                    className={`h-4 w-4 transition-transform duration-300 ${
-                                      isPdfOpen ? "rotate-180" : ""
-                                    }`}
-                                  />
-                                </button>
-                              </div>
-
-                              {/* PODGLĄD PDF */}
-                              <AnimatePresence initial={false}>
-                                {isPdfOpen && (
-                                  <motion.div
-                                    id={`pdf-${reference.id}`}
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: "auto" }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.35 }}
-                                    className="overflow-hidden"
+                                  <a
+                                    href={reference.pdf}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
                                   >
-                                    <div className="mt-6">
-                                      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                                        <p className="text-sm font-medium text-foreground">
-                                          Pełny dokument referencyjny
-                                        </p>
-
-                                        <a
-                                          href={reference.pdf}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-                                        >
-                                          Otwórz PDF w nowej karcie
-                                          <ArrowUpRight className="h-4 w-4" />
-                                        </a>
-                                      </div>
+                                    Otwórz PDF w nowej karcie
+                                    <ArrowUpRight className="h-4 w-4" />
+                                  </a>
+                                </div>
 
 
 <img
@@ -403,17 +450,15 @@ export default function Wspolprace() {
   loading="lazy"
 />
 
-                                    </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </motion.div>
+                      );
+                    })}
+                </AnimatePresence>
               </div>
             </div>
           </div>
