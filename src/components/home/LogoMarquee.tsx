@@ -2,14 +2,15 @@ import type { HomeCopy } from "@/content/home";
 
 /**
  * Przesuwający się pasek logotypów.
- * Ideo Force – logo już opublikowane na stronie Współprace.
+ * Ideo Force i ID Group – marki opublikowane na stronie Współprace.
  * Pozostałe pozycje to PLACEHOLDERY: dodaj plik do public/logos i wpisz go na listę.
  */
-type LogoItem = { type: "logo"; name: string; src: string } | { type: "placeholder" };
+type LogoItem = { type: "logo"; name: string; src: string; size?: string } | { type: "placeholder" };
 
 const LOGOS: LogoItem[] = [
   { type: "logo", name: "Ideo Force", src: "/logos/ideo-force.svg" },
-  { type: "placeholder" },
+  // Logo pionowe, więc wyższe, żeby optycznie było równe z poziomymi
+  { type: "logo", name: "ID Group", src: "/logos/id-group-mono.png", size: "h-12 sm:h-14" },
   { type: "placeholder" },
   { type: "placeholder" },
   { type: "placeholder" },
@@ -29,7 +30,7 @@ export const LogoMarquee = ({ copy }: { copy: HomeCopy["logos"] }) => (
               key={i}
               src={item.src}
               alt={item.name}
-              className="h-8 w-auto shrink-0 opacity-60 brightness-0 transition-opacity hover:opacity-100 sm:h-9"
+              className={`${item.size ?? "h-8 sm:h-9"} w-auto shrink-0 opacity-60 brightness-0 transition-opacity hover:opacity-100`}
               loading="lazy"
             />
           ) : (

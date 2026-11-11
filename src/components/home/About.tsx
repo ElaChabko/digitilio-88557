@@ -79,14 +79,14 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
                   <div className="flex items-center justify-between">
                     <span
                       aria-hidden="true"
-                      className={`h-10 text-7xl font-semibold leading-none ${t.placeholder ? "text-lilac/40" : "text-lilac"}`}
+                      className={`block h-9 overflow-visible text-7xl font-semibold leading-[0.6] ${t.placeholder ? "text-lilac/40" : "text-lilac"}`}
                     >
                       „
                     </span>
                     {t.placeholder && <PlaceholderTag tone="light">{copy.testimonials!.tag}</PlaceholderTag>}
                   </div>
                   <blockquote
-                    className={`mt-6 text-xl leading-relaxed sm:text-2xl ${
+                    className={`mt-8 text-xl leading-relaxed sm:text-2xl ${
                       t.placeholder ? "text-white/45" : "font-medium tracking-[-0.015em] text-white"
                     }`}
                   >

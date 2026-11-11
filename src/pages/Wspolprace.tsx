@@ -291,7 +291,7 @@ export default function Wspolprace() {
                       <div className="rounded-[2rem] bg-white p-6 text-foreground shadow-sm sm:p-10 lg:max-w-4xl">
                         <span
                           aria-hidden="true"
-                          className="mb-2 block h-10 text-7xl font-semibold leading-none text-violet"
+                          className="mb-8 block h-9 overflow-visible text-7xl font-semibold leading-[0.6] text-violet"
                         >
                           „
                         </span>
