@@ -9,17 +9,17 @@ import { homeEn } from "@/content/home";
 import { Hero } from "@/components/home/Hero";
 import { Problem } from "@/components/home/Problem";
 import { Unify } from "@/components/home/Unify";
-import { ServicesStepper } from "@/components/home/ServicesStepper";
-import { ProcessWords } from "@/components/home/ProcessWords";
+import { Services } from "@/components/home/Services";
+import { Process } from "@/components/home/Process";
 import { WorkTrack } from "@/components/home/WorkTrack";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { About } from "@/components/home/About";
-import { ForWhomStack } from "@/components/home/ForWhomStack";
+import { ForWhom } from "@/components/home/ForWhom";
 import { Benefits } from "@/components/home/Benefits";
 import { Contact } from "@/components/home/Contact";
 
 /**
- * Angielska wersja strony – te same sekcje i animacje co strona główna,
+ * Angielska wersja strony – te same sekcje co strona główna,
  * teksty z src/content/home.ts (homeEn). Kontakt przez formularz na dole strony.
  */
 
@@ -59,12 +59,12 @@ const English = () => {
         <Hero copy={copy.hero} onCta={scrollToContact} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
-        <ServicesStepper copy={copy.services} />
-        <ProcessWords copy={copy.process} />
+        <Services copy={copy.services} />
+        <Process copy={copy.process} />
         <WorkTrack copy={copy.work} />
         <LogoMarquee copy={copy.logos} />
         <About copy={copy.about} onCta={scrollToContact} />
-        <ForWhomStack copy={copy.forWhom} />
+        <ForWhom copy={copy.forWhom} />
         <Benefits copy={copy.benefits} />
         <Contact copy={copy.contact}>
           <div className="rounded-[2rem] bg-white p-6 text-foreground shadow-2xl sm:p-8">

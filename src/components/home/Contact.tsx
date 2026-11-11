@@ -20,14 +20,14 @@ export const Contact = ({
   return (
     <section
       id="contact"
-      className="relative scroll-mt-0 overflow-hidden px-5 py-28 text-white sm:px-8 sm:py-36 lg:px-12 lg:py-44"
+      className="relative scroll-mt-0 overflow-hidden px-5 py-24 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32"
     >
       <GradientField />
 
       <div className="relative mx-auto max-w-[1400px]">
         <Pill tone="light">{copy.pill}</Pill>
         <FadeUp>
-          <h2 className="mt-6 max-w-4xl text-[2.6rem] font-semibold leading-[1] tracking-[-0.05em] sm:text-7xl lg:text-[5.8rem]">
+          <h2 className="mt-6 max-w-4xl text-[2.6rem] font-semibold leading-[1] tracking-[-0.05em] sm:text-6xl lg:text-[4.6rem]">
             {copy.title}
           </h2>
         </FadeUp>

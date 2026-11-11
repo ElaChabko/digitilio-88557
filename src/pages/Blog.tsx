@@ -15,7 +15,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { createCollectionSchema } from "@/lib/structuredData";
 import { PageHero } from "@/components/site/PageHero";
 import { ArticleCard } from "@/components/LatestArticles";
-import { ActionButton, EASE, FadeUp, Pill, ScrollText } from "@/components/site/motion";
+import { ActionButton, EASE, FadeUp, Pill } from "@/components/site/motion";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 
 import { blogPosts } from "@/content/blogs/index";
@@ -443,11 +443,9 @@ export default function Blog() {
         <section className="px-5 pb-28 sm:px-8 lg:px-12">
           <div className="mx-auto max-w-[1400px] overflow-hidden rounded-[2.4rem] bg-violet px-7 py-14 text-white sm:px-14 sm:py-20">
             <Pill tone="light">Wiedza to punkt wyjścia</Pill>
-            <ScrollText
-              as="h2"
-              text="Dobra praktyka nie zawsze jest dobrą decyzją w Twojej sytuacji."
-              className="mt-6 max-w-3xl text-[2rem] font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl"
-            />
+            <h2 className="mt-6 max-w-3xl text-[2rem] font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl">
+              Dobra praktyka nie zawsze jest dobrą decyzją w Twojej sytuacji.
+            </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
               Materiały pomagają zrozumieć problem. Jeśli potrzebujesz
               przełożyć je na konkretną sytuację firmy, wtedy warto zacząć od

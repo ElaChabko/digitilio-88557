@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { Quote } from "lucide-react";
 
 import aboutPhoto from "@/assets/about-photo-new.webp";
@@ -10,47 +8,31 @@ import {
   FadeUp,
   Pill,
   PlaceholderTag,
-  ScrollText,
-  useCalmMotion,
 } from "@/components/site/motion";
 
 /** O mnie: ciemna śliwkowa sekcja, zdjęcie odsłaniane przy przewijaniu, liczby odliczane w górę */
 export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => void }) => {
-  const photoRef = useRef<HTMLDivElement | null>(null);
-  const calm = useCalmMotion();
-  const { scrollYProgress } = useScroll({ target: photoRef, offset: ["start end", "center center"] });
-  const clip = useTransform(
-    scrollYProgress,
-    [0, 1],
-    calm
-      ? ["inset(0% 0% 0% 0% round 2rem)", "inset(0% 0% 0% 0% round 2rem)"]
-      : ["inset(22% 18% 22% 18% round 2rem)", "inset(0% 0% 0% 0% round 2rem)"]
-  );
-  const imgScale = useTransform(scrollYProgress, [0, 1], [calm ? 1 : 1.25, 1]);
 
   return (
-    <section id="about" className="relative overflow-hidden bg-plum px-5 py-24 text-white sm:px-8 sm:py-32 lg:px-12 lg:py-40">
+    <section id="about" className="relative overflow-hidden bg-plum px-5 py-24 text-white sm:px-8 sm:py-28 lg:px-12">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          <motion.div ref={photoRef} style={{ clipPath: clip }} className="overflow-hidden lg:sticky lg:top-24 lg:self-start">
-            <motion.img
+          <div className="overflow-hidden rounded-[2rem] lg:sticky lg:top-24 lg:self-start">
+            <img
               src={aboutPhoto}
               alt="Ela Chabko - Digitilio"
               width={768}
               height={768}
               loading="lazy"
               className="w-full object-cover"
-              style={{ scale: imgScale }}
             />
-          </motion.div>
+          </div>
 
           <div>
             <Pill tone="light">{copy.pill}</Pill>
-            <ScrollText
-              as="h2"
-              text={copy.title}
-              className="mt-6 text-[2.4rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-[4.5rem]"
-            />
+            <h2 className="mt-6 text-[2.4rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-[4.5rem]">
+              {copy.title}
+            </h2>
 
             <FadeUp className="mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-white/80">
               {copy.paragraphs.map((p) => (
@@ -86,7 +68,7 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
         </div>
 
         {copy.testimonials && (
-          <div className="mt-24 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-32">
+          <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-20">
             {copy.testimonials.items.map((t, i) => (
               <FadeUp key={t.author + i} delay={i * 0.1}>
                 <figure

@@ -3,7 +3,7 @@ import { FadeUp, Pill, ScrollText } from "@/components/site/motion";
 
 /** Wyśrodkowane hasła w kolorze marki, wywoływane słowo po słowie (jak „Contactless payments? Sure.”) */
 export const Problem = ({ copy }: { copy: HomeCopy["problem"] }) => (
-  <section id="problem" className="bg-white px-5 py-28 sm:px-8 sm:py-36 lg:py-44">
+  <section id="problem" className="bg-white px-5 py-24 sm:px-8 sm:py-28 lg:py-32">
     <div className="mx-auto max-w-5xl text-center">
       <FadeUp>
         <Pill>{copy.pill}</Pill>

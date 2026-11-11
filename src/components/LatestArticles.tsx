@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { blogPosts } from "@/content/blogs/index";
-import { EASE, Pill, ScrollText } from "@/components/site/motion";
+import { EASE, Pill } from "@/components/site/motion";
 
 export const formatPlDate = (date: string) => {
   const parsed = new Date(date);
@@ -109,11 +109,9 @@ export const LatestArticles = ({
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <Pill>{pill}</Pill>
-            <ScrollText
-              as="h2"
-              text={title}
-              className="mt-5 text-[2.1rem] font-semibold leading-[1.03] tracking-[-0.045em] text-violet sm:text-5xl lg:text-6xl"
-            />
+            <h2 className="mt-5 text-[2.1rem] font-semibold leading-[1.03] tracking-[-0.045em] text-violet sm:text-5xl lg:text-6xl">
+              {title}
+            </h2>
           </div>
           <Link
             to="/baza-wiedzy"

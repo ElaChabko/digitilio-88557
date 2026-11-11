@@ -254,7 +254,7 @@ export const Unify = ({ copy }: { copy: HomeCopy["unify"] }) => {
   }
 
   return (
-    <section ref={ref} aria-label={copy.title.join(" ")} className="relative h-[340vh] bg-white">
+    <section ref={ref} aria-label={copy.title.join(" ")} className="relative h-[230vh] bg-white sm:h-[250vh]">
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden">
         <motion.h2
           className="relative z-0 text-center text-[19vw] font-semibold leading-[0.9] tracking-[-0.055em] text-violet sm:text-[15vw] lg:text-[11.5rem] xl:text-[13rem]"

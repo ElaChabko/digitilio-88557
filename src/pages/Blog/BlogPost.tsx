@@ -7,11 +7,11 @@ import { SEO } from "@/components/SEO";
 import { StructuredData } from "@/components/StructuredData";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { PageHero } from "@/components/site/PageHero";
-import { ActionButton, FadeUp, Pill, useCalmMotion } from "@/components/site/motion";
+import { ActionButton, FadeUp, Pill } from "@/components/site/motion";
 import { LatestArticles, formatPlDate } from "@/components/LatestArticles";
 
 import { Calendar, Clock } from "lucide-react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 import { getPostBySlug } from "@/content/blogs/index";
 import { createBreadcrumbSchema, PERSON_ID } from "@/lib/structuredData";
@@ -23,9 +23,7 @@ export default function BlogPost() {
   const post = slug ? getPostBySlug(slug) : null;
 
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const calm = useCalmMotion();
   const articleRef = useRef<HTMLElement | null>(null);
-  const coverRef = useRef<HTMLDivElement | null>(null);
 
   // Pasek postępu czytania
   const { scrollYProgress: readProgress } = useScroll({
@@ -34,13 +32,6 @@ export default function BlogPost() {
   });
   const readScale = useSpring(readProgress, { stiffness: 120, damping: 24, mass: 0.3 });
 
-  // Okładka rozszerza się przy przewijaniu
-  const { scrollYProgress: coverProgress } = useScroll({
-    target: coverRef,
-    offset: ["start end", "center center"],
-  });
-  const coverScale = useTransform(coverProgress, [0, 1], [calm ? 1 : 0.88, 1]);
-  const coverRadius = useTransform(coverProgress, [0, 1], [48, 28]);
 
   if (!post) {
     return (
@@ -160,15 +151,15 @@ export default function BlogPost() {
       <article ref={articleRef} className="px-5 pb-20 sm:px-8 lg:px-12">
         {/* OKŁADKA */}
         {post.image && (
-          <div ref={coverRef} className="mx-auto mt-10 max-w-5xl sm:mt-14">
-            <motion.div style={{ scale: coverScale, borderRadius: coverRadius }} className="overflow-hidden">
+          <div className="mx-auto mt-10 max-w-5xl sm:mt-14">
+            <div className="overflow-hidden rounded-[2rem]">
               <img
                 src={post.image}
                 alt={post.title}
                 className="aspect-[16/8] w-full object-cover"
                 loading="eager"
               />
-            </motion.div>
+            </div>
           </div>
         )}
 

@@ -1,12 +1,10 @@
-import { useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import type { ReactNode } from "react";
 
 import { GradientField } from "./GradientField";
-import { Pill, useCalmMotion } from "./motion";
+import { Pill } from "./motion";
 
 /**
  * Nagłówek podstron: fiolet marki na całą szerokość z płynnym gradientem.
- * Przy przewijaniu karta lekko się zmniejsza i zaokrągla (jak hero strony głównej).
  */
 export const PageHero = ({
   pill,
@@ -21,23 +19,12 @@ export const PageHero = ({
   children?: ReactNode;
   size?: "default" | "article";
 }) => {
-  const ref = useRef<HTMLElement | null>(null);
-  const calm = useCalmMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, calm ? 1 : 0.94]);
-  const radius = useTransform(scrollYProgress, [0, 0.6], [0, calm ? 0 : 44]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, calm ? 0 : -60]);
-
   return (
-    <section ref={ref} className="relative bg-white">
-      <motion.div
-        className="relative origin-top overflow-hidden text-white"
-        style={{ scale, borderRadius: radius }}
-      >
+    <section className="relative bg-white">
+      <div className="relative overflow-hidden text-white">
         <GradientField />
 
-        <motion.div
-          style={{ y: textY }}
+        <div
           className={`relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 ${
             size === "article" ? "pb-16 pt-32 sm:pb-20 sm:pt-40" : "pb-20 pt-36 sm:pb-28 sm:pt-44 lg:pb-32"
           }`}
@@ -70,8 +57,8 @@ export const PageHero = ({
               {children}
             </div>
           )}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 };

@@ -53,7 +53,7 @@ export const Pill = ({
 export const FadeUp = ({
   children,
   delay = 0,
-  y = 32,
+  y = 16,
   className = "",
   as = "div",
 }: {
@@ -68,8 +68,8 @@ export const FadeUp = ({
     <Comp
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, delay, ease: EASE }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay, ease: EASE }}
       className={className}
     >
       {children}

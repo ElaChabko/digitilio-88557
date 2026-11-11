@@ -1,14 +1,12 @@
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react";
 
 import type { HomeCopy, WorkItem } from "@/content/home";
-import { Pill, PlaceholderTag, useCalmMotion } from "@/components/site/motion";
+import { Pill, PlaceholderTag } from "@/components/site/motion";
 
 const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string }) => {
   const shell =
-    "relative flex h-[min(50vh,440px)] w-[min(78vw,460px)] sm:h-[min(60vh,520px)] shrink-0 flex-col overflow-hidden rounded-[2rem] p-7 sm:p-9";
+    "relative flex h-[400px] w-[78vw] max-w-[340px] shrink-0 flex-col overflow-hidden rounded-[2rem] p-7 lg:h-[440px] lg:w-full lg:max-w-none";
 
   if (item.type === "case") {
     return (
@@ -18,7 +16,7 @@ const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string
         <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-lilac/25 blur-3xl" aria-hidden="true" />
         <span className="relative text-sm font-medium text-white/75">Case study</span>
         <div className="relative mt-auto">
-          <p className="text-5xl font-semibold tracking-[-0.05em] sm:text-6xl">{item.stat}</p>
+          <p className="text-4xl font-semibold tracking-[-0.05em] xl:text-5xl">{item.stat}</p>
           <p className="mt-2 text-base text-white/80">{item.statLabel}</p>
           <div className="mt-8 flex items-end justify-between gap-4 border-t border-white/20 pt-5">
             <div>
@@ -38,7 +36,7 @@ const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string
     return (
       <article className={`${shell} bg-plum text-white`}>
         <span className="text-sm font-medium text-lilac">{item.meta}</span>
-        <h3 className="mt-auto text-3xl font-semibold leading-tight tracking-[-0.03em]">{item.title}</h3>
+        <h3 className="mt-auto text-2xl font-semibold leading-tight tracking-[-0.03em]">{item.title}</h3>
         <p className="mt-4 text-base leading-relaxed text-white/75">{item.text}</p>
       </article>
     );
@@ -57,35 +55,16 @@ const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string
 };
 
 /**
- * Realizacje: sekcja przypięta, karty przesuwają się w poziomie podczas przewijania w dół.
+ * Realizacje: siatka kart na komputerze, przesuwanie palcem na telefonie (bez przypinania).
  */
-export const WorkTrack = ({ copy }: { copy: HomeCopy["work"] }) => {
-  const ref = useRef<HTMLElement | null>(null);
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const [distance, setDistance] = useState(0);
-  const calm = useCalmMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0.08, 0.92], [0, -distance]);
-
-  useEffect(() => {
-    const measure = () => {
-      const track = trackRef.current;
-      if (!track) return;
-      setDistance(Math.max(0, track.scrollWidth - window.innerWidth + 48));
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  const header = (
-    <div className="mx-auto flex max-w-[1500px] flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
+export const WorkTrack = ({ copy }: { copy: HomeCopy["work"] }) => (
+  <section id="work" className="bg-white py-24 sm:py-32">
+    <div className="mx-auto flex max-w-[1400px] flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
       <div>
         <Pill>{copy.pill}</Pill>
         <h2 className="mt-5 max-w-3xl text-[2.1rem] font-semibold leading-[1.03] tracking-[-0.045em] text-violet sm:text-5xl lg:text-6xl">
           {copy.title}
         </h2>
-        <p className="mt-3 text-base text-muted-foreground">{copy.lead}</p>
       </div>
       {copy.allHref && copy.allLabel && (
         <Link
@@ -97,31 +76,15 @@ export const WorkTrack = ({ copy }: { copy: HomeCopy["work"] }) => {
         </Link>
       )}
     </div>
-  );
 
-  if (calm) {
-    return (
-      <section id="work" className="bg-white py-24">
-        {header}
-        <div className="mt-10 flex gap-5 overflow-x-auto px-5 pb-4 sm:px-8 lg:px-12">
-          {copy.items.map((item, i) => (
-            <Card key={i} item={item} placeholderTag={copy.placeholderTag} />
-          ))}
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section ref={ref} id="work" className="relative bg-white" style={{ height: `${120 + copy.items.length * 45}vh` }}>
-      <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden pb-20 pt-24">
-        {header}
-        <motion.div ref={trackRef} style={{ x }} className="mt-8 flex w-max gap-5 px-5 sm:mt-10 sm:px-8 lg:px-12">
-          {copy.items.map((item, i) => (
-            <Card key={i} item={item} placeholderTag={copy.placeholderTag} />
-          ))}
-        </motion.div>
+    <div className="mx-auto mt-10 max-w-[1400px] lg:px-12">
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:px-8 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+        {copy.items.map((item, i) => (
+          <div key={i} className="snap-start">
+            <Card item={item} placeholderTag={copy.placeholderTag} />
+          </div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
