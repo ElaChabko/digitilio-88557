@@ -2,7 +2,8 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { DotMark } from "@/components/site/DotMark";
 
 import logoPurple from "@/assets/logo-purple.png";
 import { ContactFormDialog } from "@/components/ContactFormDialog";
@@ -203,9 +204,9 @@ export const Navigation = ({
               to={t.homePath}
               aria-label={t.home}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 transition-colors hover:bg-white/25"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 transition-colors hover:bg-white/25"
             >
-              <Home className="h-4 w-4" />
+              <DotMark className="h-5 w-5" />
             </Link>
 
             {/* Desktop: wszystkie linki */}
@@ -230,7 +231,7 @@ export const Navigation = ({
               onClick={() => setIsMenuOpen((v) => !v)}
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? t.close : t.menu}
-              className="flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors hover:bg-white/15 md:hidden"
+              className="flex h-10 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3 text-sm font-semibold transition-colors hover:bg-white/15 sm:px-4 md:hidden"
             >
               {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
               {t.menu}
@@ -239,7 +240,7 @@ export const Navigation = ({
             <button
               type="button"
               onClick={openContact}
-              className="flex h-10 items-center rounded-full bg-white px-4 text-sm font-semibold text-violet transition-colors hover:bg-lilac-soft md:hidden"
+              className="flex h-10 shrink-0 items-center whitespace-nowrap rounded-full bg-white px-4 text-sm font-semibold text-violet transition-colors hover:bg-lilac-soft md:hidden"
             >
               {t.contact}
             </button>

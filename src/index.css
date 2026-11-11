@@ -7,6 +7,18 @@ All colors MUST be HSL.
 */
 
 @layer base {
+  /* Bez automatycznego powiększania tekstu w przeglądarkach w aplikacjach (FB, Instagram) */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Długie słowa w nagłówkach łamią się zamiast wychodzić poza ekran */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
   :root {
     /* Redesign (kierunek Jeton): biel + fiolet marki na całe sekcje */
     --background: 0 0% 100%;
@@ -298,16 +310,25 @@ All colors MUST be HSL.
   .animate-marquee { animation: none; }
 }
 
-/* Płynny gradient (GradientField) */
-@keyframes gf-a {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-18%, 22%) scale(1.15); }
+/* Płynny gradient (GradientField): każda plama światła ma własną, zamkniętą trasę */
+@keyframes gf-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-14%, 10%) scale(1.08); }
+  50% { transform: translate(-26%, 22%) scale(0.95); }
+  75% { transform: translate(-8%, 14%) scale(1.04); }
 }
-@keyframes gf-b {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(25%, -20%) scale(0.9); }
+@keyframes gf-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(22%, -16%) scale(1.1); }
+  66% { transform: translate(34%, 6%) scale(0.92); }
 }
-@keyframes gf-c {
-  0% { transform: translate(0, 0) scale(1.1); }
-  100% { transform: translate(-20%, -25%) scale(0.95); }
+@keyframes gf-3 {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  30% { transform: translate(-18%, -20%) scale(0.95); }
+  60% { transform: translate(14%, -30%) scale(1.1); }
+  80% { transform: translate(8%, -8%) scale(1); }
+}
+@keyframes gf-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40%, 30%) scale(1.25); }
 }

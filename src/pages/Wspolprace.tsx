@@ -1,12 +1,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ChevronDown,
-  Quote,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Navigation } from "@/components/Navigation";
@@ -294,11 +289,12 @@ export default function Wspolprace() {
                       <div style={{ marginLeft: arrowLeft }} className="h-0 w-0 border-x-[12px] border-b-[12px] border-x-transparent border-b-white" />
 
                       <div className="rounded-[2rem] bg-white p-6 text-foreground shadow-sm sm:p-10 lg:max-w-4xl">
-                        <Quote
-                          className="mb-6 h-8 w-8 text-violet"
-                          strokeWidth={1.5}
+                        <span
                           aria-hidden="true"
-                        />
+                          className="mb-2 block h-10 text-7xl font-semibold leading-none text-violet"
+                        >
+                          „
+                        </span>
 
                         <blockquote>
                           <p className="text-xl font-medium leading-relaxed tracking-tight text-foreground sm:text-2xl">

@@ -10,7 +10,6 @@ import { PageHero } from "@/components/site/PageHero";
 import { ActionButton, FadeUp, Pill } from "@/components/site/motion";
 import { LatestArticles, formatPlDate } from "@/components/LatestArticles";
 
-import { Calendar, Clock } from "lucide-react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 import { getPostBySlug } from "@/content/blogs/index";
@@ -135,17 +134,9 @@ export default function BlogPost() {
         pill={post.category}
         title={post.title}
       >
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80">
-          <span className="flex items-center gap-1.5">
-            <Calendar className="h-4 w-4" />
-            {formatPlDate(post.date)}
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Clock className="h-4 w-4" />
-            {post.readTime}
-          </span>
-          <span>Ela Chabko</span>
-        </div>
+        <p className="text-sm text-white/80">
+          Ela Chabko · {formatPlDate(post.date)} · {post.readTime}
+        </p>
       </PageHero>
 
       <article ref={articleRef} className="px-5 pb-20 sm:px-8 lg:px-12">

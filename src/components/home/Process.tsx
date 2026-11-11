@@ -1,14 +1,5 @@
-import { ClipboardList, ListOrdered, Rocket, Search, type LucideIcon } from "lucide-react";
-
-import type { HomeCopy, StepIcon } from "@/content/home";
+import type { HomeCopy } from "@/content/home";
 import { FadeUp, Pill } from "@/components/site/motion";
-
-const ICONS: Record<StepIcon, LucideIcon> = {
-  search: Search,
-  priority: ListOrdered,
-  plan: ClipboardList,
-  rocket: Rocket,
-};
 
 const COLORS = [
   { tile: "bg-violet", text: "text-violet" },
@@ -30,18 +21,14 @@ export const Process = ({ copy }: { copy: HomeCopy["process"] }) => (
 
       <ol className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-6">
         {copy.steps.map((step, i) => {
-          const Icon = ICONS[step.icon];
           const color = COLORS[i % COLORS.length];
           return (
             <FadeUp as="li" key={step.word} delay={i * 0.05} className="border-t border-violet/15 pt-6">
-              <div className="flex items-center gap-3">
-                <span className={`flex h-11 w-11 items-center justify-center rounded-2xl text-white ${color.tile}`}>
-                  <Icon className="h-5 w-5" strokeWidth={2} />
-                </span>
-                <span className="text-sm font-semibold tabular-nums text-foreground/40">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </div>
+              <span
+                className={`flex h-12 w-12 items-center justify-center rounded-full text-base font-semibold tabular-nums text-white ${color.tile}`}
+              >
+                {i + 1}
+              </span>
               <h3 className={`mt-5 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl ${color.text}`}>
                 {step.word}
               </h3>

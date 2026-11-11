@@ -21,12 +21,12 @@ export const ContactFormDialog = ({ isOpen, onClose }: ContactFormDialogProps) =
         if (!open) onClose();
       }}
     >
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0">
-        <DialogHeader className="p-6 pb-0">
-          <DialogTitle>Skontaktuj się ze mną</DialogTitle>
+      <DialogContent className="flex max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] max-w-2xl flex-col gap-0 overflow-hidden rounded-[1.75rem] p-0 sm:max-h-[calc(100dvh-4rem)] sm:rounded-[2rem]">
+        <DialogHeader className="shrink-0 border-b border-violet/10 p-6 pr-14 text-left">
+          <DialogTitle className="text-2xl font-semibold tracking-[-0.03em] text-violet">Skontaktuj się ze mną</DialogTitle>
         </DialogHeader>
 
-        <div className="p-6 pt-4">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-6 pt-5 [-webkit-overflow-scrolling:touch]">
           <ContactForm onSuccess={onClose} />
         </div>
       </DialogContent>

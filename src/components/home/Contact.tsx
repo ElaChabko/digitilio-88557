@@ -27,7 +27,7 @@ export const Contact = ({
       <div className="relative mx-auto max-w-[1400px]">
         <Pill tone="light">{copy.pill}</Pill>
         <FadeUp>
-          <h2 className="mt-6 max-w-4xl text-[2.6rem] font-semibold leading-[1] tracking-[-0.05em] sm:text-6xl lg:text-[4.6rem]">
+          <h2 className="mt-6 max-w-4xl text-[clamp(1.8rem,8.6vw,2.6rem)] font-semibold leading-[1] tracking-[-0.05em] sm:text-6xl lg:text-[4.6rem]">
             {copy.title}
           </h2>
         </FadeUp>

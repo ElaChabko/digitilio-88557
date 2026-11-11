@@ -1,5 +1,3 @@
-import { Check } from "lucide-react";
-
 import type { HomeCopy } from "@/content/home";
 import { FadeUp, Pill } from "@/components/site/motion";
 
@@ -22,10 +20,9 @@ export const Benefits = ({ copy }: { copy: HomeCopy["benefits"] }) => (
         {copy.items.map((item, i) => (
           <li key={item.title} className="grid grid-cols-1 items-center gap-4 py-7 sm:grid-cols-[auto_1fr_1fr] sm:gap-8 sm:py-8">
             <span
-              className={`flex h-12 w-12 items-center justify-center rounded-2xl text-white sm:h-14 sm:w-14 ${TILES[i % TILES.length]}`}
-            >
-              <Check className="h-6 w-6" strokeWidth={3} />
-            </span>
+              aria-hidden="true"
+              className={`h-4 w-4 rounded-full sm:h-5 sm:w-5 ${TILES[i % TILES.length]}`}
+            />
             <h3
               className="text-2xl font-semibold tracking-[-0.035em] text-foreground sm:text-3xl lg:text-4xl"
             >

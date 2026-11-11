@@ -262,10 +262,10 @@ export const homePl: HomeCopy = {
           role: "Wiceprezeska Zarządu Ideo Force",
         },
         {
-          text: "Tu pojawi się krótki cytat z listu referencyjnego lub opinii klienta, najlepiej z konkretnym efektem współpracy.",
-          author: "Imię i nazwisko",
-          role: "Stanowisko, firma",
-          placeholder: true,
+          // Cytat z referencji ID Group (strona Współprace)
+          text: "Praca z Elą Chabko to nie tylko przyjemność, ale i wewnętrzny spokój.",
+          author: "Łukasz Szymczak",
+          role: "Founder ID Group",
         },
       ],
     },

@@ -6,7 +6,7 @@ import { Pill, PlaceholderTag } from "@/components/site/motion";
 
 const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string }) => {
   const shell =
-    "relative flex h-[400px] w-[78vw] max-w-[340px] shrink-0 flex-col overflow-hidden rounded-[2rem] p-7 lg:h-[440px] lg:w-full lg:max-w-none";
+    "relative flex min-h-[400px] w-[78vw] max-w-[340px] shrink-0 flex-col overflow-hidden rounded-[2rem] p-7 lg:min-h-[440px] lg:w-full lg:max-w-none";
 
   if (item.type === "case") {
     return (
@@ -16,7 +16,7 @@ const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string
         <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-lilac/25 blur-3xl" aria-hidden="true" />
         <span className="relative text-sm font-medium text-white/75">Case study</span>
         <div className="relative mt-auto">
-          <p className="text-4xl font-semibold tracking-[-0.05em] xl:text-5xl">{item.stat}</p>
+          <p className="text-[clamp(1.7rem,8vw,2.25rem)] font-semibold tracking-[-0.05em] xl:text-5xl">{item.stat}</p>
           <p className="mt-2 text-base text-white/80">{item.statLabel}</p>
           <div className="mt-8 flex items-end justify-between gap-4 border-t border-white/20 pt-5">
             <div>

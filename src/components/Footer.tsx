@@ -1,7 +1,8 @@
-import { BadgeCheck, Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 
 import logoWhite from "@/assets/logo-white.png";
 import { OPEN_COOKIE_SETTINGS_EVENT } from "@/lib/consent";
+import { GradientField } from "@/components/site/GradientField";
 
 const CERTIFICATES = [
   {
@@ -66,7 +67,8 @@ export const Footer = ({ lang = "pl" }: { lang?: "pl" | "en" }) => {
 
   return (
     <footer className="relative overflow-hidden bg-plum pb-28 text-white sm:pb-32">
-      <div className="container mx-auto px-4 pt-20 sm:px-6 sm:pt-24">
+      <GradientField tone="deep" />
+      <div className="container relative mx-auto px-4 pt-20 sm:px-6 sm:pt-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.3fr_0.7fr_0.9fr] lg:gap-16">
             {/* Marka */}
@@ -133,7 +135,7 @@ export const Footer = ({ lang = "pl" }: { lang?: "pl" | "en" }) => {
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 text-xs text-white/75 transition-colors hover:border-white/35 hover:text-white"
                   >
-                    <BadgeCheck className="h-3.5 w-3.5 text-lilac" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-lilac" aria-hidden="true" />
                     {c.label}
                   </a>
                 ))}
@@ -167,7 +169,7 @@ export const Footer = ({ lang = "pl" }: { lang?: "pl" | "en" }) => {
       {/* Duży napis marki na dole */}
       <p
         aria-hidden="true"
-        className="pointer-events-none mt-10 select-none whitespace-nowrap text-center text-[22vw] font-semibold leading-[0.8] tracking-[-0.06em] text-white/[0.05]"
+        className="pointer-events-none relative mt-10 select-none whitespace-nowrap text-center text-[22vw] font-semibold leading-[0.8] tracking-[-0.06em] text-white/[0.05]"
       >
         digitilio
       </p>

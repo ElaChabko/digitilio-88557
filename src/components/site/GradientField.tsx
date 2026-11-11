@@ -1,9 +1,26 @@
 import { useCalmMotion } from "./motion";
 
 /**
- * Płynny, płaski gradient w kolorach marki (zamiast obiektów 3D).
- * Kilka dużych, rozmytych plam powoli przesuwa się po tle.
+ * Płynny gradient w kolorach marki: kilka rozmytych rozjaśnień
+ * powoli „pływa” po fioletowym tle (każde inną drogą i w innym tempie).
  */
+type Blob = {
+  color: string;
+  size: string;
+  left: string;
+  top: string;
+  path: "gf-1" | "gf-2" | "gf-3" | "gf-4";
+  duration: string;
+  delay: string;
+};
+
+const BLOBS: Blob[] = [
+  { color: "hsl(272 85% 78% / 0.55)", size: "58vmax", left: "48%", top: "-24%", path: "gf-1", duration: "19s", delay: "0s" },
+  { color: "hsl(305 70% 76% / 0.45)", size: "46vmax", left: "-14%", top: "42%", path: "gf-2", duration: "23s", delay: "-6s" },
+  { color: "hsl(248 75% 70% / 0.45)", size: "44vmax", left: "30%", top: "55%", path: "gf-3", duration: "27s", delay: "-11s" },
+  { color: "hsl(285 90% 88% / 0.35)", size: "30vmax", left: "70%", top: "40%", path: "gf-4", duration: "17s", delay: "-4s" },
+];
+
 export const GradientField = ({
   className = "",
   tone = "violet",
@@ -14,31 +31,25 @@ export const GradientField = ({
   const calm = useCalmMotion();
   const base =
     tone === "deep"
-      ? "linear-gradient(160deg, hsl(262 44% 22%) 0%, hsl(263 44% 30%) 100%)"
-      : "linear-gradient(155deg, hsl(262 46% 30%) 0%, hsl(264 46% 38%) 55%, hsl(268 48% 46%) 100%)";
-
-  const blobs = [
-    { c: "hsl(270 70% 70% / 0.75)", s: "62vmax", x: "62%", y: "-18%", a: "gf-a", d: "22s" },
-    { c: "hsl(300 60% 72% / 0.55)", s: "48vmax", x: "-12%", y: "55%", a: "gf-b", d: "26s" },
-    { c: "hsl(250 60% 60% / 0.6)", s: "44vmax", x: "35%", y: "60%", a: "gf-c", d: "30s" },
-    { c: "hsl(280 70% 82% / 0.45)", s: "30vmax", x: "80%", y: "50%", a: "gf-b", d: "18s" },
-  ];
+      ? "linear-gradient(160deg, hsl(262 44% 17%) 0%, hsl(263 42% 24%) 100%)"
+      : "linear-gradient(155deg, hsl(262 46% 28%) 0%, hsl(264 46% 36%) 55%, hsl(268 46% 42%) 100%)";
 
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
       <div className="absolute inset-0" style={{ background: base }} />
-      {blobs.map((b, i) => (
+      {BLOBS.map((b, i) => (
         <span
           key={i}
-          className="absolute rounded-full"
+          className="absolute rounded-full will-change-transform"
           style={{
-            width: b.s,
-            height: b.s,
-            left: b.x,
-            top: b.y,
-            background: `radial-gradient(circle, ${b.c} 0%, transparent 65%)`,
-            filter: "blur(30px)",
-            animation: calm ? undefined : `${b.a} ${b.d} ease-in-out infinite alternate`,
+            width: b.size,
+            height: b.size,
+            left: b.left,
+            top: b.top,
+            background: `radial-gradient(circle, ${b.color} 0%, transparent 62%)`,
+            mixBlendMode: "screen",
+            opacity: tone === "deep" ? 0.55 : 1,
+            animation: calm ? undefined : `${b.path} ${b.duration} ease-in-out ${b.delay} infinite`,
           }}
         />
       ))}

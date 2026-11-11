@@ -37,9 +37,9 @@ const Shell = ({
   radius: MotionValue<number>;
   children: React.ReactNode;
 }) => (
-  <section ref={sectionRef} id="hero" className="relative h-[100svh] min-h-[620px] bg-white">
+  <section ref={sectionRef} id="hero" className="relative bg-white">
     <motion.div
-      className="absolute inset-0 origin-top overflow-hidden text-white"
+      className="relative flex min-h-[100svh] origin-top flex-col overflow-hidden text-white"
       style={{ scale, borderRadius: radius }}
     >
       <GradientField />
@@ -76,11 +76,11 @@ const HeroType = ({ copy, onCta }: Props) => {
     <Shell sectionRef={ref} scale={m.scale} radius={m.radius}>
       <motion.div
         style={{ scale: textScale, opacity: m.fade }}
-        className="relative z-10 flex h-full flex-col items-center justify-center px-5 pb-16 pt-24 text-center sm:px-8"
+        className="relative z-10 flex min-h-[100svh] flex-1 flex-col items-center justify-center px-5 pb-28 pt-28 text-center sm:px-8 sm:pb-24"
       >
         <Headline
           copy={copy}
-          className="max-w-[16ch] text-[2.6rem] font-semibold leading-[0.95] tracking-[-0.055em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[5.2rem] xl:text-[6rem]"
+          className="max-w-[16ch] text-[clamp(1.7rem,8.4vw,2.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[5.2rem] xl:text-[6rem]"
         />
         <div className="hero-fade-up mt-10" style={{ animationDelay: "0.5s" }}>
           <ActionButton tone="white" onClick={onCta}>

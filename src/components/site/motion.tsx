@@ -207,14 +207,14 @@ export const ActionButton = ({
   tone?: "violet" | "white";
   className?: string;
 }) => {
-  const cls = `group inline-flex items-center gap-3 rounded-full py-2 pl-6 pr-2 text-base font-semibold transition-all duration-300 hover:gap-4 ${
+  const cls = `group inline-flex max-w-full items-center gap-3 rounded-full py-2 pl-6 pr-2 text-left text-base font-semibold leading-tight transition-all duration-300 hover:gap-4 ${
     tone === "white"
       ? "bg-white text-violet hover:bg-lilac-soft"
       : "bg-violet text-white hover:bg-violet-bright"
   } ${className}`;
   const arrow = (
     <span
-      className={`flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-[-45deg] ${
+      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-[-45deg] ${
         tone === "white" ? "bg-violet text-white" : "bg-white text-violet"
       }`}
       aria-hidden="true"

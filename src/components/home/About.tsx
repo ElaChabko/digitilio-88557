@@ -1,5 +1,3 @@
-import { Quote } from "lucide-react";
-
 import aboutPhoto from "@/assets/about-photo-new.webp";
 import type { HomeCopy } from "@/content/home";
 import {
@@ -79,7 +77,12 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <Quote className={`h-8 w-8 ${t.placeholder ? "text-lilac/50" : "text-lilac"}`} />
+                    <span
+                      aria-hidden="true"
+                      className={`h-10 text-7xl font-semibold leading-none ${t.placeholder ? "text-lilac/40" : "text-lilac"}`}
+                    >
+                      „
+                    </span>
                     {t.placeholder && <PlaceholderTag tone="light">{copy.testimonials!.tag}</PlaceholderTag>}
                   </div>
                   <blockquote

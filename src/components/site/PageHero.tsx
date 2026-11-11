@@ -37,8 +37,8 @@ export const PageHero = ({
           <h1
             className={`hero-slide-in mt-6 max-w-4xl font-semibold tracking-[-0.045em] ${
               size === "article"
-                ? "text-[2.1rem] leading-[1.05] sm:text-5xl lg:text-[3.8rem]"
-                : "text-[2.6rem] leading-[1] sm:text-6xl lg:text-[5.2rem]"
+                ? "text-[clamp(1.6rem,7.4vw,2.1rem)] leading-[1.05] sm:text-5xl lg:text-[3.8rem]"
+                : "text-[clamp(1.8rem,8.6vw,2.6rem)] leading-[1] sm:text-6xl lg:text-[5.2rem]"
             }`}
             style={{ animationDelay: "0.1s" }}
           >

@@ -9,6 +9,7 @@ import { Check, Heart, Mail, Play, Sparkles } from "lucide-react";
 
 import type { HomeCopy } from "@/content/home";
 import { useCalmMotion } from "@/components/site/motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * „Jeden kierunek”: przypięta sekcja (jak „Unify your finances” na jeton.com).
@@ -162,20 +163,24 @@ const FlyingCard = ({
   progress: MotionValue<number>;
   children: ReactNode;
 }) => {
+  const isMobile = useIsMobile();
   const n = CARDS.length;
+  // Na telefonie karty krążą bliżej środka, żeby nie wychodziły za ekran
+  const k = isMobile ? 0.62 : 1;
+  const around = { x: spec.around.x * k, y: spec.around.y, r: spec.around.r };
   const enter = 0.02 + index * 0.025;
-  const around = 0.32 + index * 0.012;
+  const aroundAt = 0.32 + index * 0.012;
   const gather = 0.68;
 
   // Pozycje: daleko poza ekranem → wokół hasła → w stosie na środku
-  const far = { x: spec.around.x * 2.3, y: spec.around.y * 2.3, r: spec.around.r * 3 };
+  const far = { x: around.x * 2.3, y: around.y * 2.3, r: around.r * 3 };
   const stack = { x: (index - (n - 1) / 2) * 0.7, y: (index - (n - 1) / 2) * 0.9, r: (index - (n - 1) / 2) * 2.2 };
 
-  const t = [enter, around, gather];
-  const x = useTransform(progress, t, [`${far.x}vw`, `${spec.around.x}vw`, `${stack.x}vw`]);
-  const y = useTransform(progress, t, [`${far.y}vh`, `${spec.around.y}vh`, `${stack.y}vh`]);
-  const rotate = useTransform(progress, t, [far.r, spec.around.r, stack.r]);
-  const scale = useTransform(progress, [around, gather], [1, 0.92]);
+  const t = [enter, aroundAt, gather];
+  const x = useTransform(progress, t, [`${far.x}vw`, `${around.x}vw`, `${stack.x}vw`]);
+  const y = useTransform(progress, t, [`${far.y}vh`, `${around.y}vh`, `${stack.y}vh`]);
+  const rotate = useTransform(progress, t, [far.r, around.r, stack.r]);
+  const scale = useTransform(progress, [aroundAt, gather], [isMobile ? 0.88 : 1, 0.92]);
 
   return (
     <motion.div className="absolute left-1/2 top-1/2" style={{ x, y, rotate, scale }}>
@@ -257,7 +262,7 @@ export const Unify = ({ copy }: { copy: HomeCopy["unify"] }) => {
     <section ref={ref} aria-label={copy.title.join(" ")} className="relative h-[230vh] bg-white sm:h-[250vh]">
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden">
         <motion.h2
-          className="relative z-0 text-center text-[19vw] font-semibold leading-[0.9] tracking-[-0.055em] text-violet sm:text-[15vw] lg:text-[11.5rem] xl:text-[13rem]"
+          className="relative z-0 text-center text-[16vw] font-semibold leading-[0.9] tracking-[-0.055em] text-violet sm:text-[15vw] lg:text-[11.5rem] xl:text-[13rem]"
           style={{ scale: titleScale, opacity: titleOpacity }}
         >
           <span className="block">{copy.title[0]}</span>

@@ -1,15 +1,6 @@
-import { Compass, LifeBuoy, Rocket, ScanSearch, type LucideIcon } from "lucide-react";
-
-import type { HomeCopy, ServiceIcon } from "@/content/home";
+import type { HomeCopy } from "@/content/home";
 import { GradientField } from "@/components/site/GradientField";
 import { FadeUp, Pill } from "@/components/site/motion";
-
-const ICONS: Record<ServiceIcon, LucideIcon> = {
-  diagnosis: ScanSearch,
-  strategy: Compass,
-  implementation: Rocket,
-  support: LifeBuoy,
-};
 
 /** Usługi: fioletowa sekcja z czterema kartami (bez przypinania) */
 export const Services = ({ copy }: { copy: HomeCopy["services"] }) => (
@@ -29,18 +20,12 @@ export const Services = ({ copy }: { copy: HomeCopy["services"] }) => (
 
       <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-16">
         {copy.items.map((item, i) => {
-          const Icon = ICONS[item.icon];
           return (
             <FadeUp key={item.title} delay={(i % 2) * 0.06}>
               <article className="flex h-full flex-col rounded-[2rem] bg-white/[0.08] p-7 ring-1 ring-white/15 backdrop-blur-sm transition-colors duration-300 hover:bg-white/[0.13] sm:p-9">
-                <div className="flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-violet">
-                    <Icon className="h-5 w-5" strokeWidth={1.8} />
-                  </span>
-                  <span className="text-sm font-semibold tabular-nums text-white/45">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
+                <span className="text-5xl font-semibold leading-none tracking-[-0.05em] text-lilac tabular-nums sm:text-6xl">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <h3 className="mt-10 text-2xl font-semibold leading-tight tracking-[-0.03em] sm:text-[1.75rem]">
                   {item.title}
                 </h3>
