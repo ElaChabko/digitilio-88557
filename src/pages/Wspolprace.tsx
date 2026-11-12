@@ -77,6 +77,21 @@ const references: Reference[] = [
     description:
       "Jest całkowicie samodzielna i pokazuje wysoki poziom kompetencji zarówno w pracy hands-on, komunikacji z klientem, przygotowaniu strategii, jak i prowadzeniu projektu całościowo.",
   },
+  {
+    id: "vaya-medical",
+    company: "Vaya Medical",
+    website: "https://vaya.com.pl",
+    logo: "/logos/vaya-medical.png",
+    pdf: "/referencje/vaya-medical-referencje.pdf",
+    image: "/referencje/vaya-medical-referencje.webp",
+    author: "Iwona Sierpińska",
+    position: "Co-owner Vaya Medical",
+    logoClassName: "max-h-14",
+    quote:
+      "Cenimy przede wszystkim dobrą organizację, terminowość, samodzielność oraz regularne rekomendacje oparte na wynikach prowadzonych działań.",
+    description:
+      "Współpraca przebiega sprawnie, a przygotowywane materiały są dopasowane do specyfiki naszej marki i grupy odbiorców.",
+  },
 ];
 
 export default function Wspolprace() {
