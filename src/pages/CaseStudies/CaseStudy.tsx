@@ -15,6 +15,9 @@ import { getCaseStudyBySlug } from "@/content/caseStudies";
 import { PageHero } from "@/components/site/PageHero";
 import { CountUp } from "@/components/site/motion";
 
+/** Akapit zaczynający się od „Sytuacja.”, „Decyzja.” itp. dostaje etykietę nad tekstem */
+const DECISION_LABEL = /^(Sytuacja|Decyzja|Dlaczego|Efekt)\.\s+([\s\S]*)$/;
+
 export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>();
   const caseStudy = slug ? getCaseStudyBySlug(slug) : undefined;
@@ -137,7 +140,7 @@ export default function CaseStudy() {
                 Najważniejsze wyniki
               </motion.p>
 
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className={`grid gap-4 md:grid-cols-2 ${caseStudy.results.length >= 4 ? "lg:grid-cols-4" : caseStudy.results.length === 3 ? "lg:grid-cols-3" : ""}`}>
                 {caseStudy.results.map((result, index) => (
                   <motion.div
                     key={`${result.value}-${index}`}
@@ -278,7 +281,7 @@ export default function CaseStudy() {
 
                           <h2
                             className={[
-                              "mt-5 max-w-md text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl",
+                              "mt-5 max-w-md text-3xl font-semibold leading-tight tracking-[-0.035em] [hyphens:manual] [overflow-wrap:normal] sm:text-4xl",
                               isDark ? "text-white" : "text-foreground",
                             ].join(" ")}
                           >
@@ -297,9 +300,25 @@ export default function CaseStudy() {
                               : "text-muted-foreground",
                           ].join(" ")}
                         >
-                          {section.paragraphs.map((paragraph, index) => (
-                            <p key={index}>{paragraph}</p>
-                          ))}
+                          {section.paragraphs.map((paragraph, index) => {
+                            const labelled = paragraph.match(DECISION_LABEL);
+
+                            if (!labelled) return <p key={index}>{paragraph}</p>;
+
+                            return (
+                              <div key={index}>
+                                <p
+                                  className={[
+                                    "mb-2 text-xs font-semibold uppercase tracking-[0.14em]",
+                                    isDark ? "text-lilac" : "text-violet",
+                                  ].join(" ")}
+                                >
+                                  {labelled[1]}
+                                </p>
+                                <p>{labelled[2]}</p>
+                              </div>
+                            );
+                          })}
 
                           {section.statement && (
                             <p
@@ -710,7 +729,7 @@ export default function CaseStudy() {
 
                       <div className="mt-12 max-w-4xl">
                         <p className="text-lg leading-relaxed text-muted-foreground">
-                          W efekcie w okresie współpracy:
+                          {section.resultsLabel ?? "W efekcie w okresie współpracy:"}
                         </p>
 
                         <ul className="mt-6 space-y-4">

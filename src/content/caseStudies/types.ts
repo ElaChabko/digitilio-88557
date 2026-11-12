@@ -86,6 +86,7 @@ export type CaseStudySection =
       opening?: string;
       intro?: string;
       flow: CaseStudyFlowStep[];
+      resultsLabel?: string;
       results: string[];
     }
   | {
