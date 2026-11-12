@@ -86,7 +86,7 @@ const references: Reference[] = [
     image: "/referencje/vaya-medical-referencje.webp",
     author: "Iwona Sierpińska",
     position: "Co-owner Vaya Medical",
-    logoClassName: "max-h-14",
+    logoClassName: "max-h-[72px]",
     quote:
       "Cenimy przede wszystkim dobrą organizację, terminowość, samodzielność oraz regularne rekomendacje oparte na wynikach prowadzonych działań.",
     description:
