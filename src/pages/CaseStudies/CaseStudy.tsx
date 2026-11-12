@@ -124,6 +124,7 @@ export default function CaseStudy() {
         </PageHero>
 
         {/* NAJWAŻNIEJSZE WYNIKI */}
+        {caseStudy.results.length > 0 && (
         <section className="py-20 sm:py-24">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="mx-auto max-w-7xl">
@@ -171,6 +172,7 @@ export default function CaseStudy() {
             </div>
           </div>
         </section>
+        )}
 
         {/* DYNAMICZNE SEKCJE */}
         {caseStudy.sections.map((section, sectionIndex) => {

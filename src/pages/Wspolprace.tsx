@@ -12,7 +12,6 @@ import { StructuredData } from "@/components/StructuredData";
 import { createCollectionSchema } from "@/lib/structuredData";
 import { PageHero } from "@/components/site/PageHero";
 import { Pill } from "@/components/site/motion";
-import { PracticeDecisions } from "@/components/site/PracticeDecisions";
 
 const getCaseStudyMeta = (scope: string, industry: string) => {
   const mainScope = scope
@@ -216,9 +215,6 @@ export default function Wspolprace() {
             </div>
           </div>
         </section>
-
-        {/* DECYZJE Z PRAKTYKI */}
-        <PracticeDecisions />
 
         {/* REFERENCJE */}
         <section className="bg-plum px-5 py-24 text-white sm:px-8 sm:py-32 lg:px-12">
