@@ -1,7 +1,9 @@
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import {
+  animate,
   motion,
-  useScroll,
+  useInView,
+  useMotionValue,
   useTransform,
   type MotionValue,
 } from "framer-motion";
@@ -12,9 +14,11 @@ import { useCalmMotion } from "@/components/site/motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
- * „Jeden kierunek”: przypięta sekcja (jak „Unify your finances” na jeton.com).
+ * „Jeden kierunek” (jak „Unify your finances” na jeton.com).
  * Karty z różnymi działaniami marketingowymi wlatują z krawędzi ekranu,
  * otaczają hasło, a potem zbierają się w jeden stos, na który wjeżdża plan marketingowy.
+ * Animacja odtwarza się SAMA, gdy sekcja wejdzie w widok – nie trzeba przewijać,
+ * żeby ją „dokręcić” (sekcja nie jest przypinana).
  */
 
 type Pos = { x: number; y: number; r: number };
@@ -239,7 +243,15 @@ const PlanItem = ({
 export const Unify = ({ copy }: { copy: HomeCopy["unify"] }) => {
   const ref = useRef<HTMLElement | null>(null);
   const calm = useCalmMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  // Postęp animacji 0 → 1 liczony w czasie, a nie od przewijania
+  const scrollYProgress = useMotionValue(0);
+  const inView = useInView(ref, { once: true, amount: 0.55 });
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(scrollYProgress, 1, { duration: 6, ease: "linear", delay: 0.15 });
+    return () => controls.stop();
+  }, [inView, scrollYProgress]);
 
   const titleScale = useTransform(scrollYProgress, [0.3, 0.7], [1, 0.86]);
   const titleOpacity = useTransform(scrollYProgress, [0.5, 0.72], [1, 0.12]);
@@ -259,8 +271,8 @@ export const Unify = ({ copy }: { copy: HomeCopy["unify"] }) => {
   }
 
   return (
-    <section ref={ref} aria-label={copy.title.join(" ")} className="relative h-[230vh] bg-white sm:h-[250vh]">
-      <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden">
+    <section ref={ref} aria-label={copy.title.join(" ")} className="relative bg-white">
+      <div className="relative flex h-[100svh] min-h-[600px] items-center justify-center overflow-hidden">
         <motion.h2
           className="relative z-0 text-center text-[16vw] font-semibold leading-[0.9] tracking-[-0.055em] text-violet sm:text-[15vw] lg:text-[11.5rem] xl:text-[13rem]"
           style={{ scale: titleScale, opacity: titleOpacity }}

@@ -20,8 +20,7 @@ export const LogoMarquee = ({ copy }: { copy: HomeCopy["logos"] }) => (
   <section aria-label={copy.label} className="overflow-hidden bg-white pb-20 pt-6 sm:pb-28">
     <p className="mb-8 text-center text-sm font-medium text-muted-foreground">{copy.label}</p>
     <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-white to-transparent sm:w-40" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-white to-transparent sm:w-40" />
+      {/* Bez wygaszania przy krawędziach: logotypy wyjeżdżają poza ekran */}
       <div className="flex w-max animate-marquee items-center gap-14 sm:gap-20">
         {[...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS].map((item, i) =>
           item.type === "logo" ? (
