@@ -26,7 +26,7 @@ export const practiceDecisions: CaseStudy = {
   card: {
     stat: "2×",
     statLabel: "wyższy ROAS po trzech tygodniach zmian w kreacjach",
-    title: "Decyzje z mojej praktyki, gdy kampania nie idzie zgodnie z planem",
+    title: "Decyzje z mojej praktyki: kampanie, które nie szły zgodnie z planem",
     meta: "E-commerce / B2B · Meta Ads",
   },
 
