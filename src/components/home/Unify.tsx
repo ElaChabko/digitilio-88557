@@ -245,13 +245,37 @@ export const Unify = ({ copy }: { copy: HomeCopy["unify"] }) => {
   const calm = useCalmMotion();
   // Postęp animacji 0 → 1 liczony w czasie, a nie od przewijania
   const scrollYProgress = useMotionValue(0);
-  const inView = useInView(ref, { once: true, amount: 0.55 });
+  // Start dopiero, gdy sekcja wypełnia prawie cały ekran
+  const inView = useInView(ref, { amount: 0.8 });
+  // Czy sekcja jest choć trochę widoczna (do resetu po wyjściu)
+  const visible = useInView(ref, { amount: 0 });
+  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
+
+  const play = () => {
+    controlsRef.current?.stop();
+    scrollYProgress.set(0);
+    controlsRef.current = animate(scrollYProgress, 1, { duration: 6, ease: "linear", delay: 0.15 });
+  };
 
   useEffect(() => {
-    if (!inView) return;
-    const controls = animate(scrollYProgress, 1, { duration: 6, ease: "linear", delay: 0.15 });
-    return () => controls.stop();
-  }, [inView, scrollYProgress]);
+    if (inView && scrollYProgress.get() === 0) play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
+  // Po wyjściu z sekcji wracamy do stanu wejściowego, żeby przy powrocie odtworzyć animację
+  useEffect(() => {
+    if (!visible) {
+      controlsRef.current?.stop();
+      scrollYProgress.set(0);
+    }
+  }, [visible, scrollYProgress]);
+
+  useEffect(() => () => controlsRef.current?.stop(), []);
+
+  // Ruch myszką albo kliknięcie/stuknięcie po zakończeniu animacji = odtwórz od nowa
+  const replay = () => {
+    if (scrollYProgress.get() >= 1) play();
+  };
 
   const titleScale = useTransform(scrollYProgress, [0.3, 0.7], [1, 0.86]);
   const titleOpacity = useTransform(scrollYProgress, [0.5, 0.72], [1, 0.12]);
@@ -271,8 +295,14 @@ export const Unify = ({ copy }: { copy: HomeCopy["unify"] }) => {
   }
 
   return (
-    <section ref={ref} aria-label={copy.title.join(" ")} className="relative bg-white">
-      <div className="relative flex h-[100svh] min-h-[600px] items-center justify-center overflow-hidden">
+    <section
+      ref={ref}
+      aria-label={copy.title.join(" ")}
+      className="relative cursor-pointer bg-white"
+      onMouseMove={replay}
+      onClick={replay}
+    >
+      <div className="relative flex h-[100svh] min-h-[560px] items-center justify-center overflow-hidden">
         <motion.h2
           className="relative z-0 text-center text-[16vw] font-semibold leading-[0.9] tracking-[-0.055em] text-violet sm:text-[15vw] lg:text-[11.5rem] xl:text-[13rem]"
           style={{ scale: titleScale, opacity: titleOpacity }}
