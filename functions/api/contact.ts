@@ -14,6 +14,7 @@ type ContactPayload = {
   marketingConsentVersion?: string;
 
   lang?: string;
+  topic?: string;
 };
 
 const jsonResponse = (
@@ -192,13 +193,21 @@ export const onRequestPost: PagesFunction<Env> = async ({
     // Zapytania z angielskiej podstrony /en oznaczamy w temacie
     const langTag = body.lang === "en" ? "[EN] " : "";
 
+    // Temat wybrany w formularzu (np. „Strona internetowa”)
+    const safeTopic = String(body.topic || "")
+      .replace(/[\r\n]+/g, " ")
+      .trim()
+      .slice(0, 80);
+    const topicTag = safeTopic ? `[${safeTopic}] ` : "";
+
     const subject = safeCompany
-      ? `${langTag}Digitilio – new inquiry (${safeCompany})`
-      : `${langTag}Digitilio – new inquiry`;
+      ? `${langTag}${topicTag}Digitilio – new inquiry (${safeCompany})`
+      : `${langTag}${topicTag}Digitilio – new inquiry`;
 
     const text = [
       "New message from Digitilio website",
       body.lang === "en" ? "Form: English page (/en)" : null,
+      safeTopic ? `Topic: ${safeTopic}` : null,
       "",
       `Name: ${safeName || "Not provided"}`,
       `Email: ${safeEmail}`,

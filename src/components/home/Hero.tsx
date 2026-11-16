@@ -2,16 +2,18 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 import type { HomeCopy } from "@/content/home";
+import { TOPICS, type TopicId } from "@/content/topics";
 import { GradientField } from "@/components/site/GradientField";
-import { ActionButton, useCalmMotion } from "@/components/site/motion";
+import { useCalmMotion } from "@/components/site/motion";
 
 /**
- * Hero „Typografia”: samo duże hasło na środku, na płynnym fiolecie,
- * i jeden przycisk. Przy przewijaniu hasło się zmniejsza, a karta zaokrągla.
+ * Hero „Typografia”: duże hasło na środku, na płynnym fiolecie,
+ * krótko co robię i pigułki z tematami, które otwierają formularz z wybranym tematem. Przy przewijaniu hasło się zmniejsza, a karta zaokrągla.
  */
 type Props = {
   copy: HomeCopy["hero"];
-  onCta: () => void;
+  lang?: "pl" | "en";
+  onCta: (topic?: TopicId) => void;
 };
 
 const useHeroMotion = (ref: React.RefObject<HTMLElement>) => {
@@ -67,7 +69,7 @@ const Headline = ({
   </h1>
 );
 
-const HeroType = ({ copy, onCta }: Props) => {
+const HeroType = ({ copy, onCta, lang = "pl" }: Props) => {
   const ref = useRef<HTMLElement>(null);
   const m = useHeroMotion(ref);
   const textScale = useTransform(m.p, [0, 1], [1, m.calm ? 1 : 0.86]);
@@ -76,16 +78,38 @@ const HeroType = ({ copy, onCta }: Props) => {
     <Shell sectionRef={ref} scale={m.scale} radius={m.radius}>
       <motion.div
         style={{ scale: textScale, opacity: m.fade }}
-        className="relative z-10 flex min-h-[100svh] flex-1 flex-col items-center justify-center px-5 pb-28 pt-28 text-center sm:px-8 sm:pb-24"
+        className="relative z-10 flex min-h-[100svh] flex-1 flex-col items-center justify-center px-4 pb-24 pt-24 text-center sm:px-8 sm:pb-24 sm:pt-28"
       >
         <Headline
           copy={copy}
-          className="max-w-[16ch] text-[clamp(1.7rem,8.4vw,2.6rem)] font-semibold leading-[0.98] tracking-[-0.05em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[5.2rem] xl:text-[6rem]"
+          className="max-w-full text-[clamp(1.45rem,7.4vw,2.2rem)] [hyphens:manual] font-semibold leading-[0.98] tracking-[-0.05em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[4.6rem] xl:text-[5.2rem]"
         />
-        <div className="hero-fade-up mt-10" style={{ animationDelay: "0.5s" }}>
-          <ActionButton tone="white" onClick={onCta}>
-            {copy.cta}
-          </ActionButton>
+        <p
+          className="hero-fade-up mt-5 max-w-2xl text-[15px] leading-relaxed text-white/85 sm:mt-8 sm:text-xl"
+          style={{ animationDelay: "0.4s" }}
+        >
+          {copy.lead}
+        </p>
+
+        <div className="hero-fade-up mt-6 w-full max-w-3xl sm:mt-10" style={{ animationDelay: "0.55s" }}>
+          <p className="text-sm font-semibold text-white/70">{copy.topicsLabel}</p>
+          <ul className="mt-3 flex flex-wrap justify-center gap-2 sm:mt-4 sm:gap-3">
+            {TOPICS.map((topic) => (
+              <li key={topic.id}>
+                <button
+                  type="button"
+                  onClick={() => onCta(topic.id)}
+                  className="group inline-flex items-center gap-2 rounded-full bg-white/[0.12] px-3.5 py-2 text-left text-[13px] font-semibold leading-tight text-white ring-1 ring-white/25 backdrop-blur-sm transition-colors duration-300 hover:bg-white hover:text-violet sm:px-5 sm:py-3 sm:text-base"
+                >
+                  {topic[lang]}
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-white/60 sm:mt-5 sm:text-sm">{copy.note}</p>
         </div>
       </motion.div>
     </Shell>

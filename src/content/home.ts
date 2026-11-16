@@ -28,6 +28,8 @@ export type HomeCopy = {
     line2: string;
     lead: string;
     cta: string;
+    /** Nad pigułkami z tematami */
+    topicsLabel: string;
     note: string;
     scroll: string;
   };
@@ -115,9 +117,10 @@ export const homePl: HomeCopy = {
     eyebrow: "Strategia marketingowa i doradztwo",
     line1: "Mniej przypadkowych działań.",
     line2: "Więcej dobrych decyzji marketingowych.",
-    lead: "Pomagam firmom uporządkować marketing, wybrać priorytety i przełożyć strategię na działania, które da się optymalnie wdrożyć.",
+    lead: "Prowadzę social media i kampanie reklamowe, tworzę strony internetowe i porządkuję marketing tak, żeby wszystko szło w jednym kierunku.",
     cta: "Porozmawiajmy o Twojej marce",
-    note: "Bez zobowiązań • 15 min rozmowy",
+    topicsLabel: "W czym mogę pomóc?",
+    note: "Bez zobowiązań • odpowiadam w ciągu 1 dnia roboczego",
     scroll: "Przewiń",
   },
   problem: {
@@ -356,8 +359,9 @@ export const homeEn: HomeCopy = {
     eyebrow: "Marketing strategy & consulting",
     line1: "Fewer random tactics.",
     line2: "Better marketing decisions.",
-    lead: "I help B2B and B2C companies bring order to their marketing, set priorities and turn strategy into work their team can actually implement.",
+    lead: "I run social media and ad campaigns, build websites and bring order to marketing, so everything moves in one direction.",
     cta: "Tell me about your project",
+    topicsLabel: "What can I help with?",
     note: "Based in Poland (CET) · I work in English, mostly asynchronously",
     scroll: "Scroll",
   },

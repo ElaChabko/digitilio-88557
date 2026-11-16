@@ -1,3 +1,5 @@
+import { useState } from "react";
+import type { TopicId } from "@/content/topics";
 import { SEO, HOME_ALTERNATES } from "@/components/SEO";
 import { StructuredData } from "@/components/StructuredData";
 import { ContactForm } from "@/components/ContactForm";
@@ -42,6 +44,11 @@ const scrollToContact = () =>
 
 const English = () => {
   const copy = homeEn;
+  const [topic, setTopic] = useState<TopicId | null>(null);
+  const pickTopic = (picked?: TopicId) => {
+    if (picked) setTopic(picked);
+    scrollToContact();
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -56,10 +63,10 @@ const English = () => {
       <Navigation lang="en" onContact={scrollToContact} />
 
       <main>
-        <Hero copy={copy.hero} onCta={scrollToContact} />
+        <Hero copy={copy.hero} lang="en" onCta={pickTopic} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
-        <Services copy={copy.services} onCta={scrollToContact} />
+        <Services copy={copy.services} onCta={() => pickTopic("web")} />
         <Process copy={copy.process} />
         <WorkTrack copy={copy.work} />
         <LogoMarquee copy={copy.logos} />
@@ -68,7 +75,7 @@ const English = () => {
         <Benefits copy={copy.benefits} />
         <Contact copy={copy.contact}>
           <div className="rounded-[2rem] bg-white p-6 text-foreground shadow-2xl sm:p-8">
-            <ContactForm lang="en" />
+            <ContactForm lang="en" initialTopic={topic} />
           </div>
         </Contact>
       </main>

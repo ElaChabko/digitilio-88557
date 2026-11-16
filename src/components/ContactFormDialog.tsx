@@ -6,13 +6,15 @@ import {
 } from "@/components/ui/dialog";
 
 import { ContactForm } from "@/components/ContactForm";
+import type { TopicId } from "@/content/topics";
 
 interface ContactFormDialogProps {
   isOpen: boolean;
   onClose: () => void;
+  initialTopic?: TopicId | null;
 }
 
-export const ContactFormDialog = ({ isOpen, onClose }: ContactFormDialogProps) => {
+export const ContactFormDialog = ({ isOpen, onClose, initialTopic = null }: ContactFormDialogProps) => {
   return (
     <Dialog
       open={isOpen}
@@ -27,7 +29,7 @@ export const ContactFormDialog = ({ isOpen, onClose }: ContactFormDialogProps) =
         </DialogHeader>
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-6 pt-5 [-webkit-overflow-scrolling:touch]">
-          <ContactForm onSuccess={onClose} />
+          <ContactForm onSuccess={onClose} initialTopic={initialTopic} />
         </div>
       </DialogContent>
     </Dialog>

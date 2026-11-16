@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { TOPICS, topicLabel, type TopicId } from "@/content/topics";
 import { Button } from "@/components/ui/button";
 
 type Lang = "pl" | "en";
@@ -6,6 +7,8 @@ type Lang = "pl" | "en";
 type Props = {
   onSuccess?: () => void;
   lang?: Lang;
+  /** Temat wybrany wcześniej, np. pigułką w hero */
+  initialTopic?: TopicId | null;
 };
 
 const COPY = {
@@ -17,6 +20,7 @@ const COPY = {
     emailPh: "twoj@email.pl",
     company: "Firma",
     companyPh: "Nazwa firmy",
+    topic: "Czego dotyczy zapytanie?",
     message: "Wiadomość",
     messagePh: "Napisz krótko, z czym mogę Ci pomóc.",
     consent:
@@ -39,6 +43,7 @@ const COPY = {
     emailPh: "you@company.com",
     company: "Company",
     companyPh: "Company name",
+    topic: "What is it about?",
     message: "Message",
     messagePh:
       "A few sentences about your company and what you need help with.",
@@ -60,8 +65,10 @@ type Status = null | "ok" | "err";
 
 const MARKETING_CONSENT_VERSION = "2026-08-14";
 
-export const ContactForm = ({ onSuccess, lang = "pl" }: Props) => {
+export const ContactForm = ({ onSuccess, lang = "pl", initialTopic = null }: Props) => {
   const t = COPY[lang];
+  const [topic, setTopic] = useState<TopicId | null>(initialTopic);
+  useEffect(() => setTopic(initialTopic), [initialTopic]);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<Status>(null);
 
@@ -83,6 +90,8 @@ export const ContactForm = ({ onSuccess, lang = "pl" }: Props) => {
       email: String(form.get("email") || "").trim(),
       company: String(form.get("company") || "").trim(),
       message: String(form.get("message") || "").trim(),
+      topic: topicLabel(topic, "pl"),
+      lang,
 
       // Honeypot
       website: String(form.get("website") || ""),
@@ -256,6 +265,34 @@ export const ContactForm = ({ onSuccess, lang = "pl" }: Props) => {
           className="w-full rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
         />
       </div>
+
+      {/* TEMAT */}
+      <fieldset className="space-y-2">
+        <legend className="text-sm font-medium text-foreground">
+          {t.topic}{" "}
+          <span className="font-normal text-muted-foreground">{t.optional}</span>
+        </legend>
+        <div className="flex flex-wrap gap-2 pt-1">
+          {TOPICS.map((item) => {
+            const active = topic === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                aria-pressed={active}
+                onClick={() => setTopic(active ? null : item.id)}
+                className={`rounded-full border px-3.5 py-2 text-sm font-medium transition-colors ${
+                  active
+                    ? "border-violet bg-violet text-white"
+                    : "border-border bg-background text-foreground hover:border-violet/50"
+                }`}
+              >
+                {item[lang]}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
 
       {/* MESSAGE */}
       <div className="space-y-2">

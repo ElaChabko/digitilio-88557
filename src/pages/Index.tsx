@@ -1,3 +1,4 @@
+import type { TopicId } from "@/content/topics";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -25,7 +26,11 @@ import { Contact } from "@/components/home/Contact";
 const Index = () => {
   const { hash } = useLocation();
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const openContact = () => setIsContactOpen(true);
+  const [topic, setTopic] = useState<TopicId | null>(null);
+  const openContact = (picked?: TopicId) => {
+    setTopic(picked ?? null);
+    setIsContactOpen(true);
+  };
 
   // Obsługa linków typu /#services (np. otwartych w nowej karcie)
   useEffect(() => {
@@ -53,19 +58,19 @@ const Index = () => {
         <Hero copy={copy.hero} onCta={openContact} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
-        <Services copy={copy.services} onCta={openContact} />
+        <Services copy={copy.services} onCta={() => openContact("web")} />
         <Process copy={copy.process} />
         <WorkTrack copy={copy.work} />
         <LogoMarquee copy={copy.logos} />
-        <About copy={copy.about} onCta={openContact} />
+        <About copy={copy.about} onCta={() => openContact()} />
         <ForWhom copy={copy.forWhom} />
         <Benefits copy={copy.benefits} />
         <LatestArticles />
-        <Contact copy={copy.contact} onCta={openContact} />
+        <Contact copy={copy.contact} onCta={() => openContact()} />
       </main>
 
       <Footer />
-      <ContactFormDialog isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      <ContactFormDialog isOpen={isContactOpen} initialTopic={topic} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 };
