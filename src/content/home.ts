@@ -55,6 +55,8 @@ export type HomeCopy = {
     title: string;
     lead: string;
     items: { icon: ServiceIcon; title: string; description: string }[];
+    /** Strony internetowe – osobny pasek pod kartami usług */
+    web: { label: string; title: string; text: string; cta: string };
     note: string;
   };
   process: {
@@ -171,7 +173,7 @@ export const homePl: HomeCopy = {
         icon: "implementation",
         title: "Wsparcie we wdrożeniu",
         description:
-          "Gdy kierunek jest już ustalony, ale potrzebujesz pomocy w realizacji. Zakres może obejmować social media, content, kampanie, analitykę lub wykorzystanie AI.",
+          "Gdy kierunek jest już ustalony, ale potrzebujesz pomocy w realizacji. Zakres może obejmować social media, content, kampanie, stronę internetową, analitykę lub wykorzystanie AI.",
       },
       {
         icon: "support",
@@ -180,6 +182,12 @@ export const homePl: HomeCopy = {
           "Gdy potrzebujesz regularnego spojrzenia na wyniki, priorytety i bieżące decyzje bez zatrudniania senior marketing managera na pełny etat.",
       },
     ],
+    web: {
+      label: "Również",
+      title: "Strony internetowe",
+      text: "Planuję strukturę strony i przygotowuję treści, a wdrożenie realizuję ze sprawdzonym zespołem developerskim. Strategia, komunikacja i strona powstają w jednym miejscu, więc strona od początku mówi tym samym językiem co reszta marketingu.",
+      cta: "Zapytaj o stronę",
+    },
     note: "Nie wiesz, który zakres będzie właściwy? Zaczynamy od sytuacji i problemu, a nie od wyboru usługi.",
   },
   process: {
@@ -242,7 +250,7 @@ export const homePl: HomeCopy = {
     title: "Marketing znam z kilku stron stołu.",
     paragraphs: [
       "Nazywam się Ela Chabko. Łączę strategiczne spojrzenie z doświadczeniem w codziennym wdrażaniu marketingu, dzięki czemu rekomendacje oceniam nie tylko przez pryzmat tego, jak brzmią na prezentacji, ale również tego, czy firma rzeczywiście będzie w stanie je wykorzystać.",
-      "Pracuję przy strategii, komunikacji, social mediach, content marketingu, kampaniach i analityce. Korzystam również z AI i automatyzacji, ale tylko tam, gdzie pomagają usprawnić proces, poprawić jakość pracy albo podejmować decyzje na lepszej podstawie.",
+      "Pracuję przy strategii, komunikacji, social mediach, content marketingu, kampaniach, stronach internetowych i analityce. Korzystam również z AI i automatyzacji, ale tylko tam, gdzie pomagają usprawnić proces, poprawić jakość pracy albo podejmować decyzje na lepszej podstawie.",
     ],
     stats: [
       { value: "20+", label: "marek", hint: "projekty B2B i B2C" },
@@ -405,7 +413,7 @@ export const homeEn: HomeCopy = {
         icon: "implementation",
         title: "Implementation support",
         description:
-          "For when the direction is set and you need hands-on help: LinkedIn and B2B content, Meta Ads, GA4 and marketing analytics, or practical use of AI in marketing workflows.",
+          "For when the direction is set and you need hands-on help: LinkedIn and B2B content, Meta Ads, websites, GA4 and marketing analytics, or practical use of AI in marketing workflows.",
       },
       {
         icon: "support",
@@ -414,7 +422,13 @@ export const homeEn: HomeCopy = {
           "Ongoing, part-time senior marketing input: regular review of results, priorities and day-to-day decisions, without hiring a full-time marketing manager.",
       },
     ],
-    note: "Need a website or a web app as well? I work with a trusted development team, so strategy, content and build can come from one place.",
+    web: {
+      label: "Also",
+      title: "Websites",
+      text: "I plan the structure and write the content, and the build is done with a trusted development team. Strategy, messaging and the website come from one place, so the site speaks the same language as the rest of your marketing.",
+      cta: "Ask about a website",
+    },
+    note: "Not sure which scope is right? We start from your situation and the problem, not from choosing a service.",
   },
   process: {
     pill: "How we would work together",
@@ -480,7 +494,7 @@ export const homeEn: HomeCopy = {
     title: "I have seen marketing from several sides of the table.",
     paragraphs: [
       "I’m Ela Chabko, the founder of Digitilio, a one-person marketing consultancy based in Poland. I combine strategic thinking with years of day-to-day marketing execution, so I judge recommendations not by how they look in a presentation, but by whether your team can actually use them.",
-      "I work across strategy, communication, social media, content, paid campaigns and analytics, for both B2B and consumer brands. I also teach marketing in postgraduate programs and run trainings for companies.",
+      "I work across strategy, communication, social media, content, paid campaigns, websites and analytics, for both B2B and consumer brands. I also teach marketing in postgraduate programs and run trainings for companies.",
     ],
     stats: [
       { value: "20+", label: "brands", hint: "B2B and B2C projects" },

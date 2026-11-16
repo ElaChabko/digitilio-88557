@@ -53,7 +53,7 @@ const Index = () => {
         <Hero copy={copy.hero} onCta={openContact} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
-        <Services copy={copy.services} />
+        <Services copy={copy.services} onCta={openContact} />
         <Process copy={copy.process} />
         <WorkTrack copy={copy.work} />
         <LogoMarquee copy={copy.logos} />

@@ -59,7 +59,7 @@ const English = () => {
         <Hero copy={copy.hero} onCta={scrollToContact} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
-        <Services copy={copy.services} />
+        <Services copy={copy.services} onCta={scrollToContact} />
         <Process copy={copy.process} />
         <WorkTrack copy={copy.work} />
         <LogoMarquee copy={copy.logos} />
