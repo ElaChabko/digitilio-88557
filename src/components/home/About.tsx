@@ -66,9 +66,13 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
         </div>
 
         {copy.testimonials && (
-          <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-20">
+          <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-20 lg:grid-cols-3">
             {copy.testimonials.items.map((t, i) => (
-              <FadeUp key={t.author + i} delay={i * 0.1}>
+              <FadeUp
+                key={t.author + i}
+                delay={i * 0.1}
+                className={i === 2 ? "md:col-span-2 lg:col-span-1" : ""}
+              >
                 <figure
                   className={`flex h-full flex-col rounded-[2rem] p-8 sm:p-10 ${
                     t.placeholder
@@ -86,7 +90,7 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
                     {t.placeholder && <PlaceholderTag tone="light">{copy.testimonials!.tag}</PlaceholderTag>}
                   </div>
                   <blockquote
-                    className={`mt-8 text-xl leading-relaxed sm:text-2xl ${
+                    className={`mt-8 text-xl leading-relaxed sm:text-2xl lg:text-xl xl:text-[1.35rem] ${
                       t.placeholder ? "text-white/45" : "font-medium tracking-[-0.015em] text-white"
                     }`}
                   >

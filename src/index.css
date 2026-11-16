@@ -13,10 +13,13 @@ All colors MUST be HSL.
     text-size-adjust: 100%;
   }
 
-  /* Długie słowa w nagłówkach łamią się zamiast wychodzić poza ekran */
-  h1, h2, h3 {
-    overflow-wrap: break-word;
-    hyphens: auto;
+  /* Nigdzie nie dzielimy wyrazów: całe słowo przechodzi do nowej linii.
+     Rozmiary nagłówków są dobrane tak, żeby najdłuższe słowa mieściły się na wąskich ekranach. */
+  html, body, h1, h2, h3, h4, p, li, span, a, button, blockquote {
+    -webkit-hyphens: none;
+    hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   :root {

@@ -278,6 +278,12 @@ export const homePl: HomeCopy = {
           author: "Łukasz Szymczak",
           role: "Founder ID Group",
         },
+        {
+          // Cytat z referencji Vaya Medical (strona Współprace)
+          text: "Cenimy przede wszystkim dobrą organizację, terminowość, samodzielność oraz regularne rekomendacje oparte na wynikach prowadzonych działań.",
+          author: "Iwona Sierpińska",
+          role: "Co-owner Vaya Medical",
+        },
       ],
     },
   },

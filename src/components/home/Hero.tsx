@@ -82,7 +82,7 @@ const HeroType = ({ copy, onCta, lang = "pl" }: Props) => {
       >
         <Headline
           copy={copy}
-          className="max-w-full text-[clamp(1.45rem,7.4vw,2.2rem)] [hyphens:manual] font-semibold leading-[0.98] tracking-[-0.05em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[4.6rem] xl:text-[5.2rem]"
+          className="max-w-full text-[clamp(1.45rem,7.4vw,2.2rem)] font-semibold leading-[0.98] tracking-[-0.05em] sm:max-w-[20ch] sm:text-6xl lg:max-w-[22ch] lg:text-[4.6rem] xl:text-[5.2rem]"
         />
         <p
           className="hero-fade-up mt-5 max-w-2xl text-[15px] leading-relaxed text-white/85 sm:mt-8 sm:text-xl"

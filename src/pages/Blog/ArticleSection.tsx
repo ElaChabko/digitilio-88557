@@ -103,7 +103,8 @@ export const ArticleSection = ({
             );
           })()}
 
-        <div className="space-y-4 text-[17px] leading-[1.75] text-foreground/80 sm:text-lg [&_strong]:font-semibold [&_strong]:text-foreground">
+        {/* Długie adresy URL (np. w źródłach) mogą się łamać; zwykłe słowa zawsze mieszczą się w linii */}
+        <div className="space-y-4 [&_li]:[overflow-wrap:anywhere] [&_p]:[overflow-wrap:anywhere] text-[17px] leading-[1.75] text-foreground/80 sm:text-lg [&_strong]:font-semibold [&_strong]:text-foreground">
           {section.blocks.map((block, i) => {
             switch (block.type) {
               case "paragraph":

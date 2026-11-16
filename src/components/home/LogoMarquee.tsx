@@ -2,7 +2,7 @@ import type { HomeCopy } from "@/content/home";
 
 /**
  * Przesuwający się pasek logotypów.
- * Ideo Force i ID Group – marki opublikowane na stronie Współprace.
+ * Logotypy marek, z którymi współpracowałam (wersje jednokolorowe *-mono.png).
  * Pozostałe pozycje to PLACEHOLDERY: dodaj plik do public/logos i wpisz go na listę.
  */
 type LogoItem = { type: "logo"; name: string; src: string; size?: string } | { type: "placeholder" };
@@ -11,9 +11,8 @@ const LOGOS: LogoItem[] = [
   { type: "logo", name: "Ideo Force", src: "/logos/ideo-force.svg" },
   // Logo pionowe, więc wyższe, żeby optycznie było równe z poziomymi
   { type: "logo", name: "ID Group", src: "/logos/id-group-mono.png", size: "h-12 sm:h-14" },
-  { type: "placeholder" },
-  { type: "placeholder" },
-  { type: "placeholder" },
+  { type: "logo", name: "Vaya Medical", src: "/logos/vaya-medical-mono.png", size: "h-9 sm:h-10" },
+  { type: "logo", name: "Neuraspark", src: "/logos/neuraspark-mono.png", size: "h-7 sm:h-8" },
   { type: "placeholder" },
 ];
 

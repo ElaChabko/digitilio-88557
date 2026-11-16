@@ -156,7 +156,7 @@ export default function CaseStudy() {
                       index === 0 ? "bg-violet text-white" : "bg-lilac-soft",
                     ].join(" ")}
                   >
-                    <p className={`whitespace-nowrap text-4xl font-semibold tracking-[-0.045em] lg:text-[2.7rem] xl:text-5xl ${index === 0 ? "text-white" : "text-violet"}`}>
+                    <p className={`whitespace-nowrap text-4xl font-semibold tracking-[-0.045em] lg:text-[2.1rem] xl:text-[2.6rem] 2xl:text-5xl ${index === 0 ? "text-white" : "text-violet"}`}>
                       <CountUp value={result.value} />
                     </p>
 
@@ -281,7 +281,7 @@ export default function CaseStudy() {
 
                           <h2
                             className={[
-                              "mt-5 max-w-md text-3xl font-semibold leading-tight tracking-[-0.035em] [hyphens:manual] [overflow-wrap:normal] sm:text-4xl",
+                              "mt-5 max-w-md text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl",
                               isDark ? "text-white" : "text-foreground",
                             ].join(" ")}
                           >

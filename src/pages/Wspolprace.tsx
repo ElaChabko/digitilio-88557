@@ -205,7 +205,7 @@ export default function Wspolprace() {
                           </div>
 
                           {results.length > 0 && (
-                            <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-violet/15 pt-8 transition-colors duration-500 group-hover:border-white/20 sm:grid-cols-3 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                            <div className="grid grid-cols-1 gap-x-6 gap-y-6 border-t border-violet/15 pt-8 transition-colors duration-500 group-hover:border-white/20 md:grid-cols-3 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
                               {results.map((result, resultIndex) => (
                                 <div
                                   key={`${caseStudy.slug}-${result.value}-${resultIndex}`}
