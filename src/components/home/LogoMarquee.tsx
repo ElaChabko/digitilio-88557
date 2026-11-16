@@ -13,7 +13,7 @@ const LOGOS: LogoItem[] = [
   { type: "logo", name: "ID Group", src: "/logos/id-group-mono.png", size: "h-12 sm:h-14" },
   { type: "logo", name: "Vaya Medical", src: "/logos/vaya-medical-mono.png", size: "h-9 sm:h-10" },
   { type: "logo", name: "Neuraspark", src: "/logos/neuraspark-mono.png", size: "h-7 sm:h-8" },
-  { type: "placeholder" },
+  { type: "logo", name: "PW Krystian", src: "/logos/krystian-mono.png", size: "h-5 sm:h-6" },
 ];
 
 export const LogoMarquee = ({ copy }: { copy: HomeCopy["logos"] }) => (
