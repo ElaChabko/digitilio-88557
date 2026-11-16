@@ -4,20 +4,30 @@ import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react";
 import type { HomeCopy, WorkItem } from "@/content/home";
 import { Pill, PlaceholderTag } from "@/components/site/motion";
 
-const Card = ({ item, placeholderTag }: { item: WorkItem; placeholderTag: string }) => {
+const CASE_TONES = ["bg-violet", "bg-plum", "bg-indigo"];
+
+const Card = ({ item, placeholderTag, index }: { item: WorkItem; placeholderTag: string; index: number }) => {
   const shell =
     "relative flex min-h-[400px] w-[78vw] max-w-[340px] shrink-0 flex-col overflow-hidden rounded-[2rem] p-7 lg:min-h-[440px] lg:w-full lg:max-w-none";
 
   if (item.type === "case") {
     return (
-      <Link to={item.href} className={`group ${shell} bg-violet text-white`}>
+      <Link to={item.href} className={`group ${shell} ${CASE_TONES[index % CASE_TONES.length]} text-white`}>
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border border-white/15" aria-hidden="true" />
         <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full border border-white/15" aria-hidden="true" />
         <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-lilac/25 blur-3xl" aria-hidden="true" />
         <span className="relative text-sm font-medium text-white/75">Case study</span>
         <div className="relative mt-auto">
-          <p className="text-[clamp(1.7rem,8vw,2.25rem)] font-semibold tracking-[-0.05em] xl:text-5xl">{item.stat}</p>
-          <p className="mt-2 text-base text-white/80">{item.statLabel}</p>
+          {item.stat ? (
+            <>
+              <p className="text-[clamp(1.7rem,8vw,2.25rem)] font-semibold tracking-[-0.05em] xl:text-5xl">{item.stat}</p>
+              <p className="mt-2 max-w-[24ch] text-base text-white/80">{item.statLabel}</p>
+            </>
+          ) : (
+            <p className="max-w-[12ch] text-[clamp(1.7rem,8vw,2.25rem)] font-semibold leading-[1.02] tracking-[-0.045em] xl:text-[2.6rem]">
+              {item.headline}
+            </p>
+          )}
           <div className="mt-8 flex items-end justify-between gap-4 border-t border-white/20 pt-5">
             <div>
               <h3 className="text-lg font-semibold leading-snug">{item.title}</h3>
@@ -78,10 +88,10 @@ export const WorkTrack = ({ copy }: { copy: HomeCopy["work"] }) => (
     </div>
 
     <div className="mx-auto mt-10 max-w-[1400px] lg:px-12">
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:px-8 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:px-8 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
         {copy.items.map((item, i) => (
           <div key={i} className="snap-start">
-            <Card item={item} placeholderTag={copy.placeholderTag} />
+            <Card item={item} placeholderTag={copy.placeholderTag} index={i} />
           </div>
         ))}
       </div>

@@ -23,6 +23,13 @@ export const practiceDecisions: CaseStudy = {
   seoDescription:
     "Pięć sytuacji z kampanii Meta Ads i komunikacji w social media: co się działo, jaką decyzję podjęłam i dlaczego.",
 
+  card: {
+    stat: "2×",
+    statLabel: "wyższy ROAS po trzech tygodniach zmian w kreacjach",
+    title: "Decyzje z mojej praktyki, gdy kampania nie idzie zgodnie z planem",
+    meta: "E-commerce / B2B · Meta Ads",
+  },
+
   results: [
     {
       value: "2×",

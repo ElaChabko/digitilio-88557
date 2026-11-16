@@ -117,5 +117,16 @@ export type CaseStudy = {
 
   results: CaseStudyStat[];
 
+  /** Karta w sekcji „Wybrane realizacje” na stronie głównej */
+  card: {
+    title: string;
+    meta: string;
+    /** Duża liczba na karcie; bez niej karta pokazuje hasło */
+    stat?: string;
+    statLabel?: string;
+    /** Hasło zamiast liczby (gdy case study nie ma wyników liczbowych) */
+    headline?: string;
+  };
+
   sections: CaseStudySection[];
 };

@@ -24,6 +24,13 @@ export const metaAdsLocalBusiness: CaseStudy = {
   seoDescription:
     "Jak w okresie współpracy profil Facebooka urósł z 443 do 1830 obserwujących, a dane z kampanii Meta Ads wpływały na kolejne decyzje budżetowe.",
 
+  card: {
+    stat: "443 → 1830",
+    statLabel: "obserwujących na Facebooku",
+    title: "Meta Ads dla lokalnego gabinetu specjalistycznego",
+    meta: "Usługi lokalne · Meta Ads",
+  },
+
   results: [
     {
       value: "443 → 1830",

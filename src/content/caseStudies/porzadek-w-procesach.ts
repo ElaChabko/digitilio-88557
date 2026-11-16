@@ -23,6 +23,12 @@ export const processOrder: CaseStudy = {
   seoDescription:
     "Jak w czasie rotacji w zespole ustawiłam proces pracy: od dobrze rozpisanego zadania, przez jasne zasady startu i blokerów, po e-mail marketing oparty na aktywnych kontaktach.",
 
+  card: {
+    headline: "Od zadania do publikacji",
+    title: "Porządek w marketingu w czasie rotacji zespołu",
+    meta: "Procesy marketingowe · Zespół",
+  },
+
   results: [],
 
   sections: [

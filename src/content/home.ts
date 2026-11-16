@@ -5,6 +5,8 @@
  * oznaczone komentarzem „NOWE”.
  */
 
+import { featuredCaseStudies } from "@/content/caseStudies";
+
 export type ServiceIcon = "diagnosis" | "strategy" | "implementation" | "support";
 export type StepIcon = "search" | "priority" | "plan" | "rocket";
 
@@ -12,8 +14,9 @@ export type WorkItem =
   | {
       type: "case";
       href: string;
-      stat: string;
-      statLabel: string;
+      stat?: string;
+      statLabel?: string;
+      headline?: string;
       title: string;
       meta: string;
     }
@@ -233,19 +236,12 @@ export const homePl: HomeCopy = {
     allLabel: "Wszystkie współprace",
     allHref: "/wspolprace",
     placeholderTag: "Zdjęcie realizacji",
-    items: [
-      {
-        type: "case",
-        href: "/wspolprace/meta-ads-lokalny-biznes",
-        stat: "443 → 1830",
-        statLabel: "obserwujących na Facebooku",
-        title: "Meta Ads dla lokalnego gabinetu specjalistycznego",
-        meta: "Usługi lokalne · Meta Ads",
-      },
-      { type: "placeholder", title: "Strategia contentu i LinkedIn", meta: "Technologia B2B / SaaS" },
-      { type: "placeholder", title: "Komunikacja i social media", meta: "Marka produktowa" },
-      { type: "placeholder", title: "Meta Ads i analityka", meta: "E-commerce" },
-    ],
+    // Karty budowane z wybranych case studies (src/content/caseStudies/index.ts)
+    items: featuredCaseStudies().map((c) => ({
+      type: "case" as const,
+      href: `/wspolprace/${c.slug}`,
+      ...c.card,
+    })),
   },
   logos: { label: "Współpracowałam z markami", placeholder: "Logo klienta" },
   about: {
