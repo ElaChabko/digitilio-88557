@@ -90,7 +90,7 @@ export const systemsCopy = {
 
   hero: {
     pill: "Systemy dla firm",
-    title: "Technologia, która pracuje na Twój biznes.",
+    title: "Systemy, które pracują na Twój biznes.",
     lead: "Projektujemy i wdrażamy aplikacje, automatyzacje i systemy na miarę, a potem dbamy, żeby działały bezpiecznie i bez przerw.",
     highlight:
       "Marketing i technologia w jednym miejscu. Nie musisz tłumaczyć agencji, co robi programista, ani odwrotnie.",

@@ -21,23 +21,34 @@ const BLOBS: Blob[] = [
   { color: "hsl(285 90% 88% / 0.35)", size: "30vmax", left: "70%", top: "40%", path: "gf-4", duration: "17s", delay: "-4s" },
 ];
 
+const SYS_BLOBS: Blob[] = [
+  { color: "hsl(232 85% 72% / 0.45)", size: "58vmax", left: "48%", top: "-24%", path: "gf-1", duration: "19s", delay: "0s" },
+  { color: "hsl(262 70% 70% / 0.35)", size: "46vmax", left: "-14%", top: "42%", path: "gf-2", duration: "23s", delay: "-6s" },
+  { color: "hsl(205 80% 70% / 0.28)", size: "44vmax", left: "30%", top: "55%", path: "gf-3", duration: "27s", delay: "-11s" },
+  { color: "hsl(240 90% 86% / 0.3)", size: "30vmax", left: "70%", top: "40%", path: "gf-4", duration: "17s", delay: "-4s" },
+];
+
 export const GradientField = ({
   className = "",
   tone = "violet",
 }: {
   className?: string;
-  tone?: "violet" | "deep";
+  /** violet = marketing / marka, deep = ciemne sekcje, sys = Systemy dla firm */
+  tone?: "violet" | "deep" | "sys";
 }) => {
   const calm = useCalmMotion();
   const base =
     tone === "deep"
       ? "linear-gradient(160deg, hsl(262 44% 17%) 0%, hsl(263 42% 24%) 100%)"
-      : "linear-gradient(155deg, hsl(262 46% 28%) 0%, hsl(264 46% 36%) 55%, hsl(268 46% 42%) 100%)";
+      : tone === "sys"
+        ? "linear-gradient(155deg, hsl(250 46% 12%) 0%, hsl(247 44% 22%) 55%, hsl(244 46% 32%) 100%)"
+        : "linear-gradient(155deg, hsl(262 46% 28%) 0%, hsl(264 46% 36%) 55%, hsl(268 46% 42%) 100%)";
+  const blobs = tone === "sys" ? SYS_BLOBS : BLOBS;
 
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
       <div className="absolute inset-0" style={{ background: base }} />
-      {BLOBS.map((b, i) => (
+      {blobs.map((b, i) => (
         <span
           key={i}
           className="absolute rounded-full will-change-transform"

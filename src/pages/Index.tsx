@@ -10,20 +10,23 @@ import { ContactFormDialog } from "@/components/ContactFormDialog";
 import { LatestArticles } from "@/components/LatestArticles";
 import { digitilioSiteSchema } from "@/lib/structuredData";
 import { homePl } from "@/content/home";
+import { hub } from "@/content/hub";
+import { REALIZATIONS_PATH, featuredRealizations } from "@/content/realizations";
 
 import { Hero } from "@/components/home/Hero";
-import { Problem } from "@/components/home/Problem";
-import { Unify } from "@/components/home/Unify";
-import { Services } from "@/components/home/Services";
-import { Process } from "@/components/home/Process";
+import { OnePartner } from "@/components/home/OnePartner";
+import { Pillars } from "@/components/home/Pillars";
 import { WorkTrack } from "@/components/home/WorkTrack";
-import { SystemsBand } from "@/components/home/SystemsBand";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { About } from "@/components/home/About";
-import { ForWhom } from "@/components/home/ForWhom";
-import { Benefits } from "@/components/home/Benefits";
 import { Contact } from "@/components/home/Contact";
 
+/**
+ * Strona główna = rozdroże dwóch filarów:
+ * hero z dwojgiem drzwi → dlaczego jedno miejsce → dwa filary →
+ * realizacje z obu → marki i opinie → O Digitilio → wiedza → kontakt.
+ * Szczegóły marketingu są na /marketing, systemów na /systemy-dla-firm.
+ */
 const Index = () => {
   const { hash } = useLocation();
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -33,7 +36,7 @@ const Index = () => {
     setIsContactOpen(true);
   };
 
-  // Obsługa linków typu /#services (np. otwartych w nowej karcie)
+  // Obsługa linków typu /#about (np. otwartych w nowej karcie)
   useEffect(() => {
     if (!hash) return;
     const timer = window.setTimeout(() => {
@@ -46,29 +49,25 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO
-        title="Strategia marketingowa i doradztwo | Digitilio"
-        description="Pomagam firmom uporządkować marketing, ustalić priorytety i przełożyć strategię na działania, które da się realnie wdrożyć."
-        canonical="https://digitilio.pl/"
-        alternates={HOME_ALTERNATES}
-      />
+      <SEO title={hub.seoTitle} description={hub.seoDescription} canonical="https://digitilio.pl/" alternates={HOME_ALTERNATES} />
       <StructuredData data={digitilioSiteSchema} />
       <Navigation />
 
       <main>
-        <Hero copy={copy.hero} onCta={openContact} />
-        <Problem copy={copy.problem} />
-        <Unify copy={copy.unify} />
-        <Services copy={copy.services} />
-        <SystemsBand />
-        <Process copy={copy.process} />
-        <WorkTrack copy={copy.work} />
+        <Hero copy={copy.hero} onCta={openContact} doors={hub.doors} doorsHelp={hub.doorsHelp} />
+        <OnePartner {...hub.partner} />
+        <Pillars {...hub.pillars} />
+        <WorkTrack
+          pill={hub.work.pill}
+          title={hub.work.title}
+          items={featuredRealizations()}
+          allHref={REALIZATIONS_PATH}
+          allLabel={hub.work.allLabel}
+        />
         <LogoMarquee copy={copy.logos} />
         <About copy={copy.about} onCta={() => openContact()} />
-        <ForWhom copy={copy.forWhom} />
-        <Benefits copy={copy.benefits} />
         <LatestArticles />
-        <Contact copy={copy.contact} onCta={() => openContact()} />
+        <Contact copy={hub.contact} onCta={() => openContact()} />
       </main>
 
       <Footer />

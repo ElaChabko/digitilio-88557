@@ -39,6 +39,12 @@ All colors MUST be HSL.
     --orchid: 288 42% 56%;
     --indigo: 248 46% 56%;
 
+    /* Filar „Systemy dla firm”: chłodniejszy indygo obok fioletu marketingu */
+    --sys: 246 48% 52%;          /* akcent, etykiety */
+    --sys-deep: 248 44% 15%;     /* tło sekcji */
+    --sys-soft: 240 60% 96%;     /* jasne karty */
+    --sys-light: 232 80% 82%;    /* akcent na ciemnym tle */
+
     --card: 0 0% 100%;
     --card-foreground: 260 18% 8%;
 

@@ -11,18 +11,21 @@ export const Contact = ({
   copy,
   onCta,
   children,
+  tone = "violet",
 }: {
   copy: HomeCopy["contact"];
   onCta?: () => void;
   /** Np. formularz na stronie /en zamiast przycisku */
   children?: ReactNode;
+  /** Kolor filaru: violet = marketing/marka, sys = Systemy dla firm */
+  tone?: "violet" | "sys";
 }) => {
   return (
     <section
       id="contact"
       className="relative scroll-mt-0 overflow-hidden px-5 py-24 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32"
     >
-      <GradientField />
+      <GradientField tone={tone} />
 
       <div className="relative mx-auto max-w-[1400px]">
         <Pill tone="light">{copy.pill}</Pill>

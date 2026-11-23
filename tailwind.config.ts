@@ -37,6 +37,12 @@ export default {
         plum: "hsl(var(--plum))",
         orchid: "hsl(var(--orchid))",
         indigo: "hsl(var(--indigo))",
+        sys: {
+          DEFAULT: "hsl(var(--sys))",
+          deep: "hsl(var(--sys-deep))",
+          soft: "hsl(var(--sys-soft))",
+          light: "hsl(var(--sys-light))",
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

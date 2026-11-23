@@ -162,11 +162,11 @@ Kontakt: elachabko@digitilio.pl · LinkedIn: https://www.linkedin.com/in/ela-cha
 
 ## Główne strony
 
-${pick((r) => ["/", "/wspolprace", "/baza-wiedzy"].includes(r))}
+${pick((r) => ["/", "/marketing", "/systemy-dla-firm", "/realizacje", "/baza-wiedzy"].includes(r))}
 
 ## Case studies
 
-${pick((r) => r.startsWith("/wspolprace/"))}
+${pick((r) => r.startsWith("/realizacje/") || r.startsWith("/systemy-dla-firm/"))}
 
 ## Artykuły
 

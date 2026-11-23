@@ -7,28 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { SEO } from "@/components/SEO";
-import { caseStudies } from "@/content/caseStudies";
+import { PILLARS, realizations, realizationsFor, type Pillar } from "@/content/realizations";
 import { StructuredData } from "@/components/StructuredData";
 import { createCollectionSchema } from "@/lib/structuredData";
 import { PageHero } from "@/components/site/PageHero";
-import { Pill } from "@/components/site/motion";
-
-const getCaseStudyMeta = (scope: string, industry: string) => {
-  const mainScope = scope
-    .split(",")[0]
-    ?.trim()
-    .replace(/^strategia\s+/i, "");
-
-  const mainIndustry = industry.split("/")[0]?.trim();
-
-  return [mainScope, mainIndustry].filter(Boolean).join(" · ");
-};
-
-const getCaseStudyExcerpt = (lead: string) => {
-  const firstSentence = lead.match(/^[^.!?]+[.!?]/);
-
-  return firstSentence ? firstSentence[0].trim() : lead;
-};
+import { Pill, PlaceholderTag } from "@/components/site/motion";
 
 type Reference = {
   id: string;
@@ -91,7 +74,17 @@ const references: Reference[] = [
   },
 ];
 
-export default function Wspolprace() {
+type Filter = "all" | Pillar;
+const FILTERS: { id: Filter; label: string }[] = [
+  { id: "all", label: "Wszystkie" },
+  { id: "marketing", label: "Marketing" },
+  { id: "systems", label: "Systemy dla firm" },
+];
+
+export default function Realizacje() {
+  const [filter, setFilter] = useState<Filter>("all");
+  const visible = filter === "all" ? realizations : realizationsFor(filter);
+
   const [activeReference, setActiveReference] = useState<string | null>(
     null
   );
@@ -127,20 +120,20 @@ export default function Wspolprace() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Współprace i case studies | Digitilio"
-        description="Wybrane projekty Digitilio pokazujące, jak strategia, dane i decyzje przekładają się na konkretne działania marketingowe."
-        canonical="https://digitilio.pl/wspolprace"
+        title="Realizacje: marketing i systemy dla firm | Digitilio"
+        description="Case studies marketingowe i przykłady systemów Digitilio: efekty, decyzje, które do nich prowadziły, i działające narzędzia do przetestowania."
+        canonical="https://digitilio.pl/realizacje"
       />
 
       <StructuredData
         data={createCollectionSchema({
-          name: "Współprace i case studies Digitilio",
+          name: "Realizacje Digitilio",
           description:
-            "Wybrane projekty pokazujące, jak strategia, dane i decyzje przekładają się na konkretne działania marketingowe.",
-          url: "https://digitilio.pl/wspolprace",
-          items: caseStudies.map((caseStudy) => ({
-            name: caseStudy.title,
-            url: `https://digitilio.pl/wspolprace/${caseStudy.slug}`,
+            "Case studies marketingowe i przykłady systemów dla firm.",
+          url: "https://digitilio.pl/realizacje",
+          items: realizations.map((item) => ({
+            name: item.longTitle,
+            url: `https://digitilio.pl${item.href}`,
           })),
         })}
       />
@@ -149,84 +142,116 @@ export default function Wspolprace() {
 
       <main>
         <PageHero
-          pill="Współprace"
-          title="Wybrane współprace i case studies"
-          lead="Pokazuję nie tylko efekty działań, ale również decyzje, które do nich prowadziły - co analizowaliśmy, co zmienialiśmy i dlaczego."
+          pill="Realizacje"
+          title="Efekty, decyzje i działające systemy"
+          lead="Case studies z marketingu pokazują nie tylko wyniki, ale też decyzje, które do nich prowadziły. Przykłady systemów można otworzyć i sprawdzić samemu."
         />
 
-        {/* CASE STUDIES */}
+        {/* REALIZACJE: filtr + lista z obu filarów */}
         <section className="px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-          <div>
-            <div className="mx-auto max-w-[1400px]">
-              <Pill className="mb-10">Case studies</Pill>
+          <div className="mx-auto max-w-[1400px]">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filtr realizacji">
+              {FILTERS.map((f) => {
+                const active = filter === f.id;
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setFilter(f.id)}
+                    className={`min-h-[44px] rounded-full border px-5 text-sm font-semibold transition-colors ${
+                      active
+                        ? f.id === "systems"
+                          ? "border-sys-deep bg-sys-deep text-white"
+                          : "border-violet bg-violet text-white"
+                        : "border-violet/20 text-violet hover:border-violet/50"
+                    }`}
+                  >
+                    {f.label}
+                    <span className="ml-2 tabular-nums opacity-60">
+                      {f.id === "all" ? realizations.length : realizationsFor(f.id).length}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-              <div className="space-y-6">
-                {caseStudies.map((caseStudy, caseIndex) => {
-                  const results = caseStudy.results.slice(0, 3);
-
-                  return (
-                    <Link
-                      key={caseStudy.slug}
-                      to={`/wspolprace/${caseStudy.slug}`}
-                      className="group block"
+            <div className="mt-10 space-y-6">
+              {visible.map((item, index) => {
+                const sys = item.pillar === "systems";
+                return (
+                  <Link key={item.href} to={item.href} className="group block">
+                    <motion.article
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.65, delay: Math.min(index, 3) * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                      className={`relative overflow-hidden rounded-[2.2rem] p-7 transition-colors duration-500 sm:p-10 lg:p-14 ${
+                        sys ? "bg-sys-soft group-hover:bg-sys-deep" : "bg-lilac-soft group-hover:bg-violet"
+                      }`}
                     >
-                      <motion.article
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.15 }}
-                        transition={{
-                          duration: 0.65,
-                          delay: caseIndex * 0.06,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className="relative overflow-hidden rounded-[2.2rem] bg-lilac-soft p-7 transition-colors duration-500 group-hover:bg-violet sm:p-10 lg:p-14"
-                      >
-                        <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-16">
-                          <div>
-                            <p className="mb-4 text-sm font-medium text-violet transition-colors duration-500 group-hover:text-lilac">
-                              {getCaseStudyMeta(
-                                caseStudy.scope,
-                                caseStudy.industry
-                              )}
-                            </p>
-
-                            <h2 className="max-w-4xl text-[1.8rem] font-semibold leading-[1.08] tracking-[-0.035em] text-foreground transition-colors duration-500 group-hover:text-white sm:text-4xl lg:text-[2.8rem]">
-                              {caseStudy.title}
-                            </h2>
-
-                            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-white/80">
-                              {getCaseStudyExcerpt(caseStudy.lead)}
-                            </p>
-
-                            <div className="mt-8 flex items-center gap-2 font-semibold text-violet transition-colors duration-500 group-hover:text-white">
-                              <span>Zobacz case study</span>
-                              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                            </div>
+                      <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-16">
+                        <div>
+                          <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+                            <span
+                              className={`rounded-full px-3 py-1 text-xs font-semibold text-white transition-colors duration-500 ${
+                                sys ? "bg-sys group-hover:bg-sys-light/25" : "bg-violet group-hover:bg-white/20"
+                              }`}
+                            >
+                              {PILLARS[item.pillar].label}
+                            </span>
+                            <span
+                              className={`text-sm font-medium transition-colors duration-500 group-hover:text-white/75 ${
+                                sys ? "text-sys" : "text-violet"
+                              }`}
+                            >
+                              {item.meta}
+                            </span>
                           </div>
 
-                          {results.length > 0 && (
-                            <div className="grid grid-cols-1 gap-x-6 gap-y-6 border-t border-violet/15 pt-8 transition-colors duration-500 group-hover:border-white/20 md:grid-cols-3 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-                              {results.map((result, resultIndex) => (
-                                <div
-                                  key={`${caseStudy.slug}-${result.value}-${resultIndex}`}
-                                >
-                                  <p className="whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] text-violet transition-colors duration-500 group-hover:text-white sm:text-4xl">
-                                    {result.value}
-                                  </p>
+                          <h2 className="max-w-4xl text-[1.8rem] font-semibold leading-[1.08] tracking-[-0.035em] text-foreground transition-colors duration-500 group-hover:text-white sm:text-4xl lg:text-[2.8rem]">
+                            {item.longTitle}
+                          </h2>
 
-                                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-white/70">
-                                    {result.label}
-                                  </p>
-                                </div>
-                              ))}
+                          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-white/80">
+                            {item.excerpt}
+                          </p>
+
+                          {item.draft && (
+                            <div className="mt-5">
+                              <PlaceholderTag>Treść robocza</PlaceholderTag>
                             </div>
                           )}
+
+                          <div
+                            className={`mt-8 flex items-center gap-2 font-semibold transition-colors duration-500 group-hover:text-white ${
+                              sys ? "text-sys" : "text-violet"
+                            }`}
+                          >
+                            <span>{item.cta}</span>
+                            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                          </div>
                         </div>
-                      </motion.article>
-                    </Link>
-                  );
-                })}
-              </div>
+
+                        {item.results.length > 0 && (
+                          <div className="grid grid-cols-1 gap-x-6 gap-y-6 border-t border-violet/15 pt-8 transition-colors duration-500 group-hover:border-white/20 md:grid-cols-3 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                            {item.results.map((result, resultIndex) => (
+                              <div key={`${item.href}-${resultIndex}`}>
+                                <p className="whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] text-violet transition-colors duration-500 group-hover:text-white sm:text-4xl">
+                                  {result.value}
+                                </p>
+                                <p className="mt-2 text-sm leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-white/70">
+                                  {result.label}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </motion.article>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

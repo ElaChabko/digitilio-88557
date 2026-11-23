@@ -8,13 +8,15 @@ import {
   Routes,
   Route,
   Navigate,
+  useParams,
 } from "react-router-dom";
 
 import Index from "./pages/Index";
 import English from "./pages/English";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/Blog/BlogPost";
-import Wspolprace from "./pages/Wspolprace";
+import Realizacje from "./pages/Realizacje";
+import Marketing from "./pages/Marketing";
 import CaseStudy from "./pages/CaseStudies/CaseStudy";
 import Systems from "./pages/Systems";
 import SystemExamplePage from "./pages/SystemExamplePage";
@@ -32,6 +34,12 @@ const queryClient = new QueryClient();
  * Trasy aplikacji – używane zarówno w przeglądarce (BrowserRouter),
  * jak i przy prerenderingu (StaticRouter w entry-server.tsx).
  */
+/** /wspolprace/:slug → /realizacje/:slug */
+const LegacyCaseStudyRedirect = () => {
+  const { slug } = useParams();
+  return <Navigate to={`/realizacje/${slug ?? ""}`} replace />;
+};
+
 export const AppRoutes = () => (
   <>
     <ScrollToTop />
@@ -56,8 +64,16 @@ export const AppRoutes = () => (
       <Route path="/blog/:slug" element={<BlogPost />} />
 
       {/* WSPÓŁPRACE */}
-      <Route path="/wspolprace" element={<Wspolprace />} />
-      <Route path="/wspolprace/:slug" element={<CaseStudy />} />
+      {/* MARKETING (filar 1) */}
+      <Route path="/marketing" element={<Marketing />} />
+
+      {/* REALIZACJE: case studies marketingowe + przykłady systemów */}
+      <Route path="/realizacje" element={<Realizacje />} />
+      <Route path="/realizacje/:slug" element={<CaseStudy />} />
+
+      {/* STARE ADRESY WSPÓŁPRAC (na serwerze też 301 w public/_redirects) */}
+      <Route path="/wspolprace" element={<Navigate to="/realizacje" replace />} />
+      <Route path="/wspolprace/:slug" element={<LegacyCaseStudyRedirect />} />
 
       {/* SYSTEMY DLA FIRM (drugi filar: aplikacje, automatyzacje, AI) */}
       <Route path="/systemy-dla-firm" element={<Systems />} />

@@ -24,11 +24,11 @@ type Lang = "pl" | "en";
 
 const ITEMS: Record<Lang, NavItem[]> = {
   pl: [
-    { label: "Marketing", type: "section", id: "services" },
+    { label: "Marketing", type: "route", path: "/marketing" },
     { label: "Systemy dla firm", type: "route", path: "/systemy-dla-firm" },
-    { label: "Współprace", type: "route", path: "/wspolprace" },
-    { label: "O mnie", type: "section", id: "about" },
+    { label: "Realizacje", type: "route", path: "/realizacje" },
     { label: "Baza wiedzy", type: "route", path: "/baza-wiedzy" },
+    { label: "O Digitilio", type: "section", id: "about" },
   ],
   en: [
     { label: "Services", type: "section", id: "services" },

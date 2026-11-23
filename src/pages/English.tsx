@@ -13,7 +13,7 @@ import { Problem } from "@/components/home/Problem";
 import { Unify } from "@/components/home/Unify";
 import { Services } from "@/components/home/Services";
 import { Process } from "@/components/home/Process";
-import { WorkTrack } from "@/components/home/WorkTrack";
+import { WorkTrackText } from "@/components/home/WorkTrackText";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { About } from "@/components/home/About";
 import { ForWhom } from "@/components/home/ForWhom";
@@ -68,7 +68,7 @@ const English = () => {
         <Unify copy={copy.unify} />
         <Services copy={copy.services} onCta={() => pickTopic("web")} />
         <Process copy={copy.process} />
-        <WorkTrack copy={copy.work} />
+        <WorkTrackText copy={copy.work} />
         <LogoMarquee copy={copy.logos} />
         <About copy={copy.about} onCta={scrollToContact} />
         <ForWhom copy={copy.forWhom} />

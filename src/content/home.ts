@@ -234,22 +234,23 @@ export const homePl: HomeCopy = {
     title: "Projekty, które przyniosły efekty.",
     lead: "Przewiń, żeby zobaczyć kolejne projekty.",
     allLabel: "Wszystkie współprace",
-    allHref: "/wspolprace",
+    allHref: "/realizacje",
     placeholderTag: "Zdjęcie realizacji",
     // Karty budowane z wybranych case studies (src/content/caseStudies/index.ts)
     items: featuredCaseStudies().map((c) => ({
       type: "case" as const,
-      href: `/wspolprace/${c.slug}`,
+      href: `/realizacje/${c.slug}`,
       ...c.card,
     })),
   },
   logos: { label: "Współpracowałam z markami", placeholder: "Logo klienta" },
   about: {
-    pill: "O mnie",
+    pill: "O Digitilio",
     title: "Marketing znam z kilku stron stołu.",
     paragraphs: [
       "Nazywam się Ela Chabko. Łączę strategiczne spojrzenie z doświadczeniem w codziennym wdrażaniu marketingu, dzięki czemu rekomendacje oceniam nie tylko przez pryzmat tego, jak brzmią na prezentacji, ale również tego, czy firma rzeczywiście będzie w stanie je wykorzystać.",
       "Pracuję przy strategii, komunikacji, social mediach, content marketingu, kampaniach, stronach internetowych i analityce. Korzystam również z AI i automatyzacji, ale tylko tam, gdzie pomagają usprawnić proces, poprawić jakość pracy albo podejmować decyzje na lepszej podstawie.",
+      "Systemy dla firm dostarczam razem z zespołem technologicznym z 15-letnim doświadczeniem w IT. Ja pilnuję, żeby technologia pracowała na cele firmy i marketing, a zespół, żeby działała bezpiecznie i bez przerw.",
     ],
     stats: [
       { value: "20+", label: "marek", hint: "projekty B2B i B2C" },

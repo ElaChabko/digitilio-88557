@@ -15,7 +15,7 @@ import { track } from "@/lib/track";
 const c = systemsCopy.example;
 
 const SectionTitle = ({ children }: { children: string }) => (
-  <h2 className="text-[1.9rem] font-semibold leading-[1.05] tracking-[-0.04em] text-violet sm:text-4xl lg:text-5xl">
+  <h2 className="text-[1.9rem] font-semibold leading-[1.05] tracking-[-0.04em] text-sys-deep sm:text-4xl lg:text-5xl">
     {children}
   </h2>
 );
@@ -46,7 +46,7 @@ const SystemExamplePage = () => {
       <main>
         {/* 1. NAGŁÓWEK */}
         <section className="relative overflow-hidden text-white">
-          <GradientField />
+          <GradientField tone="sys" />
           <div className="relative mx-auto max-w-[1400px] px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12">
             <Link
               to={SYSTEMS_PATH + "#przyklady"}
@@ -76,7 +76,7 @@ const SystemExamplePage = () => {
                     target="_blank"
                     rel="noopener"
                     onClick={() => track("demo_open", { demo_name: example.slug, demo_place: "example_page" })}
-                    className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-violet transition-colors hover:bg-lilac-soft"
+                    className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-sys-deep transition-colors hover:bg-sys-soft"
                   >
                     {systemsCopy.examples.open}
                     <ArrowUpRight className="h-4 w-4" />
@@ -135,9 +135,9 @@ const SystemExamplePage = () => {
               : [0, 1, 2].map((i) => (
                   <div
                     key={i}
-                    className="flex aspect-[16/10] flex-col items-center justify-center gap-3 rounded-[1.5rem] border-2 border-dashed border-violet/15 bg-lilac-soft"
+                    className="flex aspect-[16/10] flex-col items-center justify-center gap-3 rounded-[1.5rem] border-2 border-dashed border-sys/15 bg-sys-soft"
                   >
-                    <ImageIcon className="h-9 w-9 text-violet/30" strokeWidth={1.25} />
+                    <ImageIcon className="h-9 w-9 text-sys-deep/30" strokeWidth={1.25} />
                     {i === 0 && <PlaceholderTag>{c.mediaTag}</PlaceholderTag>}
                   </div>
                 ))}
@@ -145,14 +145,14 @@ const SystemExamplePage = () => {
         </section>
 
         {/* 4. CO Z TEGO MA FIRMA */}
-        <section className="bg-lilac-soft px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
+        <section className="bg-sys-soft px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
           <div className="mx-auto max-w-[1400px]">
             <SectionTitle>{c.benefits}</SectionTitle>
             <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
               {example.benefits.map((b, i) => (
                 <FadeUp key={b} delay={i * 0.05}>
                   <div className="h-full rounded-[1.75rem] bg-white p-7">
-                    <span className="text-4xl font-semibold leading-none tracking-[-0.05em] text-lilac tabular-nums">
+                    <span className="text-4xl font-semibold leading-none tracking-[-0.05em] text-sys-light tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="mt-6 text-xl font-semibold leading-snug tracking-[-0.02em] text-foreground">{b}</p>
@@ -169,9 +169,9 @@ const SystemExamplePage = () => {
             <SectionTitle>{c.how}</SectionTitle>
             <ol className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {systemsCopy.process.steps.map((step, i) => (
-                <li key={step.word} className="border-t border-violet/15 pt-5">
-                  <span className="text-sm font-semibold tabular-nums text-violet/60">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-violet">{step.word}</h3>
+                <li key={step.word} className="border-t border-sys/15 pt-5">
+                  <span className="text-sm font-semibold tabular-nums text-sys-deep/60">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-sys-deep">{step.word}</h3>
                   <p className="mt-2 text-base leading-relaxed text-muted-foreground">{step.description}</p>
                 </li>
               ))}
@@ -179,15 +179,15 @@ const SystemExamplePage = () => {
 
             {/* 6. TECHNOLOGIA (zwinięte) */}
             {example.tech?.length ? (
-              <details className="group mt-14 rounded-[1.5rem] border border-violet/15 p-6 sm:p-7">
+              <details className="group mt-14 rounded-[1.5rem] border border-sys/15 p-6 sm:p-7">
                 <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-foreground">
                   {c.tech}
-                  <ChevronDown className="h-5 w-5 text-violet transition-transform group-open:rotate-180" />
+                  <ChevronDown className="h-5 w-5 text-sys-deep transition-transform group-open:rotate-180" />
                 </summary>
                 <ul className="mt-4 space-y-2">
                   {example.tech.map((t) => (
                     <li key={t} className="flex gap-3 text-base text-muted-foreground">
-                      <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-violet" aria-hidden="true" />
+                      <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-sys" aria-hidden="true" />
                       {t}
                     </li>
                   ))}
@@ -202,6 +202,7 @@ const SystemExamplePage = () => {
 
         {/* 8. CTA */}
         <Contact
+          tone="sys"
           copy={{
             pill: systemsCopy.contact.pill,
             title: c.cta,

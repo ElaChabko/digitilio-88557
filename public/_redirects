@@ -1,1 +1,3 @@
 /blog /baza-wiedzy 301
+/wspolprace /realizacje 301
+/wspolprace/* /realizacje/:splat 301

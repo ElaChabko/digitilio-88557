@@ -16,13 +16,14 @@ export const getPrerenderRoutes = () => [
   { path: "/", lastmod: undefined as string | undefined },
   { path: "/en", lastmod: undefined },
   { path: "/baza-wiedzy", lastmod: blogPosts[0]?.date },
-  { path: "/wspolprace", lastmod: undefined },
+  { path: "/marketing", lastmod: undefined },
+  { path: "/realizacje", lastmod: undefined },
   ...blogPosts.map((post) => ({
     path: `/blog/${post.slug}`,
     lastmod: post.date,
   })),
   ...caseStudies.map((caseStudy) => ({
-    path: `/wspolprace/${caseStudy.slug}`,
+    path: `/realizacje/${caseStudy.slug}`,
     lastmod: undefined,
   })),
   { path: SYSTEMS_PATH, lastmod: undefined },

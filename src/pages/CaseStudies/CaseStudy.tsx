@@ -36,7 +36,7 @@ export default function CaseStudy() {
             </p>
 
             <Link
-              to="/wspolprace"
+              to="/realizacje"
               className="mt-5 inline-flex items-center gap-2 text-violet hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -50,7 +50,7 @@ export default function CaseStudy() {
     );
   }
 
-  const canonicalUrl = `https://digitilio.pl/wspolprace/${caseStudy.slug}`;
+  const canonicalUrl = `https://digitilio.pl/realizacje/${caseStudy.slug}`;
 
   const caseStudySchema = {
     "@context": "https://schema.org",
@@ -80,8 +80,8 @@ export default function CaseStudy() {
       url: "https://digitilio.pl/",
     },
     {
-      name: "Współprace",
-      url: "https://digitilio.pl/wspolprace",
+      name: "Realizacje",
+      url: "https://digitilio.pl/realizacje",
     },
     {
       name: caseStudy.title,
@@ -103,10 +103,11 @@ export default function CaseStudy() {
 
       <Navigation />
 
-      <main>
+      {/* overflow-x-clip: animacje wjeżdżające z boku nie poszerzają strony na telefonie */}
+      <main className="overflow-x-clip">
         <PageHero pill="Case study" size="article" title={caseStudy.title} lead={caseStudy.lead}>
           <Link
-            to="/wspolprace"
+            to="/realizacje"
             className="mb-8 inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
