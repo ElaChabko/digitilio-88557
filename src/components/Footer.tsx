@@ -26,11 +26,11 @@ const CERTIFICATES = [
 
 const COPY = {
   pl: {
-    tagline: "Mniej przypadkowych działań. Więcej dobrych decyzji marketingowych.",
+    tagline: "Marketing, który przyprowadza klientów. Systemy, które zdejmują z Ciebie ręczną pracę.",
     pages: "Strona",
     links: [
-      { href: "/#services", label: "Usługi" },
-      { href: "/#process", label: "Jak pracuję" },
+      { href: "/#services", label: "Marketing" },
+      { href: "/systemy-dla-firm", label: "Systemy dla firm" },
       { href: "/wspolprace", label: "Współprace" },
       { href: "/#about", label: "O mnie" },
       { href: "/baza-wiedzy", label: "Baza wiedzy" },

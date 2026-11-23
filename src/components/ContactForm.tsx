@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { TOPICS, topicLabel, type TopicId } from "@/content/topics";
+import { TOPIC_LABELS, TOPIC_SETS, topicLabel, type TopicId, type TopicSet } from "@/content/topics";
+import { track } from "@/lib/track";
 import { Button } from "@/components/ui/button";
 
 type Lang = "pl" | "en";
@@ -9,6 +10,12 @@ type Props = {
   lang?: Lang;
   /** Temat wybrany wcześniej, np. pigułką w hero */
   initialTopic?: TopicId | null;
+  /** Zestaw tematów: ogólny (strona główna) albo obszary Systemów dla firm */
+  topicSet?: TopicSet;
+  /** Pokaż pole „Strona www” (Systemy dla firm) */
+  withSite?: boolean;
+  /** Skąd przyszło zapytanie, np. „systemy-dla-firm” albo nazwa przykładu */
+  source?: string;
 };
 
 const COPY = {
@@ -21,8 +28,12 @@ const COPY = {
     company: "Firma",
     companyPh: "Nazwa firmy",
     topic: "Czego dotyczy zapytanie?",
+    topicSystems: "Czego potrzebujesz?",
+    site: "Strona www",
+    sitePh: "np. twojafirma.pl",
     message: "Wiadomość",
     messagePh: "Napisz krótko, z czym mogę Ci pomóc.",
+    messagePhSystems: "Opisz problem: co dziś nie działa albo co chcecie usprawnić.",
     consent:
       "Chcę otrzymywać od Digitilio na podany adres e-mail informacje, materiały i oferty marketingowe dotyczące usług i marketingu. Zgodę mogę wycofać w dowolnym momencie.",
     privacyBefore:
@@ -44,9 +55,13 @@ const COPY = {
     company: "Company",
     companyPh: "Company name",
     topic: "What is it about?",
+    topicSystems: "What do you need?",
+    site: "Website",
+    sitePh: "e.g. yourcompany.com",
     message: "Message",
     messagePh:
       "A few sentences about your company and what you need help with.",
+    messagePhSystems: "Describe the problem: what does not work today or what you want to improve.",
     consent:
       "I would like to receive information, materials and marketing offers from Digitilio at the email address provided. I can withdraw this consent at any time.",
     privacyBefore:
@@ -65,7 +80,15 @@ type Status = null | "ok" | "err";
 
 const MARKETING_CONSENT_VERSION = "2026-08-14";
 
-export const ContactForm = ({ onSuccess, lang = "pl", initialTopic = null }: Props) => {
+export const ContactForm = ({
+  onSuccess,
+  lang = "pl",
+  initialTopic = null,
+  topicSet = "general",
+  withSite = false,
+  source,
+}: Props) => {
+  const topicIds = TOPIC_SETS[topicSet];
   const t = COPY[lang];
   const [topic, setTopic] = useState<TopicId | null>(initialTopic);
   useEffect(() => setTopic(initialTopic), [initialTopic]);
@@ -92,6 +115,10 @@ export const ContactForm = ({ onSuccess, lang = "pl", initialTopic = null }: Pro
       message: String(form.get("message") || "").trim(),
       topic: topicLabel(topic, "pl"),
       lang,
+      // Strona www klienta (pole „site”, bo „website” to pułapka na boty)
+      site: String(form.get("site") || "").trim(),
+      // Źródło: podana nazwa albo adres podstrony
+      source: source || (typeof window !== "undefined" ? window.location.pathname : ""),
 
       // Honeypot
       website: String(form.get("website") || ""),
@@ -144,11 +171,10 @@ export const ContactForm = ({ onSuccess, lang = "pl", initialTopic = null }: Pro
        * Event wysyłamy dopiero po potwierdzonym
        * sukcesie backendu.
        */
-      window.dataLayer = window.dataLayer || [];
-
-      window.dataLayer.push({
-        event: "lead_form_success",
+      track("lead_form_success", {
         form_name: "contact",
+        form_source: source || window.location.pathname,
+        form_topic: topic || "none",
       });
 
       setStatus("ok");
@@ -266,14 +292,35 @@ export const ContactForm = ({ onSuccess, lang = "pl", initialTopic = null }: Pro
         />
       </div>
 
+      {/* STRONA WWW (Systemy dla firm) */}
+      {withSite && (
+        <div className="space-y-2">
+          <label htmlFor="contact-site" className="text-sm font-medium text-foreground">
+            {t.site}{" "}
+            <span className="font-normal text-muted-foreground">{t.optional}</span>
+          </label>
+          <input
+            id="contact-site"
+            name="site"
+            type="text"
+            inputMode="url"
+            autoComplete="url"
+            maxLength={200}
+            placeholder={t.sitePh}
+            className="w-full rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
+          />
+        </div>
+      )}
+
       {/* TEMAT */}
       <fieldset className="space-y-2">
         <legend className="text-sm font-medium text-foreground">
-          {t.topic}{" "}
+          {topicSet === "systems" ? t.topicSystems : t.topic}{" "}
           <span className="font-normal text-muted-foreground">{t.optional}</span>
         </legend>
         <div className="flex flex-wrap gap-2 pt-1">
-          {TOPICS.map((item) => {
+          {topicIds.map((id) => {
+            const item = { id, ...TOPIC_LABELS[id] };
             const active = topic === item.id;
             return (
               <button
@@ -314,7 +361,7 @@ export const ContactForm = ({ onSuccess, lang = "pl", initialTopic = null }: Pro
           name="message"
           required
           maxLength={5000}
-          placeholder={t.messagePh}
+          placeholder={topicSet === "systems" ? t.messagePhSystems : t.messagePh}
           className="min-h-[140px] w-full resize-none rounded-xl border bg-background px-4 py-3 outline-none transition-colors focus:border-primary"
         />
       </div>

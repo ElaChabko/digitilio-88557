@@ -1,9 +1,10 @@
 import type { HomeCopy } from "@/content/home";
 import { GradientField } from "@/components/site/GradientField";
-import { ActionButton, FadeUp, Pill } from "@/components/site/motion";
+import { FadeUp, Pill } from "@/components/site/motion";
 
 /** Usługi: fioletowa sekcja z czterema kartami (bez przypinania) */
-export const Services = ({ copy, onCta }: { copy: HomeCopy["services"]; onCta?: () => void }) => (
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Services = ({ copy }: { copy: HomeCopy["services"]; onCta?: () => void }) => (
   <section id="services" className="relative overflow-hidden px-5 py-24 text-white sm:px-8 sm:py-32 lg:px-12">
     <GradientField tone="deep" />
 
@@ -35,24 +36,6 @@ export const Services = ({ copy, onCta }: { copy: HomeCopy["services"]; onCta?: 
           );
         })}
       </div>
-
-      {/* Strony internetowe: osobny, jaśniejszy pasek */}
-      <FadeUp className="mt-4">
-        <article className="flex flex-col gap-6 rounded-[2rem] bg-white p-7 text-foreground sm:p-9 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-violet/60">{copy.web.label}</p>
-            <h3 className="mt-3 text-2xl font-semibold leading-tight tracking-[-0.03em] text-violet sm:text-[1.75rem]">
-              {copy.web.title}
-            </h3>
-            <p className="mt-3 text-base leading-relaxed text-foreground/75">{copy.web.text}</p>
-          </div>
-          {onCta && (
-            <ActionButton onClick={onCta} className="shrink-0 self-start lg:self-center">
-              {copy.web.cta}
-            </ActionButton>
-          )}
-        </article>
-      </FadeUp>
 
       <p className="mt-10 max-w-3xl text-base leading-relaxed text-white/75 sm:text-lg">{copy.note}</p>
     </div>

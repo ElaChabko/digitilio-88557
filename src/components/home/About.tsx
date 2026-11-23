@@ -38,7 +38,7 @@ export const About = ({ copy, onCta }: { copy: HomeCopy["about"]; onCta: () => v
               ))}
             </FadeUp>
 
-            <div className="mt-12 grid grid-cols-3 gap-3 sm:gap-4">
+            <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-1 xl:grid-cols-3">
               {copy.stats.map((s) => (
                 <div key={s.label} className="rounded-3xl bg-white/[0.07] p-4 ring-1 ring-white/10 sm:p-6">
                   <CountUp

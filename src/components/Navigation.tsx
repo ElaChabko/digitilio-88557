@@ -24,8 +24,8 @@ type Lang = "pl" | "en";
 
 const ITEMS: Record<Lang, NavItem[]> = {
   pl: [
-    { label: "Usługi", type: "section", id: "services" },
-    { label: "Jak pracuję", type: "section", id: "process" },
+    { label: "Marketing", type: "section", id: "services" },
+    { label: "Systemy dla firm", type: "route", path: "/systemy-dla-firm" },
     { label: "Współprace", type: "route", path: "/wspolprace" },
     { label: "O mnie", type: "section", id: "about" },
     { label: "Baza wiedzy", type: "route", path: "/baza-wiedzy" },

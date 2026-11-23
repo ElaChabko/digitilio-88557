@@ -5,6 +5,7 @@ import { AppProviders, AppRoutes } from "./App";
 import { HeadContext, type HeadData } from "@/components/SEO";
 import { blogPosts } from "@/content/blogs/index";
 import { caseStudies } from "@/content/caseStudies";
+import { SYSTEMS_PATH, systemExamples } from "@/content/systems";
 
 /**
  * Lista adresów generowanych statycznie przy buildzie.
@@ -22,6 +23,11 @@ export const getPrerenderRoutes = () => [
   })),
   ...caseStudies.map((caseStudy) => ({
     path: `/wspolprace/${caseStudy.slug}`,
+    lastmod: undefined,
+  })),
+  { path: SYSTEMS_PATH, lastmod: undefined },
+  ...systemExamples.map((example) => ({
+    path: `${SYSTEMS_PATH}/${example.slug}`,
     lastmod: undefined,
   })),
   { path: "/polityka-prywatnosci", lastmod: undefined },

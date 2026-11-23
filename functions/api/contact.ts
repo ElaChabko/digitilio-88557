@@ -15,6 +15,8 @@ type ContactPayload = {
 
   lang?: string;
   topic?: string;
+  site?: string;
+  source?: string;
 };
 
 const jsonResponse = (
@@ -200,6 +202,12 @@ export const onRequestPost: PagesFunction<Env> = async ({
       .slice(0, 80);
     const topicTag = safeTopic ? `[${safeTopic}] ` : "";
 
+    // Strona www klienta i źródło zapytania (podstrona lub demo)
+    const clean = (v: unknown, max: number) =>
+      String(v || "").replace(/[\r\n]+/g, " ").trim().slice(0, max);
+    const safeSite = clean(body.site, 200);
+    const safeSource = clean(body.source, 120);
+
     const subject = safeCompany
       ? `${langTag}${topicTag}Digitilio – new inquiry (${safeCompany})`
       : `${langTag}${topicTag}Digitilio – new inquiry`;
@@ -208,12 +216,14 @@ export const onRequestPost: PagesFunction<Env> = async ({
       "New message from Digitilio website",
       body.lang === "en" ? "Form: English page (/en)" : null,
       safeTopic ? `Topic: ${safeTopic}` : null,
+      safeSource ? `Source: ${safeSource}` : null,
       "",
       `Name: ${safeName || "Not provided"}`,
       `Email: ${safeEmail}`,
       safeCompany
         ? `Company: ${safeCompany}`
         : "Company: Not provided",
+      safeSite ? `Website: ${safeSite}` : null,
       "",
       "Message:",
       safeMessage,

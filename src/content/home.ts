@@ -118,9 +118,9 @@ export const homePl: HomeCopy = {
   lang: "pl",
   hero: {
     eyebrow: "Strategia marketingowa i doradztwo",
-    line1: "Ty prowadzisz firmę.",
-    line2: "Ja dbam o\u00A0to, żeby klienci ją znaleźli.",
-    lead: "Social media, kampanie Meta Ads i strony internetowe prowadzone według jednego planu.",
+    line1: "Za mało zapytań?",
+    line2: "Za dużo ręcznej pracy?",
+    lead: "Marketing, który przyprowadza klientów. Systemy, które zdejmują z\u00A0Ciebie ręczną pracę.",
     cta: "Porozmawiajmy o Twojej marce",
     topicsLabel: "Od czego zaczynamy?",
     note: "Bez zobowiązań • odpowiedź w 1 dzień roboczy",

@@ -17,6 +17,7 @@ import { Unify } from "@/components/home/Unify";
 import { Services } from "@/components/home/Services";
 import { Process } from "@/components/home/Process";
 import { WorkTrack } from "@/components/home/WorkTrack";
+import { SystemsBand } from "@/components/home/SystemsBand";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { About } from "@/components/home/About";
 import { ForWhom } from "@/components/home/ForWhom";
@@ -58,7 +59,8 @@ const Index = () => {
         <Hero copy={copy.hero} onCta={openContact} />
         <Problem copy={copy.problem} />
         <Unify copy={copy.unify} />
-        <Services copy={copy.services} onCta={() => openContact("web")} />
+        <Services copy={copy.services} />
+        <SystemsBand />
         <Process copy={copy.process} />
         <WorkTrack copy={copy.work} />
         <LogoMarquee copy={copy.logos} />

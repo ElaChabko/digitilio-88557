@@ -16,6 +16,8 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/Blog/BlogPost";
 import Wspolprace from "./pages/Wspolprace";
 import CaseStudy from "./pages/CaseStudies/CaseStudy";
+import Systems from "./pages/Systems";
+import SystemExamplePage from "./pages/SystemExamplePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiesPolicy from "./pages/CookiesPolicy";
 import NotFound from "./pages/NotFound";
@@ -56,6 +58,10 @@ export const AppRoutes = () => (
       {/* WSPÓŁPRACE */}
       <Route path="/wspolprace" element={<Wspolprace />} />
       <Route path="/wspolprace/:slug" element={<CaseStudy />} />
+
+      {/* SYSTEMY DLA FIRM (drugi filar: aplikacje, automatyzacje, AI) */}
+      <Route path="/systemy-dla-firm" element={<Systems />} />
+      <Route path="/systemy-dla-firm/:slug" element={<SystemExamplePage />} />
 
       {/* POLITYKI */}
       <Route
