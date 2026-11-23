@@ -55,7 +55,7 @@ const CARDS: CardSpec[] = [
   },
   {
     key: "ads",
-    around: { x: 31, y: -29, r: 7 },
+    around: { x: 29, y: -29, r: 7 },
     render: (c) => (
       <Base className="bg-violet text-white">
         <p className="text-sm font-semibold">{c.ads}</p>
@@ -156,6 +156,19 @@ const CARDS: CardSpec[] = [
   },
 ];
 
+/**
+ * Pozycje kart na telefonie: 3 nad hasłem i 3 pod nim, w całości na ekranie.
+ * Karty, których tu nie ma, na telefonie się nie pokazują.
+ */
+const MOBILE_AROUND: Record<string, Pos> = {
+  post: { x: -28, y: -22, r: -6 },
+  ads: { x: 0, y: -26, r: 3 },
+  report: { x: 28, y: -22, r: 6 },
+  newsletter: { x: -28, y: 21, r: 5 },
+  website: { x: 0, y: 25, r: -3 },
+  content: { x: 28, y: 21, r: -6 },
+};
+
 const FlyingCard = ({
   spec,
   index,
@@ -168,26 +181,46 @@ const FlyingCard = ({
   children: ReactNode;
 }) => {
   const isMobile = useIsMobile();
+  const mobilePos = MOBILE_AROUND[spec.key];
+  const mobileKeys = Object.keys(MOBILE_AROUND);
+
+  // TELEFON: karty pojawiają się na swoich miejscach (bez wlatywania zza krawędzi),
+  // potem zbierają się w stos pod planem
+  const mi = Math.max(0, mobileKeys.indexOf(spec.key));
+  const mn = mobileKeys.length;
+  const mAppear = 0.06 + mi * 0.045;
+  const mStack = { x: (mi - (mn - 1) / 2) * 1.2, y: (mi - (mn - 1) / 2) * 0.9, r: (mi - (mn - 1) / 2) * 2.5 };
+  const mp = mobilePos ?? { x: 0, y: 0, r: 0 };
+  const mx = useTransform(progress, [0.5, 0.66], [`${mp.x}vw`, `${mStack.x}vw`]);
+  const my = useTransform(progress, [0.5, 0.66], [`${mp.y}vh`, `${mStack.y}vh`]);
+  const mrotate = useTransform(progress, [0.5, 0.66], [mp.r, mStack.r]);
+  // (origin 0 0 = środek karty, bo karta jest przesunięta o -50%/-50%)
+  // Karta zajmuje ok. 28% szerokości ekranu (bazowa szerokość karty na telefonie to 150 px)
+  const fit = typeof window !== "undefined" ? Math.min(0.76, (window.innerWidth * 0.3) / 150) : 0.76;
+  const mscale = useTransform(progress, [mAppear, mAppear + 0.07, 0.5, 0.66], [fit * 0.7, fit, fit, fit * 0.95]);
+  const mopacity = useTransform(progress, [mAppear, mAppear + 0.05], [0, 1]);
+
+  // KOMPUTER: daleko poza ekranem → wokół hasła → w stosie na środku
   const n = CARDS.length;
-  // Na telefonie karty krążą bliżej środka, żeby nie wychodziły za ekran
-  const k = isMobile ? 0.62 : 1;
-  const around = { x: spec.around.x * k, y: spec.around.y, r: spec.around.r };
+  const around = spec.around;
   const enter = 0.02 + index * 0.025;
   const aroundAt = 0.32 + index * 0.012;
   const gather = 0.68;
-
-  // Pozycje: daleko poza ekranem → wokół hasła → w stosie na środku
   const far = { x: around.x * 2.3, y: around.y * 2.3, r: around.r * 3 };
   const stack = { x: (index - (n - 1) / 2) * 0.7, y: (index - (n - 1) / 2) * 0.9, r: (index - (n - 1) / 2) * 2.2 };
-
   const t = [enter, aroundAt, gather];
   const x = useTransform(progress, t, [`${far.x}vw`, `${around.x}vw`, `${stack.x}vw`]);
   const y = useTransform(progress, t, [`${far.y}vh`, `${around.y}vh`, `${stack.y}vh`]);
   const rotate = useTransform(progress, t, [far.r, around.r, stack.r]);
-  const scale = useTransform(progress, [aroundAt, gather], [isMobile ? 0.88 : 1, 0.92]);
+  const scale = useTransform(progress, [aroundAt, gather], [1, 0.92]);
+
+  if (isMobile && !mobilePos) return null;
 
   return (
-    <motion.div className="absolute left-1/2 top-1/2" style={{ x, y, rotate, scale }}>
+    <motion.div
+      className="absolute left-1/2 top-1/2"
+      style={isMobile ? { x: mx, y: my, rotate: mrotate, scale: mscale, opacity: mopacity, originX: 0, originY: 0 } : { x, y, rotate, scale }}
+    >
       <div className="-translate-x-1/2 -translate-y-1/2">{children}</div>
     </motion.div>
   );
